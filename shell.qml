@@ -9,7 +9,6 @@
 
 import "modules/ShellitBar"
 import "modules/Dock"
-import "utils/Modals"
 
 import QtQuick
 import QtQuick.Window

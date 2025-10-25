@@ -25,5 +25,5 @@ echo "[Shellit] Update complete."
 Then mark it executable:
 
 chmod +x ~/.config/quickshell/shellit/update-shellit.sh
-sudo ln -sf ~/.config/quickshell/shellit/update-shellit.sh /usr/local/bin/update-shellit
+ln -sf ~/.config/quickshell/shellit/update-shellit.sh ~/.local/bin/update-shellit
 

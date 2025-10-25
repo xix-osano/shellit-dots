@@ -52,15 +52,15 @@ set(INSTALL_QSCONFDIR "etc/xdg/quickshell/shellit" CACHE STRING "Quickshell conf
 
 
 # Determine install location (default: ~/.config/quickshell/shellit)
-if(DEFINED ENV{XDG_CONFIG_HOME})
-    set(DEFAULT_CONFIG_DIR "$ENV{XDG_CONFIG_HOME}/quickshell/shellit")
-else()
-    set(DEFAULT_CONFIG_DIR "$ENV{HOME}/.config/quickshell/shellit")
-endif()
+# if(DEFINED ENV{XDG_CONFIG_HOME})
+#     set(DEFAULT_CONFIG_DIR "$ENV{XDG_CONFIG_HOME}/quickshell/shellit")
+# else()
+#     set(DEFAULT_CONFIG_DIR "$ENV{HOME}/.config/quickshell/shellit")
+# endif()
 
-set(INSTALL_QSCONFDIR "${DEFAULT_CONFIG_DIR}" CACHE PATH "User Quickshell config directory")
+# set(INSTALL_QSCONFDIR "${DEFAULT_CONFIG_DIR}" CACHE PATH "User Quickshell config directory")
 
-message(STATUS "Installing Shellit config to: ${INSTALL_QSCONFDIR}")
+# message(STATUS "Installing Shellit config to: ${INSTALL_QSCONFDIR}")
 
 # ---------------------------------------------------------------------------
 # Compile Options
@@ -93,7 +93,7 @@ install(FILES "${VERSION_HEADER}" DESTINATION "${INSTALL_QSCONFDIR}/include")
 # Installation Logic
 # ---------------------------------------------------------------------------
 if("shell" IN_LIST ENABLE_MODULES)
-    foreach(dir assets components config modules services utils)
+    foreach(dir assets components config extras modules services utils)
         if(EXISTS "${dir}")
             install(DIRECTORY ${dir} DESTINATION "${INSTALL_QSCONFDIR}")
         endif()
