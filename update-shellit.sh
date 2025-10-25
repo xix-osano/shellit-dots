@@ -1,27 +1,72 @@
 #!/bin/bash
-set -e
-cd ~/.config/quickshell/shellit
+set -euo pipefail
 
-echo "[Shellit] Pulling latest changes..."
-git pull --rebase
+REPO_DIR="$HOME/.config/quickshell/shellit"
+INSTALL_PREFIX="/"
+BIN_LINK="$HOME/.local/bin/update-shellit"
 
-echo "[Shellit] Rebuilding..."
-cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
-cmake --build build
-
-echo "[Shellit] Installing..."
-sudo cmake --install build
-
-echo "[Shellit] Reloading Quickshell..."
-
-# Check if the Quickshell binary supports --reload, otherwise restart it
-if quickshell --help 2>/dev/null | grep -q -- "--reload"; then
-    quickshell --reload
-else
-    echo "[Shellit] --reload not supported. Restarting Quickshell instead..."
-    pkill quickshell || true
-    sleep 1
-    quickshell --config /etc/xdg/quickshell/shellit/shell.qml &
+# -----------------------------------------------------------------------------
+# Version flag
+# -----------------------------------------------------------------------------
+if [[ "${1:-}" == "--version" ]]; then
+    cd "$REPO_DIR"
+    VERSION=$(git describe --tags --always 2>/dev/null || echo "unknown")
+    echo "Shellit Updater — version $VERSION"
+    exit 0
 fi
 
-echo "[Shellit] Update complete."
+# -----------------------------------------------------------------------------
+# Ensure environment
+# -----------------------------------------------------------------------------
+if [[ ! -d "$REPO_DIR" ]]; then
+    echo "[Shellit] ❌ Repository not found at $REPO_DIR"
+    exit 1
+fi
+
+cd "$REPO_DIR"
+
+# -----------------------------------------------------------------------------
+# Pull latest updates
+# -----------------------------------------------------------------------------
+echo "[Shellit] 🔄 Pulling latest changes..."
+git fetch origin master
+git rebase origin/master || {
+    echo "[Shellit] ⚠️ Rebase failed. Attempting to continue..."
+    git rebase --abort || true
+    git pull --rebase
+}
+
+# -----------------------------------------------------------------------------
+# Rebuild project
+# -----------------------------------------------------------------------------
+echo "[Shellit] ⚙️ Rebuilding..."
+cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX"
+cmake --build build --parallel
+
+# -----------------------------------------------------------------------------
+# Install configs
+# -----------------------------------------------------------------------------
+echo "[Shellit] 📦 Installing..."
+sudo cmake --install build
+
+# -----------------------------------------------------------------------------
+# Ensure symlink exists
+# -----------------------------------------------------------------------------
+mkdir -p "$(dirname "$BIN_LINK")"
+ln -sf "$REPO_DIR/update-shellit.sh" "$BIN_LINK"
+
+# -----------------------------------------------------------------------------
+# Reload quickshell
+# -----------------------------------------------------------------------------
+echo "[Shellit] 🌀 Reloading Quickshell..."
+if command -v quickshell >/dev/null 2>&1; then
+    quickshell --reload || echo "[Shellit] ⚠️ Quickshell reload failed, restart manually if needed."
+else
+    echo "[Shellit] ⚠️ Quickshell not found in PATH."
+fi
+
+# -----------------------------------------------------------------------------
+# Done
+# -----------------------------------------------------------------------------
+echo "[Shellit] ✅ Update complete — running the freshest configs."
+
