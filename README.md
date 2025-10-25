@@ -41,3 +41,16 @@ cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
 cmake --build build
 sudo cmake --install build
 ```
+
+
+For future automated updates
+
+First run:
+```sh
+chmod +x ~/.config/quickshell/shellit/update-shellit.sh
+ln -sf ~/.config/quickshell/shellit/update-shellit.sh ~/.local/bin/update-shellit
+```
+Consequently:
+```sh
+update-shellit
+```
