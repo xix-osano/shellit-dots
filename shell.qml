@@ -2,7 +2,6 @@
 //@ pragma Env QSG_RENDER_LOOP=threaded
 //@ pragma Env QT_QUICK_FLICKABLE_WHEEL_DECELERATION=10000
 
-import "modules"
 import "modules/bar"
 import "modules/dock"
 
