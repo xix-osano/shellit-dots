@@ -13,7 +13,6 @@ import "modules/Dock"
 import QtQuick
 import QtQuick.Window
 import Quickshell
-import qs.services
 
 ShellRoot {
     id: root

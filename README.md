@@ -43,14 +43,8 @@ sudo cmake --install build
 ```
 
 
-For future automated updates
-
-First run:
+Link update-shellit.sh to local/bin for future automated updates:
 ```sh
-chmod +x ~/.config/quickshell/shellit/update-shellit.sh
 ln -sf ~/.config/quickshell/shellit/update-shellit.sh ~/.local/bin/update-shellit
-```
-Consequently:
-```sh
 update-shellit
 ```
