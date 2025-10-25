@@ -1,6 +1,6 @@
 Automated update script
 
-Create ~/.local/bin/update-shellit.sh:
+Create ~/.config/quickshell/shellit/update-shellit.sh:
 
 #!/bin/bash
 set -e
@@ -24,4 +24,6 @@ echo "[Shellit] Update complete."
 
 Then mark it executable:
 
-chmod +x ~/.local/bin/update-shellit.sh
+chmod +x ~/.config/quickshell/shellit/update-shellit.sh
+sudo ln -sf ~/.config/quickshell/shellit/update-shellit.sh /usr/local/bin/update-shellit
+

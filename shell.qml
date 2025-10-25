@@ -7,9 +7,9 @@
 //@ pragma Env QT_SCALE_FACTOR=1
 
 
-import qs.modules.shellitbar
-import qs.modules.dock
-import qs.utils.modals
+import "modules/ShellitBar"
+import "modules/Dock"
+import "utils/Modals"
 
 import QtQuick
 import QtQuick.Window
