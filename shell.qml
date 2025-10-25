@@ -3,7 +3,6 @@
 //@ pragma Env QT_QUICK_FLICKABLE_WHEEL_DECELERATION=10000
 
 import "modules/bar"
-import "modules/dock"
 
 import QtQuick
 import Quickshell
@@ -12,7 +11,6 @@ ShellRoot {
     id: root
 
     Bar {}
-    Dock {}
 
     // Load build info
     Component.onCompleted: {
