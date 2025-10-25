@@ -45,10 +45,22 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 # Install Paths
 # ---------------------------------------------------------------------------
 set(DISTRIBUTOR "Unset" CACHE STRING "Distributor")
-set(ENABLE_MODULES "shell" CACHE STRING "Modules to build/install")
+set(ENABLE_MODULES "extras;shell" CACHE STRING "Modules to build/install")
 set(INSTALL_LIBDIR "usr/lib/shellit" CACHE STRING "Library install dir")
 set(INSTALL_QMLDIR "usr/lib/qt6/qml" CACHE STRING "QML install dir")
 set(INSTALL_QSCONFDIR "etc/xdg/quickshell/shellit" CACHE STRING "Quickshell config install dir")
+
+
+# Determine install location (default: ~/.config/quickshell/shellit)
+if(DEFINED ENV{XDG_CONFIG_HOME})
+    set(DEFAULT_CONFIG_DIR "$ENV{XDG_CONFIG_HOME}/quickshell/shellit")
+else()
+    set(DEFAULT_CONFIG_DIR "$ENV{HOME}/.config/quickshell/shellit")
+endif()
+
+set(INSTALL_QSCONFDIR "${DEFAULT_CONFIG_DIR}" CACHE PATH "User Quickshell config directory")
+
+message(STATUS "Installing Shellit config to: ${INSTALL_QSCONFDIR}")
 
 # ---------------------------------------------------------------------------
 # Compile Options
