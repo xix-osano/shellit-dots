@@ -21,6 +21,7 @@ quickshell --reload
 
 echo "[Shellit] Update complete."
 
+
 Then mark it executable:
 
 chmod +x ~/.config/quickshell/shellit/update-shellit.sh
