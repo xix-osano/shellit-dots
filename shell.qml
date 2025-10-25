@@ -1,30 +1,16 @@
-//@ pragma UseQApplication
 //@ pragma Env QS_NO_RELOAD_POPUP=1
-//@ pragma Env QT_QUICK_CONTROLS_STYLE=Basic
+//@ pragma Env QSG_RENDER_LOOP=threaded
 //@ pragma Env QT_QUICK_FLICKABLE_WHEEL_DECELERATION=10000
 
-// Adjust this to make the shell smaller or larger
-//@ pragma Env QT_SCALE_FACTOR=1
-
-
-import "modules/ShellitBar"
-import "modules/Dock"
-
 import QtQuick
-import QtQuick.Window
 import Quickshell
+import "." as Shellit
 
 ShellRoot {
     id: root
 
-    // Enable/disable modules here. False = not loaded at all, so rest assured
-    // no unnecessary stuff will take up memory if you decide to only use, say, the overview.
-    property bool enableShellitBar: true
-    property bool enableDock: true
-
-
-    LazyLoader { active: enableShellitBar && Config.ready && !Config.options.bar.vertical; component: ShellitBar {} }
-    LazyLoader { active: enableDock && Config.options.dock.enable; component: Dock {} }
+    Shellit.Bar {}
+    Shellit.Dock {}
 
     // Load build info
     Component.onCompleted: {
