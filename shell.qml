@@ -2,7 +2,7 @@
 //@ pragma Env QSG_RENDER_LOOP=threaded
 //@ pragma Env QT_QUICK_FLICKABLE_WHEEL_DECELERATION=10000
 
-import "modules/drawers"
+import "modules/bar"
 import "modules/dock"
 
 import QtQuick
@@ -11,7 +11,7 @@ import Quickshell
 ShellRoot {
     id: root
 
-    Drawers {}
+    Bar {}
     Dock {}
 
     // Load build info
