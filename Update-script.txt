@@ -1,0 +1,27 @@
+Automated update script
+
+Create ~/.local/bin/update-shellit.sh:
+
+#!/bin/bash
+set -e
+cd ~/.config/quickshell/shellit
+
+echo "[Shellit] Pulling latest changes..."
+git pull --rebase
+
+echo "[Shellit] Rebuilding..."
+cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
+cmake --build build
+
+echo "[Shellit] Installing..."
+sudo cmake --install build
+
+echo "[Shellit] Reloading Quickshell..."
+quickshell --reload
+
+echo "[Shellit] Update complete."
+
+
+Then mark it executable:
+
+chmod +x ~/.local/bin/update-shellit.sh

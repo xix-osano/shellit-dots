@@ -33,8 +33,8 @@ To install the shell manually, install all dependencies and clone this repo to `
 Then simply build and install using `cmake`.
 
 ```sh
-cd $XDG_CONFIG_HOME/shellit
-git clone https://github.com/xix-osano/shellit.git shellit
+cd $XDG_CONFIG_HOME/quickshell
+git clone https://github.com/xix-osano/shellit-dots.git shellit
 
 cd shellit
 cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
