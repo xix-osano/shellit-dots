@@ -1254,7 +1254,7 @@ FocusScope {
 
                     StyledText {
                         width: parent.width
-                        text: "Third-party plugins are created by the community and are not officially supported by ShellitMaterialShell.\n\nThese plugins may pose security and privacy risks - install at your own risk."
+                        text: "Third-party plugins are created by the community and are not officially supported by Shellit.\n\nThese plugins may pose security and privacy risks - install at your own risk."
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.surfaceText
                         wrapMode: Text.WordWrap

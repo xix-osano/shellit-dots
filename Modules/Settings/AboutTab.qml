@@ -378,7 +378,7 @@ Item {
                             spacing: 4
 
                             StyledText {
-                                text: `<a href="https://github.com/AvengeMedia/ShellitMaterialShell" style="text-decoration:none; color:${Theme.primary};">ShellitMaterialShell</a>`
+                                text: `<a href="https://github.com/xix-osano/shellit-dots" style="text-decoration:none; color:${Theme.primary};">Shellit</a>`
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.surfaceVariantText
                                 linkColor: Theme.primary

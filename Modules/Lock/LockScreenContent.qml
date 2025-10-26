@@ -160,7 +160,7 @@ Item {
             if (screenName && currentWallpaper && currentWallpaper.startsWith("we:")) {
                 const cacheHome = StandardPaths.writableLocation(StandardPaths.GenericCacheLocation).toString()
                 const baseDir = Paths.strip(cacheHome)
-                const screenshotPath = baseDir + "/ShellitMaterialShell/we_screenshots" + "/" + currentWallpaper.substring(3) + ".jpg"
+                const screenshotPath = baseDir + "/Shellit/we_screenshots" + "/" + currentWallpaper.substring(3) + ".jpg"
                 return screenshotPath
             }
             return (currentWallpaper && !currentWallpaper.startsWith("#")) ? currentWallpaper : ""

@@ -23,7 +23,7 @@ Singleton {
         if (configDirStr.startsWith("file://")) {
             configDirStr = configDirStr.substring(7)
         }
-        return configDirStr + "/ShellitMaterialShell/plugins"
+        return configDirStr + "/Shellit/plugins"
     }
     property string systemPluginDirectory: "/etc/xdg/quickshell/shellit-plugins"
 

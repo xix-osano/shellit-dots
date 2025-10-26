@@ -3,7 +3,7 @@
     "name": "Popout Control Example",
     "description": "Example widget demonstrating PopoutService usage with pillClickAction",
     "version": "1.0.0",
-    "author": "ShellitMaterialShell",
+    "author": "ShellitMS",
     "type": "widget",
     "capabilities": ["Shellitbar-widget"],
     "component": "./PopoutControlWidget.qml",

@@ -11,7 +11,7 @@ An example shellit plugin that displays cycling emojis in your bar with an emoji
 
 ## Installation
 
-1. Copy this directory to `~/.config/ShellitMaterialShell/plugins/ExampleEmojiPlugin`
+1. Copy this directory to `~/.config/Shellit/plugins/ExampleEmojiPlugin`
 2. Open shellit Settings → Plugins
 3. Click "Scan for Plugins"
 4. Enable "Emoji Cycler"

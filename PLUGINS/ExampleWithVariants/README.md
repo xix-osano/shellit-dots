@@ -1,6 +1,6 @@
 # Example with Variants Plugin
 
-This plugin demonstrates the dynamic variant system for ShellitMaterialShell plugins.
+This plugin demonstrates the dynamic variant system for Shellit plugins.
 
 ## What are Variants?
 

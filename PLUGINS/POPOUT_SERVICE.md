@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `PopoutService` singleton provides plugins with access to all ShellitMaterialShell popouts and modals. It's automatically injected into plugin widgets and daemons, enabling them to control shell UI elements.
+The `PopoutService` singleton provides plugins with access to all Shellit popouts and modals. It's automatically injected into plugin widgets and daemons, enabling them to control shell UI elements.
 
 ## Automatic Injection
 

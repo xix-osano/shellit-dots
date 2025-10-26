@@ -173,7 +173,7 @@ shell.qml           # Main entry point (minimal orchestration)
    - **ShellitLocationSearch**: Location picker with search
    - **SystemLogo**: Animated system branding component
 
-7. **Plugins/** - External plugin system (`$CONFIGPATH/ShellitMaterialShell/plugins/`)
+7. **Plugins/** - External plugin system (`$CONFIGPATH/Shellit/plugins/`)
    - **PluginService**: Discovers, loads, and manages plugin lifecycle
    - **Dynamic Loading**: Plugins loaded at runtime from external directory
    - **ShellitBar Integration**: Plugin widgets rendered alongside built-in widgets
@@ -558,7 +558,7 @@ Daemon plugins run invisibly in the background without any UI components. They'r
 
 1. **Create plugin directory**:
    ```bash
-   mkdir -p ~/.config/ShellitMaterialShell/plugins/YourDaemon
+   mkdir -p ~/.config/quickshell/Shellit/plugins/YourDaemon
    ```
 
 2. **Create manifest** (`plugin.json`):
@@ -613,7 +613,7 @@ Daemon plugins run invisibly in the background without any UI components. They'r
 
 **Plugin Directory Structure:**
 ```
-~/.config/ShellitMaterialShell/
+~/.config/Shellit/
 ├── settings.json                    # Core shellit settings + plugin settings
 │   └── pluginSettings: {
 │       └── yourPlugin: {

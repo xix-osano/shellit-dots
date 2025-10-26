@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://Shellitlinux.com/schemas/plugin.json",
-  "title": "ShellitMaterialShell Plugin Manifest",
-  "description": "Schema for ShellitMaterialShell plugin.json manifest files",
+  "title": "ShellitMS Plugin Manifest",
+  "description": "Schema for Shellit plugin.json manifest files",
   "type": "object",
   "required": [
     "id",

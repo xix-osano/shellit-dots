@@ -12,7 +12,7 @@ Singleton {
 
     property int refCount: 0
 
-    readonly property string baseDir: Paths.strip(StandardPaths.writableLocation(StandardPaths.GenericStateLocation) + "/ShellitMaterialShell")
+    readonly property string baseDir: Paths.strip(StandardPaths.writableLocation(StandardPaths.GenericStateLocation) + "/Shellit")
     readonly property string filesDir: baseDir + "/notepad-files"
     readonly property string metadataPath: baseDir + "/notepad-session.json"
 

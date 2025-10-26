@@ -2,7 +2,7 @@
 
 %global debug_package %{nil}
 %global version {{{ git_dir_version }}}
-%global pkg_summary ShellitMaterialShell - Material 3 inspired shell for Wayland compositors
+%global pkg_summary Shellit - Material 3 inspired shell for Wayland compositors
 
 Name:           shellit
 Epoch:          1
@@ -11,7 +11,7 @@ Release:        1%{?dist}
 Summary:        %{pkg_summary}
 
 License:        GPL-3.0-only
-URL:            https://github.com/AvengeMedia/ShellitMaterialShell
+URL:            https://github.com/xix-osano/shellit-dots
 VCS:            {{{ git_dir_vcs }}}
 Source0:        {{{ git_dir_pack }}}
 
@@ -49,7 +49,7 @@ Recommends:     qt6-qtmultimedia
 Suggests:       qt6ct
 
 %description
-ShellitMaterialShell (shellit) is a modern Wayland desktop shell built with Quickshell
+Shellit is a modern Wayland desktop shell built with Quickshell
 and optimized for the niri and hyprland compositors. Features notifications,
 app launcher, wallpaper customization, and fully customizable with plugins.
 
@@ -58,23 +58,23 @@ process monitoring, notification center, clipboard history, dock, control center
 lock screen, and comprehensive plugin system.
 
 %package -n shellit-cli
-Summary:        ShellitMaterialShell CLI tool
+Summary:        Shellit CLI tool
 License:        GPL-3.0-only
 URL:            https://github.com/AvengeMedia/Shellitlinux
 
 %description -n shellit-cli
-Command-line interface for ShellitMaterialShell configuration and management.
+Command-line interface for Shellit configuration and management.
 Provides native DBus bindings, NetworkManager integration, and system utilities.
 
 %package -n dgop
-Summary:        Stateless CPU/GPU monitor for ShellitMaterialShell
+Summary:        Stateless CPU/GPU monitor for Shellit
 License:        MIT
 URL:            https://github.com/AvengeMedia/dgop
 Provides:       dgop
 
 %description -n dgop
 DGOP is a stateless system monitoring tool that provides CPU, GPU, memory, and 
-network statistics. Designed for integration with ShellitMaterialShell but can be 
+network statistics. Designed for integration with Shellit but can be 
 used standalone. This package always includes the latest stable dgop release.
 
 %prep
