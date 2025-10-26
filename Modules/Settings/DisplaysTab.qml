@@ -127,7 +127,7 @@ Item {
 
                         width: parent.width
                         text: "Night Mode"
-                        description: DisplayService.gammaControlAvailable ? "Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates.") : "Gamma control not available. Requires shellit API v6+.")
+                        description: DisplayService.gammaControlAvailable ? "Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates." : "Gamma control not available. Requires shellit API v6+."
                         checked: DisplayService.nightModeEnabled
                         enabled: DisplayService.gammaControlAvailable
                         onToggled: checked => {
