@@ -21,7 +21,7 @@ PanelWindow {
     property bool exiting: false
     property bool _isDestroying: false
     property bool _finalized: false
-    readonly property string clearText: I18n.tr("Dismiss")
+    readonly property string clearText: "Dismiss")
 
     signal entered
     signal exitFinished

@@ -90,7 +90,7 @@ ShellitPopout {
                     height: 40
 
                     StyledText {
-                        text: I18n.tr("System Updates")
+                        text: "System Updates"
                         font.pixelSize: Theme.fontSizeLarge
                         color: Theme.surfaceText
                         font.weight: Font.Medium
@@ -286,7 +286,7 @@ ShellitPopout {
                             }
 
                             StyledText {
-                                text: I18n.tr("Update All")
+                                text: "Update All"
                                 font.pixelSize: Theme.fontSizeMedium
                                 font.weight: Font.Medium
                                 color: Theme.primary
@@ -330,7 +330,7 @@ ShellitPopout {
                             }
 
                             StyledText {
-                                text: I18n.tr("Close")
+                                text: "Close"
                                 font.pixelSize: Theme.fontSizeMedium
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText

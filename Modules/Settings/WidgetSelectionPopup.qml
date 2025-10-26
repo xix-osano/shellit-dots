@@ -199,7 +199,7 @@ ShellitModal {
                 }
 
                 StyledText {
-                    text: I18n.tr("Add Widget to ") + root.targetSection + " Section"
+                    text: "Add Widget to " + root.targetSection + " Section"
                     font.pixelSize: Theme.fontSizeLarge
                     font.weight: Font.Medium
                     color: Theme.surfaceText
@@ -208,7 +208,7 @@ ShellitModal {
             }
 
             StyledText {
-                text: I18n.tr("Select a widget to add to the ") + root.targetSection.toLowerCase(
+                text: "Select a widget to add to the " + root.targetSection.toLowerCase(
                           ) + " section of the top bar. You can add multiple instances of the same widget if needed."
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.outline

@@ -163,7 +163,7 @@ ShellitModal {
                         spacing: Theme.spacingXS
 
                         StyledText {
-                            text: I18n.tr("Connect to Wi-Fi")
+                            text: "Connect to Wi-Fi"
                             font.pixelSize: Theme.fontSizeLarge
                             color: Theme.surfaceText
                             font.weight: Font.Medium
@@ -175,7 +175,7 @@ ShellitModal {
 
                             StyledText {
                                 text: {
-                                    const prefix = requiresEnterprise ? I18n.tr("Enter credentials for ") : I18n.tr("Enter password for ")
+                                    const prefix = requiresEnterprise ? "Enter credentials for " : "Enter password for "
                                     return prefix + wifiPasswordSSID
                                 }
                                 font.pixelSize: Theme.fontSizeMedium
@@ -186,7 +186,7 @@ ShellitModal {
 
                             StyledText {
                                 visible: isPromptMode && promptReason === "wrong-password"
-                                text: I18n.tr("Incorrect password")
+                                text: "Incorrect password"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.error
                                 width: parent.width
@@ -234,7 +234,7 @@ ShellitModal {
                         font.pixelSize: Theme.fontSizeMedium
                         textColor: Theme.surfaceText
                         text: wifiUsernameInput
-                        placeholderText: I18n.tr("Username")
+                        placeholderText: "Username"
                         backgroundColor: "transparent"
                         enabled: root.shouldBeVisible
                         onTextEdited: () => {
@@ -271,7 +271,7 @@ ShellitModal {
                         textColor: Theme.surfaceText
                         text: wifiPasswordInput
                         echoMode: showPasswordCheckbox.checked ? TextInput.Normal : TextInput.Password
-                        placeholderText: requiresEnterprise ? I18n.tr("Password") : ""
+                        placeholderText: requiresEnterprise ? "Password" : ""
                         backgroundColor: "transparent"
                         focus: !requiresEnterprise
                         enabled: root.shouldBeVisible
@@ -362,7 +362,7 @@ ShellitModal {
                         font.pixelSize: Theme.fontSizeMedium
                         textColor: Theme.surfaceText
                         text: wifiAnonymousIdentityInput
-                        placeholderText: I18n.tr("Anonymous Identity (optional)")
+                        placeholderText: "Anonymous Identity (optional)"
                         backgroundColor: "transparent"
                         enabled: root.shouldBeVisible
                         onTextEdited: () => {
@@ -394,7 +394,7 @@ ShellitModal {
                         font.pixelSize: Theme.fontSizeMedium
                         textColor: Theme.surfaceText
                         text: wifiDomainInput
-                        placeholderText: I18n.tr("Domain (optional)")
+                        placeholderText: "Domain (optional)"
                         backgroundColor: "transparent"
                         enabled: root.shouldBeVisible
                         onTextEdited: () => {
@@ -437,7 +437,7 @@ ShellitModal {
                     }
 
                     StyledText {
-                        text: I18n.tr("Show password")
+                        text: "Show password"
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.surfaceText
                         anchors.verticalCenter: parent.verticalCenter
@@ -465,7 +465,7 @@ ShellitModal {
                                 id: cancelText
 
                                 anchors.centerIn: parent
-                                text: I18n.tr("Cancel")
+                                text: "Cancel"
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -502,7 +502,7 @@ ShellitModal {
                                 id: connectText
 
                                 anchors.centerIn: parent
-                                text: I18n.tr("Connect")
+                                text: "Connect"
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.background
                                 font.weight: Font.Medium

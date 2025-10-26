@@ -37,18 +37,18 @@ Variants {
     readonly property real widgetHeight: SettingsData.dockIconSize
     readonly property real effectiveBarHeight: widgetHeight + SettingsData.dockSpacing * 2 + 10
     readonly property real barSpacing: {
-        const barIsHorizontal = (SettingsData.ShellitBarPosition === SettingsData.Position.Top || SettingsData.ShellitBarPosition === SettingsData.Position.Bottom)
-        const barIsVertical = (SettingsData.ShellitBarPosition === SettingsData.Position.Left || SettingsData.ShellitBarPosition === SettingsData.Position.Right)
-        const samePosition = (SettingsData.dockPosition === SettingsData.ShellitBarPosition)
+        const barIsHorizontal = (SettingsData.shellitBarPosition === SettingsData.Position.Top || SettingsData.shellitBarPosition === SettingsData.Position.Bottom)
+        const barIsVertical = (SettingsData.shellitBarPosition === SettingsData.Position.Left || SettingsData.shellitBarPosition === SettingsData.Position.Right)
+        const samePosition = (SettingsData.dockPosition === SettingsData.shellitBarPosition)
         const dockIsHorizontal = !isVertical
         const dockIsVertical = isVertical
 
-        if (!SettingsData.ShellitBarVisible) return 0
+        if (!SettingsData.shellitBarVisible) return 0
         if (dockIsHorizontal && barIsHorizontal && samePosition) {
-            return SettingsData.ShellitBarSpacing + effectiveBarHeight + SettingsData.ShellitBarBottomGap
+            return SettingsData.shellitBarSpacing + effectiveBarHeight + SettingsData.shellitBarBottomGap
         }
         if (dockIsVertical && barIsVertical && samePosition) {
-            return SettingsData.ShellitBarSpacing + effectiveBarHeight + SettingsData.ShellitBarBottomGap
+            return SettingsData.shellitBarSpacing + effectiveBarHeight + SettingsData.shellitBarBottomGap
         }
         return 0
     }

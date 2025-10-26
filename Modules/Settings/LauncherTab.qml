@@ -13,7 +13,7 @@ Item {
 
     FileBrowserModal {
         id: logoFileBrowser
-        browserTitle: I18n.tr("Select Launcher Logo")
+        browserTitle: "Select Launcher Logo"
         browserIcon: "image"
         browserType: "generic"
         filterExtensions: ["*.svg", "*.png", "*.jpg", "*.jpeg", "*.webp"]
@@ -62,7 +62,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Launcher Button Logo")
+                            text: "Launcher Button Logo"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -72,7 +72,7 @@ Item {
 
                     StyledText {
                         width: parent.width
-                        text: I18n.tr("Choose the logo displayed on the launcher button in ShellitBar")
+                        text: "Choose the logo displayed on the launcher button in ShellitBar"
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceVariantText
                         wrapMode: Text.WordWrap
@@ -86,12 +86,12 @@ Item {
                             id: logoModeGroup
                             anchors.horizontalCenter: parent.horizontalCenter
                             model: {
-                                const modes = [I18n.tr("Apps Icon"), I18n.tr("OS Logo")]
+                                const modes = ["Apps Icon", "OS Logo"]
                                 if (CompositorService.isNiri || CompositorService.isHyprland) {
                                     const compositorName = CompositorService.isNiri ? "niri" : "Hyprland"
                                     modes.push(compositorName)
                                 }
-                                modes.push(I18n.tr("Custom"))
+                                modes.push("Custom")
                                 return modes
                             }
                             currentIndex: {
@@ -149,7 +149,7 @@ Item {
                                 anchors.left: parent.left
                                 anchors.leftMargin: Theme.spacingM
                                 anchors.verticalCenter: parent.verticalCenter
-                                text: SettingsData.launcherLogoCustomPath || I18n.tr("Select an image file...")
+                                text: SettingsData.launcherLogoCustomPath || "Select an image file..."
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: SettingsData.launcherLogoCustomPath ? Theme.surfaceText : Theme.outlineButton
                                 width: parent.width - Theme.spacingM * 2
@@ -184,7 +184,7 @@ Item {
                             spacing: Theme.spacingM
 
                             StyledText {
-                                text: I18n.tr("Color Override")
+                                text: "Color Override"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -197,7 +197,7 @@ Item {
 
                                 ShellitButtonGroup {
                                     id: colorModeGroup
-                                    model: [I18n.tr("Default"), I18n.tr("Primary"), I18n.tr("Surface"), I18n.tr("Custom")]
+                                    model: ["Default", "Primary", "Surface", "Custom"]
                                     currentIndex: {
                                         const override = SettingsData.launcherLogoColorOverride
                                         if (override === "") return 0
@@ -248,7 +248,7 @@ Item {
                                         onClicked: {
                                             if (PopoutService.colorPickerModal) {
                                                 PopoutService.colorPickerModal.selectedColor = SettingsData.launcherLogoColorOverride
-                                                PopoutService.colorPickerModal.pickerTitle = I18n.tr("Choose Launcher Logo Color")
+                                                PopoutService.colorPickerModal.pickerTitle = "Choose Launcher Logo Color"
                                                 PopoutService.colorPickerModal.onColorSelectedCallback = function(selectedColor) {
                                                     SettingsData.setLauncherLogoColorOverride(selectedColor)
                                                 }
@@ -270,7 +270,7 @@ Item {
                                 anchors.horizontalCenter: parent.horizontalCenter
 
                                 StyledText {
-                                    text: I18n.tr("Size Offset")
+                                    text: "Size Offset"
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceText
                                     font.weight: Font.Medium
@@ -321,7 +321,7 @@ Item {
                                     spacing: Theme.spacingS
 
                                     StyledText {
-                                        text: I18n.tr("Brightness")
+                                        text: "Brightness"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceText
                                         font.weight: Font.Medium
@@ -350,7 +350,7 @@ Item {
                                     spacing: Theme.spacingS
 
                                     StyledText {
-                                        text: I18n.tr("Contrast")
+                                        text: "Contrast"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceText
                                         font.weight: Font.Medium
@@ -379,7 +379,7 @@ Item {
                                     spacing: Theme.spacingS
 
                                     StyledText {
-                                        text: I18n.tr("Invert on mode change")
+                                        text: "Invert on mode change"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceText
                                         font.weight: Font.Medium
@@ -430,7 +430,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Launch Prefix")
+                            text: "Launch Prefix"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -440,7 +440,7 @@ Item {
 
                     StyledText {
                         width: parent.width
-                        text: I18n.tr("Add a custom prefix to all application launches. This can be used for things like 'uwsm-app', 'systemd-run', or other command wrappers.")
+                        text: "Add a custom prefix to all application launches. This can be used for things like 'uwsm-app', 'systemd-run', or other command wrappers."
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceVariantText
                         wrapMode: Text.WordWrap
@@ -449,7 +449,7 @@ Item {
                     ShellitTextField {
                         width: parent.width
                         text: SettingsData.launchPrefix
-                        placeholderText: I18n.tr("Enter launch prefix (e.g., 'uwsm-app')")
+                        placeholderText: "Enter launch prefix (e.g., 'uwsm-app')"
                         onTextEdited: {
                             SettingsData.setLaunchPrefix(text)
                         }
@@ -485,7 +485,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Sort Alphabetically")
+                            text: "Sort Alphabetically"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -514,7 +514,7 @@ Item {
 
                     StyledText {
                         width: parent.width
-                        text: I18n.tr("When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency.")
+                        text: "When enabled, apps are sorted alphabetically. When disabled, apps are sorted by usage frequency."
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceVariantText
                         wrapMode: Text.WordWrap
@@ -575,7 +575,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Recently Used Apps")
+                            text: "Recently Used Apps"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -605,7 +605,7 @@ Item {
 
                     StyledText {
                         width: parent.width
-                        text: I18n.tr("Apps are ordered by usage frequency, then last used, then alphabetically.")
+                        text: "Apps are ordered by usage frequency, then last used, then alphabetically."
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceVariantText
                         wrapMode: Text.WordWrap
@@ -688,24 +688,24 @@ Item {
                                                 var diffDays = Math.floor(
                                                             diffMs / (1000 * 60 * 60 * 24))
                                                 if (diffMins < 1)
-                                                    return I18n.tr("Last launched just now")
+                                                    return "Last launched just now"
 
                                                 if (diffMins < 60)
-                                                    return I18n.tr("Last launched %1 minute%2 ago")
+                                                    return "Last launched %1 minute%2 ago"
                                                             .arg(diffMins)
                                                             .arg(diffMins === 1 ? "" : "s")
 
                                                 if (diffHours < 24)
-                                                    return I18n.tr("Last launched %1 hour%2 ago")
+                                                    return "Last launched %1 hour%2 ago"
                                                             .arg(diffHours)
                                                             .arg(diffHours === 1 ? "" : "s")
 
                                                 if (diffDays < 7)
-                                                    return I18n.tr("Last launched %1 day%2 ago")
+                                                    return "Last launched %1 day%2 ago"
                                                             .arg(diffDays)
                                                             .arg(diffDays === 1 ? "" : "s")
 
-                                                return I18n.tr("Last launched %1")
+                                                return "Last launched %1"
                                                         .arg(date.toLocaleDateString())
                                             }
                                             font.pixelSize: Theme.fontSizeSmall

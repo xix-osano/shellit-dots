@@ -771,7 +771,7 @@ Item {
 
                 StyledText {
                     anchors.centerIn: parent
-                    text: I18n.tr("Close")
+                    text: "Close"
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.surfaceText
                 }

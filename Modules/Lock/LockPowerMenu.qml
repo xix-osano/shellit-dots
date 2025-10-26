@@ -151,7 +151,7 @@ Rectangle {
                     width: parent.width
 
                     StyledText {
-                        text: I18n.tr("Power Options")
+                        text: "Power Options"
                         font.pixelSize: Theme.fontSizeLarge
                         color: Theme.surfaceText
                         font.weight: Font.Medium
@@ -206,7 +206,7 @@ Rectangle {
                             }
 
                             StyledText {
-                                text: I18n.tr("Log Out")
+                                text: "Log Out"
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -257,7 +257,7 @@ Rectangle {
                             }
 
                             StyledText {
-                                text: I18n.tr("Suspend")
+                                text: "Suspend"
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -309,7 +309,7 @@ Rectangle {
                             }
 
                             StyledText {
-                                text: I18n.tr("Hibernate")
+                                text: "Hibernate"
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -369,7 +369,7 @@ Rectangle {
                             }
 
                             StyledText {
-                                text: I18n.tr("Reboot")
+                                text: "Reboot"
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: rebootArea.containsMouse ? Theme.warning : Theme.surfaceText
                                 font.weight: Font.Medium
@@ -429,7 +429,7 @@ Rectangle {
                             }
 
                             StyledText {
-                                text: I18n.tr("Power Off")
+                                text: "Power Off"
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: powerOffArea.containsMouse ? Theme.error : Theme.surfaceText
                                 font.weight: Font.Medium

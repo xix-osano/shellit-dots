@@ -56,7 +56,7 @@ ShellitModal {
             if (spotlightContent.appLauncher) {
                 spotlightContent.appLauncher.searchQuery = ""
                 spotlightContent.appLauncher.selectedIndex = 0
-                spotlightContent.appLauncher.setCategory(I18n.tr("All"))
+                spotlightContent.appLauncher.setCategory("All")
             }
             if (spotlightContent.resetScroll) {
                 spotlightContent.resetScroll()

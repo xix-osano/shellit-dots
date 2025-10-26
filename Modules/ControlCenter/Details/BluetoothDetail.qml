@@ -37,9 +37,9 @@ Rectangle {
             devicesBeingPairedChanged()
 
             if (response.error) {
-                ToastService.showError(I18n.tr("Pairing failed"), response.error)
+                ToastService.showError("Pairing failed", response.error)
             } else if (!BluetoothService.enhancedPairingAvailable) {
-                ToastService.showSuccess(I18n.tr("Device paired"))
+                ToastService.showSuccess("Device paired")
             }
         })
     }
@@ -66,7 +66,7 @@ Rectangle {
 
         StyledText {
             id: headerText
-            text: I18n.tr("Bluetooth Settings")
+            text: "Bluetooth Settings"
             font.pixelSize: Theme.fontSizeLarge
             color: Theme.surfaceText
             font.weight: Font.Medium
@@ -447,7 +447,7 @@ Rectangle {
 
                 StyledText {
                     anchors.centerIn: parent
-                    text: I18n.tr("No Bluetooth adapter found")
+                    text: "No Bluetooth adapter found"
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.surfaceVariantText
                 }
@@ -498,7 +498,7 @@ Rectangle {
         }
 
         MenuItem {
-            text: I18n.tr("Audio Codec")
+            text: "Audio Codec"
             height: bluetoothContextMenu.currentDevice && BluetoothService.isAudioDevice(bluetoothContextMenu.currentDevice) && bluetoothContextMenu.currentDevice.connected ? 32 : 0
             visible: bluetoothContextMenu.currentDevice && BluetoothService.isAudioDevice(bluetoothContextMenu.currentDevice) && bluetoothContextMenu.currentDevice.connected
 
@@ -523,7 +523,7 @@ Rectangle {
         }
 
         MenuItem {
-            text: I18n.tr("Forget Device")
+            text: "Forget Device"
             height: 32
 
             contentItem: StyledText {
@@ -545,7 +545,7 @@ Rectangle {
                         const devicePath = BluetoothService.getDevicePath(bluetoothContextMenu.currentDevice)
                         shellitService.bluetoothRemove(devicePath, response => {
                             if (response.error) {
-                                ToastService.showError(I18n.tr("Failed to remove device"), response.error)
+                                ToastService.showError("Failed to remove device", response.error)
                             }
                         })
                     } else {

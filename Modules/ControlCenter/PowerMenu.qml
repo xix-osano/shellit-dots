@@ -10,11 +10,11 @@ import qs.Widgets
 PanelWindow {
     id: root
 
-    readonly property string powerOptionsText: I18n.tr("Power Options")
-    readonly property string logOutText: I18n.tr("Log Out")
-    readonly property string suspendText: I18n.tr("Suspend")
-    readonly property string rebootText: I18n.tr("Reboot")
-    readonly property string powerOffText: I18n.tr("Power Off")
+    readonly property string powerOptionsText: "Power Options"
+    readonly property string logOutText: "Log Out"
+    readonly property string suspendText: "Suspend"
+    readonly property string rebootText: "Reboot"
+    readonly property string powerOffText: "Power Off"
 
     property bool powerMenuVisible: false
     signal powerActionRequested(string action, string title, string message)

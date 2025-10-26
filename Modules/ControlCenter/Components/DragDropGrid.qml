@@ -197,11 +197,11 @@ Column {
             height: 60
             primaryMessage: {
                 if (!shellitService.shellitAvailable) {
-                    return I18n.tr("shellit_SOCKET not available")
+                    return "shellit_SOCKET not available"
                 }
-                return I18n.tr("NM not supported")
+                return "NM not supported"
             }
-            secondaryMessage: I18n.tr("update shellit for NM integration.")
+            secondaryMessage: "update shellit for NM integration."
         }
     }
 

@@ -476,7 +476,7 @@ Item {
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("Back")
+                                    text: "Back"
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceText
                                     anchors.verticalCenter: parent.verticalCenter

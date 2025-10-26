@@ -194,7 +194,7 @@ Column {
                 spacing: 4
 
                 StyledText {
-                    text: I18n.tr("Memory")
+                    text: "Memory"
                     font.pixelSize: Theme.fontSizeLarge
                     font.weight: Font.Bold
                     color: Theme.surfaceText
@@ -269,7 +269,7 @@ Column {
                 spacing: 4
 
                 StyledText {
-                    text: I18n.tr("Swap")
+                    text: "Swap"
                     font.pixelSize: Theme.fontSizeLarge
                     font.weight: Font.Bold
                     color: Theme.surfaceText
@@ -359,7 +359,7 @@ Column {
                 spacing: Theme.spacingXS
 
                 StyledText {
-                    text: I18n.tr("Network")
+                    text: "Network"
                     font.pixelSize: Theme.fontSizeMedium
                     font.weight: Font.Bold
                     color: Theme.surfaceText
@@ -425,7 +425,7 @@ Column {
                 spacing: Theme.spacingXS
 
                 StyledText {
-                    text: I18n.tr("Disk")
+                    text: "Disk"
                     font.pixelSize: Theme.fontSizeMedium
                     font.weight: Font.Bold
                     color: Theme.surfaceText

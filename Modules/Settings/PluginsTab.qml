@@ -59,14 +59,14 @@ FocusScope {
                             spacing: Theme.spacingXS
 
                             StyledText {
-                                text: I18n.tr("Plugin Management")
+                                text: "Plugin Management"
                                 font.pixelSize: Theme.fontSizeLarge
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
                             }
 
                             StyledText {
-                                text: I18n.tr("Manage and configure plugins for extending shellit functionality")
+                                text: "Manage and configure plugins for extending shellit functionality"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                             }
@@ -99,7 +99,7 @@ FocusScope {
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("shellit Plugin Manager Unavailable")
+                                    text: "shellit Plugin Manager Unavailable"
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.warning
                                     font.weight: Font.Medium
@@ -108,7 +108,7 @@ FocusScope {
                             }
 
                             StyledText {
-                                text: I18n.tr("The shellit_SOCKET environment variable is not set or the socket is unavailable. Automated plugin management requires the shellit_SOCKET.")
+                                text: "The shellit_SOCKET environment variable is not set or the socket is unavailable. Automated plugin management requires the shellit_SOCKET."
                                 font.pixelSize: Theme.fontSizeSmall - 1
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -122,7 +122,7 @@ FocusScope {
                         spacing: Theme.spacingM
 
                         ShellitButton {
-                            text: I18n.tr("Browse")
+                            text: "Browse"
                             iconName: "store"
                             enabled: shellitService.shellitAvailable
                             onClicked: {
@@ -131,7 +131,7 @@ FocusScope {
                         }
 
                         ShellitButton {
-                            text: I18n.tr("Scan")
+                            text: "Scan"
                             iconName: "refresh"
                             onClicked: {
                                 pluginsTab.isRefreshingPlugins = true
@@ -144,7 +144,7 @@ FocusScope {
                         }
 
                         ShellitButton {
-                            text: I18n.tr("Create Dir")
+                            text: "Create Dir"
                             iconName: "create_new_folder"
                             onClicked: {
                                 PluginService.createPluginDirectory()
@@ -170,7 +170,7 @@ FocusScope {
                     spacing: Theme.spacingM
 
                     StyledText {
-                        text: I18n.tr("Plugin Directory")
+                        text: "Plugin Directory"
                         font.pixelSize: Theme.fontSizeLarge
                         color: Theme.surfaceText
                         font.weight: Font.Medium
@@ -184,7 +184,7 @@ FocusScope {
                     }
 
                     StyledText {
-                        text: I18n.tr("Place plugin directories here. Each plugin should have a plugin.json manifest file.")
+                        text: "Place plugin directories here. Each plugin should have a plugin.json manifest file."
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceVariantText
                         wrapMode: Text.WordWrap
@@ -208,7 +208,7 @@ FocusScope {
                     spacing: Theme.spacingM
 
                     StyledText {
-                        text: I18n.tr("Available Plugins")
+                        text: "Available Plugins"
                         font.pixelSize: Theme.fontSizeLarge
                         color: Theme.surfaceText
                         font.weight: Font.Medium
@@ -364,7 +364,7 @@ FocusScope {
                                                         tooltipLoader.active = true
                                                         if (tooltipLoader.item) {
                                                             const p = mapToItem(null, width / 2, 0)
-                                                            tooltipLoader.item.show(I18n.tr("Update Plugin"), p.x, p.y - 40, null)
+                                                            tooltipLoader.item.show("Update Plugin"), p.x, p.y - 40, null
                                                         }
                                                     }
                                                     onExited: {
@@ -413,7 +413,7 @@ FocusScope {
                                                         tooltipLoader.active = true
                                                         if (tooltipLoader.item) {
                                                             const p = mapToItem(null, width / 2, 0)
-                                                            tooltipLoader.item.show(I18n.tr("Uninstall Plugin"), p.x, p.y - 40, null)
+                                                            tooltipLoader.item.show("Uninstall Plugin"), p.x, p.y - 40, null
                                                         }
                                                     }
                                                     onExited: {
@@ -459,7 +459,7 @@ FocusScope {
                                                         tooltipLoader.active = true
                                                         if (tooltipLoader.item) {
                                                             const p = mapToItem(null, width / 2, 0)
-                                                            tooltipLoader.item.show(I18n.tr("Reload Plugin"), p.x, p.y - 40, null)
+                                                            tooltipLoader.item.show("Reload Plugin"), p.x, p.y - 40, null
                                                         }
                                                     }
                                                     onExited: {
@@ -618,7 +618,7 @@ FocusScope {
 
                         StyledText {
                             width: parent.width
-                            text: I18n.tr("No plugins found.") + "\n" + I18n.tr("Place plugins in") + " " + PluginService.pluginDirectory
+                            text: "No plugins found." + "\n" + "Place plugins in" + " " + PluginService.pluginDirectory
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.surfaceVariantText
                             horizontalAlignment: Text.AlignHCenter
@@ -864,7 +864,7 @@ FocusScope {
 
                         StyledText {
                             id: headerText
-                            text: I18n.tr("Browse Plugins")
+                            text: "Browse Plugins"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -913,7 +913,7 @@ FocusScope {
                     }
 
                     StyledText {
-                        text: I18n.tr("Install plugins from the shellit plugin registry")
+                        text: "Install plugins from the shellit plugin registry"
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.outline
                         width: parent.width
@@ -935,7 +935,7 @@ FocusScope {
                         showClearButton: true
                         textColor: Theme.surfaceText
                         font.pixelSize: Theme.fontSizeMedium
-                        placeholderText: I18n.tr("Search plugins...")
+                        placeholderText: "Search plugins..."
                         text: pluginBrowserModal.searchQuery
                         focus: true
                         ignoreLeftRightKeys: true
@@ -971,7 +971,7 @@ FocusScope {
                             }
 
                             StyledText {
-                                text: I18n.tr("Loading plugins...")
+                                text: "Loading plugins..."
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.surfaceVariantText
                                 anchors.horizontalCenter: parent.horizontalCenter
@@ -1051,7 +1051,7 @@ FocusScope {
                                                 StyledText {
                                                     id: firstPartyText
                                                     anchors.centerIn: parent
-                                                    text: I18n.tr("official")
+                                                    text: "official"
                                                     font.pixelSize: Theme.fontSizeSmall - 2
                                                     color: Theme.primary
                                                     font.weight: Font.Medium
@@ -1071,7 +1071,7 @@ FocusScope {
                                                 StyledText {
                                                     id: thirdPartyText
                                                     anchors.centerIn: parent
-                                                    text: I18n.tr("3rd party")
+                                                    text: "3rd party"
                                                     font.pixelSize: Theme.fontSizeSmall - 2
                                                     color: Theme.warning
                                                     font.weight: Font.Medium
@@ -1195,7 +1195,7 @@ FocusScope {
                     }
 
                     StyledText {
-                        text: I18n.tr("No plugins found")
+                        text: "No plugins found"
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.surfaceVariantText
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -1244,7 +1244,7 @@ FocusScope {
                         }
 
                         StyledText {
-                            text: I18n.tr("Third-Party Plugin Warning")
+                            text: "Third-Party Plugin Warning"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -1254,7 +1254,7 @@ FocusScope {
 
                     StyledText {
                         width: parent.width
-                        text: I18n.tr("Third-party plugins are created by the community and are not officially supported by ShellitMaterialShell.\n\nThese plugins may pose security and privacy risks - install at your own risk.")
+                        text: "Third-party plugins are created by the community and are not officially supported by ShellitMaterialShell.\n\nThese plugins may pose security and privacy risks - install at your own risk."
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.surfaceText
                         wrapMode: Text.WordWrap
@@ -1265,19 +1265,19 @@ FocusScope {
                         spacing: Theme.spacingS
 
                         StyledText {
-                            text: I18n.tr("• Plugins may contain bugs or security issues")
+                            text: "• Plugins may contain bugs or security issues"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceVariantText
                         }
 
                         StyledText {
-                            text: I18n.tr("• Review code before installation when possible")
+                            text: "• Review code before installation when possible"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceVariantText
                         }
 
                         StyledText {
-                            text: I18n.tr("• Install only from trusted sources")
+                            text: "• Install only from trusted sources"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceVariantText
                         }
@@ -1293,13 +1293,13 @@ FocusScope {
                         spacing: Theme.spacingM
 
                         ShellitButton {
-                            text: I18n.tr("Cancel")
+                            text: "Cancel"
                             iconName: "close"
                             onClicked: thirdPartyConfirmModal.close()
                         }
 
                         ShellitButton {
-                            text: I18n.tr("I Understand")
+                            text: "I Understand"
                             iconName: "check"
                             onClicked: {
                                 SessionData.setShowThirdPartyPlugins(true)

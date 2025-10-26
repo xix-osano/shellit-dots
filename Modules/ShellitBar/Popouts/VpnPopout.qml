@@ -100,7 +100,7 @@ ShellitPopout {
                     height: 32
 
                     StyledText {
-                        text: I18n.tr("VPN Connections")
+                        text: "VPN Connections"
                         font.pixelSize: Theme.fontSizeLarge
                         color: Theme.surfaceText
                         font.weight: Font.Medium
@@ -210,7 +210,7 @@ ShellitPopout {
                                     }
 
                                     StyledText {
-                                        text: I18n.tr("Disconnect")
+                                        text: "Disconnect"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceText
                                         font.weight: Font.Medium
@@ -266,14 +266,14 @@ ShellitPopout {
                                         }
 
                                         StyledText {
-                                            text: I18n.tr("No VPN profiles found")
+                                            text: "No VPN profiles found"
                                             font.pixelSize: Theme.fontSizeMedium
                                             color: Theme.surfaceVariantText
                                             anchors.horizontalCenter: parent.horizontalCenter
                                         }
 
                                         StyledText {
-                                            text: I18n.tr("Add a VPN in NetworkManager")
+                                            text: "Add a VPN in NetworkManager"
                                             font.pixelSize: Theme.fontSizeSmall
                                             color: Theme.surfaceVariantText
                                             anchors.horizontalCenter: parent.horizontalCenter

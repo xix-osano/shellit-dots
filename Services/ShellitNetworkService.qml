@@ -274,7 +274,7 @@ Singleton {
                     pendingConnectionSSID = ""
                 } else {
                     if (connectionError) {
-                        ToastService.showError(I18n.tr("Failed to connect to ") + pendingConnectionSSID)
+                        ToastService.showError("Failed to connect to " + pendingConnectionSSID)
                     }
                     connectionStatus = "failed"
                     pendingConnectionSSID = ""
@@ -301,11 +301,11 @@ Singleton {
                 connectionError = response.error
                 lastConnectionError = response.error
                 connectionStatus = "failed"
-                ToastService.showError(I18n.tr("Failed to activate configuration"))
+                ToastService.showError("Failed to activate configuration")
             } else {
                 connectionError = ""
                 connectionStatus = "connected"
-                ToastService.showInfo(I18n.tr("Configuration activated"))
+                ToastService.showInfo("Configuration activated")
             }
 
             isConnecting = false
@@ -368,7 +368,7 @@ Singleton {
                 lastConnectionError = response.error
                 pendingConnectionSSID = ""
                 connectionStatus = "failed"
-                ToastService.showError(I18n.tr("Failed to start connection to ") + ssid)
+                ToastService.showError("Failed to start connection to " + ssid)
             }
         })
     }
@@ -378,9 +378,9 @@ Singleton {
 
         shellitService.sendRequest("network.wifi.disconnect", null, response => {
             if (response.error) {
-                ToastService.showError(I18n.tr("Failed to disconnect WiFi"))
+                ToastService.showError("Failed to disconnect WiFi")
             } else {
-                ToastService.showInfo(I18n.tr("Disconnected from WiFi"))
+                ToastService.showInfo("Disconnected from WiFi")
                 currentWifiSSID = ""
                 connectionStatus = ""
             }
@@ -436,7 +436,7 @@ Singleton {
             if (response.error) {
                 console.warn("Failed to forget network:", response.error)
             } else {
-                ToastService.showInfo(I18n.tr("Forgot network ") + ssid)
+                ToastService.showInfo("Forgot network " + ssid)
 
                 savedConnections = savedConnections.filter(s => s.ssid !== ssid)
                 savedWifiNetworks = savedWifiNetworks.filter(s => s.ssid !== ssid)
@@ -469,7 +469,7 @@ Singleton {
                 console.warn("Failed to toggle WiFi:", response.error)
             } else if (response.result) {
                 wifiEnabled = response.result.enabled
-                ToastService.showInfo(wifiEnabled ? I18n.tr("WiFi enabled") : I18n.tr("WiFi disabled"))
+                ToastService.showInfo(wifiEnabled ? "WiFi enabled" : "WiFi disabled")
             }
         })
     }
@@ -479,9 +479,9 @@ Singleton {
 
         shellitService.sendRequest("network.wifi.enable", null, response => {
             if (response.error) {
-                ToastService.showError(I18n.tr("Failed to enable WiFi"))
+                ToastService.showError("Failed to enable WiFi")
             } else {
-                ToastService.showInfo(I18n.tr("WiFi enabled"))
+                ToastService.showInfo("WiFi enabled")
             }
         })
     }

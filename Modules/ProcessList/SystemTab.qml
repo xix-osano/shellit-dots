@@ -127,7 +127,7 @@ ShellitFlickable {
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("System")
+                                    text: "System"
                                     font.pixelSize: Theme.fontSizeSmall
                                     font.family: SettingsData.monoFontFamily
                                     font.weight: Font.Bold
@@ -411,7 +411,7 @@ ShellitFlickable {
                     }
 
                     StyledText {
-                        text: I18n.tr("Storage & Disks")
+                        text: "Storage & Disks"
                         font.pixelSize: Theme.fontSizeLarge
                         font.family: SettingsData.monoFontFamily
                         font.weight: Font.Bold
@@ -431,7 +431,7 @@ ShellitFlickable {
                         spacing: Theme.spacingS
 
                         StyledText {
-                            text: I18n.tr("Device")
+                            text: "Device"
                             font.pixelSize: Theme.fontSizeSmall
                             font.family: SettingsData.monoFontFamily
                             font.weight: Font.Bold
@@ -442,7 +442,7 @@ ShellitFlickable {
                         }
 
                         StyledText {
-                            text: I18n.tr("Mount")
+                            text: "Mount"
                             font.pixelSize: Theme.fontSizeSmall
                             font.family: SettingsData.monoFontFamily
                             font.weight: Font.Bold
@@ -453,7 +453,7 @@ ShellitFlickable {
                         }
 
                         StyledText {
-                            text: I18n.tr("Size")
+                            text: "Size"
                             font.pixelSize: Theme.fontSizeSmall
                             font.family: SettingsData.monoFontFamily
                             font.weight: Font.Bold
@@ -464,7 +464,7 @@ ShellitFlickable {
                         }
 
                         StyledText {
-                            text: I18n.tr("Used")
+                            text: "Used"
                             font.pixelSize: Theme.fontSizeSmall
                             font.family: SettingsData.monoFontFamily
                             font.weight: Font.Bold
@@ -475,7 +475,7 @@ ShellitFlickable {
                         }
 
                         StyledText {
-                            text: I18n.tr("Available")
+                            text: "Available"
                             font.pixelSize: Theme.fontSizeSmall
                             font.family: SettingsData.monoFontFamily
                             font.weight: Font.Bold
@@ -486,7 +486,7 @@ ShellitFlickable {
                         }
 
                         StyledText {
-                            text: I18n.tr("Use%")
+                            text: "Use%"
                             font.pixelSize: Theme.fontSizeSmall
                             font.family: SettingsData.monoFontFamily
                             font.weight: Font.Bold

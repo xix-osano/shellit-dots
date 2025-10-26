@@ -226,8 +226,8 @@ Singleton {
                 if (!shownOutdatedError) {
                     console.error("shellitService: Server does not support subscribe method")
                     ToastService.showError(
-                        I18n.tr("shellit out of date"),
-                        I18n.tr("To update, run the following command:"),
+                        "shellit out of date",
+                        "To update, run the following command:",
                         updateCommand
                     )
                     shownOutdatedError = true

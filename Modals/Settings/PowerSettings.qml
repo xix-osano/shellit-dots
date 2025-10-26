@@ -19,7 +19,7 @@ Item {
             spacing: Theme.spacingXL
 
             StyledText {
-                text: I18n.tr("Battery not detected - only AC power settings available")
+                text: "Battery not detected - only AC power settings available"
                 font.pixelSize: Theme.fontSizeMedium
                 color: Theme.surfaceVariantText
                 visible: !BatteryService.batteryAvailable
@@ -51,7 +51,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Lock Screen")
+                            text: "Lock Screen"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -61,14 +61,14 @@ Item {
 
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("Show Power Actions")
-                        description: I18n.tr("Show power, restart, and logout buttons on the lock screen")
+                        text: "Show Power Actions"
+                        description: "Show power, restart, and logout buttons on the lock screen"
                         checked: SettingsData.lockScreenShowPowerActions
                         onToggled: checked => SettingsData.setLockScreenShowPowerActions(checked)
                     }
 
                     StyledText {
-                        text: I18n.tr("loginctl not available - lock integration requires shellit socket connection")
+                        text: "loginctl not available - lock integration requires shellit socket connection"
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.warning
                         visible: !SessionService.loginctlAvailable
@@ -78,8 +78,8 @@ Item {
 
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("Enable loginctl lock integration")
-                        description: I18n.tr("Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen")
+                        text: "Enable loginctl lock integration"
+                        description: "Bind lock screen to dbus signals from loginctl. Disable if using an external lock screen"
                         checked: SessionService.loginctlAvailable && SettingsData.loginctlLockIntegration
                         enabled: SessionService.loginctlAvailable
                         onToggled: checked => {
@@ -91,8 +91,8 @@ Item {
 
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("Lock before suspend")
-                        description: I18n.tr("Automatically lock the screen when the system prepares to suspend")
+                        text: "Lock before suspend"
+                        description: "Automatically lock the screen when the system prepares to suspend"
                         checked: SettingsData.lockBeforeSuspend
                         visible: SessionService.loginctlAvailable && SettingsData.loginctlLockIntegration
                         onToggled: checked => SettingsData.setLockBeforeSuspend(checked)
@@ -100,8 +100,8 @@ Item {
 
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("Enable fingerprint authentication")
-                        description: I18n.tr("Use fingerprint reader for lock screen authentication (requires enrolled fingerprints)")
+                        text: "Enable fingerprint authentication"
+                        description: "Use fingerprint reader for lock screen authentication (requires enrolled fingerprints)"
                         checked: SettingsData.enableFprint
                         visible: SettingsData.fprintdAvailable
                         onToggled: checked => SettingsData.setEnableFprint(checked)
@@ -135,7 +135,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Idle Settings")
+                            text: "Idle Settings"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -163,7 +163,7 @@ Item {
                         property var timeoutOptions: ["Never", "1 minute", "2 minutes", "3 minutes", "5 minutes", "10 minutes", "15 minutes", "20 minutes", "30 minutes", "1 hour", "1 hour 30 minutes", "2 hours", "3 hours"]
                         property var timeoutValues: [0, 60, 120, 180, 300, 600, 900, 1200, 1800, 3600, 5400, 7200, 10800]
 
-                        text: I18n.tr("Automatically lock after")
+                        text: "Automatically lock after"
                         options: timeoutOptions
 
                         Connections {
@@ -199,7 +199,7 @@ Item {
                         property var timeoutOptions: ["Never", "1 minute", "2 minutes", "3 minutes", "5 minutes", "10 minutes", "15 minutes", "20 minutes", "30 minutes", "1 hour", "1 hour 30 minutes", "2 hours", "3 hours"]
                         property var timeoutValues: [0, 60, 120, 180, 300, 600, 900, 1200, 1800, 3600, 5400, 7200, 10800]
 
-                        text: I18n.tr("Turn off monitors after")
+                        text: "Turn off monitors after"
                         options: timeoutOptions
 
                         Connections {
@@ -235,7 +235,7 @@ Item {
                         property var timeoutOptions: ["Never", "1 minute", "2 minutes", "3 minutes", "5 minutes", "10 minutes", "15 minutes", "20 minutes", "30 minutes", "1 hour", "1 hour 30 minutes", "2 hours", "3 hours"]
                         property var timeoutValues: [0, 60, 120, 180, 300, 600, 900, 1200, 1800, 3600, 5400, 7200, 10800]
 
-                        text: I18n.tr("Suspend system after")
+                        text: "Suspend system after"
                         options: timeoutOptions
 
                         Connections {
@@ -271,7 +271,7 @@ Item {
                         property var timeoutOptions: ["Never", "1 minute", "2 minutes", "3 minutes", "5 minutes", "10 minutes", "15 minutes", "20 minutes", "30 minutes", "1 hour", "1 hour 30 minutes", "2 hours", "3 hours"]
                         property var timeoutValues: [0, 60, 120, 180, 300, 600, 900, 1200, 1800, 3600, 5400, 7200, 10800]
 
-                        text: I18n.tr("Hibernate system after")
+                        text: "Hibernate system after"
                         options: timeoutOptions
                         visible: SessionService.hibernateSupported
 
@@ -304,7 +304,7 @@ Item {
                     }
 
                     StyledText {
-                        text: I18n.tr("Idle monitoring not supported - requires newer Quickshell version")
+                        text: "Idle monitoring not supported - requires newer Quickshell version"
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.error
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -339,7 +339,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Power Action Confirmation")
+                            text: "Power Action Confirmation"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -349,8 +349,8 @@ Item {
 
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("Show Confirmation on Power Actions")
-                        description: I18n.tr("Request confirmation on power off, restart, suspend, hibernate and logout actions")
+                        text: "Show Confirmation on Power Actions"
+                        description: "Request confirmation on power off, restart, suspend, hibernate and logout actions"
                         checked: SettingsData.powerActionConfirm
                         onToggled: checked => SettingsData.setPowerActionConfirm(checked)
                     }
@@ -383,7 +383,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Custom Power Actions")
+                            text: "Custom Power Actions"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -397,7 +397,7 @@ Item {
                         anchors.left: parent.left
 
                         StyledText {
-                            text: I18n.tr("Command or script to run instead of the standard lock procedure")
+                            text: "Command or script to run instead of the standard lock procedure"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceVariantText
                         }
@@ -429,7 +429,7 @@ Item {
                         anchors.left: parent.left
 
                         StyledText {
-                            text: I18n.tr("Command or script to run instead of the standard logout procedure")
+                            text: "Command or script to run instead of the standard logout procedure"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceVariantText
                         }
@@ -461,7 +461,7 @@ Item {
                         anchors.left: parent.left
 
                         StyledText {
-                            text: I18n.tr("Command or script to run instead of the standard suspend procedure")
+                            text: "Command or script to run instead of the standard suspend procedure"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceVariantText
                         }
@@ -493,7 +493,7 @@ Item {
                         anchors.left: parent.left
 
                         StyledText {
-                            text: I18n.tr("Command or script to run instead of the standard hibernate procedure")
+                            text: "Command or script to run instead of the standard hibernate procedure"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceVariantText
                         }
@@ -525,7 +525,7 @@ Item {
                         anchors.left: parent.left
 
                         StyledText {
-                            text: I18n.tr("Command or script to run instead of the standard reboot procedure")
+                            text: "Command or script to run instead of the standard reboot procedure"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceVariantText
                         }
@@ -557,7 +557,7 @@ Item {
                         anchors.left: parent.left
 
                         StyledText {
-                            text: I18n.tr("Command or script to run instead of the standard power off procedure")
+                            text: "Command or script to run instead of the standard power off procedure"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceVariantText
                         }

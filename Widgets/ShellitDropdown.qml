@@ -261,7 +261,7 @@ Item {
 
                         anchors.fill: parent
                         anchors.margins: 1
-                        placeholderText: I18n.tr("Search...")
+                        placeholderText: "Search..."
                         text: dropdownMenu.searchQuery
                         topPadding: Theme.spacingS
                         bottomPadding: Theme.spacingS

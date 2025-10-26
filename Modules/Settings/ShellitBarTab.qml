@@ -22,170 +22,170 @@ Item {
     property var baseWidgetDefinitions: {
         var coreWidgets = [{
             "id": "launcherButton",
-            "text": I18n.tr("App Launcher"),
-            "description": I18n.tr("Quick access to application launcher"),
+            "text": "App Launcher",
+            "description": "Quick access to application launcher",
             "icon": "apps",
             "enabled": true
         }, {
             "id": "workspaceSwitcher",
-            "text": I18n.tr("Workspace Switcher"),
-            "description": I18n.tr("Shows current workspace and allows switching"),
+            "text": "Workspace Switcher",
+            "description": "Shows current workspace and allows switching",
             "icon": "view_module",
             "enabled": true
         }, {
             "id": "focusedWindow",
-            "text": I18n.tr("Focused Window"),
-            "description": I18n.tr("Display currently focused application title"),
+            "text": "Focused Window",
+            "description": "Display currently focused application title",
             "icon": "window",
             "enabled": true
         }, {
             "id": "runningApps",
-            "text": I18n.tr("Running Apps"),
-            "description": I18n.tr("Shows all running applications with focus indication"),
+            "text": "Running Apps",
+            "description": "Shows all running applications with focus indication",
             "icon": "apps",
             "enabled": true
         }, {
             "id": "clock",
-            "text": I18n.tr("Clock"),
-            "description": I18n.tr("Current time and date display"),
+            "text": "Clock",
+            "description": "Current time and date display",
             "icon": "schedule",
             "enabled": true
         }, {
             "id": "weather",
-            "text": I18n.tr("Weather Widget"),
-            "description": I18n.tr("Current weather conditions and temperature"),
+            "text": "Weather Widget",
+            "description": "Current weather conditions and temperature",
             "icon": "wb_sunny",
             "enabled": true
         }, {
             "id": "music",
-            "text": I18n.tr("Media Controls"),
-            "description": I18n.tr("Control currently playing media"),
+            "text": "Media Controls",
+            "description": "Control currently playing media",
             "icon": "music_note",
             "enabled": true
         }, {
             "id": "clipboard",
-            "text": I18n.tr("Clipboard Manager"),
-            "description": I18n.tr("Access clipboard history"),
+            "text": "Clipboard Manager",
+            "description": "Access clipboard history",
             "icon": "content_paste",
             "enabled": true
         }, {
             "id": "cpuUsage",
-            "text": I18n.tr("CPU Usage"),
-            "description": I18n.tr("CPU usage indicator"),
+            "text": "CPU Usage",
+            "description": "CPU usage indicator",
             "icon": "memory",
             "enabled": DgopService.dgopAvailable,
-            "warning": !DgopService.dgopAvailable ? I18n.tr("Requires 'dgop' tool") : undefined
+            "warning": !DgopService.dgopAvailable ? "Requires 'dgop' tool" : undefined
         }, {
             "id": "memUsage",
-            "text": I18n.tr("Memory Usage"),
-            "description": I18n.tr("Memory usage indicator"),
+            "text": "Memory Usage",
+            "description": "Memory usage indicator",
             "icon": "developer_board",
             "enabled": DgopService.dgopAvailable,
-            "warning": !DgopService.dgopAvailable ? I18n.tr("Requires 'dgop' tool") : undefined
+            "warning": !DgopService.dgopAvailable ? "Requires 'dgop' tool" : undefined
         }, {
             "id": "diskUsage",
-            "text": I18n.tr("Disk Usage"),
-            "description": I18n.tr("Percentage"),
+            "text": "Disk Usage",
+            "description": "Percentage",
             "icon": "storage",
             "enabled": DgopService.dgopAvailable,
-            "warning": !DgopService.dgopAvailable ? I18n.tr("Requires 'dgop' tool") : undefined
+            "warning": !DgopService.dgopAvailable ? "Requires 'dgop' tool" : undefined
         }, {
             "id": "cpuTemp",
-            "text": I18n.tr("CPU Temperature"),
-            "description": I18n.tr("CPU temperature display"),
+            "text": "CPU Temperature",
+            "description": "CPU temperature display",
             "icon": "device_thermostat",
             "enabled": DgopService.dgopAvailable,
-            "warning": !DgopService.dgopAvailable ? I18n.tr("Requires 'dgop' tool") : undefined
+            "warning": !DgopService.dgopAvailable ? "Requires 'dgop' tool" : undefined
         }, {
             "id": "gpuTemp",
-            "text": I18n.tr("GPU Temperature"),
-            "description": I18n.tr("GPU temperature display"),
+            "text": "GPU Temperature",
+            "description": "GPU temperature display",
             "icon": "auto_awesome_mosaic",
-            "warning": !DgopService.dgopAvailable ? I18n.tr("Requires 'dgop' tool") : I18n.tr("This widget prevents GPU power off states, which can significantly impact battery life on laptops. It is not recommended to use this on laptops with hybrid graphics."),
+            "warning": !DgopService.dgopAvailable ? "Requires 'dgop' tool" : "This widget prevents GPU power off states, which can significantly impact battery life on laptops. It is not recommended to use this on laptops with hybrid graphics.",
             "enabled": DgopService.dgopAvailable
         }, {
             "id": "systemTray",
-            "text": I18n.tr("System Tray"),
-            "description": I18n.tr("System notification area icons"),
+            "text": "System Tray",
+            "description": "System notification area icons",
             "icon": "notifications",
             "enabled": true
         }, {
             "id": "privacyIndicator",
-            "text": I18n.tr("Privacy Indicator"),
-            "description": I18n.tr("Shows when microphone, camera, or screen sharing is active"),
+            "text": "Privacy Indicator",
+            "description": "Shows when microphone, camera, or screen sharing is active",
             "icon": "privacy_tip",
             "enabled": true
         }, {
             "id": "controlCenterButton",
-            "text": I18n.tr("Control Center"),
-            "description": I18n.tr("Access to system controls and settings"),
+            "text": "Control Center",
+            "description": "Access to system controls and settings",
             "icon": "settings",
             "enabled": true
         }, {
             "id": "notificationButton",
-            "text": I18n.tr("Notification Center"),
-            "description": I18n.tr("Access to notifications and do not disturb"),
+            "text": "Notification Center",
+            "description": "Access to notifications and do not disturb",
             "icon": "notifications",
             "enabled": true
         }, {
             "id": "battery",
-            "text": I18n.tr("Battery"),
-            "description": I18n.tr("Battery level and power management"),
+            "text": "Battery",
+            "description": "Battery level and power management",
             "icon": "battery_std",
             "enabled": true
         }, {
             "id": "vpn",
-            "text": I18n.tr("VPN"),
-            "description": I18n.tr("VPN status and quick connect"),
+            "text": "VPN",
+            "description": "VPN status and quick connect",
             "icon": "vpn_lock",
             "enabled": true
         }, {
             "id": "idleInhibitor",
-            "text": I18n.tr("Idle Inhibitor"),
-            "description": I18n.tr("Prevent screen timeout"),
+            "text": "Idle Inhibitor",
+            "description": "Prevent screen timeout",
             "icon": "motion_sensor_active",
             "enabled": true
         }, {
             "id": "spacer",
-            "text": I18n.tr("Spacer"),
-            "description": I18n.tr("Customizable empty space"),
+            "text": "Spacer",
+            "description": "Customizable empty space",
             "icon": "more_horiz",
             "enabled": true
         }, {
             "id": "separator",
-            "text": I18n.tr("Separator"),
-            "description": I18n.tr("Visual divider between widgets"),
+            "text": "Separator",
+            "description": "Visual divider between widgets",
             "icon": "remove",
             "enabled": true
         },
         {
             "id": "network_speed_monitor",
-            "text": I18n.tr("Network Speed Monitor"),
-            "description": I18n.tr("Network download and upload speed display"),
+            "text": "Network Speed Monitor",
+            "description": "Network download and upload speed display",
             "icon": "network_check",
-            "warning": !DgopService.dgopAvailable ? I18n.tr("Requires 'dgop' tool") : undefined,
+            "warning": !DgopService.dgopAvailable ? "Requires 'dgop' tool" : undefined,
             "enabled": DgopService.dgopAvailable
         }, {
             "id": "keyboard_layout_name",
-            "text": I18n.tr("Keyboard Layout Name"),
-            "description": I18n.tr("Displays the active keyboard layout and allows switching"),
+            "text": "Keyboard Layout Name",
+            "description": "Displays the active keyboard layout and allows switching",
             "icon": "keyboard",
         }, {
             "id": "notepadButton",
-            "text": I18n.tr("Notepad"),
-            "description": I18n.tr("Quick access to notepad"),
+            "text": "Notepad",
+            "description": "Quick access to notepad",
             "icon": "assignment",
             "enabled": true
         }, {
             "id": "colorPicker",
-            "text": I18n.tr("Color Picker"),
-            "description": I18n.tr("Quick access to color picker"),
+            "text": "Color Picker",
+            "description": "Quick access to color picker",
             "icon": "palette",
             "enabled": true
         }, {
             "id": "systemUpdate",
-            "text": I18n.tr("System Update"),
-            "description": I18n.tr("Check for system updates"),
+            "text": "System Update",
+            "description": "Check for system updates",
             "icon": "update",
             "enabled": SystemUpdateService.distributionSupported
         }]
@@ -199,7 +199,7 @@ Item {
                 "description": variant.description,
                 "icon": variant.icon,
                 "enabled": variant.loaded,
-                "warning": !variant.loaded ? I18n.tr("Plugin is disabled - enable in Plugins settings to use") : undefined
+                "warning": !variant.loaded ? "Plugin is disabled - enable in Plugins settings to use" : undefined
             })
         }
 
@@ -266,16 +266,16 @@ Item {
         }
 
         var widgets = []
-        if (targetSection === "left") {
-            widgets = SettingsData.ShellitBarLeftWidgets.slice()
+    Shellit    if (targetSection === "left") {
+            widgets = SettingsData.shellitBarLeftWidgets.slice()
             widgets.push(widgetObj)
             SettingsData.setShellitBarLeftWidgets(widgets)
         } else if (targetSection === "center") {
-            widgets = SettingsData.ShellitBarCenterWidgets.slice()
+            widgets = SettingsData.shellitBarCenterWidgets.slice()
             widgets.push(widgetObj)
             SettingsData.setShellitBarCenterWidgets(widgets)
         } else if (targetSection === "right") {
-            widgets = SettingsData.ShellitBarRightWidgets.slice()
+            widgets = SettingsData.shellitBarRightWidgets.slice()
             widgets.push(widgetObj)
             SettingsData.setShellitBarRightWidgets(widgets)
         }
@@ -284,19 +284,19 @@ Item {
     function removeWidgetFromSection(sectionId, widgetIndex) {
         var widgets = []
         if (sectionId === "left") {
-            widgets = SettingsData.ShellitBarLeftWidgets.slice()
+            widgets = SettingsData.shellitBarLeftWidgets.slice()
             if (widgetIndex >= 0 && widgetIndex < widgets.length) {
                 widgets.splice(widgetIndex, 1)
             }
             SettingsData.setShellitBarLeftWidgets(widgets)
         } else if (sectionId === "center") {
-            widgets = SettingsData.ShellitBarCenterWidgets.slice()
+            widgets = SettingsData.shellitBarCenterWidgets.slice()
             if (widgetIndex >= 0 && widgetIndex < widgets.length) {
                 widgets.splice(widgetIndex, 1)
             }
             SettingsData.setShellitBarCenterWidgets(widgets)
         } else if (sectionId === "right") {
-            widgets = SettingsData.ShellitBarRightWidgets.slice()
+            widgets = SettingsData.shellitBarRightWidgets.slice()
             if (widgetIndex >= 0 && widgetIndex < widgets.length) {
                 widgets.splice(widgetIndex, 1)
             }
@@ -307,11 +307,11 @@ Item {
     function handleItemEnabledChanged(sectionId, itemId, enabled) {
         var widgets = []
         if (sectionId === "left")
-            widgets = SettingsData.ShellitBarLeftWidgets.slice()
+            widgets = SettingsData.shellitBarLeftWidgets.slice()
         else if (sectionId === "center")
-            widgets = SettingsData.ShellitBarCenterWidgets.slice()
+            widgets = SettingsData.shellitBarCenterWidgets.slice()
         else if (sectionId === "right")
-            widgets = SettingsData.ShellitBarRightWidgets.slice()
+            widgets = SettingsData.shellitBarRightWidgets.slice()
         for (var i = 0; i < widgets.length; i++) {
             var widget = widgets[i]
             var widgetId = typeof widget === "string" ? widget : widget.id
@@ -366,11 +366,11 @@ Item {
     function handleSpacerSizeChanged(sectionId, widgetIndex, newSize) {
         var widgets = []
         if (sectionId === "left")
-            widgets = SettingsData.ShellitBarLeftWidgets.slice()
+            widgets = SettingsData.shellitBarLeftWidgets.slice()
         else if (sectionId === "center")
-            widgets = SettingsData.ShellitBarCenterWidgets.slice()
+            widgets = SettingsData.shellitBarCenterWidgets.slice()
         else if (sectionId === "right")
-            widgets = SettingsData.ShellitBarRightWidgets.slice()
+            widgets = SettingsData.shellitBarRightWidgets.slice()
 
         if (widgetIndex >= 0 && widgetIndex < widgets.length) {
             var widget = widgets[widgetIndex]
@@ -413,11 +413,11 @@ Item {
     function handleGpuSelectionChanged(sectionId, widgetIndex, selectedGpuIndex) {
         var widgets = []
         if (sectionId === "left")
-            widgets = SettingsData.ShellitBarLeftWidgets.slice()
+            widgets = SettingsData.shellitBarLeftWidgets.slice()
         else if (sectionId === "center")
-            widgets = SettingsData.ShellitBarCenterWidgets.slice()
+            widgets = SettingsData.shellitBarCenterWidgets.slice()
         else if (sectionId === "right")
-            widgets = SettingsData.ShellitBarRightWidgets.slice()
+            widgets = SettingsData.shellitBarRightWidgets.slice()
 
         if (widgetIndex >= 0 && widgetIndex < widgets.length) {
             var widget = widgets[widgetIndex]
@@ -456,11 +456,11 @@ Item {
     function handleDiskMountSelectionChanged(sectionId, widgetIndex, mountPath) {
         var widgets = []
         if (sectionId === "left")
-            widgets = SettingsData.ShellitBarLeftWidgets.slice()
+            widgets = SettingsData.shellitBarLeftWidgets.slice()
         else if (sectionId === "center")
-            widgets = SettingsData.ShellitBarCenterWidgets.slice()
+            widgets = SettingsData.shellitBarCenterWidgets.slice()
         else if (sectionId === "right")
-            widgets = SettingsData.ShellitBarRightWidgets.slice()
+            widgets = SettingsData.shellitBarRightWidgets.slice()
 
         if (widgetIndex >= 0 && widgetIndex < widgets.length) {
             var widget = widgets[widgetIndex]
@@ -513,11 +513,11 @@ Item {
     function handleMinimumWidthChanged(sectionId, widgetIndex, enabled) {
         var widgets = []
         if (sectionId === "left")
-            widgets = SettingsData.ShellitBarLeftWidgets.slice()
+            widgets = SettingsData.shellitBarLeftWidgets.slice()
         else if (sectionId === "center")
-            widgets = SettingsData.ShellitBarCenterWidgets.slice()
+            widgets = SettingsData.shellitBarCenterWidgets.slice()
         else if (sectionId === "right")
-            widgets = SettingsData.ShellitBarRightWidgets.slice()
+            widgets = SettingsData.shellitBarRightWidgets.slice()
 
         if (widgetIndex >= 0 && widgetIndex < widgets.length) {
             var widget = widgets[widgetIndex]
@@ -562,11 +562,11 @@ Item {
         var widgets = []
         var widgetData = []
         if (sectionId === "left")
-            widgetData = SettingsData.ShellitBarLeftWidgets || []
+            widgetData = SettingsData.shellitBarLeftWidgets || []
         else if (sectionId === "center")
-            widgetData = SettingsData.ShellitBarCenterWidgets || []
+            widgetData = SettingsData.shellitBarCenterWidgets || []
         else if (sectionId === "right")
-            widgetData = SettingsData.ShellitBarRightWidgets || []
+            widgetData = SettingsData.shellitBarRightWidgets || []
         widgetData.forEach(widget => {
                                var widgetId = typeof widget === "string" ? widget : widget.id
                                var widgetEnabled = typeof widget
@@ -613,23 +613,23 @@ Item {
 
     Component.onCompleted: {
         // Only set defaults if widgets have never been configured (null/undefined, not empty array)
-        if (!SettingsData.ShellitBarLeftWidgets)
+        if (!SettingsData.shellitBarLeftWidgets)
             SettingsData.setShellitBarLeftWidgets(defaultLeftWidgets)
 
-        if (!SettingsData.ShellitBarCenterWidgets)
+        if (!SettingsData.shellitBarCenterWidgets)
             SettingsData.setShellitBarCenterWidgets(defaultCenterWidgets)
 
-        if (!SettingsData.ShellitBarRightWidgets)
+        if (!SettingsData.shellitBarRightWidgets)
             SettingsData.setShellitBarRightWidgets(defaultRightWidgets)
         const sections = ["left", "center", "right"]
         sections.forEach(sectionId => {
                              var widgets = []
                              if (sectionId === "left")
-                             widgets = SettingsData.ShellitBarLeftWidgets.slice()
+                             widgets = SettingsData.shellitBarLeftWidgets.slice()
                              else if (sectionId === "center")
-                             widgets = SettingsData.ShellitBarCenterWidgets.slice()
+                             widgets = SettingsData.shellitBarCenterWidgets.slice()
                              else if (sectionId === "right")
-                             widgets = SettingsData.ShellitBarRightWidgets.slice()
+                             widgets = SettingsData.shellitBarRightWidgets.slice()
                              var updated = false
                              for (var i = 0; i < widgets.length; i++) {
                                  var widget = widgets[i]
@@ -695,7 +695,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Position")
+                            text: "Position"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -705,9 +705,9 @@ Item {
                         ShellitButtonGroup {
                             id: positionButtonGroup
                             anchors.verticalCenter: parent.verticalCenter
-                            model: [I18n.tr("Top"), I18n.tr("Bottom"), I18n.tr("Left"), I18n.tr("Right")]
+                            model: ["Top", "Bottom", "Left", "Right"]
                             currentIndex: {
-                                switch (SettingsData.ShellitBarPosition) {
+                                switch (SettingsData.shellitBarPosition) {
                                     case SettingsData.Position.Top: return 0
                                     case SettingsData.Position.Bottom: return 1
                                     case SettingsData.Position.Left: return 2
@@ -733,7 +733,7 @@ Item {
             // ShellitBar Auto-hide Section
             StyledRect {
                 width: parent.width
-                height: ShellitBarAutoHideSection.implicitHeight + Theme.spacingL * 2
+                height: shellitBarAutoHideSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
                 color: Theme.surfaceContainerHigh
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
@@ -765,14 +765,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Auto-hide")
+                                text: "Auto-hide"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Automatically hide the top bar to expand screen real estate")
+                                text: "Automatically hide the top bar to expand screen real estate"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -817,14 +817,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Manual Show/Hide")
+                                text: "Manual Show/Hide"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Toggle top bar visibility manually (can be controlled via IPC)")
+                                text: "Toggle top bar visibility manually (can be controlled via IPC)"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -871,14 +871,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Show on Overview")
+                                text: "Show on Overview"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Always show the top bar when niri's overview is open")
+                                text: "Always show the top bar when niri's overview is open"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -890,7 +890,7 @@ Item {
                             id: overviewToggle
 
                             anchors.verticalCenter: parent.verticalCenter
-                            checked: SettingsData.ShellitBarOpenOnOverview
+                            checked: SettingsData.shellitBarOpenOnOverview
                             onToggled: toggled => {
                                            return SettingsData.setShellitBarOpenOnOverview(
                                                toggled)
@@ -904,7 +904,7 @@ Item {
             // Spacing
             StyledRect {
                 width: parent.width
-                height: ShellitBarSpacingSection.implicitHeight + Theme.spacingL * 2
+                height: shellitBarSpacingSection.implicitHeight + Theme.spacingL * 2
                 radius: Theme.cornerRadius
                 color: Theme.surfaceContainerHigh
                 border.color: Qt.rgba(Theme.outline.r, Theme.outline.g,
@@ -930,7 +930,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Spacing")
+                            text: "Spacing"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -947,7 +947,7 @@ Item {
                             spacing: Theme.spacingS
 
                             StyledText {
-                                text: I18n.tr("Edge Spacing (0 = edge-to-edge)")
+                                text: "Edge Spacing (0 = edge-to-edge)"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -961,7 +961,7 @@ Item {
                                 StyledText {
                                     id: edgeSpacingText
                                     visible: false
-                                    text: I18n.tr("Edge Spacing (0 = edge-to-edge)")
+                                    text: "Edge Spacing (0 = edge-to-edge)"
                                     font.pixelSize: Theme.fontSizeSmall
                                 }
                             }
@@ -989,7 +989,7 @@ Item {
                             id: edgeSpacingSlider
                             width: parent.width
                             height: 24
-                            value: SettingsData.ShellitBarSpacing
+                            value: SettingsData.shellitBarSpacing
                             minimum: 0
                             maximum: 32
                             unit: ""
@@ -1004,7 +1004,7 @@ Item {
                             Binding {
                                 target: edgeSpacingSlider
                                 property: "value"
-                                value: SettingsData.ShellitBarSpacing
+                                value: SettingsData.shellitBarSpacing
                                 restoreMode: Binding.RestoreBinding
                             }
                         }
@@ -1019,7 +1019,7 @@ Item {
                             spacing: Theme.spacingS
 
                             StyledText {
-                                text: I18n.tr("Exclusive Zone Offset")
+                                text: "Exclusive Zone Offset"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -1033,7 +1033,7 @@ Item {
                                 StyledText {
                                     id: exclusiveZoneText
                                     visible: false
-                                    text: I18n.tr("Exclusive Zone Offset")
+                                    text: "Exclusive Zone Offset"
                                     font.pixelSize: Theme.fontSizeSmall
                                 }
                             }
@@ -1061,7 +1061,7 @@ Item {
                             id: exclusiveZoneSlider
                             width: parent.width
                             height: 24
-                            value: SettingsData.ShellitBarBottomGap
+                            value: SettingsData.shellitBarBottomGap
                             minimum: -50
                             maximum: 50
                             unit: ""
@@ -1076,7 +1076,7 @@ Item {
                             Binding {
                                 target: exclusiveZoneSlider
                                 property: "value"
-                                value: SettingsData.ShellitBarBottomGap
+                                value: SettingsData.shellitBarBottomGap
                                 restoreMode: Binding.RestoreBinding
                             }
                         }
@@ -1091,7 +1091,7 @@ Item {
                             spacing: Theme.spacingS
 
                             StyledText {
-                                text: I18n.tr("Size")
+                                text: "Size"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -1105,7 +1105,7 @@ Item {
                                 StyledText {
                                     id: sizeText
                                     visible: false
-                                    text: I18n.tr("Size")
+                                    text: "Size"
                                     font.pixelSize: Theme.fontSizeSmall
                                 }
                             }
@@ -1133,7 +1133,7 @@ Item {
                             id: sizeSlider
                             width: parent.width
                             height: 24
-                            value: SettingsData.ShellitBarInnerPadding
+                            value: SettingsData.shellitBarInnerPadding
                             minimum: 0
                             maximum: 24
                             unit: ""
@@ -1148,7 +1148,7 @@ Item {
                             Binding {
                                 target: sizeSlider
                                 property: "value"
-                                value: SettingsData.ShellitBarInnerPadding
+                                value: SettingsData.shellitBarInnerPadding
                                 restoreMode: Binding.RestoreBinding
                             }
                         }
@@ -1160,8 +1160,8 @@ Item {
 
                         ShellitToggle {
                             width: parent.width
-                            text: I18n.tr("Auto Popup Gaps")
-                            description: I18n.tr("Automatically calculate popup distance from bar edge.")
+                            text: "Auto Popup Gaps"
+                            description: "Automatically calculate popup distance from bar edge."
                             checked: SettingsData.popupGapsAuto
                             onToggled: checked => {
                                 SettingsData.setPopupGapsAuto(checked)
@@ -1190,7 +1190,7 @@ Item {
                                     spacing: Theme.spacingS
 
                                     StyledText {
-                                        text: I18n.tr("Manual Gap Size")
+                                        text: "Manual Gap Size"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceText
                                         font.weight: Font.Medium
@@ -1204,7 +1204,7 @@ Item {
                                         StyledText {
                                             id: manualGapSizeText
                                             visible: false
-                                            text: I18n.tr("Manual Gap Size")
+                                            text: "Manual Gap Size"
                                             font.pixelSize: Theme.fontSizeSmall
                                         }
                                     }
@@ -1256,9 +1256,9 @@ Item {
 
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("Square Corners")
+                        text: "Square Corners"
                         description: "Removes rounded corners from bar container."
-                        checked: SettingsData.ShellitBarSquareCorners
+                        checked: SettingsData.shellitBarSquareCorners
                         onToggled: checked => {
                                        SettingsData.setShellitBarSquareCorners(
                                            checked)
@@ -1267,9 +1267,9 @@ Item {
 
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("No Background")
+                        text: "No Background"
                         description: "Remove widget backgrounds for a minimal look with tighter spacing."
-                        checked: SettingsData.ShellitBarNoBackground
+                        checked: SettingsData.shellitBarNoBackground
                         onToggled: checked => {
                                        SettingsData.setShellitBarNoBackground(
                                            checked)
@@ -1278,9 +1278,9 @@ Item {
 
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("Goth Corners")
+                        text: "Goth Corners"
                         description: "Add curved swooping tips at the bottom of the bar."
-                        checked: SettingsData.ShellitBarGothCornersEnabled
+                        checked: SettingsData.shellitBarGothCornersEnabled
                         onToggled: checked => {
                                        SettingsData.setShellitBarGothCornersEnabled(
                                            checked)
@@ -1293,9 +1293,9 @@ Item {
 
                         ShellitToggle {
                             width: parent.width
-                            text: I18n.tr("Border")
+                            text: "Border"
                             description: "Add a 1px border to the bar. Smart edge detection only shows border on exposed sides."
-                            checked: SettingsData.ShellitBarBorderEnabled
+                            checked: SettingsData.shellitBarBorderEnabled
                             onToggled: checked => {
                                            SettingsData.setShellitBarBorderEnabled(checked)
                                        }
@@ -1323,14 +1323,14 @@ Item {
                                     spacing: Theme.spacingXS
 
                                     StyledText {
-                                        text: I18n.tr("Border Color")
+                                        text: "Border Color"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceText
                                         font.weight: Font.Medium
                                     }
 
                                     StyledText {
-                                        text: I18n.tr("Choose the border accent color")
+                                        text: "Choose the border accent color"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceVariantText
                                         width: parent.width
@@ -1342,7 +1342,7 @@ Item {
                                     anchors.verticalCenter: parent.verticalCenter
                                     model: ["Surface", "Secondary", "Primary"]
                                     currentIndex: {
-                                        const colorOption = SettingsData.ShellitBarBorderColor || "surfaceText"
+                                        const colorOption = SettingsData.shellitBarBorderColor || "surfaceText"
                                         switch (colorOption) {
                                             case "surfaceText": return 0
                                             case "secondary": return 1
@@ -1358,8 +1358,8 @@ Item {
                                                 case 1: newColor = "secondary"; break
                                                 case 2: newColor = "primary"; break
                                             }
-                                            if (SettingsData.ShellitBarBorderColor !== newColor) {
-                                                SettingsData.ShellitBarBorderColor = newColor
+                                            if (SettingsData.shellitBarBorderColor !== newColor) {
+                                                SettingsData.shellitBarBorderColor = newColor
                                             }
                                         }
                                     }
@@ -1375,7 +1375,7 @@ Item {
                                     spacing: Theme.spacingS
 
                                     StyledText {
-                                        text: I18n.tr("Border Opacity")
+                                        text: "Border Opacity"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceText
                                         font.weight: Font.Medium
@@ -1389,7 +1389,7 @@ Item {
                                         StyledText {
                                             id: borderOpacityText
                                             visible: false
-                                            text: I18n.tr("Border Opacity")
+                                            text: "Border Opacity"
                                             font.pixelSize: Theme.fontSizeSmall
                                         }
                                     }
@@ -1403,7 +1403,7 @@ Item {
                                         iconColor: Theme.surfaceText
                                         anchors.verticalCenter: parent.verticalCenter
                                         onClicked: {
-                                            SettingsData.ShellitBarBorderOpacity = 1.0
+                                            SettingsData.shellitBarBorderOpacity = 1.0
                                         }
                                     }
 
@@ -1417,7 +1417,7 @@ Item {
                                     id: borderOpacitySlider
                                     width: parent.width
                                     height: 24
-                                    value: (SettingsData.ShellitBarBorderOpacity ?? 1.0) * 100
+                                    value: (SettingsData.shellitBarBorderOpacity ?? 1.0) * 100
                                     minimum: 0
                                     maximum: 100
                                     unit: "%"
@@ -1425,13 +1425,13 @@ Item {
                                     wheelEnabled: false
                                     thumbOutlineColor: Theme.surfaceContainerHigh
                                     onSliderValueChanged: newValue => {
-                                        SettingsData.ShellitBarBorderOpacity = newValue / 100
+                                        SettingsData.shellitBarBorderOpacity = newValue / 100
                                     }
 
                                     Binding {
                                         target: borderOpacitySlider
                                         property: "value"
-                                        value: (SettingsData.ShellitBarBorderOpacity ?? 1.0) * 100
+                                        value: (SettingsData.shellitBarBorderOpacity ?? 1.0) * 100
                                         restoreMode: Binding.RestoreBinding
                                     }
                                 }
@@ -1446,7 +1446,7 @@ Item {
                                     spacing: Theme.spacingS
 
                                     StyledText {
-                                        text: I18n.tr("Border Thickness")
+                                        text: "Border Thickness"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceText
                                         font.weight: Font.Medium
@@ -1460,7 +1460,7 @@ Item {
                                         StyledText {
                                             id: borderThicknessText
                                             visible: false
-                                            text: I18n.tr("Border Thickness")
+                                            text: "Border Thickness"
                                             font.pixelSize: Theme.fontSizeSmall
                                         }
                                     }
@@ -1474,7 +1474,7 @@ Item {
                                         iconColor: Theme.surfaceText
                                         anchors.verticalCenter: parent.verticalCenter
                                         onClicked: {
-                                            SettingsData.ShellitBarBorderThickness = 1
+                                            SettingsData.shellitBarBorderThickness = 1
                                         }
                                     }
 
@@ -1488,7 +1488,7 @@ Item {
                                     id: borderThicknessSlider
                                     width: parent.width
                                     height: 24
-                                    value: SettingsData.ShellitBarBorderThickness ?? 1
+                                    value: SettingsData.shellitBarBorderThickness ?? 1
                                     minimum: 1
                                     maximum: 10
                                     unit: "px"
@@ -1496,13 +1496,13 @@ Item {
                                     wheelEnabled: false
                                     thumbOutlineColor: Theme.surfaceContainerHigh
                                     onSliderValueChanged: newValue => {
-                                        SettingsData.ShellitBarBorderThickness = newValue
+                                        SettingsData.shellitBarBorderThickness = newValue
                                     }
 
                                     Binding {
                                         target: borderThicknessSlider
                                         property: "value"
-                                        value: SettingsData.ShellitBarBorderThickness ?? 1
+                                        value: SettingsData.shellitBarBorderThickness ?? 1
                                         restoreMode: Binding.RestoreBinding
                                     }
                                 }
@@ -1525,21 +1525,21 @@ Item {
 
                         Column {
                             anchors.left: parent.left
-                            anchors.right: ShellitBarFontScaleControls.left
+                            anchors.right: shellitBarFontScaleControls.left
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.leftMargin: Theme.spacingM
                             anchors.rightMargin: Theme.spacingM
                             spacing: Theme.spacingXS
 
                             StyledText {
-                                text: I18n.tr("ShellitBar Font Scale")
+                                text: "ShellitBar Font Scale"
                                 font.pixelSize: Theme.fontSizeMedium
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Scale ShellitBar font sizes independently")
+                                text: "Scale ShellitBar font sizes independently"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 width: parent.width
@@ -1560,11 +1560,11 @@ Item {
                                 buttonSize: 32
                                 iconName: "remove"
                                 iconSize: Theme.iconSizeSmall
-                                enabled: SettingsData.ShellitBarFontScale > 0.5
+                                enabled: SettingsData.shellitBarFontScale > 0.5
                                 backgroundColor: Theme.surfaceContainerHigh
                                 iconColor: Theme.surfaceText
                                 onClicked: {
-                                    var newScale = Math.max(0.5, SettingsData.ShellitBarFontScale - 0.05)
+                                    var newScale = Math.max(0.5, SettingsData.shellitBarFontScale - 0.05)
                                     SettingsData.setShellitBarFontScale(newScale)
                                 }
                             }
@@ -1590,11 +1590,11 @@ Item {
                                 buttonSize: 32
                                 iconName: "add"
                                 iconSize: Theme.iconSizeSmall
-                                enabled: SettingsData.ShellitBarFontScale < 2.0
+                                enabled: SettingsData.shellitBarFontScale < 2.0
                                 backgroundColor: Theme.surfaceContainerHigh
                                 iconColor: Theme.surfaceText
                                 onClicked: {
-                                    var newScale = Math.min(2.0, SettingsData.ShellitBarFontScale + 0.05)
+                                    var newScale = Math.min(2.0, SettingsData.shellitBarFontScale + 0.05)
                                     SettingsData.setShellitBarFontScale(newScale)
                                 }
                             }
@@ -1634,7 +1634,7 @@ Item {
 
                         StyledText {
                             id: widgetTitle
-                            text: I18n.tr("Widget Management")
+                            text: "Widget Management"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -1672,7 +1672,7 @@ Item {
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("Reset")
+                                    text: "Reset"
                                     font.pixelSize: Theme.fontSizeSmall
                                     font.weight: Font.Medium
                                     color: Theme.surfaceText
@@ -1714,7 +1714,7 @@ Item {
 
                     StyledText {
                         width: parent.width
-                        text: I18n.tr("Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely.")
+                        text: "Drag widgets to reorder within sections. Use the eye icon to hide/show widgets (maintains spacing), or X to remove them completely."
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceVariantText
                         wrapMode: Text.WordWrap
@@ -1740,32 +1740,32 @@ Item {
                         id: leftSection
                         anchors.fill: parent
                         anchors.margins: Theme.spacingL
-                        title: SettingsData.ShellitBarIsVertical ? I18n.tr("Top Section") : I18n.tr("Left Section")
+                        title: SettingsData.shellitBarIsVertical ? "Top Section" : "Left Section"
                         titleIcon: "format_align_left"
                         sectionId: "left"
-                        allWidgets: ShellitBarTab.baseWidgetDefinitions
-                        items: ShellitBarTab.getItemsForSection("left")
+                        allWidgets: shellitBarTab.baseWidgetDefinitions
+                        items: shellitBarTab.getItemsForSection("left")
                         onItemEnabledChanged: (sectionId, itemId, enabled) => {
-                                                  ShellitBarTab.handleItemEnabledChanged(
+                                                  shellitBarTab.handleItemEnabledChanged(
                                                       sectionId,
                                                       itemId, enabled)
                                               }
                         onItemOrderChanged: newOrder => {
-                                                ShellitBarTab.handleItemOrderChanged(
+                                                shellitBarTab.handleItemOrderChanged(
                                                     "left", newOrder)
                                             }
                         onAddWidget: sectionId => {
                                          widgetSelectionPopup.allWidgets
-                                         = ShellitBarTab.getWidgetsForPopup()
+                                         = shellitBarTab.getWidgetsForPopup()
                                          widgetSelectionPopup.targetSection = sectionId
                                          widgetSelectionPopup.show()
                                      }
                         onRemoveWidget: (sectionId, widgetIndex) => {
-                                            ShellitBarTab.removeWidgetFromSection(
+                                            shellitBarTab.removeWidgetFromSection(
                                                 sectionId, widgetIndex)
                                         }
                         onSpacerSizeChanged: (sectionId, widgetIndex, newSize) => {
-                                                 ShellitBarTab.handleSpacerSizeChanged(
+                                                 shellitBarTab.handleSpacerSizeChanged(
                                                      sectionId, widgetIndex, newSize)
                                              }
                         onCompactModeChanged: (widgetId, value) => {
@@ -1787,16 +1787,16 @@ Item {
                                                            handleControlCenterSettingChanged(sectionId, widgetIndex, settingName, value)
                                                        }
                         onGpuSelectionChanged: (sectionId, widgetIndex, selectedIndex) => {
-                                                   ShellitBarTab.handleGpuSelectionChanged(
+                                                   shellitBarTab.handleGpuSelectionChanged(
                                                        sectionId, widgetIndex,
                                                        selectedIndex)
                                                }
                         onDiskMountSelectionChanged: (sectionId, widgetIndex, mountPath) => {
-                                                         ShellitBarTab.handleDiskMountSelectionChanged(
+                                                         shellitBarTab.handleDiskMountSelectionChanged(
                                                              sectionId, widgetIndex, mountPath)
                                                      }
                         onMinimumWidthChanged: (sectionId, widgetIndex, enabled) => {
-                                                   ShellitBarTab.handleMinimumWidthChanged(
+                                                   shellitBarTab.handleMinimumWidthChanged(
                                                        sectionId, widgetIndex, enabled)
                                                }
                     }
@@ -1816,32 +1816,32 @@ Item {
                         id: centerSection
                         anchors.fill: parent
                         anchors.margins: Theme.spacingL
-                        title: I18n.tr("Center Section")
+                        title: "Center Section"
                         titleIcon: "format_align_center"
                         sectionId: "center"
-                        allWidgets: ShellitBarTab.baseWidgetDefinitions
-                        items: ShellitBarTab.getItemsForSection("center")
+                        allWidgets: shellitBarTab.baseWidgetDefinitions
+                        items: shellitBarTab.getItemsForSection("center")
                         onItemEnabledChanged: (sectionId, itemId, enabled) => {
-                                                  ShellitBarTab.handleItemEnabledChanged(
+                                                  shellitBarTab.handleItemEnabledChanged(
                                                       sectionId,
                                                       itemId, enabled)
                                               }
                         onItemOrderChanged: newOrder => {
-                                                ShellitBarTab.handleItemOrderChanged(
+                                                shellitBarTab.handleItemOrderChanged(
                                                     "center", newOrder)
                                             }
                         onAddWidget: sectionId => {
                                          widgetSelectionPopup.allWidgets
-                                         = ShellitBarTab.getWidgetsForPopup()
+                                         = shellitBarTab.getWidgetsForPopup()
                                          widgetSelectionPopup.targetSection = sectionId
                                          widgetSelectionPopup.show()
                                      }
                         onRemoveWidget: (sectionId, widgetIndex) => {
-                                            ShellitBarTab.removeWidgetFromSection(
+                                            shellitBarTab.removeWidgetFromSection(
                                                 sectionId, widgetIndex)
                                         }
                         onSpacerSizeChanged: (sectionId, widgetIndex, newSize) => {
-                                                 ShellitBarTab.handleSpacerSizeChanged(
+                                                 shellitBarTab.handleSpacerSizeChanged(
                                                      sectionId, widgetIndex, newSize)
                                              }
                         onCompactModeChanged: (widgetId, value) => {
@@ -1863,16 +1863,16 @@ Item {
                                                            handleControlCenterSettingChanged(sectionId, widgetIndex, settingName, value)
                                                        }
                         onGpuSelectionChanged: (sectionId, widgetIndex, selectedIndex) => {
-                                                   ShellitBarTab.handleGpuSelectionChanged(
+                                                   shellitBarTab.handleGpuSelectionChanged(
                                                        sectionId, widgetIndex,
                                                        selectedIndex)
                                                }
                         onDiskMountSelectionChanged: (sectionId, widgetIndex, mountPath) => {
-                                                         ShellitBarTab.handleDiskMountSelectionChanged(
+                                                         shellitBarTab.handleDiskMountSelectionChanged(
                                                              sectionId, widgetIndex, mountPath)
                                                      }
                         onMinimumWidthChanged: (sectionId, widgetIndex, enabled) => {
-                                                   ShellitBarTab.handleMinimumWidthChanged(
+                                                   shellitBarTab.handleMinimumWidthChanged(
                                                        sectionId, widgetIndex, enabled)
                                                }
                     }
@@ -1892,32 +1892,32 @@ Item {
                         id: rightSection
                         anchors.fill: parent
                         anchors.margins: Theme.spacingL
-                        title: SettingsData.ShellitBarIsVertical ? I18n.tr("Bottom Section") : I18n.tr("Right Section")
+                        title: SettingsData.ShellitBarIsVertical ? "Bottom Section" : "Right Section"
                         titleIcon: "format_align_right"
                         sectionId: "right"
-                        allWidgets: ShellitBarTab.baseWidgetDefinitions
-                        items: ShellitBarTab.getItemsForSection("right")
+                        allWidgets: shellitBarTab.baseWidgetDefinitions
+                        items: shellitBarTab.getItemsForSection("right")
                         onItemEnabledChanged: (sectionId, itemId, enabled) => {
-                                                  ShellitBarTab.handleItemEnabledChanged(
+                                                  shellitBarTab.handleItemEnabledChanged(
                                                       sectionId,
                                                       itemId, enabled)
                                               }
                         onItemOrderChanged: newOrder => {
-                                                ShellitBarTab.handleItemOrderChanged(
+                                                shellitBarTab.handleItemOrderChanged(
                                                     "right", newOrder)
                                             }
                         onAddWidget: sectionId => {
                                          widgetSelectionPopup.allWidgets
-                                         = ShellitBarTab.getWidgetsForPopup()
+                                         = shellitBarTab.getWidgetsForPopup()
                                          widgetSelectionPopup.targetSection = sectionId
                                          widgetSelectionPopup.show()
                                      }
                         onRemoveWidget: (sectionId, widgetIndex) => {
-                                            ShellitBarTab.removeWidgetFromSection(
+                                            shellitBarTab.removeWidgetFromSection(
                                                 sectionId, widgetIndex)
                                         }
                         onSpacerSizeChanged: (sectionId, widgetIndex, newSize) => {
-                                                 ShellitBarTab.handleSpacerSizeChanged(
+                                                 shellitBarTab.handleSpacerSizeChanged(
                                                      sectionId, widgetIndex, newSize)
                                              }
                         onCompactModeChanged: (widgetId, value) => {
@@ -1939,16 +1939,16 @@ Item {
                                                            handleControlCenterSettingChanged(sectionId, widgetIndex, settingName, value)
                                                        }
                         onGpuSelectionChanged: (sectionId, widgetIndex, selectedIndex) => {
-                                                   ShellitBarTab.handleGpuSelectionChanged(
+                                                   shellitBarTab.handleGpuSelectionChanged(
                                                        sectionId, widgetIndex,
                                                        selectedIndex)
                                                }
                         onDiskMountSelectionChanged: (sectionId, widgetIndex, mountPath) => {
-                                                         ShellitBarTab.handleDiskMountSelectionChanged(
+                                                         shellitBarTab.handleDiskMountSelectionChanged(
                                                              sectionId, widgetIndex, mountPath)
                                                      }
                         onMinimumWidthChanged: (sectionId, widgetIndex, enabled) => {
-                                                   ShellitBarTab.handleMinimumWidthChanged(
+                                                   shellitBarTab.handleMinimumWidthChanged(
                                                        sectionId, widgetIndex, enabled)
                                                }
                     }
@@ -1960,9 +1960,9 @@ Item {
     WidgetSelectionPopup {
         id: widgetSelectionPopup
 
-        parentModal: ShellitBarTab.parentModal
+        parentModal: shellitBarTab.parentModal
         onWidgetSelected: (widgetId, targetSection) => {
-                              ShellitBarTab.addWidgetToSection(widgetId,
+                              shellitBarTab.addWidgetToSection(widgetId,
                                                            targetSection)
                           }
     }

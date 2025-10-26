@@ -19,7 +19,7 @@ Item {
         spacing: Theme.spacingXS
 
         StyledText {
-            text: I18n.tr("Notifications")
+            text: "Notifications"
             font.pixelSize: Theme.fontSizeLarge
             color: Theme.surfaceText
             font.weight: Font.Medium
@@ -38,7 +38,7 @@ Item {
                 tooltipLoader.active = true
                 if (tooltipLoader.item) {
                     const p = mapToItem(null, width / 2, 0)
-                    tooltipLoader.item.show(I18n.tr("Do Not Disturb"), p.x, p.y - 40, null)
+                    tooltipLoader.item.show("Do Not Disturb"), p.x, p.y - 40, null
                 }
             }
             onExited: {
@@ -99,7 +99,7 @@ Item {
                 }
 
                 StyledText {
-                    text: I18n.tr("Clear")
+                    text: "Clear"
                     font.pixelSize: Theme.fontSizeSmall
                     color: clearArea.containsMouse ? Theme.primary : Theme.surfaceText
                     font.weight: Font.Medium

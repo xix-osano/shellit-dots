@@ -42,7 +42,7 @@ ShellitPopout {
         if (shouldBeVisible) {
             appLauncher.searchQuery = ""
             appLauncher.selectedIndex = 0
-            appLauncher.setCategory(I18n.tr("All"))
+            appLauncher.setCategory("All")
             Qt.callLater(() => {
                              if (contentLoader.item && contentLoader.item.searchField) {
                                  contentLoader.item.searchField.text = ""
@@ -185,7 +185,7 @@ ShellitPopout {
                             anchors.left: parent.left
                             anchors.leftMargin: Theme.spacingS
                             anchors.verticalCenter: parent.verticalCenter
-                            text: I18n.tr("Applications")
+                            text: "Applications"
                             font.pixelSize: Theme.fontSizeLarge + 4
                             font.weight: Font.Bold
                             color: Theme.surfaceText
@@ -783,7 +783,7 @@ ShellitPopout {
                     }
 
                     StyledText {
-                        text: contextMenu.isPinned ? I18n.tr("Unpin from Dock") : I18n.tr("Pin to Dock")
+                        text: contextMenu.isPinned ? "Unpin from Dock" : "Pin to Dock"
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceText
                         font.weight: Font.Normal
@@ -920,7 +920,7 @@ ShellitPopout {
                     }
 
                     StyledText {
-                        text: I18n.tr("Launch")
+                        text: "Launch"
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceText
                         font.weight: Font.Normal
@@ -980,7 +980,7 @@ ShellitPopout {
                     }
 
                     StyledText {
-                        text: I18n.tr("Launch on dGPU")
+                        text: "Launch on dGPU"
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceText
                         font.weight: Font.Normal

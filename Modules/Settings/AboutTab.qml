@@ -47,7 +47,8 @@ Item {
                         StyledText {
                             id: asciiText
 
-                            text: "██████╗  █████╗ ███╗   ██╗██╗  ██╗\n██╔══██╗██╔══██╗████╗  ██║██║ ██╔╝\n██║  ██║███████║██╔██╗ ██║█████╔╝ \n██║  ██║██╔══██║██║╚██╗██║██╔═██╗ \n██████╔╝██║  ██║██║ ╚████║██║  ██╗\n╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝"
+                            //text: "██████╗  █████╗ ███╗   ██╗██╗  ██╗\n██╔══██╗██╔══██╗████╗  ██║██║ ██╔╝\n██║  ██║███████║██╔██╗ ██║█████╔╝ \n██║  ██║██╔══██║██║╚██╗██║██╔═██╗ \n██████╔╝██║  ██║██║ ╚████║██║  ██╗\n╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝"
+                            text: "███████╗██╗  ██╗███████╗██╗   ██╗███████╗████████╗\n ██╔════╝██║  ██║██╔════╝██║   ██║██╔════╝╚══██╔══╝\n███████╗███████║█████╗  ███████║█████╗     ██║\n╚════██║██╔══██║██╔══╝  ██╔══██║██╔══╝     ██║\n███████║██║  ██║███████╗██║  ██║███████╗   ██║\n╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝"
                             isMonospace: true
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.primary
@@ -248,7 +249,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("About")
+                            text: "About"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -257,9 +258,9 @@ Item {
                     }
 
                     StyledText {
-                        text: I18n.tr(`shellit is a highly customizable, modern desktop shell with a <a href="https://m3.material.io/" style="text-decoration:none; color:${Theme.primary};">material 3 inspired</a> design.
+                        text: `shellit is a highly customizable, modern desktop shell with a <a href="https://m3.material.io/" style="text-decoration:none; color:${Theme.primary};">material 3 inspired</a> design.
                         <br /><br/>It is built with <a href="https://quickshell.org" style="text-decoration:none; color:${Theme.primary};">Quickshell</a>, a QT6 framework for building desktop shells, and <a href="https://go.dev" style="text-decoration:none; color:${Theme.primary};">Go</a>, a statically typed, compiled programming language.
-                        `)
+                        `
                         textFormat: Text.RichText
                         font.pixelSize: Theme.fontSizeMedium
                         linkColor: Theme.primary
@@ -306,7 +307,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Resources")
+                            text: "Resources"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -321,7 +322,7 @@ Item {
                         rowSpacing: Theme.spacingS
 
                         StyledText {
-                            text: I18n.tr("Website:")
+                            text: "Website:"
                             font.pixelSize: Theme.fontSizeMedium
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -344,7 +345,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Plugins:")
+                            text: "Plugins:"
                             font.pixelSize: Theme.fontSizeMedium
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -367,7 +368,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Github:")
+                            text: "Github:"
                             font.pixelSize: Theme.fontSizeMedium
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -394,7 +395,7 @@ Item {
                             }
 
                             StyledText {
-                                text: I18n.tr("- Support Us With a Star ⭐")
+                                text: "- Support Us With a Star ⭐"
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.surfaceVariantText
                                 anchors.verticalCenter: parent.verticalCenter
@@ -402,7 +403,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("System Monitoring:")
+                            text: "System Monitoring:"
                             font.pixelSize: Theme.fontSizeMedium
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -429,7 +430,7 @@ Item {
                             }
 
                             StyledText {
-                                text: I18n.tr("- Stateless System Monitoring")
+                                text: "- Stateless System Monitoring"
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.surfaceVariantText
                                 anchors.verticalCenter: parent.verticalCenter
@@ -468,7 +469,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Support Development")
+                            text: "Support Development"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -483,7 +484,7 @@ Item {
 
                     ShellitButton {
                         id: kofiButton
-                        text: I18n.tr("Donate on Ko-fi")
+                        text: "Donate on Ko-fi"
                         iconName: "favorite"
                         iconSize: 20
                         backgroundColor: Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.08)

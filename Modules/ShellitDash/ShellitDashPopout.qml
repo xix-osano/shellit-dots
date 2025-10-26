@@ -217,16 +217,16 @@ ShellitPopout {
 
                     model: {
                         let tabs = [
-                            { icon: "dashboard", text: I18n.tr("Overview") },
-                            { icon: "music_note", text: I18n.tr("Media") },
-                            { icon: "wallpaper", text: I18n.tr("Wallpapers") }
+                            { icon: "dashboard", text: "Overview" },
+                            { icon: "music_note", text: "Media" },
+                            { icon: "wallpaper", text: "Wallpapers" }
                         ]
 
                         if (SettingsData.weatherEnabled) {
-                            tabs.push({ icon: "wb_sunny", text: I18n.tr("Weather") })
+                            tabs.push({ icon: "wb_sunny", text: "Weather" })
                         }
 
-                        tabs.push({ icon: "settings", text: I18n.tr("Settings"), isAction: true })
+                        tabs.push({ icon: "settings", text: "Settings", isAction: true })
                         return tabs
                     }
 

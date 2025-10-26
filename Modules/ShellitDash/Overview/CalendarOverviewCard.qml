@@ -133,7 +133,7 @@ Rectangle {
                 text: {
                     const dateStr = Qt.formatDate(selectedDate, "MMM d")
                     if (selectedDateEvents && selectedDateEvents.length > 0) {
-                        const eventCount = selectedDateEvents.length === 1 ? I18n.tr("1 event") : selectedDateEvents.length + " " + I18n.tr("events")
+                        const eventCount = selectedDateEvents.length === 1 ? "1 event" : selectedDateEvents.length + " " + "events"
                         return dateStr + " • " + eventCount
                     }
                     return dateStr
@@ -399,7 +399,7 @@ Rectangle {
                         width: parent.width
                         text: {
                             if (!modelData || modelData.allDay) {
-                                return I18n.tr("All day")
+                                return "All day"
                             } else if (modelData.start && modelData.end) {
                                 const timeFormat = SettingsData.use24HourClock ? "HH:mm" : "h:mm AP"
                                 const startTime = Qt.formatTime(modelData.start, timeFormat)

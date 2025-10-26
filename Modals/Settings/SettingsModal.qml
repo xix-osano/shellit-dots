@@ -162,7 +162,7 @@ ShellitModal {
                         }
 
                         StyledText {
-                            text: I18n.tr("Settings")
+                            text: "Settings"
                             font.pixelSize: Theme.fontSizeXLarge
                             color: Theme.surfaceText
                             font.weight: Font.Medium

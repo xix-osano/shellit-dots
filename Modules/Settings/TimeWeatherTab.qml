@@ -56,14 +56,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("24-Hour Format")
+                                text: "24-Hour Format"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Use 24-hour time format instead of 12-hour AM/PM")
+                                text: "Use 24-hour time format instead of 12-hour AM/PM"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -119,14 +119,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Show seconds")
+                                text: "Show seconds"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Clock show seconds")
+                                text: "Clock show seconds"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -176,7 +176,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Date Format")
+                            text: "Date Format"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -186,7 +186,7 @@ Item {
 
                     ShellitDropdown {
                         height: 50
-                        text: I18n.tr("Top Bar Format")
+                        text: "Top Bar Format"
                         description: "Preview: " + (SettingsData.clockDateFormat ? new Date().toLocaleDateString(Qt.locale(), SettingsData.clockDateFormat) : new Date().toLocaleDateString(Qt.locale(), "ddd d"))
                         currentValue: {
                             if (!SettingsData.clockDateFormat || SettingsData.clockDateFormat.length === 0) {
@@ -221,7 +221,7 @@ Item {
                                                            return p.format
                                                            === SettingsData.clockDateFormat
                                                        })
-                            return match ? match.label: I18n.tr("Custom: ") + SettingsData.clockDateFormat
+                            return match ? match.label: "Custom: " + SettingsData.clockDateFormat
                         }
                         options: ["System Default", "Day Date", "Day Month Date", "Month Date", "Numeric (M/D)", "Numeric (D/M)", "Full with Year", "ISO Date", "Full Day & Month", "Custom..."]
                         onValueChanged: value => {
@@ -248,7 +248,7 @@ Item {
 
                     ShellitDropdown {
                         height: 50
-                        text: I18n.tr("Lock Screen Format")
+                        text: "Lock Screen Format"
                         description: "Preview: " + (SettingsData.lockDateFormat ? new Date().toLocaleDateString(Qt.locale(), SettingsData.lockDateFormat) : new Date().toLocaleDateString(Qt.locale(), Locale.LongFormat))
                         currentValue: {
                             if (!SettingsData.lockDateFormat || SettingsData.lockDateFormat.length === 0) {
@@ -283,7 +283,7 @@ Item {
                                                            return p.format
                                                            === SettingsData.lockDateFormat
                                                        })
-                            return match ? match.label: I18n.tr("Custom: ") + SettingsData.lockDateFormat
+                            return match ? match.label: "Custom: " + SettingsData.lockDateFormat
                         }
                         options: ["System Default", "Day Date", "Day Month Date", "Month Date", "Numeric (M/D)", "Numeric (D/M)", "Full with Year", "ISO Date", "Full Day & Month", "Custom..."]
                         onValueChanged: value => {
@@ -313,7 +313,7 @@ Item {
 
                         width: parent.width
                         visible: false
-                        placeholderText: I18n.tr("Enter custom top bar format (e.g., ddd MMM d)")
+                        placeholderText: "Enter custom top bar format (e.g., ddd MMM d)"
                         text: SettingsData.clockDateFormat
                         onTextChanged: {
                             if (visible && text)
@@ -326,7 +326,7 @@ Item {
 
                         width: parent.width
                         visible: false
-                        placeholderText: I18n.tr("Enter custom lock screen format (e.g., dddd, MMMM d)")
+                        placeholderText: "Enter custom lock screen format (e.g., dddd, MMMM d)"
                         text: SettingsData.lockDateFormat
                         onTextChanged: {
                             if (visible && text)
@@ -351,7 +351,7 @@ Item {
                             spacing: Theme.spacingXS
 
                             StyledText {
-                                text: I18n.tr("Format Legend")
+                                text: "Format Legend"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.primary
                                 font.weight: Font.Medium
@@ -366,31 +366,31 @@ Item {
                                     spacing: 2
 
                                     StyledText {
-                                        text: I18n.tr("• d - Day (1-31)")
+                                        text: "• d - Day (1-31)"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceVariantText
                                     }
 
                                     StyledText {
-                                        text: I18n.tr("• dd - Day (01-31)")
+                                        text: "• dd - Day (01-31)"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceVariantText
                                     }
 
                                     StyledText {
-                                        text: I18n.tr("• ddd - Day name (Mon)")
+                                        text: "• ddd - Day name (Mon)"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceVariantText
                                     }
 
                                     StyledText {
-                                        text: I18n.tr("• dddd - Day name (Monday)")
+                                        text: "• dddd - Day name (Monday)"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceVariantText
                                     }
 
                                     StyledText {
-                                        text: I18n.tr("• M - Month (1-12)")
+                                        text: "• M - Month (1-12)"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceVariantText
                                     }
@@ -401,31 +401,31 @@ Item {
                                     spacing: 2
 
                                     StyledText {
-                                        text: I18n.tr("• MM - Month (01-12)")
+                                        text: "• MM - Month (01-12)"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceVariantText
                                     }
 
                                     StyledText {
-                                        text: I18n.tr("• MMM - Month (Jan)")
+                                        text: "• MMM - Month (Jan)"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceVariantText
                                     }
 
                                     StyledText {
-                                        text: I18n.tr("• MMMM - Month (January)")
+                                        text: "• MMMM - Month (January)"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceVariantText
                                     }
 
                                     StyledText {
-                                        text: I18n.tr("• yy - Year (24)")
+                                        text: "• yy - Year (24)"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceVariantText
                                     }
 
                                     StyledText {
-                                        text: I18n.tr("• yyyy - Year (2024)")
+                                        text: "• yyyy - Year (2024)"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceVariantText
                                     }
@@ -470,14 +470,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Enable Weather")
+                                text: "Enable Weather"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Show weather information in top bar and control center")
+                                text: "Show weather information in top bar and control center"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -535,14 +535,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Use Fahrenheit")
+                                text: "Use Fahrenheit"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Use Fahrenheit instead of Celsius for temperature")
+                                text: "Use Fahrenheit instead of Celsius for temperature"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -607,14 +607,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Auto Location")
+                                text: "Auto Location"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Automatically determine your location using your IP address")
+                                text: "Automatically determine your location using your IP address"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -647,7 +647,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Custom Location")
+                            text: "Custom Location"
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.surfaceText
                             font.weight: Font.Medium
@@ -662,7 +662,7 @@ Item {
                                     spacing: Theme.spacingXS
 
                                     StyledText {
-                                        text: I18n.tr("Latitude")
+                                        text: "Latitude"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceVariantText
                                     }
@@ -713,7 +713,7 @@ Item {
                                     spacing: Theme.spacingXS
 
                                     StyledText {
-                                        text: I18n.tr("Longitude")
+                                        text: "Longitude"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceVariantText
                                     }
@@ -766,7 +766,7 @@ Item {
                             spacing: Theme.spacingXS
 
                             StyledText {
-                                text: I18n.tr("Location Search")
+                                text: "Location Search"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 font.weight: Font.Medium
@@ -776,7 +776,7 @@ Item {
                                 id: locationSearchInput
                                 width: parent.width
                                 currentLocation: ""
-                                placeholderText: I18n.tr("New York, NY")
+                                placeholderText: "New York, NY"
                                 keyNavigationBacktab: longitudeInput
                                 onLocationSelected: (displayName, coordinates) => {
                                                         SettingsData.setWeatherLocation(displayName, coordinates)
@@ -830,7 +830,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Current Weather")
+                            text: "Current Weather"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -851,7 +851,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("No Weather Data Available")
+                            text: "No Weather Data Available"
                             font.pixelSize: Theme.fontSizeLarge
                             color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.7)
                             anchors.horizontalCenter: parent.horizontalCenter
@@ -1084,7 +1084,7 @@ Item {
                                         spacing: 2
 
                                         StyledText {
-                                            text: I18n.tr("Feels Like")
+                                            text: "Feels Like"
                                             font.pixelSize: Theme.fontSizeSmall
                                             color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.7)
                                             anchors.horizontalCenter: parent.horizontalCenter
@@ -1131,7 +1131,7 @@ Item {
                                         spacing: 2
 
                                         StyledText {
-                                            text: I18n.tr("Humidity")
+                                            text: "Humidity"
                                             font.pixelSize: Theme.fontSizeSmall
                                             color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.7)
                                             anchors.horizontalCenter: parent.horizontalCenter
@@ -1178,7 +1178,7 @@ Item {
                                         spacing: 2
 
                                         StyledText {
-                                            text: I18n.tr("Wind")
+                                            text: "Wind"
                                             font.pixelSize: Theme.fontSizeSmall
                                             color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.7)
                                             anchors.horizontalCenter: parent.horizontalCenter
@@ -1225,7 +1225,7 @@ Item {
                                         spacing: 2
 
                                         StyledText {
-                                            text: I18n.tr("Pressure")
+                                            text: "Pressure"
                                             font.pixelSize: Theme.fontSizeSmall
                                             color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.7)
                                             anchors.horizontalCenter: parent.horizontalCenter
@@ -1272,7 +1272,7 @@ Item {
                                         spacing: 2
 
                                         StyledText {
-                                            text: I18n.tr("Rain Chance")
+                                            text: "Rain Chance"
                                             font.pixelSize: Theme.fontSizeSmall
                                             color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.7)
                                             anchors.horizontalCenter: parent.horizontalCenter
@@ -1319,14 +1319,14 @@ Item {
                                         spacing: 2
 
                                         StyledText {
-                                            text: I18n.tr("Visibility")
+                                            text: "Visibility"
                                             font.pixelSize: Theme.fontSizeSmall
                                             color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.7)
                                             anchors.horizontalCenter: parent.horizontalCenter
                                         }
 
                                         StyledText {
-                                            text: I18n.tr("Good")
+                                            text: "Good"
                                             font.pixelSize: Theme.fontSizeSmall + 1
                                             color: Theme.surfaceText
                                             font.weight: Font.Medium

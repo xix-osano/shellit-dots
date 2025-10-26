@@ -651,7 +651,7 @@ Item {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.margins: Theme.spacingXL
-            text: I18n.tr("DEMO MODE - Click anywhere to exit")
+            text: "DEMO MODE - Click anywhere to exit"
             font.pixelSize: Theme.fontSizeSmall
             color: "white"
             opacity: 0.7

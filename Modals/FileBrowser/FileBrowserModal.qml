@@ -782,7 +782,7 @@ ShellitModal {
                     width: parent.width - saveButton.width - Theme.spacingM
                     height: 40
                     text: defaultFileName
-                    placeholderText: I18n.tr("Enter filename...")
+                    placeholderText: "Enter filename..."
                     ignoreLeftRightKeys: false
                     focus: saveMode
                     topPadding: Theme.spacingS
@@ -815,7 +815,7 @@ ShellitModal {
 
                     StyledText {
                         anchors.centerIn: parent
-                        text: I18n.tr("Save")
+                        text: "Save"
                         color: fileNameInput.text.trim() !== "" ? Theme.primaryText : Theme.surfaceVariantText
                         font.pixelSize: Theme.fontSizeMedium
                     }
@@ -919,7 +919,7 @@ ShellitModal {
                         spacing: Theme.spacingM
 
                         StyledText {
-                            text: I18n.tr("File Already Exists")
+                            text: "File Already Exists"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -927,7 +927,7 @@ ShellitModal {
                         }
 
                         StyledText {
-                            text: I18n.tr("A file with this name already exists. Do you want to overwrite it?")
+                            text: "A file with this name already exists. Do you want to overwrite it?"
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.surfaceTextMedium
                             width: parent.width
@@ -949,7 +949,7 @@ ShellitModal {
 
                                 StyledText {
                                     anchors.centerIn: parent
-                                    text: I18n.tr("Cancel")
+                                    text: "Cancel"
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.surfaceText
                                     font.weight: Font.Medium
@@ -975,7 +975,7 @@ ShellitModal {
 
                                 StyledText {
                                     anchors.centerIn: parent
-                                    text: I18n.tr("Overwrite")
+                                    text: "Overwrite"
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.background
                                     font.weight: Font.Medium

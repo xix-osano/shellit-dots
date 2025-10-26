@@ -13,7 +13,7 @@ Item {
     // likely require corresponding updates in Modals/Spotlight/SpotlightResults.qml and vice versa.
 
     property string searchQuery: ""
-    property string selectedCategory: I18n.tr("All")
+    property string selectedCategory: "All"
     property string viewMode: "list" // "list" or "grid"
     property int selectedIndex: 0
     property int maxResults: 50
@@ -24,8 +24,8 @@ Item {
     property bool suppressUpdatesWhileLaunching: false
     property var categories: {
         const allCategories = AppSearchService.getAllCategories().filter(cat => cat !== "Education" && cat !== "Science")
-        const result = [I18n.tr("All")]
-        return result.concat(allCategories.filter(cat => cat !== I18n.tr("All")))
+        const result = ["All"]
+        return result.concat(allCategories.filter(cat => cat !== "All"))
     }
     readonly property var categoryIcons: categories.map(category => AppSearchService.getCategoryIcon(category))
     property var appUsageRanking: AppUsageHistoryData.appUsageRanking || {}
@@ -42,8 +42,8 @@ Item {
 
     function updateCategories() {
         const allCategories = AppSearchService.getAllCategories().filter(cat => cat !== "Education" && cat !== "Science")
-        const result = [I18n.tr("All")]
-        categories = result.concat(allCategories.filter(cat => cat !== I18n.tr("All")))
+        const result = ["All"]
+        categories = result.concat(allCategories.filter(cat => cat !== "All"))
     }
 
     Connections {
@@ -77,7 +77,7 @@ Item {
         }
 
         let apps = []
-        const allCategory = I18n.tr("All")
+        const allCategory = "All"
         const emptyTriggerPlugins = typeof PluginService !== "undefined" ? PluginService.getPluginsWithEmptyTrigger() : []
 
         if (triggerResult.triggered) {

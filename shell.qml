@@ -424,7 +424,7 @@ Item {
         delegate: ShellitSlideout {
             id: notepadSlideout
             modelData: item
-            title: I18n.tr("Notepad")
+            title: "Notepad"
             slideoutWidth: 480
             expandable: true
             expandedWidthValue: 960

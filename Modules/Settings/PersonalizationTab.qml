@@ -107,7 +107,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Wallpaper")
+                            text: "Wallpaper"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -486,14 +486,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Blur on Overview")
+                                text: "Blur on Overview"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Blur wallpaper when niri overview is open")
+                                text: "Blur wallpaper when niri overview is open"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -543,14 +543,14 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
 
                                 StyledText {
-                                    text: I18n.tr("Per-Mode Wallpapers")
+                                    text: "Per-Mode Wallpapers"
                                     font.pixelSize: Theme.fontSizeLarge
                                     font.weight: Font.Medium
                                     color: Theme.surfaceText
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("Set different wallpapers for light and dark mode")
+                                    text: "Set different wallpapers for light and dark mode"
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceVariantText
                                     width: parent.width
@@ -600,14 +600,14 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
 
                                 StyledText {
-                                    text: I18n.tr("Per-Monitor Wallpapers")
+                                    text: "Per-Monitor Wallpapers"
                                     font.pixelSize: Theme.fontSizeLarge
                                     font.weight: Font.Medium
                                     color: Theme.surfaceText
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("Set different wallpapers for each connected monitor")
+                                    text: "Set different wallpapers for each connected monitor"
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceVariantText
                                     width: parent.width
@@ -632,7 +632,7 @@ Item {
                             leftPadding: Theme.iconSize + Theme.spacingM
 
                             StyledText {
-                                text: I18n.tr("Monitor Selection:")
+                                text: "Monitor Selection:"
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -641,8 +641,8 @@ Item {
                             ShellitDropdown {
                                 id: monitorDropdown
 
-                                text: I18n.tr("Monitor")
-                                description: I18n.tr("Select monitor to configure wallpaper")
+                                text: "Monitor"
+                                description: "Select monitor to configure wallpaper"
                                 currentValue: selectedMonitorName || "No monitors"
                                 options: {
                                     var screenNames = []
@@ -689,14 +689,14 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
 
                                 StyledText {
-                                    text: I18n.tr("Automatic Cycling")
+                                    text: "Automatic Cycling"
                                     font.pixelSize: Theme.fontSizeLarge
                                     font.weight: Font.Medium
                                     color: Theme.surfaceText
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("Automatically cycle through wallpapers in the same folder")
+                                    text: "Automatically cycle through wallpapers in the same folder"
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceVariantText
                                     width: parent.width
@@ -738,7 +738,7 @@ Item {
                                 width: parent.width - parent.leftPadding
 
                                 StyledText {
-                                    text: I18n.tr("Mode:")
+                                    text: "Mode:"
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.surfaceText
                                     anchors.verticalCenter: parent.verticalCenter
@@ -806,8 +806,8 @@ Item {
                                         return SessionData.wallpaperCyclingMode === "interval"
                                     }
                                 }
-                                text: I18n.tr("Interval")
-                                description: I18n.tr("How often to change wallpaper")
+                                text: "Interval"
+                                description: "How often to change wallpaper"
                                 options: intervalOptions
                                 currentValue: {
                                     var currentSeconds
@@ -861,7 +861,7 @@ Item {
                                 width: parent.width - parent.leftPadding
 
                                 StyledText {
-                                    text: I18n.tr("Daily at:")
+                                    text: "Daily at:"
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.surfaceText
                                     anchors.verticalCenter: parent.verticalCenter
@@ -936,7 +936,7 @@ Item {
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("24-hour format")
+                                    text: "24-hour format"
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceVariantText
                                     anchors.verticalCenter: parent.verticalCenter
@@ -953,8 +953,8 @@ Item {
                     }
 
                     ShellitDropdown {
-                        text: I18n.tr("Transition Effect")
-                        description: I18n.tr("Visual effect used when wallpaper changes")
+                        text: "Transition Effect"
+                        description: "Visual effect used when wallpaper changes"
                         currentValue: {
                             if (SessionData.wallpaperTransition === "random") return "Random"
                             return SessionData.wallpaperTransition.charAt(0).toUpperCase() + SessionData.wallpaperTransition.slice(1)
@@ -972,14 +972,14 @@ Item {
                         visible: SessionData.wallpaperTransition === "random"
 
                         StyledText {
-                            text: I18n.tr("Include Transitions")
+                            text: "Include Transitions"
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.surfaceText
                             font.weight: Font.Medium
                         }
 
                         StyledText {
-                            text: I18n.tr("Select which transitions to include in randomization")
+                            text: "Select which transitions to include in randomization"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceVariantText
                             wrapMode: Text.WordWrap
@@ -1044,14 +1044,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Blur Layer")
+                                text: "Blur Layer"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Enable compositor-targetable blur layer (namespace: shellit:blurwallpaper). Requires manual niri configuration.")
+                                text: "Enable compositor-targetable blur layer (namespace: shellit:blurwallpaper). Requires manual niri configuration."
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -1101,14 +1101,14 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
 
                         StyledText {
-                            text: I18n.tr("Light Mode")
+                            text: "Light Mode"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
                         }
 
                         StyledText {
-                            text: I18n.tr("Use light theme instead of dark theme")
+                            text: "Use light theme instead of dark theme"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceVariantText
                             wrapMode: Text.WordWrap
@@ -1157,7 +1157,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Animation Speed")
+                            text: "Animation Speed"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -1210,7 +1210,7 @@ Item {
                                 spacing: Theme.spacingM
 
                                 StyledText {
-                                    text: I18n.tr("Duration")
+                                    text: "Duration"
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.surfaceText
                                     anchors.verticalCenter: parent.verticalCenter
@@ -1291,7 +1291,7 @@ Item {
                             }
 
                             StyledText {
-                                text: I18n.tr("Select a preset or drag the slider to customize")
+                                text: "Select a preset or drag the slider to customize"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -1329,7 +1329,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Matugen Settings")
+                            text: "Matugen Settings"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -1354,14 +1354,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Dynamic Theming")
+                                text: "Dynamic Theming"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Automatically extract colors from wallpaper")
+                                text: "Automatically extract colors from wallpaper"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -1386,8 +1386,8 @@ Item {
 
                     ShellitDropdown {
                         id: personalizationMatugenPaletteDropdown
-                        text: I18n.tr("Matugen Palette")
-                        description: I18n.tr("Select the palette algorithm used for wallpaper-based colors")
+                        text: "Matugen Palette"
+                        description: "Select the palette algorithm used for wallpaper-based colors"
                         options: Theme.availableMatugenSchemes.map(function (option) { return option.label })
                         currentValue: Theme.getMatugenScheme(SettingsData.matugenScheme).label
                         enabled: Theme.matugenAvailable
@@ -1438,14 +1438,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Run User Templates")
+                                text: "Run User Templates"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Execute templates from ~/.config/matugen/config.toml")
+                                text: "Execute templates from ~/.config/matugen/config.toml"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 width: parent.width
@@ -1465,7 +1465,7 @@ Item {
                     }
 
                     StyledText {
-                        text: I18n.tr("matugen not detected - dynamic theming unavailable")
+                        text: "matugen not detected - dynamic theming unavailable"
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.error
                         visible: ToastService.wallpaperErrorStatus === "matugen_missing"
@@ -1508,14 +1508,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Enable System Sounds")
+                                text: "Enable System Sounds"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Play sounds for system events")
+                                text: "Play sounds for system events"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 width: parent.width
@@ -1557,13 +1557,13 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
 
                                 StyledText {
-                                    text: I18n.tr("Use System Theme")
+                                    text: "Use System Theme"
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.surfaceText
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("Use sound theme from system settings")
+                                    text: "Use sound theme from system settings"
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceVariantText
                                     width: parent.width
@@ -1585,8 +1585,8 @@ Item {
                             id: soundThemeDropdown
 
                             width: parent.width - parent.leftPadding
-                            text: I18n.tr("Sound Theme")
-                            description: I18n.tr("Select system sound theme")
+                            text: "Sound Theme"
+                            description: "Select system sound theme"
                             visible: SettingsData.useSystemSoundTheme && AudioService.availableSoundThemes.length > 0
                             enabled: SettingsData.useSystemSoundTheme && AudioService.availableSoundThemes.length > 0
                             options: AudioService.availableSoundThemes
@@ -1622,13 +1622,13 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
 
                                 StyledText {
-                                    text: I18n.tr("New Notification")
+                                    text: "New Notification"
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.surfaceText
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("Play sound when new notification arrives")
+                                    text: "Play sound when new notification arrives"
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceVariantText
                                     width: parent.width
@@ -1656,13 +1656,13 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
 
                                 StyledText {
-                                    text: I18n.tr("Volume Changed")
+                                    text: "Volume Changed"
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.surfaceText
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("Play sound when volume is adjusted")
+                                    text: "Play sound when volume is adjusted"
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceVariantText
                                     width: parent.width
@@ -1691,13 +1691,13 @@ Item {
                                 anchors.verticalCenter: parent.verticalCenter
 
                                 StyledText {
-                                    text: I18n.tr("Plugged In")
+                                    text: "Plugged In"
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.surfaceText
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("Play sound when power cable is connected")
+                                    text: "Play sound when power cable is connected"
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceVariantText
                                     width: parent.width

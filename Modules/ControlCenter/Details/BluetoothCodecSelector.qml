@@ -170,7 +170,7 @@ Item {
                     }
 
                     StyledText {
-                        text: I18n.tr("Audio Codec Selection")
+                        text: "Audio Codec Selection"
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceTextMedium
                     }

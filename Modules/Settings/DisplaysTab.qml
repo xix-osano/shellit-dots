@@ -12,42 +12,42 @@ Item {
     property var variantComponents: [{
         "id": "ShellitBar",
         "name": "Shellit Bar",
-        "description": I18n.tr("System bar with widgets and system information"),
+        "description": "System bar with widgets and system information",
         "icon": "toolbar"
     }, {
         "id": "dock",
-        "name": I18n.tr("Application Dock"),
-        "description": I18n.tr("Bottom dock for pinned and running applications"),
+        "name": "Application Dock",
+        "description": "Bottom dock for pinned and running applications",
         "icon": "dock"
     }, {
         "id": "notifications",
-        "name": I18n.tr("Notification Popups"),
-        "description": I18n.tr("Notification toast popups"),
+        "name": "Notification Popups",
+        "description": "Notification toast popups",
         "icon": "notifications"
     }, {
         "id": "wallpaper",
-        "name": I18n.tr("Wallpaper"),
-        "description": I18n.tr("Desktop background images"),
+        "name": "Wallpaper",
+        "description": "Desktop background images",
         "icon": "wallpaper"
     }, {
         "id": "osd",
-        "name": I18n.tr("On-Screen Displays"),
-        "description": I18n.tr("Volume, brightness, and other system OSDs"),
+        "name": "On-Screen Displays",
+        "description": "Volume, brightness, and other system OSDs",
         "icon": "picture_in_picture"
     }, {
         "id": "toast",
-        "name": I18n.tr("Toast Messages"),
-        "description": I18n.tr("System toast notifications"),
+        "name": "Toast Messages",
+        "description": "System toast notifications",
         "icon": "campaign"
     }, {
         "id": "notepad",
-        "name": I18n.tr("Notepad Slideout"),
-        "description": I18n.tr("Quick note-taking slideout panel"),
+        "name": "Notepad Slideout",
+        "description": "Quick note-taking slideout panel",
         "icon": "sticky_note_2"
     }, {
         "id": "systemTray",
-        "name": I18n.tr("System Tray"),
-        "description": I18n.tr("System tray icons"),
+        "name": "System Tray",
+        "description": "System tray icons",
         "icon": "notifications"
     }]
 
@@ -114,7 +114,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Gamma Control")
+                            text: "Gamma Control"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -126,8 +126,8 @@ Item {
                         id: nightModeToggle
 
                         width: parent.width
-                        text: I18n.tr("Night Mode")
-                        description: DisplayService.gammaControlAvailable ? I18n.tr("Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates.") : I18n.tr("Gamma control not available. Requires shellit API v6+.")
+                        text: "Night Mode"
+                        description: DisplayService.gammaControlAvailable ? "Apply warm color temperature to reduce eye strain. Use automation settings below to control when it activates.") : "Gamma control not available. Requires shellit API v6+.")
                         checked: DisplayService.nightModeEnabled
                         enabled: DisplayService.gammaControlAvailable
                         onToggled: checked => {
@@ -152,8 +152,8 @@ Item {
 
                         ShellitDropdown {
                             width: parent.width - parent.leftPadding - parent.rightPadding
-                            text: I18n.tr("Temperature")
-                            description: I18n.tr("Color temperature for night mode")
+                            text: "Temperature"
+                            description: "Color temperature for night mode"
                             currentValue: SessionData.nightModeTemperature + "K"
                             options: {
                                 var temps = []
@@ -172,8 +172,8 @@ Item {
                     ShellitToggle {
                         id: automaticToggle
                         width: parent.width
-                        text: I18n.tr("Automatic Control")
-                        description: I18n.tr("Only adjust gamma based on time or location rules.")
+                        text: "Automatic Control"
+                        description: "Only adjust gamma based on time or location rules."
                         checked: SessionData.nightModeAutoEnabled
                         visible: DisplayService.gammaControlAvailable
                         onToggled: checked => {
@@ -263,7 +263,7 @@ Item {
                                     }
 
                                     StyledText {
-                                        text: I18n.tr("Hour")
+                                        text: "Hour"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceVariantText
                                         width: 70
@@ -271,7 +271,7 @@ Item {
                                     }
 
                                     StyledText {
-                                        text: I18n.tr("Minute")
+                                        text: "Minute"
                                         font.pixelSize: Theme.fontSizeSmall
                                         color: Theme.surfaceVariantText
                                         width: 70
@@ -283,7 +283,7 @@ Item {
                                     spacing: Theme.spacingM
 
                                     StyledText {
-                                        text: I18n.tr("Start")
+                                        text: "Start"
                                         font.pixelSize: Theme.fontSizeMedium
                                         color: Theme.surfaceText
                                         width: 50
@@ -326,7 +326,7 @@ Item {
                                     spacing: Theme.spacingM
 
                                     StyledText {
-                                        text: I18n.tr("End")
+                                        text: "End"
                                         font.pixelSize: Theme.fontSizeMedium
                                         color: Theme.surfaceText
                                         width: 50
@@ -376,8 +376,8 @@ Item {
                             ShellitToggle {
                                 id: ipLocationToggle
                                 width: parent.width
-                                text: I18n.tr("Use IP Location")
-                                description: I18n.tr("Automatically detect location based on IP address")
+                                text: "Use IP Location"
+                                description: "Automatically detect location based on IP address"
                                 checked: SessionData.nightModeUseIPLocation || false
                                 onToggled: checked => {
                                     SessionData.setNightModeUseIPLocation(checked)
@@ -398,7 +398,7 @@ Item {
                                 visible: !SessionData.nightModeUseIPLocation
 
                                 StyledText {
-                                    text: I18n.tr("Manual Coordinates")
+                                    text: "Manual Coordinates"
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.surfaceText
                                 }
@@ -410,7 +410,7 @@ Item {
                                         spacing: Theme.spacingXS
 
                                         StyledText {
-                                            text: I18n.tr("Latitude")
+                                            text: "Latitude"
                                             font.pixelSize: Theme.fontSizeSmall
                                             color: Theme.surfaceVariantText
                                         }
@@ -433,7 +433,7 @@ Item {
                                         spacing: Theme.spacingXS
 
                                         StyledText {
-                                            text: I18n.tr("Longitude")
+                                            text: "Longitude"
                                             font.pixelSize: Theme.fontSizeSmall
                                             color: Theme.surfaceVariantText
                                         }
@@ -454,7 +454,7 @@ Item {
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("Uses sunrise/sunset times to automatically adjust night mode based on your location.")
+                                    text: "Uses sunrise/sunset times to automatically adjust night mode based on your location."
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceVariantText
                                     width: parent.width - parent.leftPadding
@@ -498,14 +498,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Connected Displays")
+                                text: "Connected Displays"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Configure which displays show shell components")
+                                text: "Configure which displays show shell components"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -521,7 +521,7 @@ Item {
                         spacing: Theme.spacingS
 
                         StyledText {
-                            text: I18n.tr("Available Screens (") + Quickshell.screens.length + ")"
+                            text: "Available Screens (" + Quickshell.screens.length + ")"
                             font.pixelSize: Theme.fontSizeMedium
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -663,7 +663,7 @@ Item {
                                 spacing: Theme.spacingS
 
                                 StyledText {
-                                    text: I18n.tr("Show on screens:")
+                                    text: "Show on screens:"
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.surfaceText
                                     font.weight: Font.Medium
@@ -677,8 +677,8 @@ Item {
 
                                     ShellitToggle {
                                         width: parent.width
-                                        text: I18n.tr("All displays")
-                                        description: I18n.tr("Show on all connected displays")
+                                        text: "All displays"
+                                        description: "Show on all connected displays"
                                         checked: displaysTab.getScreenPreferences(parent.componentId).includes("all")
                                         onToggled: (checked) => {
                                             if (checked) {
@@ -694,8 +694,8 @@ Item {
 
                                     ShellitToggle {
                                         width: parent.width
-                                        text: I18n.tr("Show on Last Display")
-                                        description: I18n.tr("Always show when there's only one connected display")
+                                        text: "Show on Last Display"
+                                        description: "Always show when there's only one connected display"
                                         checked: displaysTab.getShowOnLastDisplay(parent.componentId)
                                         visible: !displaysTab.getScreenPreferences(parent.componentId).includes("all") && ["ShellitBar", "dock", "notifications", "osd", "toast"].includes(parent.componentId)
                                         onToggled: (checked) => {

@@ -6,7 +6,7 @@ import qs.Modals.Clipboard
 Rectangle {
     id: keyboardHints
 
-    readonly property string hintsText: I18n.tr("Shift+Del: Clear All • Esc: Close")
+    readonly property string hintsText: "Shift+Del: Clear All • Esc: Close"
 
     height: ClipboardConstants.keyboardHintsHeight
     radius: Theme.cornerRadius

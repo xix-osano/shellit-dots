@@ -123,7 +123,7 @@ ShellitModal {
                     }
 
                     StyledText {
-                        text: I18n.tr("System Monitor Unavailable")
+                        text: "System Monitor Unavailable"
                         font.pixelSize: Theme.fontSizeLarge
                         font.weight: Font.Bold
                         color: Theme.error
@@ -131,7 +131,7 @@ ShellitModal {
                     }
 
                     StyledText {
-                        text: I18n.tr("The 'dgop' tool is required for system monitoring.\nPlease install dgop to use this feature.")
+                        text: "The 'dgop' tool is required for system monitoring.\nPlease install dgop to use this feature."
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.surfaceText
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -154,7 +154,7 @@ ShellitModal {
                     height: 40
 
                     StyledText {
-                        text: I18n.tr("System Monitor")
+                        text: "System Monitor"
                         font.pixelSize: Theme.fontSizeLarge + 4
                         font.weight: Font.Bold
                         color: Theme.surfaceText

@@ -223,7 +223,7 @@ PanelWindow {
                         anchors.right: closeButton.left
                         anchors.rightMargin: Theme.spacingXS
                         anchors.verticalCenter: parent.verticalCenter
-                        text: (modelData && modelData.title) ? modelData.title: I18n.tr("(Unnamed)")
+                        text: (modelData && modelData.title) ? modelData.title: "(Unnamed)"
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceText
                         font.weight: Font.Normal
@@ -367,7 +367,7 @@ PanelWindow {
                     anchors.right: parent.right
                     anchors.rightMargin: Theme.spacingS
                     anchors.verticalCenter: parent.verticalCenter
-                    text: root.appData && root.appData.isPinned ? I18n.tr("Unpin from Dock") : I18n.tr("Pin to Dock")
+                    text: root.appData && root.appData.isPinned ? "Unpin from Dock" : "Pin to Dock"
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.surfaceText
                     font.weight: Font.Normal
@@ -414,7 +414,7 @@ PanelWindow {
                     anchors.right: parent.right
                     anchors.rightMargin: Theme.spacingS
                     anchors.verticalCenter: parent.verticalCenter
-                    text: I18n.tr("Launch on dGPU")
+                    text: "Launch on dGPU"
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.surfaceText
                     font.weight: Font.Normal

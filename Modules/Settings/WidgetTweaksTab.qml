@@ -47,7 +47,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Workspace Settings")
+                            text: "Workspace Settings"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -57,8 +57,8 @@ Item {
 
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("Workspace Index Numbers")
-                        description: I18n.tr("Show workspace index numbers in the top bar workspace switcher")
+                        text: "Workspace Index Numbers"
+                        description: "Show workspace index numbers in the top bar workspace switcher"
                         checked: SettingsData.showWorkspaceIndex
                         onToggled: checked => {
                                        return SettingsData.setShowWorkspaceIndex(
@@ -67,8 +67,8 @@ Item {
                     }
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("Window Scrolling")
-                        description: I18n.tr("Scroll through windows, rather than workspaces")
+                        text: "Window Scrolling"
+                        description: "Scroll through windows, rather than workspaces"
                         checked: SettingsData.workspaceScrolling
                         visible: CompositorService.isNiri
                         onToggled: checked => {
@@ -78,8 +78,8 @@ Item {
 
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("Workspace Padding")
-                        description: I18n.tr("Always show a minimum of 3 workspaces, even if fewer are available")
+                        text: "Workspace Padding"
+                        description: "Always show a minimum of 3 workspaces, even if fewer are available"
                         checked: SettingsData.showWorkspacePadding
                         onToggled: checked => {
                                        return SettingsData.setShowWorkspacePadding(
@@ -89,8 +89,8 @@ Item {
 
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("Show Workspace Apps")
-                        description: I18n.tr("Display application icons in workspace indicators")
+                        text: "Show Workspace Apps"
+                        description: "Display application icons in workspace indicators"
                         checked: SettingsData.showWorkspaceApps
                         onToggled: checked => {
                                        return SettingsData.setShowWorkspaceApps(
@@ -111,7 +111,7 @@ Item {
                             spacing: Theme.spacingS
 
                             StyledText {
-                                text: I18n.tr("Max apps to show")
+                                text: "Max apps to show"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -142,8 +142,8 @@ Item {
 
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("Per-Monitor Workspaces")
-                        description: I18n.tr("Show only workspaces belonging to each specific monitor.")
+                        text: "Per-Monitor Workspaces"
+                        description: "Show only workspaces belonging to each specific monitor."
                         checked: SettingsData.workspacesPerMonitor
                         onToggled: checked => {
                             return SettingsData.setWorkspacesPerMonitor(checked);
@@ -180,7 +180,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Media Player Settings")
+                            text: "Media Player Settings"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -190,8 +190,8 @@ Item {
 
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("Wave Progress Bars")
-                        description: I18n.tr("Use animated wave progress bars for media playback")
+                        text: "Wave Progress Bars"
+                        description: "Use animated wave progress bars for media playback"
                         checked: SettingsData.waveProgressEnabled
                         onToggled: checked => {
                             return SettingsData.setWaveProgressEnabled(checked);
@@ -227,7 +227,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("System Updater")
+                            text: "System Updater"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -237,8 +237,8 @@ Item {
 
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("Use Custom Command")
-                        description: I18n.tr("Use custom command for update your system")
+                        text: "Use Custom Command"
+                        description: "Use custom command for update your system"
                         checked: SettingsData.updaterUseCustomCommand
                         onToggled: checked => {
                             if (!checked) {
@@ -263,7 +263,7 @@ Item {
                             spacing: Theme.spacingXS
 
                             StyledText {
-                                text: I18n.tr("System update custom command")
+                                text: "System update custom command"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                             }
@@ -310,7 +310,7 @@ Item {
                             spacing: Theme.spacingXS
 
                             StyledText {
-                                text: I18n.tr("Terminal custom additional parameters")
+                                text: "Terminal custom additional parameters"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                             }
@@ -375,7 +375,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Running Apps Settings")
+                            text: "Running Apps Settings"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -385,8 +385,8 @@ Item {
 
                     ShellitToggle {
                         width: parent.width
-                        text: I18n.tr("Running Apps Only In Current Workspace")
-                        description: I18n.tr("Show only apps running in current workspace")
+                        text: "Running Apps Only In Current Workspace"
+                        description: "Show only apps running in current workspace"
                         checked: SettingsData.runningAppsCurrentWorkspace
                         onToggled: checked => {
                                        return SettingsData.setRunningAppsCurrentWorkspace(
@@ -425,7 +425,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Named Workspace Icons")
+                            text: "Named Workspace Icons"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -435,7 +435,7 @@ Item {
 
                     StyledText {
                         width: parent.width
-                        text: I18n.tr("Configure icons for named workspaces. Icons take priority over numbers when both are enabled.")
+                        text: "Configure icons for named workspaces. Icons take priority over numbers when both are enabled."
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.outline
                         wrapMode: Text.WordWrap
@@ -582,7 +582,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Notification Popups")
+                            text: "Notification Popups"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -598,8 +598,8 @@ Item {
 
                         ShellitDropdown {
                             width: parent.width - parent.leftPadding - parent.rightPadding
-                            text: I18n.tr("Popup Position")
-                            description: I18n.tr("Choose where notification popups appear on screen")
+                            text: "Popup Position"
+                            description: "Choose where notification popups appear on screen"
                             currentValue: {
                                 if (SettingsData.notificationPopupPosition === -1) {
                                     return "Top Center"
@@ -672,14 +672,14 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
 
                         StyledText {
-                            text: I18n.tr("Always Show OSD Percentage")
+                            text: "Always Show OSD Percentage"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
                         }
 
                         StyledText {
-                            text: I18n.tr("Display volume and brightness percentage values by default in OSD popups")
+                            text: "Display volume and brightness percentage values by default in OSD popups"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceVariantText
                             wrapMode: Text.WordWrap

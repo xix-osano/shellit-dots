@@ -38,7 +38,7 @@ Column {
             anchors.verticalCenter: parent.verticalCenter
 
             StyledText {
-                text: I18n.tr("Process")
+                text: "Process"
                 font.pixelSize: Theme.fontSizeSmall
                 font.family: SettingsData.monoFontFamily
                 font.weight: DgopService.currentSort === "name" ? Font.Bold : Font.Medium

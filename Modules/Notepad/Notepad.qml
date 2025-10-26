@@ -258,7 +258,7 @@ Item {
     FileBrowserModal {
         id: saveBrowser
 
-        browserTitle: I18n.tr("Save Notepad File")
+        browserTitle: "Save Notepad File"
         browserIcon: "save"
         browserType: "notepad_save"
         fileExtensions: ["*.txt", "*.md", "*.*"]
@@ -322,7 +322,7 @@ Item {
     FileBrowserModal {
         id: loadBrowser
 
-        browserTitle: I18n.tr("Open Notepad File")
+        browserTitle: "Open Notepad File"
         browserIcon: "folder_open"
         browserType: "notepad_load"
         fileExtensions: ["*.txt", "*.md", "*.*"]
@@ -385,7 +385,7 @@ Item {
                             spacing: Theme.spacingXS
 
                             StyledText {
-                                text: I18n.tr("Unsaved Changes")
+                                text: "Unsaved Changes"
                                 font.pixelSize: Theme.fontSizeLarge
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -393,12 +393,12 @@ Item {
 
                             StyledText {
                                 text: root.pendingAction === "new" ?
-                                      I18n.tr("You have unsaved changes. Save before creating a new file?") :
+                                      "You have unsaved changes. Save before creating a new file?" :
                                       root.pendingAction.startsWith("close_tab_") ?
-                                      I18n.tr("You have unsaved changes. Save before closing this tab?") :
+                                      "You have unsaved changes. Save before closing this tab?" :
                                       root.pendingAction === "load_file" || root.pendingAction === "open" ?
-                                      I18n.tr("You have unsaved changes. Save before opening a file?") :
-                                      I18n.tr("You have unsaved changes. Save before continuing?")
+                                      "You have unsaved changes. Save before opening a file?" :
+                                      "You have unsaved changes. Save before continuing?"
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.surfaceTextMedium
                                 width: parent.width
@@ -437,7 +437,7 @@ Item {
                                 StyledText {
                                     id: discardText
                                     anchors.centerIn: parent
-                                    text: I18n.tr("Don't Save")
+                                    text: "Don't Save"
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.surfaceText
                                     font.weight: Font.Medium
@@ -477,7 +477,7 @@ Item {
                                 StyledText {
                                     id: saveAsText
                                     anchors.centerIn: parent
-                                    text: I18n.tr("Save")
+                                    text: "Save"
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.background
                                     font.weight: Font.Medium

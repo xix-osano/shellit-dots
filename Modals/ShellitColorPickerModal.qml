@@ -142,7 +142,7 @@ ShellitModal {
                         }
 
                         StyledText {
-                            text: I18n.tr("Select a color from the palette or use custom sliders")
+                            text: "Select a color from the palette or use custom sliders"
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.surfaceTextMedium
                         }
@@ -302,7 +302,7 @@ ShellitModal {
                     spacing: Theme.spacingS
 
                     StyledText {
-                        text: I18n.tr("Material Colors")
+                        text: "Material Colors"
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.surfaceText
                         font.weight: Font.Medium
@@ -352,7 +352,7 @@ ShellitModal {
                             spacing: Theme.spacingXS
 
                             StyledText {
-                                text: I18n.tr("Recent Colors")
+                                text: "Recent Colors"
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -404,7 +404,7 @@ ShellitModal {
                             spacing: Theme.spacingXS
 
                             StyledText {
-                                text: I18n.tr("Opacity")
+                                text: "Opacity"
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -441,7 +441,7 @@ ShellitModal {
                     spacing: Theme.spacingS
 
                     StyledText {
-                        text: I18n.tr("Hex:")
+                        text: "Hex:"
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.surfaceTextMedium
                         anchors.verticalCenter: parent.verticalCenter
@@ -480,7 +480,7 @@ ShellitModal {
                     ShellitButton {
                         width: 80
                         buttonHeight: 36
-                        text: I18n.tr("Apply")
+                        text: "Apply"
                         backgroundColor: Theme.primary
                         textColor: Theme.background
                         anchors.verticalCenter: parent.verticalCenter
@@ -507,7 +507,7 @@ ShellitModal {
                     ShellitButton {
                         width: 70
                         buttonHeight: 36
-                        text: I18n.tr("Cancel")
+                        text: "Cancel"
                         backgroundColor: "transparent"
                         textColor: Theme.surfaceText
                         anchors.verticalCenter: parent.verticalCenter
@@ -526,7 +526,7 @@ ShellitModal {
                     ShellitButton {
                         width: 70
                         buttonHeight: 36
-                        text: I18n.tr("Copy")
+                        text: "Copy"
                         backgroundColor: Theme.primary
                         textColor: Theme.background
                         anchors.verticalCenter: parent.verticalCenter

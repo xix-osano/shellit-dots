@@ -155,30 +155,30 @@ Singleton {
             return []
 
         const categoryMap = {
-            "AudioVideo": I18n.tr("Media"),
-            "Audio": I18n.tr("Media"),
-            "Video": I18n.tr("Media"),
-            "Development": I18n.tr("Development"),
-            "TextEditor": I18n.tr("Development"),
-            "IDE": I18n.tr("Development"),
-            "Education": I18n.tr("Education"),
-            "Game": I18n.tr("Games"),
-            "Graphics": I18n.tr("Graphics"),
-            "Photography": I18n.tr("Graphics"),
-            "Network": I18n.tr("Internet"),
-            "WebBrowser": I18n.tr("Internet"),
-            "Email": I18n.tr("Internet"),
-            "Office": I18n.tr("Office"),
-            "WordProcessor": I18n.tr("Office"),
-            "Spreadsheet": I18n.tr("Office"),
-            "Presentation": I18n.tr("Office"),
-            "Science": I18n.tr("Science"),
-            "Settings": I18n.tr("Settings"),
-            "System": I18n.tr("System"),
-            "Utility": I18n.tr("Utilities"),
-            "Accessories": I18n.tr("Utilities"),
-            "FileManager": I18n.tr("Utilities"),
-            "TerminalEmulator": I18n.tr("Utilities")
+            "AudioVideo": "Media",
+            "Audio": "Media",
+            "Video": "Media",
+            "Development": "Development",
+            "TextEditor": "Development",
+            "IDE": "Development",
+            "Education": "Education",
+            "Game": "Games",
+            "Graphics": "Graphics",
+            "Photography": "Graphics",
+            "Network": "Internet",
+            "WebBrowser": "Internet",
+            "Email": "Internet",
+            "Office": "Office",
+            "WordProcessor": "Office",
+            "Spreadsheet": "Office",
+            "Presentation": "Office",
+            "Science": "Science",
+            "Settings": "Settings",
+            "System": "System",
+            "Utility": "Utilities",
+            "Accessories": "Utilities",
+            "FileManager": "Utilities",
+            "TerminalEmulator": "Utilities"
         }
 
         const mappedCategories = new Set()
@@ -214,7 +214,7 @@ Singleton {
     }
 
     function getAllCategories() {
-        const categories = new Set([I18n.tr("All")])
+        const categories = new Set(["All"])
 
         for (const app of applications) {
             const appCategories = getCategoriesForApp(app)
@@ -230,7 +230,7 @@ Singleton {
     }
 
     function getAppsInCategory(category) {
-        if (category === I18n.tr("All")) {
+        if (category === "All") {
             return applications
         }
 

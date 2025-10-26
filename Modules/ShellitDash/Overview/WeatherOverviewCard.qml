@@ -33,7 +33,7 @@ Card {
         }
 
         Button {
-            text: I18n.tr("Refresh")
+            text: "Refresh"
             flat: true
             visible: !WeatherService.weather.loading
             anchors.horizontalCenter: parent.horizontalCenter

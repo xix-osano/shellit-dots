@@ -55,7 +55,7 @@ Row {
                 }
 
                 Typography {
-                    text: I18n.tr("Add Widget")
+                    text: "Add Widget"
                     style: Typography.Style.Subtitle
                     color: Theme.surfaceText
                     anchors.verticalCenter: parent.verticalCenter
@@ -156,7 +156,7 @@ Row {
             }
 
             Typography {
-                text: I18n.tr("Add Widget")
+                text: "Add Widget"
                 style: Typography.Style.Button
                 color: Theme.primary
                 anchors.verticalCenter: parent.verticalCenter
@@ -190,7 +190,7 @@ Row {
             }
 
             Typography {
-                text: I18n.tr("Defaults")
+                text: "Defaults"
                 style: Typography.Style.Button
                 color: Theme.warning
                 anchors.verticalCenter: parent.verticalCenter
@@ -224,7 +224,7 @@ Row {
             }
 
             Typography {
-                text: I18n.tr("Reset")
+                text: "Reset"
                 style: Typography.Style.Button
                 color: Theme.error
                 anchors.verticalCenter: parent.verticalCenter

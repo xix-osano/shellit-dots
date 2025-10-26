@@ -11,37 +11,37 @@ Rectangle {
     property int currentIndex: 0
     property var parentModal: null
     readonly property var sidebarItems: [{
-        "text": I18n.tr("Personalization"),
+        "text": "Personalization",
         "icon": "person"
     }, {
-        "text": I18n.tr("Time & Weather"),
+        "text": "Time & Weather",
         "icon": "schedule"
     }, {
-        "text": I18n.tr("Shellit Bar"),
+        "text": "Shellit Bar",
         "icon": "toolbar"
     }, {
-        "text": I18n.tr("Widgets"),
+        "text": "Widgets",
         "icon": "widgets"
     }, {
-        "text": I18n.tr("Dock"),
+        "text": "Dock",
         "icon": "dock_to_bottom"
     }, {
-        "text": I18n.tr("Displays"),
+        "text": "Displays",
         "icon": "monitor"
     }, {
-        "text": I18n.tr("Launcher"),
+        "text": "Launcher",
         "icon": "apps"
     }, {
-        "text": I18n.tr("Theme & Colors"),
+        "text": "Theme & Colors",
         "icon": "palette"
     }, {
-        "text": I18n.tr("Power & Security"),
+        "text": "Power & Security",
         "icon": "power"
     }, {
-        "text": I18n.tr("Plugins"),
+        "text": "Plugins",
         "icon": "extension"
     }, {
-        "text": I18n.tr("About"),
+        "text": "About",
         "icon": "info"
     }]
 

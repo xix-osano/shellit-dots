@@ -56,7 +56,7 @@ ShellitModal {
                         spacing: Theme.spacingXS
 
                         StyledText {
-                            text: I18n.tr("Network Information")
+                            text: "Network Information"
                             font.pixelSize: Theme.fontSizeLarge
                             color: Theme.surfaceText
                             font.weight: Font.Medium
@@ -126,7 +126,7 @@ ShellitModal {
                             id: closeText
 
                             anchors.centerIn: parent
-                            text: I18n.tr("Close")
+                            text: "Close"
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.background
                             font.weight: Font.Medium

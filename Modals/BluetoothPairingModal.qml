@@ -100,7 +100,7 @@ ShellitModal {
                     spacing: Theme.spacingXS
 
                     StyledText {
-                        text: I18n.tr("Pair Bluetooth Device")
+                        text: "Pair Bluetooth Device"
                         font.pixelSize: Theme.fontSizeLarge
                         color: Theme.surfaceText
                         font.weight: Font.Medium
@@ -109,15 +109,15 @@ ShellitModal {
                     StyledText {
                         text: {
                             if (requestType === "confirm")
-                                return I18n.tr("Confirm passkey for ") + deviceName
+                                return "Confirm passkey for " + deviceName
                             if (requestType === "authorize")
-                                return I18n.tr("Authorize pairing with ") + deviceName
+                                return "Authorize pairing with " + deviceName
                             if (requestType.startsWith("authorize-service"))
-                                return I18n.tr("Authorize service for ") + deviceName
+                                return "Authorize service for " + deviceName
                             if (requestType === "pin")
-                                return I18n.tr("Enter PIN for ") + deviceName
+                                return "Enter PIN for " + deviceName
                             if (requestType === "passkey")
-                                return I18n.tr("Enter passkey for ") + deviceName
+                                return "Enter passkey for " + deviceName
                             return deviceName
                         }
                         font.pixelSize: Theme.fontSizeMedium
@@ -150,7 +150,7 @@ ShellitModal {
                         font.pixelSize: Theme.fontSizeMedium
                         textColor: Theme.surfaceText
                         text: pinInput
-                        placeholderText: I18n.tr("Enter PIN")
+                        placeholderText: "Enter PIN"
                         backgroundColor: "transparent"
                         enabled: root.shouldBeVisible
                         onTextEdited: () => {
@@ -185,7 +185,7 @@ ShellitModal {
                         font.pixelSize: Theme.fontSizeMedium
                         textColor: Theme.surfaceText
                         text: passkeyInput
-                        placeholderText: I18n.tr("Enter 6-digit passkey")
+                        placeholderText: "Enter 6-digit passkey"
                         backgroundColor: "transparent"
                         enabled: root.shouldBeVisible
                         onTextEdited: () => {
@@ -209,7 +209,7 @@ ShellitModal {
                         spacing: 2
 
                         StyledText {
-                            text: I18n.tr("Passkey:")
+                            text: "Passkey:"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceTextMedium
                             anchors.horizontalCenter: parent.horizontalCenter
@@ -246,7 +246,7 @@ ShellitModal {
                                 id: cancelText
 
                                 anchors.centerIn: parent
-                                text: I18n.tr("Cancel")
+                                text: "Cancel"
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -287,10 +287,10 @@ ShellitModal {
                                 anchors.centerIn: parent
                                 text: {
                                     if (requestType === "confirm")
-                                        return I18n.tr("Confirm")
+                                        return "Confirm"
                                     if (requestType === "authorize" || requestType.startsWith("authorize-service"))
-                                        return I18n.tr("Authorize")
-                                    return I18n.tr("Pair")
+                                        return "Authorize"
+                                    return "Pair"
                                 }
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.background
@@ -351,7 +351,7 @@ ShellitModal {
 
         shellitService.bluetoothSubmitPairing(token, secrets, true, response => {
             if (response.error) {
-                ToastService.showError(I18n.tr("Pairing failed"), response.error)
+                ToastService.showError("Pairing failed", response.error)
             }
         })
 

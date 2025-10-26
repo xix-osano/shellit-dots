@@ -312,7 +312,7 @@ ShellitPopout {
                             spacing: Theme.spacingXS
 
                             StyledText {
-                                text: I18n.tr("Health")
+                                text: "Health"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.primary
                                 font.weight: Font.Medium
@@ -347,7 +347,7 @@ ShellitPopout {
                             spacing: Theme.spacingXS
 
                             StyledText {
-                                text: I18n.tr("Capacity")
+                                text: "Capacity"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.primary
                                 font.weight: Font.Medium
@@ -372,7 +372,7 @@ ShellitPopout {
                     visible: !BatteryService.usePreferred && BatteryService.batteries.length > 1
 
                     StyledText {
-                        text: I18n.tr("Individual Batteries")
+                        text: "Individual Batteries"
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.surfaceTextMedium
                         font.weight: Font.Medium
@@ -466,7 +466,7 @@ ShellitPopout {
                                             spacing: 2
 
                                             StyledText {
-                                                text: I18n.tr("Health")
+                                                text: "Health"
                                                 font.pixelSize: Theme.fontSizeSmall
                                                 color: Theme.surfaceTextMedium
                                                 font.weight: Font.Medium
@@ -503,7 +503,7 @@ ShellitPopout {
                                             spacing: 2
 
                                             StyledText {
-                                                text: I18n.tr("Capacity")
+                                                text: "Capacity"
                                                 font.pixelSize: Theme.fontSizeSmall
                                                 color: Theme.surfaceTextMedium
                                                 font.weight: Font.Medium
@@ -533,9 +533,9 @@ ShellitPopout {
 
                                             StyledText {
                                                 text: modelData.state === UPowerDeviceState.Charging
-                                                                          ? I18n.tr("To Full")
+                                                                          ? "To Full"
                                                                           : modelData.state === UPowerDeviceState.Discharging
-                                                                              ? I18n.tr("Left") : ""
+                                                                              ? "Left" : ""
                                                 font.pixelSize: Theme.fontSizeSmall
                                                 color: Theme.surfaceTextMedium
                                                 font.weight: Font.Medium
@@ -620,7 +620,7 @@ ShellitPopout {
                                 width: parent.width - Theme.iconSize - Theme.spacingM
 
                                 StyledText {
-                                    text: I18n.tr("Power Profile Degradation")
+                                    text: "Power Profile Degradation"
                                     font.pixelSize: Theme.fontSizeLarge
                                     color: Theme.error
                                     font.weight: Font.Medium

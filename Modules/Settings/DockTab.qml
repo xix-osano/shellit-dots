@@ -50,7 +50,7 @@ Item {
 
                         StyledText {
                             id: positionText
-                            text: I18n.tr("Dock Position")
+                            text: "Dock Position"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -125,14 +125,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Auto-hide Dock")
+                                text: "Auto-hide Dock"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Hide the dock when not in use and reveal it when hovering near the dock area")
+                                text: "Hide the dock when not in use and reveal it when hovering near the dock area"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -176,14 +176,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Show Dock")
+                                text: "Show Dock"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen")
+                                text: "Display a dock with pinned and running applications that can be positioned at the top, bottom, left, or right edge of the screen"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -229,14 +229,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Show on Overview")
+                                text: "Show on Overview"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Always show the dock when niri's overview is open")
+                                text: "Always show the dock when niri's overview is open"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -294,14 +294,14 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
 
                             StyledText {
-                                text: I18n.tr("Group by App")
+                                text: "Group by App"
                                 font.pixelSize: Theme.fontSizeLarge
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Group multiple windows of the same app together with a window count indicator")
+                                text: "Group multiple windows of the same app together with a window count indicator"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -361,7 +361,7 @@ Item {
 
                         StyledText {
                             id: indicatorStyleText
-                            text: I18n.tr("Indicator Style")
+                            text: "Indicator Style"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -426,7 +426,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Icon Size")
+                            text: "Icon Size"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -489,7 +489,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Spacing")
+                            text: "Spacing"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -502,7 +502,7 @@ Item {
                         spacing: Theme.spacingS
 
                         StyledText {
-                            text: I18n.tr("Padding")
+                            text: "Padding"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceText
                             font.weight: Font.Medium
@@ -530,7 +530,7 @@ Item {
                         spacing: Theme.spacingS
 
                         StyledText {
-                            text: I18n.tr("Height to Edge Gap (Exclusive Zone)")
+                            text: "Height to Edge Gap (Exclusive Zone)"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceText
                             font.weight: Font.Medium
@@ -593,7 +593,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Dock Transparency")
+                            text: "Dock Transparency"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText

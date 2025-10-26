@@ -80,11 +80,11 @@ Rectangle {
                     text: {
                         switch (entryType) {
                         case "image":
-                            return I18n.tr("Image") + " • " + entryPreview
+                            return "Image" + " • " + entryPreview
                         case "long_text":
-                            return I18n.tr("Long Text")
+                            return "Long Text"
                         default:
-                            return I18n.tr("Text")
+                            return "Text"
                         }
                     }
                     font.pixelSize: Theme.fontSizeSmall

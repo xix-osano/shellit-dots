@@ -105,7 +105,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Theme Color")
+                            text: "Theme Color"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -626,8 +626,8 @@ Item {
 
                             ShellitDropdown {
                                 id: matugenPaletteDropdown
-                                text: I18n.tr("Matugen Palette")
-                                description: I18n.tr("Select the palette algorithm used for wallpaper-based colors")
+                                text: "Matugen Palette"
+                                description: "Select the palette algorithm used for wallpaper-based colors"
                                 options: cachedMatugenSchemes
                                 currentValue: Theme.getMatugenScheme(SettingsData.matugenScheme).label
                                 enabled: Theme.matugenAvailable
@@ -731,7 +731,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Widget Styling")
+                            text: "Widget Styling"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -744,7 +744,7 @@ Item {
                         spacing: Theme.spacingS
 
                         StyledText {
-                            text: I18n.tr("Shellit Bar Transparency")
+                            text: "Shellit Bar Transparency"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceText
                             font.weight: Font.Medium
@@ -778,7 +778,7 @@ Item {
 
                             StyledText {
                                 id: transparencyLabel
-                                text: I18n.tr("Shellit Bar Widget Transparency")
+                                text: "Shellit Bar Widget Transparency"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceText
                                 font.weight: Font.Medium
@@ -842,7 +842,7 @@ Item {
                         spacing: Theme.spacingS
 
                         StyledText {
-                            text: I18n.tr("Popup Transparency")
+                            text: "Popup Transparency"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceText
                             font.weight: Font.Medium
@@ -879,7 +879,7 @@ Item {
                         spacing: Theme.spacingS
 
                         StyledText {
-                            text: I18n.tr("Corner Radius (0 = square corners)")
+                            text: "Corner Radius (0 = square corners)"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceText
                             font.weight: Font.Medium
@@ -932,7 +932,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("Font Settings")
+                            text: "Font Settings"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -941,8 +941,8 @@ Item {
                     }
 
                     ShellitDropdown {
-                        text: I18n.tr("Font Family")
-                        description: I18n.tr("Select system font family")
+                        text: "Font Family"
+                        description: "Select system font family"
                         currentValue: {
                             if (SettingsData.fontFamily === SettingsData.defaultFontFamily)
                                 return "Default"
@@ -962,8 +962,8 @@ Item {
                     }
 
                     ShellitDropdown {
-                        text: I18n.tr("Font Weight")
-                        description: I18n.tr("Select font weight")
+                        text: "Font Weight"
+                        description: "Select font weight"
                         currentValue: {
                             switch (SettingsData.fontWeight) {
                             case Font.Thin:
@@ -1028,8 +1028,8 @@ Item {
                     }
 
                     ShellitDropdown {
-                        text: I18n.tr("Monospace Font")
-                        description: I18n.tr("Select monospace font for process list and technical displays")
+                        text: "Monospace Font"
+                        description: "Select monospace font for process list and technical displays"
                         currentValue: {
                             if (SettingsData.monoFontFamily === SettingsData.defaultMonoFontFamily)
                                 return "Default"
@@ -1061,14 +1061,14 @@ Item {
                             spacing: Theme.spacingXS
 
                             StyledText {
-                                text: I18n.tr("Font Scale")
+                                text: "Font Scale"
                                 font.pixelSize: Theme.fontSizeMedium
                                 font.weight: Font.Medium
                                 color: Theme.surfaceText
                             }
 
                             StyledText {
-                                text: I18n.tr("Scale all font sizes")
+                                text: "Scale all font sizes"
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 width: parent.width
@@ -1165,14 +1165,14 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
 
                         StyledText {
-                            text: I18n.tr("Sync Mode with Portal")
+                            text: "Sync Mode with Portal"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
                         }
 
                         StyledText {
-                            text: I18n.tr("Sync dark mode with settings portals for system-wide theme hints")
+                            text: "Sync dark mode with settings portals for system-wide theme hints"
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.surfaceVariantText
                             wrapMode: Text.WordWrap
@@ -1218,7 +1218,7 @@ Item {
                     StyledText {
                         id: warningText
                         font.pixelSize: Theme.fontSizeSmall
-                        text: I18n.tr("The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0).")
+                        text: "The below settings will modify your GTK and Qt settings. If you wish to preserve your current configurations, please back them up (qt5ct.conf|qt6ct.conf and ~/.config/gtk-3.0|gtk-4.0)."
                         wrapMode: Text.WordWrap
                         width: parent.width - Theme.iconSizeSmall - Theme.spacingM
                         anchors.verticalCenter: parent.verticalCenter
@@ -1257,7 +1257,7 @@ Item {
                         ShellitDropdown {
                             width: parent.width - Theme.iconSize - Theme.spacingXS
                             anchors.verticalCenter: parent.verticalCenter
-                            text: I18n.tr("Icon Theme")
+                            text: "Icon Theme"
                             description: "ShellitShell & System Icons\n(requires restart)"
                             currentValue: SettingsData.iconTheme
                             enableFuzzySearch: true
@@ -1307,7 +1307,7 @@ Item {
                         }
 
                         StyledText {
-                            text: I18n.tr("System App Theming")
+                            text: "System App Theming"
                             font.pixelSize: Theme.fontSizeLarge
                             font.weight: Font.Medium
                             color: Theme.surfaceText
@@ -1339,7 +1339,7 @@ Item {
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("Apply GTK Colors")
+                                    text: "Apply GTK Colors"
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.primary
                                     font.weight: Font.Medium
@@ -1375,7 +1375,7 @@ Item {
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("Apply Qt Colors")
+                                    text: "Apply Qt Colors"
                                     font.pixelSize: Theme.fontSizeMedium
                                     color: Theme.primary
                                     font.weight: Font.Medium
@@ -1393,7 +1393,7 @@ Item {
                     }
 
                     StyledText {
-                        text: I18n.tr(`Generate baseline GTK3/4 or QT5/QT6 (requires qt6ct-kde) configurations to follow shellit colors. Only needed once.<br /><br />It is recommended to configure <a href="https://github.com/AvengeMedia/ShellitMaterialShell/blob/master/README.md#Theming" style="text-decoration:none; color:${Theme.primary};">adw-gtk3</a> prior to applying GTK themes.`)
+                        text: `Generate baseline GTK3/4 or QT5/QT6 (requires qt6ct-kde) configurations to follow shellit colors. Only needed once.<br /><br />It is recommended to configure <a href="https://github.com/xix-osano/shellit-dots/blob/master/README.md#Theming" style="text-decoration:none; color:${Theme.primary};">adw-gtk3</a> prior to applying GTK themes.`
                         textFormat: Text.RichText
                         linkColor: Theme.primary
                         onLinkActivated: url => Qt.openUrlExternally(url)

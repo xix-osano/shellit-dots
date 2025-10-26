@@ -8,7 +8,7 @@ Item {
     id: root
 
     property var categories: []
-    property string selectedCategory: I18n.tr("All")
+    property string selectedCategory: "All"
     property bool compact: false
 
     signal categorySelected(string category)

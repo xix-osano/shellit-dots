@@ -147,19 +147,19 @@ Singleton {
                                        console.warn("PortalService: Failed to set icon file:", response.error)
 
                                        const errorMsg = response.error.toString()
-                                       let userMessage = I18n.tr("Failed to set profile image")
+                                       let userMessage = "Failed to set profile image"
 
                                        if (errorMsg.includes("too large")) {
-                                           userMessage = I18n.tr("Profile image is too large. Please use a smaller image.")
+                                           userMessage = "Profile image is too large. Please use a smaller image."
                                        } else if (errorMsg.includes("permission")) {
-                                           userMessage = I18n.tr("Permission denied to set profile image.")
+                                           userMessage = "Permission denied to set profile image."
                                        } else if (errorMsg.includes("not found") || errorMsg.includes("does not exist")) {
-                                           userMessage = I18n.tr("Selected image file not found.")
+                                           userMessage = "Selected image file not found."
                                        } else {
-                                           userMessage = I18n.tr("Failed to set profile image: ") + errorMsg.split(":").pop().trim()
+                                           userMessage = "Failed to set profile image: " + errorMsg.split(":").pop().trim()
                                        }
 
-                                       Quickshell.execDetached(["notify-send", "-u", "normal", "-a", "shellit", "-i", "error", I18n.tr("Profile Image Error"), userMessage])
+                                       Quickshell.execDetached(["notify-send", "-u", "normal", "-a", "shellit", "-i", "error", "Profile Image Error", userMessage])
 
                                        pendingProfileImage = ""
                                    } else {
