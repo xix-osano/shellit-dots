@@ -543,7 +543,7 @@ Rectangle {
                 if (bluetoothContextMenu.currentDevice) {
                     if (BluetoothService.enhancedPairingAvailable) {
                         const devicePath = BluetoothService.getDevicePath(bluetoothContextMenu.currentDevice)
-                        DMSService.bluetoothRemove(devicePath, response => {
+                        shellitService.bluetoothRemove(devicePath, response => {
                             if (response.error) {
                                 ToastService.showError(I18n.tr("Failed to remove device"), response.error)
                             }
@@ -561,7 +561,7 @@ Rectangle {
     }
 
     Connections {
-        target: DMSService
+        target: shellitService
 
         function onBluetoothPairingRequest(data) {
             bluetoothPairingModal.show(data)

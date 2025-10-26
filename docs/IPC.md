@@ -1,9 +1,9 @@
 # IPC Commands Reference
 
-ShellitMaterialShell provides comprehensive IPC (Inter-Process Communication) functionality that allows external control of the shell through command-line commands. All IPC commands follow the format:
+Shellit provides comprehensive IPC (Inter-Process Communication) functionality that allows external control of the shell through command-line commands. All IPC commands follow the format:
 
 ```bash
-dms ipc call <target> <function> [parameters...]
+shellit ipc call <target> <function> [parameters...]
 ```
 
 ## Target: `audio`
@@ -44,9 +44,9 @@ Audio system control and information.
 
 ### Examples
 ```bash
-dms ipc call audio setvolume 50
-dms ipc call audio increment 10
-dms ipc call audio mute
+shellit ipc call audio setvolume 50
+shellit ipc call audio increment 10
+shellit ipc call audio mute
 ```
 
 ## Target: `brightness`
@@ -86,9 +86,9 @@ Display brightness control for internal and external displays.
 
 ### Examples
 ```bash
-dms ipc call brightness set 80
-dms ipc call brightness increment 10 ""
-dms ipc call brightness decrement 5 "intel_backlight"
+shellit ipc call brightness set 80
+shellit ipc call brightness increment 10 ""
+shellit ipc call brightness decrement 5 "intel_backlight"
 ```
 
 ## Target: `night`
@@ -141,11 +141,11 @@ Night mode (gamma/color temperature) control.
 
 ### Examples
 ```bash
-dms ipc call night toggle
-dms ipc call night temperature 4000
-dms ipc call night automation time
-dms ipc call night schedule 20:00 06:00
-dms ipc call night location 40.7128 -74.0060
+shellit ipc call night toggle
+shellit ipc call night temperature 4000
+shellit ipc call night automation time
+shellit ipc call night schedule 20:00 06:00
+shellit ipc call night location 40.7128 -74.0060
 ```
 
 ## Target: `mpris`
@@ -184,8 +184,8 @@ Media player control via MPRIS interface.
 
 ### Examples
 ```bash
-dms ipc call mpris playPause
-dms ipc call mpris next
+shellit ipc call mpris playPause
+shellit ipc call mpris next
 ```
 
 ## Target: `lock`
@@ -208,8 +208,8 @@ Screen lock control and status.
 
 ### Examples
 ```bash
-dms ipc call lock lock
-dms ipc call lock isLocked
+shellit ipc call lock lock
+shellit ipc call lock isLocked
 ```
 
 ## Target: `inhibit`
@@ -232,8 +232,8 @@ Idle inhibitor control to prevent automatic sleep/lock.
 
 ### Examples
 ```bash
-dms ipc call inhibit toggle
-dms ipc call inhibit enable
+shellit ipc call inhibit toggle
+shellit ipc call inhibit enable
 ```
 
 ## Target: `wallpaper`
@@ -291,36 +291,36 @@ Wallpaper management and retrieval with support for per-monitor configurations.
 
 **Global wallpaper mode:**
 ```bash
-dms ipc call wallpaper get
-dms ipc call wallpaper set /path/to/image.jpg
-dms ipc call wallpaper next
-dms ipc call wallpaper clear
+shellit ipc call wallpaper get
+shellit ipc call wallpaper set /path/to/image.jpg
+shellit ipc call wallpaper next
+shellit ipc call wallpaper clear
 ```
 
 **Per-monitor wallpaper mode:**
 ```bash
 # Set different wallpapers for each monitor
-dms ipc call wallpaper setFor DP-2 /path/to/image1.jpg
-dms ipc call wallpaper setFor eDP-1 /path/to/image2.jpg
+shellit ipc call wallpaper setFor DP-2 /path/to/image1.jpg
+shellit ipc call wallpaper setFor eDP-1 /path/to/image2.jpg
 
 # Get wallpaper for specific monitor
-dms ipc call wallpaper getFor DP-2
+shellit ipc call wallpaper getFor DP-2
 
 # Cycle wallpapers for specific monitor
-dms ipc call wallpaper nextFor eDP-1
-dms ipc call wallpaper prevFor DP-2
+shellit ipc call wallpaper nextFor eDP-1
+shellit ipc call wallpaper prevFor DP-2
 
 # Clear all wallpapers and return to global mode
-dms ipc call wallpaper clear
+shellit ipc call wallpaper clear
 ```
 
 **Error handling:**
 When per-monitor mode is enabled, legacy functions will return helpful error messages:
 ```bash
-dms ipc call wallpaper get
+shellit ipc call wallpaper get
 # Returns: "ERROR: Per-monitor mode enabled. Use getFor(screenName) instead."
 
-dms ipc call wallpaper set /path/to/image.jpg
+shellit ipc call wallpaper set /path/to/image.jpg
 # Returns: "ERROR: Per-monitor mode enabled. Use setFor(screenName, path) instead."
 ```
 
@@ -345,9 +345,9 @@ User profile image management.
 
 ### Examples
 ```bash
-dms ipc call profile getImage
-dms ipc call profile setImage /path/to/avatar.png
-dms ipc call profile clearImage
+shellit ipc call profile getImage
+shellit ipc call profile setImage /path/to/avatar.png
+shellit ipc call profile clearImage
 ```
 
 ## Target: `theme`
@@ -374,8 +374,8 @@ Theme mode control (light/dark mode switching).
 
 ### Examples
 ```bash
-dms ipc call theme toggle
-dms ipc call theme dark
+shellit ipc call theme toggle
+shellit ipc call theme dark
 ```
 
 ## Target: `bar`
@@ -402,9 +402,9 @@ Top bar visibility control.
 
 ### Examples
 ```bash
-dms ipc call bar toggle
-dms ipc call bar hide
-dms ipc call bar status
+shellit ipc call bar toggle
+shellit ipc call bar hide
+shellit ipc call bar status
 ```
 
 ## Modal Controls
@@ -475,9 +475,9 @@ Control Center popout containing network, bluetooth, audio, power, and other qui
 
 **Examples**
 ```bash
-dms ipc call control-center toggle
-dms ipc call control-center open
-dms ipc call control-center close
+shellit ipc call control-center toggle
+shellit ipc call control-center open
+shellit ipc call control-center close
 ```
 
 ### Target: `notepad`
@@ -559,50 +559,50 @@ Displays a live overview of all workspaces across all monitors with window previ
 ### Modal Examples
 ```bash
 # Open application launcher
-dms ipc call spotlight toggle
+shellit ipc call spotlight toggle
 
 # Open spotlight with pre-filled search
-dms ipc call spotlight openQuery browser
-dms ipc call spotlight toggleQuery "!"
+shellit ipc call spotlight openQuery browser
+shellit ipc call spotlight toggleQuery "!"
 
 # Show clipboard history
-dms ipc call clipboard open
+shellit ipc call clipboard open
 
 # Toggle notification center
-dms ipc call notifications toggle
+shellit ipc call notifications toggle
 
 # Show settings
-dms ipc call settings open
+shellit ipc call settings open
 
 # Show system monitor
-dms ipc call processlist toggle
+shellit ipc call processlist toggle
 
 # Show power menu
-dms ipc call powermenu toggle
+shellit ipc call powermenu toggle
 
 # Open notepad
-dms ipc call notepad toggle
+shellit ipc call notepad toggle
 
 # Show dashboard with specific tabs
-dms ipc call dash open overview
-dms ipc call dash toggle media
-dms ipc call dash open weather
+shellit ipc call dash open overview
+shellit ipc call dash toggle media
+shellit ipc call dash open weather
 
 # Open wallpaper browser
-dms ipc call Shellitdash wallpaper
+shellit ipc call Shellitdash wallpaper
 
 # Open file browsers
-dms ipc call file browse wallpaper
-dms ipc call file browse profile
+shellit ipc call file browse wallpaper
+shellit ipc call file browse profile
 
 # Show Hyprland keybinds cheatsheet (Hyprland only)
-dms ipc call hypr toggleBinds
-dms ipc call hypr openBinds
+shellit ipc call hypr toggleBinds
+shellit ipc call hypr openBinds
 
 # Show Hyprland workspace overview (Hyprland only)
-dms ipc call hypr toggleOverview
-dms ipc call hypr openOverview
-dms ipc call hypr closeOverview
+shellit ipc call hypr toggleOverview
+shellit ipc call hypr openOverview
+shellit ipc call hypr closeOverview
 ```
 
 ## Common Usage Patterns
@@ -614,25 +614,25 @@ These IPC commands are designed to be used with window manager keybindings.
 **Example niri configuration:**
 ```kdl
 binds {
-    Mod+Space { spawn "qs" "-c" "dms" "ipc" "call" "spotlight" "toggle"; }
-    Mod+V { spawn "qs" "-c" "dms" "ipc" "call" "clipboard" "toggle"; }
-    Mod+P { spawn "qs" "-c" "dms" "ipc" "call" "notepad" "toggle"; }
-    Mod+X { spawn "qs" "-c" "dms" "ipc" "call" "powermenu" "toggle"; }
-    XF86AudioRaiseVolume { spawn "qs" "-c" "dms" "ipc" "call" "audio" "increment" "3"; }
-    XF86MonBrightnessUp { spawn "qs" "-c" "dms" "ipc" "call" "brightness" "increment" "5" ""; }
+    Mod+Space { spawn "qs" "-c" "shellit" "ipc" "call" "spotlight" "toggle"; }
+    Mod+V { spawn "qs" "-c" "shellit" "ipc" "call" "clipboard" "toggle"; }
+    Mod+P { spawn "qs" "-c" "shellit" "ipc" "call" "notepad" "toggle"; }
+    Mod+X { spawn "qs" "-c" "shellit" "ipc" "call" "powermenu" "toggle"; }
+    XF86AudioRaiseVolume { spawn "qs" "-c" "shellit" "ipc" "call" "audio" "increment" "3"; }
+    XF86MonBrightnessUp { spawn "qs" "-c" "shellit" "ipc" "call" "brightness" "increment" "5" ""; }
 }
 ```
 
 **Example Hyprland configuration:**
 ```conf
-bind = SUPER, Space, exec, qs -c dms ipc call spotlight toggle
-bind = SUPER, V, exec, qs -c dms ipc call clipboard toggle
-bind = SUPER, P, exec, qs -c dms ipc call notepad toggle
-bind = SUPER, X, exec, qs -c dms ipc call powermenu toggle
-bind = SUPER, slash, exec, qs -c dms ipc call hypr toggleBinds
-bind = SUPER, Tab, exec, qs -c dms ipc call hypr toggleOverview
-bind = , XF86AudioRaiseVolume, exec, qs -c dms ipc call audio increment 3
-bind = , XF86MonBrightnessUp, exec, qs -c dms ipc call brightness increment 5 ""
+bind = SUPER, Space, exec, qs -c shellit ipc call spotlight toggle
+bind = SUPER, V, exec, qs -c shellit ipc call clipboard toggle
+bind = SUPER, P, exec, qs -c shellit ipc call notepad toggle
+bind = SUPER, X, exec, qs -c shellit ipc call powermenu toggle
+bind = SUPER, slash, exec, qs -c shellit ipc call hypr toggleBinds
+bind = SUPER, Tab, exec, qs -c shellit ipc call hypr toggleOverview
+bind = , XF86AudioRaiseVolume, exec, qs -c shellit ipc call audio increment 3
+bind = , XF86MonBrightnessUp, exec, qs -c shellit ipc call brightness increment 5 ""
 ```
 
 ### Scripting and Automation
@@ -644,9 +644,9 @@ IPC commands can be used in scripts for automation:
 # Toggle night mode based on time of day
 hour=$(date +%H)
 if [ $hour -ge 20 ] || [ $hour -le 6 ]; then
-    dms ipc call night enable
+    shellit ipc call night enable
 else
-    dms ipc call night disable
+    shellit ipc call night disable
 fi
 ```
 
@@ -656,9 +656,9 @@ Many commands provide status information useful for scripts:
 
 ```bash
 # Check if screen is locked before performing action
-if dms ipc call lock isLocked | grep -q "false"; then
+if shellit ipc call lock isLocked | grep -q "false"; then
     # Perform action only if unlocked
-    dms ipc call notifications open
+    shellit ipc call notifications open
 fi
 ```
 

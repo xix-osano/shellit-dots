@@ -1051,7 +1051,7 @@ Item {
                             }
 
                             StyledText {
-                                text: I18n.tr("Enable compositor-targetable blur layer (namespace: dms:blurwallpaper). Requires manual niri configuration.")
+                                text: I18n.tr("Enable compositor-targetable blur layer (namespace: shellit:blurwallpaper). Requires manual niri configuration.")
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap

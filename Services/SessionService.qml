@@ -48,7 +48,7 @@ Singleton {
 
     property bool stateInitialized: false
 
-    readonly property string socketPath: Quickshell.env("DMS_SOCKET")
+    readonly property string socketPath: Quickshell.env("shellit_SOCKET")
 
     Timer {
         id: sessionInitTimer
@@ -65,9 +65,9 @@ Singleton {
                 return
             }
             if (socketPath && socketPath.length > 0) {
-                checkDMSCapabilities()
+                checkshellitCapabilities()
             } else {
-                console.log("SessionService: DMS_SOCKET not set")
+                console.log("SessionService: shellit_SOCKET not set")
             }
         }
     }
@@ -295,11 +295,11 @@ Singleton {
     }
 
     Connections {
-        target: DMSService
+        target: shellitService
 
         function onConnectionStateChanged() {
-            if (DMSService.isConnected) {
-                checkDMSCapabilities()
+            if (shellitService.isConnected) {
+                checkshellitCapabilities()
             }
         }
 
@@ -309,11 +309,11 @@ Singleton {
     }
 
     Connections {
-        target: DMSService
-        enabled: DMSService.isConnected
+        target: shellitService
+        enabled: shellitService.isConnected
 
         function onCapabilitiesChanged() {
-            checkDMSCapabilities()
+            checkshellitCapabilities()
         }
     }
 
@@ -344,7 +344,7 @@ Singleton {
     }
 
     Connections {
-        target: DMSService
+        target: shellitService
         enabled: SettingsData.loginctlLockIntegration
 
         function onLoginctlStateUpdate(data) {
@@ -356,16 +356,16 @@ Singleton {
         }
     }
 
-    function checkDMSCapabilities() {
-        if (!DMSService.isConnected) {
+    function checkshellitCapabilities() {
+        if (!shellitService.isConnected) {
             return
         }
 
-        if (DMSService.capabilities.length === 0) {
+        if (shellitService.capabilities.length === 0) {
             return
         }
 
-        if (DMSService.capabilities.includes("loginctl")) {
+        if (shellitService.capabilities.includes("loginctl")) {
             loginctlAvailable = true
             if (SettingsData.loginctlLockIntegration && !stateInitialized) {
                 stateInitialized = true
@@ -374,14 +374,14 @@ Singleton {
             }
         } else {
             loginctlAvailable = false
-            console.log("SessionService: loginctl capability not available in DMS")
+            console.log("SessionService: loginctl capability not available in shellit")
         }
     }
 
     function getLoginctlState() {
         if (!loginctlAvailable) return
 
-        DMSService.sendRequest("loginctl.getState", null, response => {
+        shellitService.sendRequest("loginctl.getState", null, response => {
             if (response.result) {
                 updateLoginctlState(response.result)
             }
@@ -391,7 +391,7 @@ Singleton {
     function syncLockBeforeSuspend() {
         if (!loginctlAvailable) return
 
-        DMSService.sendRequest("loginctl.setLockBeforeSuspend", {
+        shellitService.sendRequest("loginctl.setLockBeforeSuspend", {
             enabled: SettingsData.lockBeforeSuspend
         }, response => {
             if (response.error) {
@@ -405,9 +405,9 @@ Singleton {
     function syncSleepInhibitor() {
         if (!loginctlAvailable) return
 
-        if (!DMSService.apiVersion || DMSService.apiVersion < 4) return
+        if (!shellitService.apiVersion || shellitService.apiVersion < 4) return
 
-        DMSService.sendRequest("loginctl.setSleepInhibitorEnabled", {
+        shellitService.sendRequest("loginctl.setSleepInhibitorEnabled", {
             enabled: SettingsData.loginctlLockIntegration && SettingsData.lockBeforeSuspend
         }, response => {
             if (response.error) {

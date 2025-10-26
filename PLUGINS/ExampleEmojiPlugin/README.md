@@ -1,6 +1,6 @@
 # Emoji Cycler Plugin
 
-An example dms plugin that displays cycling emojis in your bar with an emoji picker popout.
+An example shellit plugin that displays cycling emojis in your bar with an emoji picker popout.
 
 ## Features
 
@@ -12,7 +12,7 @@ An example dms plugin that displays cycling emojis in your bar with an emoji pic
 ## Installation
 
 1. Copy this directory to `~/.config/ShellitMaterialShell/plugins/ExampleEmojiPlugin`
-2. Open DMS Settings → Plugins
+2. Open shellit Settings → Plugins
 3. Click "Scan for Plugins"
 4. Enable "Emoji Cycler"
 5. Add `exampleEmojiPlugin` to your ShellitBar widget list
@@ -53,4 +53,4 @@ This plugin demonstrates:
 - Toast notifications (`ToastService.show`)
 - Dynamic settings loading/saving
 
-Perfect template for creating your own DMS plugins!
+Perfect template for creating your own shellit plugins!

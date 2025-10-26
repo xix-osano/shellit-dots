@@ -68,7 +68,7 @@ Item {
                     }
 
                     StyledText {
-                        text: I18n.tr("loginctl not available - lock integration requires DMS socket connection")
+                        text: I18n.tr("loginctl not available - lock integration requires shellit socket connection")
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.warning
                         visible: !SessionService.loginctlAvailable

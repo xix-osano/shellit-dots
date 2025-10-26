@@ -66,7 +66,7 @@ FocusScope {
                             }
 
                             StyledText {
-                                text: I18n.tr("Manage and configure plugins for extending DMS functionality")
+                                text: I18n.tr("Manage and configure plugins for extending shellit functionality")
                                 font.pixelSize: Theme.fontSizeSmall
                                 color: Theme.surfaceVariantText
                             }
@@ -75,15 +75,15 @@ FocusScope {
 
                     StyledRect {
                         width: parent.width
-                        height: dmsWarningColumn.implicitHeight + Theme.spacingM * 2
+                        height: shellitWarningColumn.implicitHeight + Theme.spacingM * 2
                         radius: Theme.cornerRadius
                         color: Qt.rgba(Theme.warning.r, Theme.warning.g, Theme.warning.b, 0.1)
                         border.color: Theme.warning
                         border.width: 1
-                        visible: !DMSService.dmsAvailable
+                        visible: !shellitService.shellitAvailable
 
                         Column {
-                            id: dmsWarningColumn
+                            id: shellitWarningColumn
                             anchors.fill: parent
                             anchors.margins: Theme.spacingM
                             spacing: Theme.spacingXS
@@ -99,7 +99,7 @@ FocusScope {
                                 }
 
                                 StyledText {
-                                    text: I18n.tr("DMS Plugin Manager Unavailable")
+                                    text: I18n.tr("shellit Plugin Manager Unavailable")
                                     font.pixelSize: Theme.fontSizeSmall
                                     color: Theme.warning
                                     font.weight: Font.Medium
@@ -108,7 +108,7 @@ FocusScope {
                             }
 
                             StyledText {
-                                text: I18n.tr("The DMS_SOCKET environment variable is not set or the socket is unavailable. Automated plugin management requires the DMS_SOCKET.")
+                                text: I18n.tr("The shellit_SOCKET environment variable is not set or the socket is unavailable. Automated plugin management requires the shellit_SOCKET.")
                                 font.pixelSize: Theme.fontSizeSmall - 1
                                 color: Theme.surfaceVariantText
                                 wrapMode: Text.WordWrap
@@ -124,7 +124,7 @@ FocusScope {
                         ShellitButton {
                             text: I18n.tr("Browse")
                             iconName: "store"
-                            enabled: DMSService.dmsAvailable
+                            enabled: shellitService.shellitAvailable
                             onClicked: {
                                 pluginBrowserModal.show()
                             }
@@ -136,8 +136,8 @@ FocusScope {
                             onClicked: {
                                 pluginsTab.isRefreshingPlugins = true
                                 PluginService.scanPlugins()
-                                if (DMSService.dmsAvailable) {
-                                    DMSService.listInstalled()
+                                if (shellitService.shellitAvailable) {
+                                    shellitService.listInstalled()
                                 }
                                 pluginsTab.refreshPluginList()
                             }
@@ -247,7 +247,7 @@ FocusScope {
                                 property bool hasSettings: pluginData && pluginData.settings !== undefined && pluginData.settings !== ""
                                 property bool isExpanded: pluginsTab.expandedPluginId === pluginId
                                 property bool hasUpdate: {
-                                    if (DMSService.apiVersion < 8) return false
+                                    if (shellitService.apiVersion < 8) return false
                                     return pluginsTab.installedPluginsData[pluginId] || pluginsTab.installedPluginsData[pluginName] || false
                                 }
 
@@ -331,7 +331,7 @@ FocusScope {
                                                 height: 28
                                                 radius: 14
                                                 color: updateArea.containsMouse ? Theme.surfaceContainerHighest : "transparent"
-                                                visible: DMSService.dmsAvailable && PluginService.isPluginLoaded(pluginDelegate.pluginId) && pluginDelegate.hasUpdate
+                                                visible: shellitService.shellitAvailable && PluginService.isPluginLoaded(pluginDelegate.pluginId) && pluginDelegate.hasUpdate
 
                                                 ShellitIcon {
                                                     anchors.centerIn: parent
@@ -348,14 +348,14 @@ FocusScope {
                                                     onClicked: {
                                                         const currentPluginName = pluginDelegate.pluginName
                                                         const currentPluginId = pluginDelegate.pluginId
-                                                        DMSService.update(currentPluginName, response => {
+                                                        shellitService.update(currentPluginName, response => {
                                                             if (response.error) {
                                                                 ToastService.showError("Update failed: " + response.error)
                                                             } else {
                                                                 ToastService.showInfo("Plugin updated: " + currentPluginName)
                                                                 PluginService.forceRescanPlugin(currentPluginId)
-                                                                if (DMSService.apiVersion >= 8) {
-                                                                    DMSService.listInstalled()
+                                                                if (shellitService.apiVersion >= 8) {
+                                                                    shellitService.listInstalled()
                                                                 }
                                                             }
                                                         })
@@ -381,7 +381,7 @@ FocusScope {
                                                 height: 28
                                                 radius: 14
                                                 color: uninstallArea.containsMouse ? Theme.surfaceContainerHighest : "transparent"
-                                                visible: DMSService.dmsAvailable
+                                                visible: shellitService.shellitAvailable
 
                                                 ShellitIcon {
                                                     anchors.centerIn: parent
@@ -397,7 +397,7 @@ FocusScope {
                                                     cursorShape: Qt.PointingHandCursor
                                                     onClicked: {
                                                         const currentPluginName = pluginDelegate.pluginName
-                                                        DMSService.uninstall(currentPluginName, response => {
+                                                        shellitService.uninstall(currentPluginName, response => {
                                                             if (response.error) {
                                                                 ToastService.showError("Uninstall failed: " + response.error)
                                                             } else {
@@ -656,15 +656,15 @@ FocusScope {
             }
         }
         function onPluginListUpdated() {
-            if (DMSService.apiVersion >= 8) {
-                DMSService.listInstalled()
+            if (shellitService.apiVersion >= 8) {
+                shellitService.listInstalled()
             }
             refreshPluginList()
         }
     }
 
     Connections {
-        target: DMSService
+        target: shellitService
         function onPluginsListReceived(plugins) {
             pluginBrowserModal.isLoading = false
             pluginBrowserModal.allPlugins = plugins
@@ -695,8 +695,8 @@ FocusScope {
 
     Component.onCompleted: {
         pluginBrowserModal.parentModal = pluginsTab.parentModal
-        if (DMSService.dmsAvailable && DMSService.apiVersion >= 8) {
-            DMSService.listInstalled()
+        if (shellitService.shellitAvailable && shellitService.apiVersion >= 8) {
+            shellitService.listInstalled()
         }
     }
 
@@ -760,7 +760,7 @@ FocusScope {
 
         function installPlugin(pluginName) {
             ToastService.showInfo("Installing plugin: " + pluginName)
-            DMSService.install(pluginName, response => {
+            shellitService.install(pluginName, response => {
                 if (response.error) {
                     ToastService.showError("Install failed: " + response.error)
                 } else {
@@ -773,9 +773,9 @@ FocusScope {
 
         function refreshPlugins() {
             isLoading = true
-            DMSService.listPlugins()
-            if (DMSService.apiVersion >= 8) {
-                DMSService.listInstalled()
+            shellitService.listPlugins()
+            if (shellitService.apiVersion >= 8) {
+                shellitService.listInstalled()
             }
         }
 
@@ -913,7 +913,7 @@ FocusScope {
                     }
 
                     StyledText {
-                        text: I18n.tr("Install plugins from the DMS plugin registry")
+                        text: I18n.tr("Install plugins from the shellit plugin registry")
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.outline
                         width: parent.width

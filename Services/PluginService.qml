@@ -25,7 +25,7 @@ Singleton {
         }
         return configDirStr + "/ShellitMaterialShell/plugins"
     }
-    property string systemPluginDirectory: "/etc/xdg/quickshell/dms-plugins"
+    property string systemPluginDirectory: "/etc/xdg/quickshell/shellit-plugins"
 
     property var knownManifests: ({})
     property var pathToPluginId: ({})

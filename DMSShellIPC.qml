@@ -11,10 +11,10 @@ Item {
     required property var powerMenuModalLoader
     required property var processListModalLoader
     required property var controlCenterLoader
-    required property var ShellitDashPopoutLoader
+    required property var shellitDashPopoutLoader
     required property var notepadSlideoutVariants
     required property var hyprKeybindsModalLoader
-    required property var ShellitBarLoader
+    required property var shellitBarLoader
     required property var hyprlandOverviewLoader
 
     IpcHandler {
@@ -78,8 +78,8 @@ Item {
 
     IpcHandler {
         function open(): string {
-            if (root.ShellitBarLoader.item) {
-                root.ShellitBarLoader.item.triggerControlCenterOnFocusedScreen()
+            if (root.shellitBarLoader.item) {
+                root.shellitBarLoader.item.triggerControlCenterOnFocusedScreen()
                 return "CONTROL_CENTER_OPEN_SUCCESS"
             }
             return "CONTROL_CENTER_OPEN_FAILED"
@@ -94,8 +94,8 @@ Item {
         }
 
         function toggle(): string {
-            if (root.ShellitBarLoader.item) {
-                root.ShellitBarLoader.item.triggerControlCenterOnFocusedScreen()
+            if (root.shellitBarLoader.item) {
+                root.shellitBarLoader.item.triggerControlCenterOnFocusedScreen()
                 return "CONTROL_CENTER_TOGGLE_SUCCESS"
             }
             return "CONTROL_CENTER_TOGGLE_FAILED"
@@ -106,53 +106,53 @@ Item {
 
     IpcHandler {
         function open(tab: string): string {
-            root.ShellitDashPopoutLoader.active = true
-            if (root.ShellitDashPopoutLoader.item) {
+            root.shellitDashPopoutLoader.active = true
+            if (root.shellitDashPopoutLoader.item) {
                 switch (tab.toLowerCase()) {
                 case "media":
-                    root.ShellitDashPopoutLoader.item.currentTabIndex = 1
+                    root.shellitDashPopoutLoader.item.currentTabIndex = 1
                     break
                 case "weather":
-                    root.ShellitDashPopoutLoader.item.currentTabIndex = SettingsData.weatherEnabled ? 2 : 0
+                    root.shellitDashPopoutLoader.item.currentTabIndex = SettingsData.weatherEnabled ? 2 : 0
                     break
                 default:
-                    root.ShellitDashPopoutLoader.item.currentTabIndex = 0
+                    root.shellitDashPopoutLoader.item.currentTabIndex = 0
                     break
                 }
-                root.ShellitDashPopoutLoader.item.setTriggerPosition(Screen.width / 2, Theme.barHeight + Theme.spacingS, 100, "center", Screen)
-                root.ShellitDashPopoutLoader.item.dashVisible = true
+                root.shellitDashPopoutLoader.item.setTriggerPosition(Screen.width / 2, Theme.barHeight + Theme.spacingS, 100, "center", Screen)
+                root.shellitDashPopoutLoader.item.dashVisible = true
                 return "DASH_OPEN_SUCCESS"
             }
             return "DASH_OPEN_FAILED"
         }
 
         function close(): string {
-            if (root.ShellitDashPopoutLoader.item) {
-                root.ShellitDashPopoutLoader.item.dashVisible = false
+            if (root.shellitDashPopoutLoader.item) {
+                root.shellitDashPopoutLoader.item.dashVisible = false
                 return "DASH_CLOSE_SUCCESS"
             }
             return "DASH_CLOSE_FAILED"
         }
 
         function toggle(tab: string): string {
-            root.ShellitDashPopoutLoader.active = true
-            if (root.ShellitDashPopoutLoader.item) {
-                if (root.ShellitDashPopoutLoader.item.dashVisible) {
-                    root.ShellitDashPopoutLoader.item.dashVisible = false
+            root.shellitDashPopoutLoader.active = true
+            if (root.shellitDashPopoutLoader.item) {
+                if (root.shellitDashPopoutLoader.item.dashVisible) {
+                    root.shellitDashPopoutLoader.item.dashVisible = false
                 } else {
                     switch (tab.toLowerCase()) {
                     case "media":
-                        root.ShellitDashPopoutLoader.item.currentTabIndex = 1
+                        root.shellitDashPopoutLoader.item.currentTabIndex = 1
                         break
                     case "weather":
-                        root.ShellitDashPopoutLoader.item.currentTabIndex = SettingsData.weatherEnabled ? 2 : 0
+                        root.shellitDashPopoutLoader.item.currentTabIndex = SettingsData.weatherEnabled ? 2 : 0
                         break
                     default:
-                        root.ShellitDashPopoutLoader.item.currentTabIndex = 0
+                        root.shellitDashPopoutLoader.item.currentTabIndex = 0
                         break
                     }
-                    root.ShellitDashPopoutLoader.item.setTriggerPosition(Screen.width / 2, Theme.barHeight + Theme.spacingS, 100, "center", Screen)
-                    root.ShellitDashPopoutLoader.item.dashVisible = true
+                    root.shellitDashPopoutLoader.item.setTriggerPosition(Screen.width / 2, Theme.barHeight + Theme.spacingS, 100, "center", Screen)
+                    root.shellitDashPopoutLoader.item.dashVisible = true
                 }
                 return "DASH_TOGGLE_SUCCESS"
             }
@@ -377,12 +377,12 @@ Item {
 
     IpcHandler {
         function wallpaper(): string {
-            if (root.ShellitBarLoader.item && root.ShellitBarLoader.item.triggerWallpaperBrowserOnFocusedScreen()) {
+            if (root.shellitBarLoader.item && root.shellitBarLoader.item.triggerWallpaperBrowserOnFocusedScreen()) {
                 return "SUCCESS: Toggled wallpaper browser"
             }
             return "ERROR: Failed to toggle wallpaper browser"
         }
 
-        target: "Shellitdash"
+        target: "shellitdash"
     }
 }

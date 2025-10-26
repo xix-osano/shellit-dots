@@ -115,7 +115,7 @@ Singleton {
         id: settingsFile
 
         path: StandardPaths.writableLocation(
-                  StandardPaths.GenericStateLocation) + "/ShellitMaterialShell/appusage.json"
+                  StandardPaths.GenericStateLocation) + "/Shellit/appusage.json"
         blockLoading: true
         blockWrites: true
         watchChanges: true

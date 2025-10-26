@@ -1,17 +1,17 @@
 [config]
 
-[templates.dmsgtk4]
+[templates.shellitgtk4]
 input_path = './matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-4.0/Shellit-colors.css'
 
-[templates.dmskcolorscheme]
+[templates.shellitkcolorscheme]
 input_path = './matugen/templates/kcolorscheme.colors'
 output_path = '~/.local/share/color-schemes/ShellitMatugen.colors'
 
-[templates.dmslightkcolorscheme]
+[templates.shellitlightkcolorscheme]
 input_path = './matugen/templates/light-kcolorscheme.colors'
 output_path = '~/.local/share/color-schemes/ShellitMatugenLight.colors'
 
-[templates.dmsdarkkcolorscheme]
+[templates.shellitdarkkcolorscheme]
 input_path = './matugen/templates/dark-kcolorscheme.colors'
 output_path = '~/.local/share/color-schemes/ShellitMatugenDark.colors'

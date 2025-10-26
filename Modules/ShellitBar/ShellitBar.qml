@@ -126,7 +126,7 @@ Item {
             }
 
             readonly property var dBarLayer: {
-                switch (Quickshell.env("DMS_ShellitBAR_LAYER")) {
+                switch (Quickshell.env("shellit_ShellitBAR_LAYER")) {
                 case "bottom":
                     return WlrLayer.Bottom
                 case "overlay":

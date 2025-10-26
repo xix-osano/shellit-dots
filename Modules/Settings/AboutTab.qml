@@ -56,7 +56,7 @@ Item {
                     }
 
                     StyledText {
-                        text: SystemUpdateService.shellVersion ? `dms ${SystemUpdateService.shellVersion}` : "dms"
+                        text: SystemUpdateService.shellVersion ? `shellit ${SystemUpdateService.shellVersion}` : "shellit"
                         font.pixelSize: Theme.fontSizeXLarge
                         font.weight: Font.Bold
                         color: Theme.surfaceText
@@ -257,7 +257,7 @@ Item {
                     }
 
                     StyledText {
-                        text: I18n.tr(`dms is a highly customizable, modern desktop shell with a <a href="https://m3.material.io/" style="text-decoration:none; color:${Theme.primary};">material 3 inspired</a> design.
+                        text: I18n.tr(`shellit is a highly customizable, modern desktop shell with a <a href="https://m3.material.io/" style="text-decoration:none; color:${Theme.primary};">material 3 inspired</a> design.
                         <br /><br/>It is built with <a href="https://quickshell.org" style="text-decoration:none; color:${Theme.primary};">Quickshell</a>, a QT6 framework for building desktop shells, and <a href="https://go.dev" style="text-decoration:none; color:${Theme.primary};">Go</a>, a statically typed, compiled programming language.
                         `)
                         textFormat: Text.RichText

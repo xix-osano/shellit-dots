@@ -23,8 +23,8 @@ Scope {
             Quickshell.execDetached(["sh", "-c", SettingsData.customPowerActionLock])
             return
         }
-        if (!processingExternalEvent && SettingsData.loginctlLockIntegration && DMSService.isConnected) {
-            DMSService.lockSession(response => {
+        if (!processingExternalEvent && SettingsData.loginctlLockIntegration && shellitService.isConnected) {
+            shellitService.lockSession(response => {
                 if (response.error) {
                     console.warn("Lock: Failed to call loginctl.lock:", response.error)
                     shouldLock = true
@@ -36,8 +36,8 @@ Scope {
     }
 
     function unlock() {
-        if (!processingExternalEvent && SettingsData.loginctlLockIntegration && DMSService.isConnected) {
-            DMSService.unlockSession(response => {
+        if (!processingExternalEvent && SettingsData.loginctlLockIntegration && shellitService.isConnected) {
+            shellitService.unlockSession(response => {
                 if (response.error) {
                     console.warn("Lock: Failed to call loginctl.unlock:", response.error)
                     shouldLock = false
@@ -110,8 +110,8 @@ Scope {
         target: "lock"
 
         function lock() {
-            if (!root.processingExternalEvent && SettingsData.loginctlLockIntegration && DMSService.isConnected) {
-                DMSService.lockSession(response => {
+            if (!root.processingExternalEvent && SettingsData.loginctlLockIntegration && shellitService.isConnected) {
+                shellitService.lockSession(response => {
                     if (response.error) {
                         console.warn("Lock: Failed to call loginctl.lock:", response.error)
                         root.shouldLock = true

@@ -1393,7 +1393,7 @@ Item {
                     }
 
                     StyledText {
-                        text: I18n.tr(`Generate baseline GTK3/4 or QT5/QT6 (requires qt6ct-kde) configurations to follow DMS colors. Only needed once.<br /><br />It is recommended to configure <a href="https://github.com/AvengeMedia/ShellitMaterialShell/blob/master/README.md#Theming" style="text-decoration:none; color:${Theme.primary};">adw-gtk3</a> prior to applying GTK themes.`)
+                        text: I18n.tr(`Generate baseline GTK3/4 or QT5/QT6 (requires qt6ct-kde) configurations to follow shellit colors. Only needed once.<br /><br />It is recommended to configure <a href="https://github.com/AvengeMedia/ShellitMaterialShell/blob/master/README.md#Theming" style="text-decoration:none; color:${Theme.primary};">adw-gtk3</a> prior to applying GTK themes.`)
                         textFormat: Text.RichText
                         linkColor: Theme.primary
                         onLinkActivated: url => Qt.openUrlExternally(url)

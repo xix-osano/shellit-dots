@@ -24,7 +24,7 @@ Variants {
         screen: modelData
 
         WlrLayershell.layer: WlrLayer.Background
-        WlrLayershell.namespace: "dms:blurwallpaper"
+        WlrLayershell.namespace: "shellit:blurwallpaper"
         WlrLayershell.exclusionMode: ExclusionMode.Ignore
 
         anchors.top: true

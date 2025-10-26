@@ -71,9 +71,9 @@
       "description": "Path to settings component QML file",
       "pattern": "^\\./.*\\.qml$"
     },
-    "requires_dms": {
+    "requires_shellit": {
       "type": "string",
-      "description": "Minimum DMS version requirement (e.g., '>=0.1.18', '>0.1.0')",
+      "description": "Minimum shellit version requirement (e.g., '>=0.1.18', '>0.1.0')",
       "pattern": "^(>=?|<=?|=|>|<)\\d+\\.\\d+\\.\\d+$"
     },
     "requires": {

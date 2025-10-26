@@ -448,7 +448,7 @@ When modifying the shell:
 
 ### Creating Plugins
 
-Plugins are external, dynamically-loaded components that extend Shellit functionality. Plugins are stored in `~/.config/Shellit/plugins/` and have their settings isolated from core DMS settings.
+Plugins are external, dynamically-loaded components that extend Shellit functionality. Plugins are stored in `~/.config/Shellit/plugins/` and have their settings isolated from core shellit settings.
 
 **Plugin Types:**
 - **Widget plugins** (`"type": "widget"` or omit type field): Display UI components in ShellitBar
@@ -614,7 +614,7 @@ Daemon plugins run invisibly in the background without any UI components. They'r
 **Plugin Directory Structure:**
 ```
 ~/.config/ShellitMaterialShell/
-├── settings.json                    # Core DMS settings + plugin settings
+├── settings.json                    # Core shellit settings + plugin settings
 │   └── pluginSettings: {
 │       └── yourPlugin: {
 │           ├── enabled: true,

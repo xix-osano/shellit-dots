@@ -30,7 +30,7 @@ Rectangle {
     }
 
     property int currentPreferenceIndex: {
-        if (DMSService.apiVersion < 5) {
+        if (shellitService.apiVersion < 5) {
             return 1
         }
 
@@ -76,7 +76,7 @@ Rectangle {
         ShellitButtonGroup {
             id: preferenceControls
             anchors.verticalCenter: parent.verticalCenter
-            visible: DMSService.apiVersion >= 5 && NetworkService.backend !== "iwd"
+            visible: shellitService.apiVersion >= 5 && NetworkService.backend !== "iwd"
 
             model: ["Ethernet", "WiFi"]
             currentIndex: currentPreferenceIndex
@@ -196,7 +196,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.margins: Theme.spacingM
         anchors.topMargin: Theme.spacingM
-        visible: currentPreferenceIndex === 0 && DMSService.apiVersion >= 5
+        visible: currentPreferenceIndex === 0 && shellitService.apiVersion >= 5
         contentHeight: wiredColumn.height
         clip: true
 
@@ -509,7 +509,7 @@ Rectangle {
                         onClicked: function(event) {
                             if (modelData.ssid !== NetworkService.currentWifiSSID) {
                                 if (modelData.secured && !modelData.saved) {
-                                    if (DMSService.apiVersion >= 7) {
+                                    if (shellitService.apiVersion >= 7) {
                                         NetworkService.connectToWifi(modelData.ssid)
                                     } else if (PopoutService.wifiPasswordModal) {
                                         PopoutService.wifiPasswordModal.show(modelData.ssid)
@@ -567,7 +567,7 @@ Rectangle {
                     NetworkService.disconnectWifi()
                 } else {
                     if (networkContextMenu.currentSecured && !networkContextMenu.currentSaved) {
-                        if (DMSService.apiVersion >= 7) {
+                        if (shellitService.apiVersion >= 7) {
                             NetworkService.connectToWifi(networkContextMenu.currentSSID)
                         } else if (PopoutService.wifiPasswordModal) {
                             PopoutService.wifiPasswordModal.show(networkContextMenu.currentSSID)

@@ -1,6 +1,6 @@
 # Custom Themes
 
-This guide covers creating custom themes for ShellitMaterialShell. You can define your own color schemes by creating theme files that the shell can load.
+This guide covers creating custom themes for Shellit. You can define your own color schemes by creating theme files that the shell can load.
 
 ## Theme Structure
 
@@ -147,7 +147,7 @@ While the core colors above are required, you can also customize these optional 
 
 In settings -> Theme & Colors you can choose "Custom" to choose a path to your theme.
 
-You can also edit `~/.config/ShellitMaterialShell/settings.json` manually
+You can also edit `~/.config/quickshell/Shellit/settings.json` manually
 
 ```json
 {

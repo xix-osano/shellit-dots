@@ -786,12 +786,12 @@ window-rule {
 }`
 
         const configDir = Paths.strip(StandardPaths.writableLocation(StandardPaths.ConfigLocation))
-        const niriDmsDir = configDir + "/niri/dms"
-        const configPath = niriDmsDir + "/layout.kdl"
+        const nirishellitDir = configDir + "/niri/shellit"
+        const configPath = nirishellitDir + "/layout.kdl"
 
         writeConfigProcess.configContent = configContent
         writeConfigProcess.configPath = configPath
-        writeConfigProcess.command = ["sh", "-c", `mkdir -p "${niriDmsDir}" && cat > "${configPath}" << 'EOF'\n${configContent}\nEOF`]
+        writeConfigProcess.command = ["sh", "-c", `mkdir -p "${nirishellitDir}" && cat > "${configPath}" << 'EOF'\n${configContent}\nEOF`]
         writeConfigProcess.running = true
         configGenerationPending = false
     }
@@ -800,12 +800,12 @@ window-rule {
         console.log("NiriService: Generating binds config...")
 
         const configDir = Paths.strip(StandardPaths.writableLocation(StandardPaths.ConfigLocation))
-        const niriDmsDir = configDir + "/niri/dms"
-        const bindsPath = niriDmsDir + "/binds.kdl"
+        const nirishellitDir = configDir + "/niri/shellit"
+        const bindsPath = nirishellitDir + "/binds.kdl"
         const sourceBindsPath = Paths.strip(Qt.resolvedUrl("niri-binds.kdl"))
 
         writeBindsProcess.bindsPath = bindsPath
-        writeBindsProcess.command = ["sh", "-c", `mkdir -p "${niriDmsDir}" && cp --no-preserve=mode "${sourceBindsPath}" "${bindsPath}"`]
+        writeBindsProcess.command = ["sh", "-c", `mkdir -p "${nirishellitDir}" && cp --no-preserve=mode "${sourceBindsPath}" "${bindsPath}"`]
         writeBindsProcess.running = true
     }
 }

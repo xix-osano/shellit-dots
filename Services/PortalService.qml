@@ -20,7 +20,7 @@ Singleton {
     property string colorSchemeCommand: ""
     property string pendingProfileImage: ""
 
-    readonly property string socketPath: Quickshell.env("DMS_SOCKET")
+    readonly property string socketPath: Quickshell.env("shellit_SOCKET")
 
     function init() {}
 
@@ -32,7 +32,7 @@ Singleton {
         if (!username)
             return
 
-        DMSService.sendRequest("freedesktop.accounts.getUserIconFile", {
+        shellitService.sendRequest("freedesktop.accounts.getUserIconFile", {
                                    "username": username
                                }, response => {
                                    if (response.result && response.result.success) {
@@ -52,7 +52,7 @@ Singleton {
             profileImage = ""
             return
         }
-        if (Quickshell.env("DMS_RUN_GREETER") === "1" || Quickshell.env("DMS_RUN_GREETER") === "true") {
+        if (Quickshell.env("shellit_RUN_GREETER") === "1" || Quickshell.env("shellit_RUN_GREETER") === "true") {
             profileImage = ""
             return
         }
@@ -62,7 +62,7 @@ Singleton {
             return
         }
 
-        DMSService.sendRequest("freedesktop.accounts.getUserIconFile", {
+        shellitService.sendRequest("freedesktop.accounts.getUserIconFile", {
                                    "username": username
                                }, response => {
                                    if (response.result && response.result.success) {
@@ -94,7 +94,7 @@ Singleton {
         if (!freedeskAvailable)
             return
 
-        DMSService.sendRequest("freedesktop.settings.getColorScheme", null, response => {
+        shellitService.sendRequest("freedesktop.settings.getColorScheme", null, response => {
                                    if (response.result) {
                                        systemColorScheme = response.result.value || 0
                                    }
@@ -127,7 +127,7 @@ Singleton {
         if (!settingsPortalAvailable || !freedeskAvailable)
             return
 
-        DMSService.sendRequest("freedesktop.settings.setIconTheme", {
+        shellitService.sendRequest("freedesktop.settings.setIconTheme", {
                                    "iconTheme": themeName
                                }, response => {
                                    if (response.error) {
@@ -140,7 +140,7 @@ Singleton {
         if (!accountsServiceAvailable || !freedeskAvailable)
             return
 
-        DMSService.sendRequest("freedesktop.accounts.setIconFile", {
+        shellitService.sendRequest("freedesktop.accounts.setIconFile", {
                                    "path": imagePath || ""
                                }, response => {
                                    if (response.error) {
@@ -159,7 +159,7 @@ Singleton {
                                            userMessage = I18n.tr("Failed to set profile image: ") + errorMsg.split(":").pop().trim()
                                        }
 
-                                       Quickshell.execDetached(["notify-send", "-u", "normal", "-a", "DMS", "-i", "error", I18n.tr("Profile Image Error"), userMessage])
+                                       Quickshell.execDetached(["notify-send", "-u", "normal", "-a", "shellit", "-i", "error", I18n.tr("Profile Image Error"), userMessage])
 
                                        pendingProfileImage = ""
                                    } else {
@@ -172,47 +172,47 @@ Singleton {
 
     Component.onCompleted: {
         if (socketPath && socketPath.length > 0) {
-            checkDMSCapabilities()
+            checkshellitCapabilities()
         } else {
-            console.info("PortalService: DMS_SOCKET not set")
+            console.info("PortalService: shellit_SOCKET not set")
         }
         colorSchemeDetector.running = true
     }
 
     Connections {
-        target: DMSService
+        target: shellitService
 
         function onConnectionStateChanged() {
-            if (DMSService.isConnected) {
-                checkDMSCapabilities()
+            if (shellitService.isConnected) {
+                checkshellitCapabilities()
             }
         }
     }
 
     Connections {
-        target: DMSService
-        enabled: DMSService.isConnected
+        target: shellitService
+        enabled: shellitService.isConnected
 
         function onCapabilitiesChanged() {
-            checkDMSCapabilities()
+            checkshellitCapabilities()
         }
     }
 
-    function checkDMSCapabilities() {
-        if (!DMSService.isConnected) {
+    function checkshellitCapabilities() {
+        if (!shellitService.isConnected) {
             return
         }
 
-        if (DMSService.capabilities.length === 0) {
+        if (shellitService.capabilities.length === 0) {
             return
         }
 
-        freedeskAvailable = DMSService.capabilities.includes("freedesktop")
+        freedeskAvailable = shellitService.capabilities.includes("freedesktop")
         if (freedeskAvailable) {
             checkAccountsService()
             checkSettingsPortal()
         } else {
-            console.info("PortalService: freedesktop capability not available in DMS")
+            console.info("PortalService: freedesktop capability not available in shellit")
         }
     }
 
@@ -220,7 +220,7 @@ Singleton {
         if (!freedeskAvailable)
             return
 
-        DMSService.sendRequest("freedesktop.getState", null, response => {
+        shellitService.sendRequest("freedesktop.getState", null, response => {
                                    if (response.result && response.result.accounts) {
                                        accountsServiceAvailable = response.result.accounts.available || false
                                        if (accountsServiceAvailable) {
@@ -234,7 +234,7 @@ Singleton {
         if (!freedeskAvailable)
             return
 
-        DMSService.sendRequest("freedesktop.getState", null, response => {
+        shellitService.sendRequest("freedesktop.getState", null, response => {
                                    if (response.result && response.result.settings) {
                                        settingsPortalAvailable = response.result.settings.available || false
                                        if (settingsPortalAvailable && SettingsData.syncModeWithPortal) {

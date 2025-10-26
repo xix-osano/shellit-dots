@@ -99,7 +99,7 @@ build_once() {
   [[ -z "$surface_base" ]] && surface_base="sc"
   [[ -z "$run_user_templates" ]] && run_user_templates="true"
 
-  USER_MATUGEN_DIR="$CONFIG_DIR/matugen/dms"
+  USER_MATUGEN_DIR="$CONFIG_DIR/matugen/shellit"
   
   TMP_CFG="$(mktemp)"
   trap 'rm -f "$TMP_CFG"' RETURN
@@ -118,7 +118,7 @@ build_once() {
   cat >> "$TMP_CFG" << EOF
 [templates.Shellit]
 input_path = '$SHELL_DIR/matugen/templates/Shellit.json'
-output_path = '$STATE_DIR/dms-colors.json'
+output_path = '$STATE_DIR/shellit-colors.json'
 
 EOF
 

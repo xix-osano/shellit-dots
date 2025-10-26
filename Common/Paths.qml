@@ -12,13 +12,13 @@ Singleton {
                                         StandardPaths.PicturesLocation)[0]
 
     readonly property url data: `${StandardPaths.standardLocations(
-                                    StandardPaths.GenericDataLocation)[0]}/ShellitMaterialShell`
+                                    StandardPaths.GenericDataLocation)[0]}/Shellit`
     readonly property url state: `${StandardPaths.standardLocations(
-                                     StandardPaths.GenericStateLocation)[0]}/ShellitMaterialShell`
+                                     StandardPaths.GenericStateLocation)[0]}/Shellit`
     readonly property url cache: `${StandardPaths.standardLocations(
-                                     StandardPaths.GenericCacheLocation)[0]}/ShellitMaterialShell`
+                                     StandardPaths.GenericCacheLocation)[0]}/Shellit`
     readonly property url config: `${StandardPaths.standardLocations(
-                                      StandardPaths.GenericConfigLocation)[0]}/ShellitMaterialShell`
+                                      StandardPaths.GenericConfigLocation)[0]}/Shellit`
 
     readonly property url imagecache: `${cache}/imagecache`
 

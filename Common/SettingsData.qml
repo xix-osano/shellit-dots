@@ -14,7 +14,7 @@ Singleton {
 
     readonly property int settingsConfigVersion: 1
 
-    readonly property bool isGreeterMode: Quickshell.env("DMS_RUN_GREETER") === "1" || Quickshell.env("DMS_RUN_GREETER") === "true"
+    readonly property bool isGreeterMode: Quickshell.env("shellit_RUN_GREETER") === "1" || Quickshell.env("shellit_RUN_GREETER") === "true"
 
     enum Position {
         Top,
@@ -36,23 +36,23 @@ Singleton {
     readonly property string _homeUrl: StandardPaths.writableLocation(StandardPaths.HomeLocation)
     readonly property string _configUrl: StandardPaths.writableLocation(StandardPaths.ConfigLocation)
     readonly property string _configDir: Paths.strip(_configUrl)
-    readonly property string pluginSettingsPath: _configDir + "/ShellitMaterialShell/plugin_settings.json"
+    readonly property string pluginSettingsPath: _configDir + "/Shellit/plugin_settings.json"
 
     property bool _loading: false
     property bool _pluginSettingsLoading: false
     property bool hasTriedDefaultSettings: false
     property var pluginSettings: ({})
 
-    property alias ShellitBarLeftWidgetsModel: leftWidgetsModel
-    property alias ShellitBarCenterWidgetsModel: centerWidgetsModel
-    property alias ShellitBarRightWidgetsModel: rightWidgetsModel
+    property alias shellitBarLeftWidgetsModel: leftWidgetsModel
+    property alias shellitBarCenterWidgetsModel: centerWidgetsModel
+    property alias shellitBarRightWidgetsModel: rightWidgetsModel
 
     property string currentThemeName: "blue"
     property string customThemeFile: ""
     property string matugenScheme: "scheme-tonal-spot"
     property bool runUserMatugenTemplates: true
-    property real ShellitBarTransparency: 1.0
-    property real ShellitBarWidgetTransparency: 1.0
+    property real shellitBarTransparency: 1.0
+    property real shellitBarWidgetTransparency: 1.0
     property real popupTransparency: 1.0
     property real dockTransparency: 1
     property string widgetBackgroundColor: "sch"
@@ -118,10 +118,10 @@ Singleton {
     property string lockDateFormat: ""
     property int mediaSize: 1
 
-    property var ShellitBarLeftWidgets: ["launcherButton", "workspaceSwitcher", "focusedWindow"]
-    property var ShellitBarCenterWidgets: ["music", "clock", "weather"]
-    property var ShellitBarRightWidgets: ["systemTray", "clipboard", "cpuUsage", "memUsage", "notificationButton", "battery", "controlCenterButton"]
-    property var ShellitBarWidgetOrder: []
+    property var shellitBarLeftWidgets: ["launcherButton", "workspaceSwitcher", "focusedWindow"]
+    property var shellitBarCenterWidgets: ["music", "clock", "weather"]
+    property var shellitBarRightWidgets: ["systemTray", "clipboard", "cpuUsage", "memUsage", "notificationButton", "battery", "controlCenterButton"]
+    property var shellitBarWidgetOrder: []
 
     property string appLauncherViewMode: "list"
     property string spotlightModalViewMode: "list"
@@ -153,7 +153,7 @@ Singleton {
     property string monoFontFamily: "Fira Code"
     property int fontWeight: Font.Normal
     property real fontScale: 1.0
-    property real ShellitBarFontScale: 1.0
+    property real shellitBarFontScale: 1.0
 
     property bool notepadUseMonospace: true
     property string notepadFontFamily: ""
@@ -208,23 +208,23 @@ Singleton {
     property string dockIndicatorStyle: "circle"
 
     property bool notificationOverlayEnabled: false
-    property bool ShellitBarAutoHide: false
-    property bool ShellitBarOpenOnOverview: false
-    property bool ShellitBarVisible: true
+    property bool shellitBarAutoHide: false
+    property bool shellitBarOpenOnOverview: false
+    property bool shellitBarVisible: true
     property int overviewRows: 2
     property int overviewColumns: 5
     property real overviewScale: 0.16
-    property real ShellitBarSpacing: 4
-    property real ShellitBarBottomGap: 0
-    property real ShellitBarInnerPadding: 4
-    property int ShellitBarPosition: SettingsData.Position.Top
-    property bool ShellitBarIsVertical: ShellitBarPosition === SettingsData.Position.Left || ShellitBarPosition === SettingsData.Position.Right
+    property real shellitBarSpacing: 4
+    property real shellitBarBottomGap: 0
+    property real shellitBarInnerPadding: 4
+    property int shellitBarPosition: SettingsData.Position.Top
+    property bool shellitBarIsVertical: shellitBarPosition === SettingsData.Position.Left || shellitBarPosition === SettingsData.Position.Right
 
-    property bool ShellitBarSquareCorners: false
-    property bool ShellitBarNoBackground: false
-    property bool ShellitBarGothCornersEnabled: false
-    property bool ShellitBarBorderEnabled: false
-    property string ShellitBarBorderColor: "surfaceText"
+    property bool shellitBarSquareCorners: false
+    property bool shellitBarNoBackground: false
+    property bool shellitBarGothCornersEnabled: false
+    property bool shellitBarBorderEnabled: false
+    property string shellitBarBorderColor: "surfaceText"
     property real ShellitBarBorderOpacity: 1.0
     property real ShellitBarBorderThickness: 1
 
@@ -330,8 +330,8 @@ Singleton {
                 customThemeFile = settings.customThemeFile !== undefined ? settings.customThemeFile : ""
                 matugenScheme = settings.matugenScheme !== undefined ? settings.matugenScheme : "scheme-tonal-spot"
                 runUserMatugenTemplates = settings.runUserMatugenTemplates !== undefined ? settings.runUserMatugenTemplates : true
-                ShellitBarTransparency = settings.ShellitBarTransparency !== undefined ? (settings.ShellitBarTransparency > 1 ? settings.ShellitBarTransparency / 100 : settings.ShellitBarTransparency) : (settings.topBarTransparency !== undefined ? (settings.topBarTransparency > 1 ? settings.topBarTransparency / 100 : settings.topBarTransparency) : 1.0)
-                ShellitBarWidgetTransparency = settings.ShellitBarWidgetTransparency !== undefined ? (settings.ShellitBarWidgetTransparency > 1 ? settings.ShellitBarWidgetTransparency / 100 : settings.ShellitBarWidgetTransparency) : (settings.topBarWidgetTransparency !== undefined ? (settings.topBarWidgetTransparency > 1 ? settings.topBarWidgetTransparency / 100 : settings.topBarWidgetTransparency) : 1.0)
+                shellitBarTransparency = settings.shellitBarTransparency !== undefined ? (settings.shellitBarTransparency > 1 ? settings.shellitBarTransparency / 100 : settings.shellitBarTransparency) : (settings.topBarTransparency !== undefined ? (settings.topBarTransparency > 1 ? settings.topBarTransparency / 100 : settings.topBarTransparency) : 1.0)
+                shellitBarWidgetTransparency = settings.shellitBarWidgetTransparency !== undefined ? (settings.shellitBarWidgetTransparency > 1 ? settings.shellitBarWidgetTransparency / 100 : settings.shellitBarWidgetTransparency) : (settings.topBarWidgetTransparency !== undefined ? (settings.topBarWidgetTransparency > 1 ? settings.topBarWidgetTransparency / 100 : settings.topBarWidgetTransparency) : 1.0)
                 popupTransparency = settings.popupTransparency !== undefined ? (settings.popupTransparency > 1 ? settings.popupTransparency / 100 : settings.popupTransparency) : 1.0
                 dockTransparency = settings.dockTransparency !== undefined ? (settings.dockTransparency > 1 ? settings.dockTransparency / 100 : settings.dockTransparency) : 1
                 use24HourClock = settings.use24HourClock !== undefined ? settings.use24HourClock : true
@@ -388,24 +388,24 @@ Singleton {
                 clockDateFormat = settings.clockDateFormat !== undefined ? settings.clockDateFormat : ""
                 lockDateFormat = settings.lockDateFormat !== undefined ? settings.lockDateFormat : ""
                 mediaSize = settings.mediaSize !== undefined ? settings.mediaSize : (settings.mediaCompactMode !== undefined ? (settings.mediaCompactMode ? 0 : 1) : 1)
-                if (settings.ShellitBarWidgetOrder || settings.topBarWidgetOrder) {
-                    var widgetOrder = settings.ShellitBarWidgetOrder || settings.topBarWidgetOrder
-                    ShellitBarLeftWidgets = widgetOrder.filter(w => {
+                if (settings.shellitBarWidgetOrder || settings.topBarWidgetOrder) {
+                    var widgetOrder = settings.shellitBarWidgetOrder || settings.topBarWidgetOrder
+                    shellitBarLeftWidgets = widgetOrder.filter(w => {
                                                                               return ["launcherButton", "workspaceSwitcher", "focusedWindow"].includes(w)
                                                                           })
-                    ShellitBarCenterWidgets = widgetOrder.filter(w => {
+                    shellitBarCenterWidgets = widgetOrder.filter(w => {
                                                                                 return ["clock", "music", "weather"].includes(w)
                                                                             })
-                    ShellitBarRightWidgets = widgetOrder.filter(w => {
+                    shellitBarRightWidgets = widgetOrder.filter(w => {
                                                                                return ["systemTray", "clipboard", "systemResources", "notificationButton", "battery", "controlCenterButton"].includes(w)
                                                                            })
                 } else {
-                    var leftWidgets = settings.ShellitBarLeftWidgets !== undefined ? settings.ShellitBarLeftWidgets : (settings.topBarLeftWidgets !== undefined ? settings.topBarLeftWidgets : ["launcherButton", "workspaceSwitcher", "focusedWindow"])
-                    var centerWidgets = settings.ShellitBarCenterWidgets !== undefined ? settings.ShellitBarCenterWidgets : (settings.topBarCenterWidgets !== undefined ? settings.topBarCenterWidgets : ["music", "clock", "weather"])
-                    var rightWidgets = settings.ShellitBarRightWidgets !== undefined ? settings.ShellitBarRightWidgets : (settings.topBarRightWidgets !== undefined ? settings.topBarRightWidgets : ["systemTray", "clipboard", "cpuUsage", "memUsage", "notificationButton", "battery", "controlCenterButton"])
-                    ShellitBarLeftWidgets = leftWidgets
-                    ShellitBarCenterWidgets = centerWidgets
-                    ShellitBarRightWidgets = rightWidgets
+                    var leftWidgets = settings.shellitBarLeftWidgets !== undefined ? settings.shellitBarLeftWidgets : (settings.topBarLeftWidgets !== undefined ? settings.topBarLeftWidgets : ["launcherButton", "workspaceSwitcher", "focusedWindow"])
+                    var centerWidgets = settings.shellitBarCenterWidgets !== undefined ? settings.shellitBarCenterWidgets : (settings.topBarCenterWidgets !== undefined ? settings.topBarCenterWidgets : ["music", "clock", "weather"])
+                    var rightWidgets = settings.shellitBarRightWidgets !== undefined ? settings.shellitBarRightWidgets : (settings.topBarRightWidgets !== undefined ? settings.topBarRightWidgets : ["systemTray", "clipboard", "cpuUsage", "memUsage", "notificationButton", "battery", "controlCenterButton"])
+                    shellitBarLeftWidgets = leftWidgets
+                    shellitBarCenterWidgets = centerWidgets
+                    shellitBarRightWidgets = rightWidgets
                     updateListModel(leftWidgetsModel, leftWidgets)
                     updateListModel(centerWidgetsModel, centerWidgets)
                     updateListModel(rightWidgetsModel, rightWidgets)
@@ -433,7 +433,7 @@ Singleton {
                 monoFontFamily = settings.monoFontFamily !== undefined ? settings.monoFontFamily : defaultMonoFontFamily
                 fontWeight = settings.fontWeight !== undefined ? settings.fontWeight : Font.Normal
                 fontScale = settings.fontScale !== undefined ? settings.fontScale : 1.0
-                ShellitBarFontScale = settings.ShellitBarFontScale !== undefined ? settings.ShellitBarFontScale : 1.0
+                shellitBarFontScale = settings.shellitBarFontScale !== undefined ? settings.shellitBarFontScale : 1.0
                 notepadUseMonospace = settings.notepadUseMonospace !== undefined ? settings.notepadUseMonospace : true
                 notepadFontFamily = settings.notepadFontFamily !== undefined ? settings.notepadFontFamily : ""
                 notepadFontSize = settings.notepadFontSize !== undefined ? settings.notepadFontSize : 14
@@ -458,9 +458,9 @@ Singleton {
                 dockIndicatorStyle = settings.dockIndicatorStyle !== undefined ? settings.dockIndicatorStyle : "circle"
                 cornerRadius = settings.cornerRadius !== undefined ? settings.cornerRadius : 12
                 notificationOverlayEnabled = settings.notificationOverlayEnabled !== undefined ? settings.notificationOverlayEnabled : false
-                ShellitBarAutoHide = settings.ShellitBarAutoHide !== undefined ? settings.ShellitBarAutoHide : (settings.topBarAutoHide !== undefined ? settings.topBarAutoHide : false)
-                ShellitBarOpenOnOverview = settings.ShellitBarOpenOnOverview !== undefined ? settings.ShellitBarOpenOnOverview : (settings.topBarOpenOnOverview !== undefined ? settings.topBarOpenOnOverview : false)
-                ShellitBarVisible = settings.ShellitBarVisible !== undefined ? settings.ShellitBarVisible : (settings.topBarVisible !== undefined ? settings.topBarVisible : true)
+                shellitBarAutoHide = settings.shellitBarAutoHide !== undefined ? settings.shellitBarAutoHide : (settings.topBarAutoHide !== undefined ? settings.topBarAutoHide : false)
+                shellitBarOpenOnOverview = settings.shellitBarOpenOnOverview !== undefined ? settings.shellitBarOpenOnOverview : (settings.topBarOpenOnOverview !== undefined ? settings.topBarOpenOnOverview : false)
+                shellitBarVisible = settings.shellitBarVisible !== undefined ? settings.shellitBarVisible : (settings.topBarVisible !== undefined ? settings.topBarVisible : true)
                 dockOpenOnOverview = settings.dockOpenOnOverview !== undefined ? settings.dockOpenOnOverview : false
                 notificationTimeoutLow = settings.notificationTimeoutLow !== undefined ? settings.notificationTimeoutLow : 5000
                 notificationTimeoutNormal = settings.notificationTimeoutNormal !== undefined ? settings.notificationTimeoutNormal : 5000
@@ -477,19 +477,19 @@ Singleton {
                 updaterUseCustomCommand = settings.updaterUseCustomCommand !== undefined ? settings.updaterUseCustomCommand : false;
                 updaterCustomCommand = settings.updaterCustomCommand !== undefined ? settings.updaterCustomCommand : "";
                 updaterTerminalAdditionalParams = settings.updaterTerminalAdditionalParams !== undefined ? settings.updaterTerminalAdditionalParams : "";
-                ShellitBarSpacing = settings.ShellitBarSpacing !== undefined ? settings.ShellitBarSpacing : (settings.topBarSpacing !== undefined ? settings.topBarSpacing : 4)
-                ShellitBarBottomGap = settings.ShellitBarBottomGap !== undefined ? settings.ShellitBarBottomGap : (settings.topBarBottomGap !== undefined ? settings.topBarBottomGap : 0)
-                ShellitBarInnerPadding = settings.ShellitBarInnerPadding !== undefined ? settings.ShellitBarInnerPadding : (settings.topBarInnerPadding !== undefined ? settings.topBarInnerPadding : 4)
-                ShellitBarSquareCorners = settings.ShellitBarSquareCorners !== undefined ? settings.ShellitBarSquareCorners : (settings.topBarSquareCorners !== undefined ? settings.topBarSquareCorners : false)
-                ShellitBarNoBackground = settings.ShellitBarNoBackground !== undefined ? settings.ShellitBarNoBackground : (settings.topBarNoBackground !== undefined ? settings.topBarNoBackground : false)
-                ShellitBarGothCornersEnabled = settings.ShellitBarGothCornersEnabled !== undefined ? settings.ShellitBarGothCornersEnabled : (settings.topBarGothCornersEnabled !== undefined ? settings.topBarGothCornersEnabled : false)
-                ShellitBarBorderEnabled = settings.ShellitBarBorderEnabled !== undefined ? settings.ShellitBarBorderEnabled : false
-                ShellitBarBorderColor = settings.ShellitBarBorderColor !== undefined ? settings.ShellitBarBorderColor : "surfaceText"
-                ShellitBarBorderOpacity = settings.ShellitBarBorderOpacity !== undefined ? settings.ShellitBarBorderOpacity : 1.0
-                ShellitBarBorderThickness = settings.ShellitBarBorderThickness !== undefined ? settings.ShellitBarBorderThickness : 1
+                shellitBarSpacing = settings.shellitBarSpacing !== undefined ? settings.shellitBarSpacing : (settings.topBarSpacing !== undefined ? settings.topBarSpacing : 4)
+                shellitBarBottomGap = settings.shellitBarBottomGap !== undefined ? settings.shellitBarBottomGap : (settings.topBarBottomGap !== undefined ? settings.topBarBottomGap : 0)
+                shellitBarInnerPadding = settings.shellitBarInnerPadding !== undefined ? settings.shellitBarInnerPadding : (settings.topBarInnerPadding !== undefined ? settings.topBarInnerPadding : 4)
+                shellitBarSquareCorners = settings.shellitBarSquareCorners !== undefined ? settings.shellitBarSquareCorners : (settings.topBarSquareCorners !== undefined ? settings.topBarSquareCorners : false)
+                shellitBarNoBackground = settings.shellitBarNoBackground !== undefined ? settings.shellitBarNoBackground : (settings.topBarNoBackground !== undefined ? settings.topBarNoBackground : false)
+                shellitBarGothCornersEnabled = settings.shellitBarGothCornersEnabled !== undefined ? settings.shellitBarGothCornersEnabled : (settings.topBarGothCornersEnabled !== undefined ? settings.topBarGothCornersEnabled : false)
+                shellitBarBorderEnabled = settings.shellitBarBorderEnabled !== undefined ? settings.shellitBarBorderEnabled : false
+                shellitBarBorderColor = settings.shellitBarBorderColor !== undefined ? settings.shellitBarBorderColor : "surfaceText"
+                shellitBarBorderOpacity = settings.shellitBarBorderOpacity !== undefined ? settings.shellitBarBorderOpacity : 1.0
+                shellitBarBorderThickness = settings.shellitBarBorderThickness !== undefined ? settings.shellitBarBorderThickness : 1
                 popupGapsAuto = settings.popupGapsAuto !== undefined ? settings.popupGapsAuto : true
                 popupGapsManual = settings.popupGapsManual !== undefined ? settings.popupGapsManual : 4
-                ShellitBarPosition = settings.ShellitBarPosition !== undefined ? settings.ShellitBarPosition : (settings.ShellitBarAtBottom !== undefined ? (settings.ShellitBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : (settings.topBarAtBottom !== undefined ? (settings.topBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : SettingsData.Position.Top))
+                shellitBarPosition = settings.shellitBarPosition !== undefined ? settings.shellitBarPosition : (settings.shellitBarAtBottom !== undefined ? (settings.shellitBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : (settings.topBarAtBottom !== undefined ? (settings.topBarAtBottom ? SettingsData.Position.Bottom : SettingsData.Position.Top) : SettingsData.Position.Top))
                 lockScreenShowPowerActions = settings.lockScreenShowPowerActions !== undefined ? settings.lockScreenShowPowerActions : true
                 enableFprint = settings.enableFprint !== undefined ? settings.enableFprint : false
                 maxFprintTries = settings.maxFprintTries !== undefined ? settings.maxFprintTries : 3
@@ -618,7 +618,7 @@ Singleton {
                                                 "monoFontFamily": monoFontFamily,
                                                 "fontWeight": fontWeight,
                                                 "fontScale": fontScale,
-                                                "ShellitBarFontScale": ShellitBarFontScale,
+                                                "shellitBarFontScale": shellitBarFontScale,
                                                 "notepadUseMonospace": notepadUseMonospace,
                                                 "notepadFontFamily": notepadFontFamily,
                                                 "notepadFontSize": notepadFontSize,
@@ -644,22 +644,22 @@ Singleton {
                                                 "dockIndicatorStyle": dockIndicatorStyle,
                                                 "cornerRadius": cornerRadius,
                                                 "notificationOverlayEnabled": notificationOverlayEnabled,
-                                                "ShellitBarAutoHide": ShellitBarAutoHide,
-                                                "ShellitBarOpenOnOverview": ShellitBarOpenOnOverview,
-                                                "ShellitBarVisible": ShellitBarVisible,
-                                                "ShellitBarSpacing": ShellitBarSpacing,
-                                                "ShellitBarBottomGap": ShellitBarBottomGap,
-                                                "ShellitBarInnerPadding": ShellitBarInnerPadding,
-                                                "ShellitBarSquareCorners": ShellitBarSquareCorners,
-                                                "ShellitBarNoBackground": ShellitBarNoBackground,
-                                                "ShellitBarGothCornersEnabled": ShellitBarGothCornersEnabled,
-                                                "ShellitBarBorderEnabled": ShellitBarBorderEnabled,
-                                                "ShellitBarBorderColor": ShellitBarBorderColor,
-                                                "ShellitBarBorderOpacity": ShellitBarBorderOpacity,
-                                                "ShellitBarBorderThickness": ShellitBarBorderThickness,
+                                                "shellitBarAutoHide": shellitBarAutoHide,
+                                                "shellitBarOpenOnOverview": shellitBarOpenOnOverview,
+                                                "shellitBarVisible": shellitBarVisible,
+                                                "shellitBarSpacing": shellitBarSpacing,
+                                                "shellitBarBottomGap": shellitBarBottomGap,
+                                                "shellitBarInnerPadding": shellitBarInnerPadding,
+                                                "shellitBarSquareCorners": shellitBarSquareCorners,
+                                                "shellitBarNoBackground": shellitBarNoBackground,
+                                                "shellitBarGothCornersEnabled": shellitBarGothCornersEnabled,
+                                                "shellitBarBorderEnabled": shellitBarBorderEnabled,
+                                                "shellitBarBorderColor": shellitBarBorderColor,
+                                                "shellitBarBorderOpacity": shellitBarBorderOpacity,
+                                                "shellitBarBorderThickness": shellitBarBorderThickness,
                                                 "popupGapsAuto": popupGapsAuto,
                                                 "popupGapsManual": popupGapsManual,
-                                                "ShellitBarPosition": ShellitBarPosition,
+                                                "shellitBarPosition": shellitBarPosition,
                                                 "lockScreenShowPowerActions": lockScreenShowPowerActions,
                                                 "enableFprint": enableFprint,
                                                 "maxFprintTries": maxFprintTries,
@@ -717,7 +717,7 @@ Singleton {
     function cleanupUnusedKeys() {
         const validKeys = [
             "currentThemeName", "customThemeFile", "matugenScheme", "runUserMatugenTemplates",
-            "ShellitBarTransparency", "ShellitBarWidgetTransparency", "popupTransparency", "dockTransparency",
+            "shellitBarTransparency", "shellitBarWidgetTransparency", "popupTransparency", "dockTransparency",
             "use24HourClock", "showSeconds", "useFahrenheit", "nightModeEnabled", "weatherLocation",
             "weatherCoordinates", "useAutoLocation", "weatherEnabled", "showLauncherButton",
             "showWorkspaceSwitcher", "showFocusedWindow", "showWeather", "showMusic",
@@ -729,23 +729,23 @@ Singleton {
             "maxWorkspaceIcons", "workspacesPerMonitor", "workspaceNameIcons", "waveProgressEnabled",
             "clockCompactMode", "focusedWindowCompactMode", "runningAppsCompactMode",
             "runningAppsCurrentWorkspace", "runningAppsGroupByApp", "clockDateFormat", "lockDateFormat", "mediaSize",
-            "ShellitBarLeftWidgets", "ShellitBarCenterWidgets", "ShellitBarRightWidgets",
+            "shellitBarLeftWidgets", "shellitBarCenterWidgets", "shellitBarRightWidgets",
             "appLauncherViewMode", "spotlightModalViewMode", "sortAppsAlphabetically",
             "networkPreference", "iconTheme", "launcherLogoMode", "launcherLogoCustomPath",
             "launcherLogoColorOverride", "launcherLogoColorInvertOnMode", "launcherLogoBrightness",
             "launcherLogoContrast", "launcherLogoSizeOffset", "fontFamily", "monoFontFamily",
-            "fontWeight", "fontScale", "ShellitBarFontScale", "notepadUseMonospace",
+            "fontWeight", "fontScale", "shellitBarFontScale", "notepadUseMonospace",
             "notepadFontFamily", "notepadFontSize", "notepadShowLineNumbers",
             "notepadTransparencyOverride", "notepadLastCustomTransparency", "soundsEnabled",
             "useSystemSoundTheme", "soundNewNotification", "soundVolumeChanged", "soundPluggedIn", "gtkThemingEnabled",
             "qtThemingEnabled", "syncModeWithPortal", "showDock", "dockAutoHide", "dockGroupByApp",
             "dockOpenOnOverview", "dockPosition", "dockSpacing", "dockBottomGap", "dockIconSize", "dockIndicatorStyle",
-            "cornerRadius", "notificationOverlayEnabled", "ShellitBarAutoHide",
-            "ShellitBarOpenOnOverview", "ShellitBarVisible", "ShellitBarSpacing", "ShellitBarBottomGap",
-            "ShellitBarInnerPadding", "ShellitBarSquareCorners", "ShellitBarNoBackground",
-            "ShellitBarGothCornersEnabled", "ShellitBarBorderEnabled", "ShellitBarBorderColor",
-            "ShellitBarBorderOpacity", "ShellitBarBorderThickness", "popupGapsAuto", "popupGapsManual",
-            "ShellitBarPosition", "lockScreenShowPowerActions", "enableFprint", "maxFprintTries",
+            "cornerRadius", "notificationOverlayEnabled", "shellitBarAutoHide",
+            "shellitBarOpenOnOverview", "shellitBarVisible", "shellitBarSpacing", "shellitBarBottomGap",
+            "shellitBarInnerPadding", "shellitBarSquareCorners", "shellitBarNoBackground",
+            "shellitBarGothCornersEnabled", "shellitBarBorderEnabled", "shellitBarBorderColor",
+            "shellitBarBorderOpacity", "shellitBarBorderThickness", "popupGapsAuto", "popupGapsManual",
+            "shellitBarPosition", "lockScreenShowPowerActions", "enableFprint", "maxFprintTries",
             "hideBrightnessSlider", "widgetBackgroundColor", "surfaceBase", "wallpaperFillMode",
             "blurredWallpaperLayer", "blurWallpaperOnOverview", "notificationTimeoutLow", "notificationTimeoutNormal", "notificationTimeoutCritical",
             "notificationPopupPosition", "osdAlwaysShowValue", "powerActionConfirm",
@@ -811,9 +811,9 @@ Singleton {
         centerWidgetsModel.append(dummyItem)
         rightWidgetsModel.append(dummyItem)
 
-        updateListModel(leftWidgetsModel, ShellitBarLeftWidgets)
-        updateListModel(centerWidgetsModel, ShellitBarCenterWidgets)
-        updateListModel(rightWidgetsModel, ShellitBarRightWidgets)
+        updateListModel(leftWidgetsModel, shellitBarLeftWidgets)
+        updateListModel(centerWidgetsModel, shellitBarCenterWidgets)
+        updateListModel(rightWidgetsModel, shellitBarRightWidgets)
     }
 
     function updateListModel(listModel, order) {
@@ -892,7 +892,7 @@ Singleton {
     function updateGtkIconTheme(themeName) {
         var gtkThemeName = (themeName === "System Default") ? systemDefaultIconTheme : themeName
         if (gtkThemeName !== "System Default" && gtkThemeName !== "") {
-            if (DMSService.apiVersion >= 3) {
+            if (shellitService.apiVersion >= 3) {
                 PortalService.setSystemIconTheme(gtkThemeName)
             }
 
@@ -923,8 +923,8 @@ Singleton {
     }
 
     function getPopupYPosition(barHeight) {
-        const gothOffset = ShellitBarGothCornersEnabled ? Theme.cornerRadius : 0
-        return barHeight + ShellitBarSpacing + ShellitBarBottomGap - gothOffset + Theme.popupDistance
+        const gothOffset = shellitBarGothCornersEnabled ? Theme.cornerRadius : 0
+        return barHeight + shellitBarSpacing + shellitBarBottomGap - gothOffset + Theme.popupDistance
     }
 
     function getPopupTriggerPosition(globalPos, screen, barThickness, widgetWidth) {
@@ -933,16 +933,16 @@ Singleton {
         const relativeX = globalPos.x - screenX
         const relativeY = globalPos.y - screenY
 
-        if (ShellitBarPosition === SettingsData.Position.Left || ShellitBarPosition === SettingsData.Position.Right) {
+        if (shellitBarPosition === SettingsData.Position.Left || shellitBarPosition === SettingsData.Position.Right) {
             return {
                 x: relativeY,
-                y: barThickness + ShellitBarSpacing + Theme.popupDistance,
+                y: barThickness + shellitBarSpacing + Theme.popupDistance,
                 width: widgetWidth
             }
         }
         return {
             x: relativeX,
-            y: barThickness + ShellitBarSpacing + ShellitBarBottomGap + Theme.popupDistance,
+            y: barThickness + shellitBarSpacing + shellitBarBottomGap + Theme.popupDistance,
             width: widgetWidth
         }
     }
@@ -967,9 +967,9 @@ Singleton {
 
     function sendTestNotification(index) {
         const notifications = [
-            ["Notification Position Test", "DMS test notification 1 of 3 ~ Hi there!", "preferences-system"],
-            ["Second Test", "DMS Notification 2 of 3 ~ Check it out!", "applications-graphics"],
-            ["Third Test", "DMS notification 3 of 3 ~ Enjoy!", "face-smile"]
+            ["Notification Position Test", "shellit test notification 1 of 3 ~ Hi there!", "preferences-system"],
+            ["Second Test", "shellit Notification 2 of 3 ~ Check it out!", "applications-graphics"],
+            ["Third Test", "shellit notification 3 of 3 ~ Enjoy!", "face-smile"]
         ]
 
         if (index < 0 || index >= notifications.length) {
@@ -977,7 +977,7 @@ Singleton {
         }
 
         const notif = notifications[index]
-        testNotificationProcess.command = ["notify-send", "-h", "int:transient:1", "-a", "DMS", "-i", notif[2], notif[0], notif[1]]
+        testNotificationProcess.command = ["notify-send", "-h", "int:transient:1", "-a", "shellit", "-i", notif[2], notif[0], notif[1]]
         testNotificationProcess.running = true
     }
 
@@ -1021,12 +1021,12 @@ Singleton {
     }
 
     function setShellitBarTransparency(transparency) {
-        ShellitBarTransparency = transparency
+        shellitBarTransparency = transparency
         saveSettings()
     }
 
     function setShellitBarWidgetTransparency(transparency) {
-        ShellitBarWidgetTransparency = transparency
+        shellitBarWidgetTransparency = transparency
         saveSettings()
     }
 
@@ -1305,24 +1305,24 @@ Singleton {
     }
 
     function setShellitBarWidgetOrder(order) {
-        ShellitBarWidgetOrder = order
+        shellitBarWidgetOrder = order
         saveSettings()
     }
 
     function setShellitBarLeftWidgets(order) {
-        ShellitBarLeftWidgets = order
+        shellitBarLeftWidgets = order
         updateListModel(leftWidgetsModel, order)
         saveSettings()
     }
 
     function setShellitBarCenterWidgets(order) {
-        ShellitBarCenterWidgets = order
+        shellitBarCenterWidgets = order
         updateListModel(centerWidgetsModel, order)
         saveSettings()
     }
 
     function setShellitBarRightWidgets(order) {
-        ShellitBarRightWidgets = order
+        shellitBarRightWidgets = order
         updateListModel(rightWidgetsModel, order)
         saveSettings()
     }
@@ -1331,9 +1331,9 @@ Singleton {
         var defaultLeft = ["launcherButton", "workspaceSwitcher", "focusedWindow"]
         var defaultCenter = ["music", "clock", "weather"]
         var defaultRight = ["systemTray", "clipboard", "notificationButton", "battery", "controlCenterButton"]
-        ShellitBarLeftWidgets = defaultLeft
-        ShellitBarCenterWidgets = defaultCenter
-        ShellitBarRightWidgets = defaultRight
+        shellitBarLeftWidgets = defaultLeft
+        shellitBarCenterWidgets = defaultCenter
+        shellitBarRightWidgets = defaultRight
         updateListModel(leftWidgetsModel, defaultLeft)
         updateListModel(centerWidgetsModel, defaultCenter)
         updateListModel(rightWidgetsModel, defaultRight)
@@ -1456,7 +1456,7 @@ Singleton {
     }
 
     function setShellitBarFontScale(scale) {
-        ShellitBarFontScale = scale
+        shellitBarFontScale = scale
         saveSettings()
     }
 
@@ -1563,20 +1563,20 @@ Singleton {
 
     function setShowDock(enabled) {
         showDock = enabled
-        if (enabled && dockPosition === ShellitBarPosition) {
-            if (ShellitBarPosition === SettingsData.Position.Top) {
+        if (enabled && dockPosition === shellitBarPosition) {
+            if (shellitBarPosition === SettingsData.Position.Top) {
                 setDockPosition(SettingsData.Position.Bottom)
                 return
             }
-            if (ShellitBarPosition === SettingsData.Position.Bottom) {
+            if (shellitBarPosition === SettingsData.Position.Bottom) {
                 setDockPosition(SettingsData.Position.Top)
                 return
             }
-            if (ShellitBarPosition === SettingsData.Position.Left) {
+            if (shellitBarPosition === SettingsData.Position.Left) {
                 setDockPosition(SettingsData.Position.Right)
                 return
             }
-            if (ShellitBarPosition === SettingsData.Position.Right) {
+            if (shellitBarPosition === SettingsData.Position.Right) {
                 setDockPosition(SettingsData.Position.Left)
                 return
             }
@@ -1601,16 +1601,16 @@ Singleton {
 
     function setDockPosition(position) {
         dockPosition = position
-        if (position === SettingsData.Position.Bottom && ShellitBarPosition === SettingsData.Position.Bottom && showDock) {
+        if (position === SettingsData.Position.Bottom && shellitBarPosition === SettingsData.Position.Bottom && showDock) {
             setShellitBarPosition(SettingsData.Position.Top)
         }
-        if (position === SettingsData.Position.Top && ShellitBarPosition === SettingsData.Position.Top && showDock) {
+        if (position === SettingsData.Position.Top && shellitBarPosition === SettingsData.Position.Top && showDock) {
             setShellitBarPosition(SettingsData.Position.Bottom)
         }
-        if (position === SettingsData.Position.Left && ShellitBarPosition === SettingsData.Position.Left && showDock) {
+        if (position === SettingsData.Position.Left && shellitBarPosition === SettingsData.Position.Left && showDock) {
             setShellitBarPosition(SettingsData.Position.Right)
         }
-        if (position === SettingsData.Position.Right && ShellitBarPosition === SettingsData.Position.Right && showDock) {
+        if (position === SettingsData.Position.Right && shellitBarPosition === SettingsData.Position.Right && showDock) {
             setShellitBarPosition(SettingsData.Position.Left)
         }
         saveSettings()
@@ -1648,45 +1648,42 @@ Singleton {
     }
 
     function setShellitBarAutoHide(enabled) {
-        ShellitBarAutoHide = enabled
+        shellitBarAutoHide = enabled
         saveSettings()
     }
 
     function setShellitBarOpenOnOverview(enabled) {
-        ShellitBarOpenOnOverview = enabled
+        shellitBarOpenOnOverview = enabled
         saveSettings()
     }
 
     function setShellitBarVisible(visible) {
-        ShellitBarVisible = visible
+        shellitBarVisible = visible
         saveSettings()
     }
 
     function toggleShellitBarVisible() {
-        ShellitBarVisible = !ShellitBarVisible
+        shellitBarVisible = !shellitBarVisible
         saveSettings()
     }
 
     function setShellitBarSpacing(spacing) {
-        ShellitBarSpacing = spacing
+        shellitBarSpacing = spacing
         saveSettings()
-        if (typeof NiriService !== "undefined" && CompositorService.isNiri) {
-            NiriService.generateNiriLayoutConfig()
-        }
     }
 
     function setShellitBarBottomGap(gap) {
-        ShellitBarBottomGap = gap
+        shellitBarBottomGap = gap
         saveSettings()
     }
 
     function setShellitBarInnerPadding(padding) {
-        ShellitBarInnerPadding = padding
+        shellitBarInnerPadding = padding
         saveSettings()
     }
 
     function setShellitBarPosition(position) {
-        ShellitBarPosition = position
+        shellitBarPosition = position
         if (position === SettingsData.Position.Bottom && dockPosition === SettingsData.Position.Bottom && showDock) {
             setDockPosition(SettingsData.Position.Top)
             return
@@ -1707,22 +1704,22 @@ Singleton {
     }
 
     function setShellitBarSquareCorners(enabled) {
-        ShellitBarSquareCorners = enabled
+        shellitBarSquareCorners = enabled
         saveSettings()
     }
 
     function setShellitBarNoBackground(enabled) {
-        ShellitBarNoBackground = enabled
+        shellitBarNoBackground = enabled
         saveSettings()
     }
 
     function setShellitBarGothCornersEnabled(enabled) {
-        ShellitBarGothCornersEnabled = enabled
+        shellitBarGothCornersEnabled = enabled
         saveSettings()
     }
 
     function setShellitBarBorderEnabled(enabled) {
-        ShellitBarBorderEnabled = enabled
+        shellitBarBorderEnabled = enabled
         saveSettings()
     }
 
@@ -1931,7 +1928,7 @@ Singleton {
     FileView {
         id: settingsFile
 
-        path: isGreeterMode ? "" : StandardPaths.writableLocation(StandardPaths.ConfigLocation) + "/ShellitMaterialShell/settings.json"
+        path: isGreeterMode ? "" : StandardPaths.writableLocation(StandardPaths.ConfigLocation) + "/Shellit/settings.json"
         blockLoading: true
         blockWrites: true
         atomicWrites: true
@@ -2036,7 +2033,7 @@ Singleton {
         id: defaultSettingsCheckProcess
 
         command: ["sh", "-c", "CONFIG_DIR=\"" + _configDir
-            + "/ShellitMaterialShell\"; if [ -f \"$CONFIG_DIR/default-settings.json\" ] && [ ! -f \"$CONFIG_DIR/settings.json\" ]; then cp --no-preserve=mode \"$CONFIG_DIR/default-settings.json\" \"$CONFIG_DIR/settings.json\" && echo 'copied'; else echo 'not_found'; fi"]
+            + "/Shellit\"; if [ -f \"$CONFIG_DIR/default-settings.json\" ] && [ ! -f \"$CONFIG_DIR/settings.json\" ]; then cp --no-preserve=mode \"$CONFIG_DIR/default-settings.json\" \"$CONFIG_DIR/settings.json\" && echo 'copied'; else echo 'not_found'; fi"]
         running: false
         onExited: exitCode => {
             if (exitCode === 0) {
@@ -2071,11 +2068,11 @@ Singleton {
 
         function toggle(): string {
             root.toggleShellitBarVisible()
-            return root.ShellitBarVisible ? "BAR_SHOW_SUCCESS" : "BAR_HIDE_SUCCESS"
+            return root.shellitBarVisible ? "BAR_SHOW_SUCCESS" : "BAR_HIDE_SUCCESS"
         }
 
         function status(): string {
-            return root.ShellitBarVisible ? "visible" : "hidden"
+            return root.shellitBarVisible ? "visible" : "hidden"
         }
 
         target: "bar"

@@ -1,12 +1,12 @@
 [Unit]
-Description=Shellit Material Shell (DMS)
+Description=Shellit
 PartOf=graphical-session.target
 After=graphical-session-pre.target
 Wants=graphical-session-pre.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/dms run
+ExecStart=/usr/bin/shellit run
 Restart=on-failure
 RestartSec=1
 

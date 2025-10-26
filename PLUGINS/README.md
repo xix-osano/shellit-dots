@@ -65,7 +65,7 @@ The manifest file defines plugin metadata and configuration.
     "component": "./YourWidget.qml",
     "icon": "material_icon_name",
     "settings": "./YourSettings.qml",
-    "requires_dms": ">=0.1.0",
+    "requires_shellit": ">=0.1.0",
     "requires": ["some-system-tool"],
     "permissions": [
         "settings_read",
@@ -90,9 +90,9 @@ The manifest file defines plugin metadata and configuration.
 **Optional Fields:**
 - `icon`: Material Design icon name (displayed in UI)
 - `settings`: Path to settings component (enables settings UI)
-- `requires_dms`: Minimum DMS version requirement (e.g., ">=0.1.18", ">0.1.0")
+- `requires_shellit`: Minimum shellit version requirement (e.g., ">=0.1.18", ">0.1.0")
 - `requires`: Array of required system tools/dependencies (e.g., ["wl-copy", "curl"])
-- `permissions`: Required DMS permissions (e.g., ["settings_read", "settings_write"])
+- `permissions`: Required shellit permissions (e.g., ["settings_read", "settings_write"])
 
 **Permissions:**
 
@@ -716,7 +716,7 @@ Create `plugin.json`:
     "component": "./MyWidget.qml",
     "icon": "extension",
     "settings": "./MySettings.qml",
-    "requires_dms": ">=0.1.0",
+    "requires_shellit": ">=0.1.0",
     "permissions": ["settings_read", "settings_write"]
 }
 ```
@@ -811,7 +811,7 @@ PluginSettings {
 
 ### Step 5: Enable Plugin
 
-1. Run the shell: `qs -p $CONFIGPATH/quickshell/dms/shell.qml`
+1. Run the shell: `qs -p $CONFIGPATH/quickshell/shellit/shell.qml`
 2. Open Settings (Ctrl+,)
 3. Navigate to Plugins tab
 4. Click "Scan for Plugins"
@@ -827,7 +827,7 @@ After enabling a plugin, add it to the bar:
 3. Choose section (left, center, right)
 4. Save and reload
 
-Or edit `$CONFIGPATH/quickshell/dms/config.json`:
+Or edit `$CONFIGPATH/quickshell/shellit/config.json`:
 
 ```json
 {
@@ -1081,7 +1081,7 @@ Item {
 View plugin logs:
 
 ```bash
-qs -v -p $CONFIGPATH/quickshell/dms/shell.qml
+qs -v -p $CONFIGPATH/quickshell/shellit/shell.qml
 ```
 
 Look for lines prefixed with:
@@ -1127,7 +1127,7 @@ Currently, only `settings_write` is enforced by the PluginSettings component.
 
 ## API Stability
 
-The plugin API is currently **experimental**. Breaking changes may occur in minor version updates. Pin to specific DMS versions for production use.
+The plugin API is currently **experimental**. Breaking changes may occur in minor version updates. Pin to specific shellit versions for production use.
 
 **Roadmap:**
 - Plugin marketplace/repository
@@ -1138,7 +1138,7 @@ The plugin API is currently **experimental**. Breaking changes may occur in mino
 
 ## Launcher Plugins
 
-Launcher plugins extend the DMS application launcher by adding custom searchable items with trigger-based filtering.
+Launcher plugins extend the shellit application launcher by adding custom searchable items with trigger-based filtering.
 
 ### Overview
 
@@ -1166,7 +1166,7 @@ To create a launcher plugin, set the plugin type in `plugin.json`:
     "trigger": "#",
     "icon": "search",
     "settings": "./MySettings.qml",
-    "requires_dms": ">=0.1.18",
+    "requires_shellit": ">=0.1.18",
     "permissions": ["settings_read", "settings_write"]
 }
 ```
@@ -1456,4 +1456,4 @@ Share your plugins with the community:
 4. Add example screenshots
 5. Document dependencies and permissions
 
-For plugin system improvements, submit issues or PRs to the main DMS repository.
+For plugin system improvements, submit issues or PRs to the main shellit repository.

@@ -186,7 +186,7 @@ Singleton {
 
 ### Reference Assignment
 
-References are assigned in `DMSShell.qml` when popouts are loaded:
+References are assigned in `shellitShell.qml` when popouts are loaded:
 
 ```qml
 LazyLoader {
@@ -204,7 +204,7 @@ LazyLoader {
 
 The service is injected in three locations:
 
-1. **DMSShell.qml** (daemon plugins):
+1. **shellitShell.qml** (daemon plugins):
 ```qml
 Instantiator {
     delegate: Loader {

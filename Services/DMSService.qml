@@ -11,7 +11,7 @@ import qs.Common
 Singleton {
     id: root
 
-    property bool dmsAvailable: false
+    property bool shellitAvailable: false
     property var capabilities: []
     property int apiVersion: 0
     readonly property int expectedApiVersion: 1
@@ -21,12 +21,12 @@ Singleton {
     property bool isConnecting: false
     property bool subscribeConnected: false
 
-    readonly property string socketPath: Quickshell.env("DMS_SOCKET")
+    readonly property string socketPath: Quickshell.env("shellit_SOCKET")
 
     property var pendingRequests: ({})
     property int requestIdCounter: 0
     property bool shownOutdatedError: false
-    property string updateCommand: "dms update"
+    property string updateCommand: "shellit update"
     property bool checkingUpdateCommand: false
 
     signal pluginsListReceived(var plugins)
@@ -69,13 +69,13 @@ Singleton {
             onStreamFinished: {
                 const helper = text.trim()
                 if (helper.includes("paru")) {
-                    checkDmsPackage.helper = "paru"
-                    checkDmsPackage.running = true
+                    checkshellitPackage.helper = "paru"
+                    checkshellitPackage.running = true
                 } else if (helper.includes("yay")) {
-                    checkDmsPackage.helper = "yay"
-                    checkDmsPackage.running = true
+                    checkshellitPackage.helper = "yay"
+                    checkshellitPackage.running = true
                 } else {
-                    updateCommand = "dms update"
+                    updateCommand = "shellit update"
                     checkingUpdateCommand = false
                     startSocketConnection()
                 }
@@ -84,7 +84,7 @@ Singleton {
 
         onExited: exitCode => {
             if (exitCode !== 0) {
-                updateCommand = "dms update"
+                updateCommand = "shellit update"
                 checkingUpdateCommand = false
                 startSocketConnection()
             }
@@ -92,19 +92,19 @@ Singleton {
     }
 
     Process {
-        id: checkDmsPackage
+        id: checkshellitPackage
         property string helper: ""
-        command: ["sh", "-c", "pacman -Qi dms-shell-git 2>/dev/null || pacman -Qi dms-shell-bin 2>/dev/null"]
+        command: ["sh", "-c", "pacman -Qi shellit-shell-git 2>/dev/null || pacman -Qi shellit-shell-bin 2>/dev/null"]
         running: false
 
         stdout: StdioCollector {
             onStreamFinished: {
-                if (text.includes("dms-shell-git")) {
-                    updateCommand = checkDmsPackage.helper + " -S dms-shell-git"
-                } else if (text.includes("dms-shell-bin")) {
-                    updateCommand = checkDmsPackage.helper + " -S dms-shell-bin"
+                if (text.includes("shellit-shell-git")) {
+                    updateCommand = checkshellitPackage.helper + " -S shellit-shell-git"
+                } else if (text.includes("shellit-shell-bin")) {
+                    updateCommand = checkshellitPackage.helper + " -S shellit-shell-bin"
                 } else {
-                    updateCommand = "dms update"
+                    updateCommand = "shellit update"
                 }
                 checkingUpdateCommand = false
                 startSocketConnection()
@@ -113,7 +113,7 @@ Singleton {
 
         onExited: exitCode => {
             if (exitCode !== 0) {
-                updateCommand = "dms update"
+                updateCommand = "shellit update"
                 checkingUpdateCommand = false
                 startSocketConnection()
             }
@@ -126,16 +126,16 @@ Singleton {
 
         onExited: exitCode => {
             if (exitCode === 0) {
-                root.dmsAvailable = true
+                root.shellitAvailable = true
                 connectSocket()
             } else {
-                root.dmsAvailable = false
+                root.shellitAvailable = false
             }
         }
     }
 
     function connectSocket() {
-        if (!dmsAvailable || isConnected || isConnecting) {
+        if (!shellitAvailable || isConnected || isConnecting) {
             return
         }
 
@@ -169,13 +169,13 @@ Singleton {
                     return
                 }
 
-                console.log("DMSService: Request socket <<", line)
+                console.log("shellitService: Request socket <<", line)
 
                 try {
                     const response = JSON.parse(line)
                     handleResponse(response)
                 } catch (e) {
-                    console.warn("DMSService: Failed to parse request response:", line, e)
+                    console.warn("shellitService: Failed to parse request response:", line, e)
                 }
             }
         }
@@ -199,13 +199,13 @@ Singleton {
                     return
                 }
 
-                console.log("DMSService: Subscribe socket <<", line)
+                console.log("shellitService: Subscribe socket <<", line)
 
                 try {
                     const response = JSON.parse(line)
                     handleSubscriptionEvent(response)
                 } catch (e) {
-                    console.warn("DMSService: Failed to parse subscription event:", line, e)
+                    console.warn("shellitService: Failed to parse subscription event:", line, e)
                 }
             }
         }
@@ -216,7 +216,7 @@ Singleton {
             "method": "subscribe"
         }
 
-        console.log("DMSService: Subscribing to all services")
+        console.log("shellitService: Subscribing to all services")
         subscribeSocket.send(request)
     }
 
@@ -224,9 +224,9 @@ Singleton {
         if (response.error) {
             if (response.error.includes("unknown method") && response.error.includes("subscribe")) {
                 if (!shownOutdatedError) {
-                    console.error("DMSService: Server does not support subscribe method")
+                    console.error("shellitService: Server does not support subscribe method")
                     ToastService.showError(
-                        I18n.tr("DMS out of date"),
+                        I18n.tr("shellit out of date"),
                         I18n.tr("To update, run the following command:"),
                         updateCommand
                     )
@@ -247,10 +247,10 @@ Singleton {
             apiVersion = data.apiVersion || 0
             capabilities = data.capabilities || []
 
-            console.info("DMSService: Connected (API v" + apiVersion + ") -", JSON.stringify(capabilities))
+            console.info("shellitService: Connected (API v" + apiVersion + ") -", JSON.stringify(capabilities))
 
             if (apiVersion < expectedApiVersion) {
-                ToastService.showError("DMS server is outdated (API v" + apiVersion + ", expected v" + expectedApiVersion + ")")
+                ToastService.showError("shellit server is outdated (API v" + apiVersion + ", expected v" + expectedApiVersion + ")")
             }
 
             capabilitiesReceived()
@@ -271,10 +271,10 @@ Singleton {
 
     function sendRequest(method, params, callback) {
         if (!isConnected) {
-            console.warn("DMSService.sendRequest: Not connected, method:", method)
+            console.warn("shellitService.sendRequest: Not connected, method:", method)
             if (callback) {
                 callback({
-                    "error": "not connected to DMS socket"
+                    "error": "not connected to shellit socket"
                 })
             }
             return
@@ -295,7 +295,7 @@ Singleton {
             pendingRequests[id] = callback
         }
 
-        console.log("DMSService.sendRequest: Sending request id=" + id + " method=" + method)
+        console.log("shellitService.sendRequest: Sending request id=" + id + " method=" + method)
         requestSocket.send(request)
     }
 

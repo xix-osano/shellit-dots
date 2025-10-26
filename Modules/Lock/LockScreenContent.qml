@@ -63,8 +63,8 @@ Item {
     function sendLockerReadyOnce() {
         if (lockerReadySent) return;
         lockerReadySent = true;
-        if (SessionService.loginctlAvailable && DMSService.apiVersion >= 2) {
-            DMSService.sendRequest("loginctl.lockerReady", null, resp => {
+        if (SessionService.loginctlAvailable && shellitService.apiVersion >= 2) {
+            shellitService.sendRequest("loginctl.lockerReady", null, resp => {
                 if (resp?.error) console.warn("lockerReady failed:", resp.error)
                 else console.log("lockerReady sent (afterAnimating/afterRendering)");
             });

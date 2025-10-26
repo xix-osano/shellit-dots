@@ -1,4 +1,4 @@
-// Stock theme definitions for ShellitMaterialShell
+// Stock theme definitions for Shellit
 // Separated from Theme.qml to keep that file clean
 
 const CatppuccinMocha = {

@@ -73,15 +73,15 @@ Item {
     }
 
     Loader {
-        id: ShellitBarLoader
+        id: shellitBarLoader
         asynchronous: false
 
-        property var currentPosition: SettingsData.ShellitBarPosition
+        property var currentPosition: SettingsData.shellitBarPosition
         property bool initialized: false
         property var hyprlandOverviewLoaderRef: hyprlandOverviewLoader
 
         sourceComponent: ShellitBar {
-            hyprlandOverviewLoader: ShellitBarLoader.hyprlandOverviewLoaderRef
+            hyprlandOverviewLoader: shellitBarLoader.hyprlandOverviewLoaderRef
 
             onColorPickerRequested: {
                 if (colorPickerModal.shouldBeVisible) {
@@ -140,17 +140,17 @@ Item {
     }
 
     Loader {
-        id: ShellitDashPopoutLoader
+        id: shellitDashPopoutLoader
 
         active: false
         asynchronous: true
 
         sourceComponent: Component {
             ShellitDashPopout {
-                id: ShellitDashPopout
+                id: shellitDashPopout
 
                 Component.onCompleted: {
-                    PopoutService.ShellitDashPopout = ShellitDashPopout
+                    PopoutService.shellitDashPopout = shellitDashPopout
                 }
             }
         }
@@ -508,14 +508,14 @@ Item {
         }
     }
 
-    DMSShellIPC {
+    shellitShellIPC {
         powerMenuModalLoader: powerMenuModalLoader
         processListModalLoader: processListModalLoader
         controlCenterLoader: controlCenterLoader
-        ShellitDashPopoutLoader: ShellitDashPopoutLoader
+        shellitDashPopoutLoader: shellitDashPopoutLoader
         notepadSlideoutVariants: notepadSlideoutVariants
         hyprKeybindsModalLoader: hyprKeybindsModalLoader
-        ShellitBarLoader: ShellitBarLoader
+        shellitBarLoader: shellitBarLoader
         hyprlandOverviewLoader: hyprlandOverviewLoader
     }
 
