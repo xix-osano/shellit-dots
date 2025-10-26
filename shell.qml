@@ -32,7 +32,7 @@ import qs.Modules.HyprWorkspaces
 import qs.Modules.Plugins
 import qs.Services
 
-Item {
+ShellRoot {
     id: root
 
     Instantiator {
