@@ -225,8 +225,8 @@ Singleton {
     property bool shellitBarGothCornersEnabled: false
     property bool shellitBarBorderEnabled: false
     property string shellitBarBorderColor: "surfaceText"
-    property real ShellitBarBorderOpacity: 1.0
-    property real ShellitBarBorderThickness: 1
+    property real shellitBarBorderOpacity: 1.0
+    property real shellitBarBorderThickness: 1
 
     onShellitBarBorderColorChanged: saveSettings()
     onShellitBarBorderOpacityChanged: saveSettings()
