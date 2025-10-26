@@ -266,7 +266,7 @@ Item {
         }
 
         var widgets = []
-    Shellit    if (targetSection === "left") {
+        if (targetSection === "left") {
             widgets = SettingsData.shellitBarLeftWidgets.slice()
             widgets.push(widgetObj)
             SettingsData.setShellitBarLeftWidgets(widgets)
