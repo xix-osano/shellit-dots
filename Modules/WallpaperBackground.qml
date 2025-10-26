@@ -10,12 +10,7 @@ import qs.Modules
 import qs.Services
 
 Variants {
-    model: {
-        if (SessionData.isGreeterMode) {
-            return Quickshell.screens
-        }
-        return SettingsData.getFilteredScreens("wallpaper")
-    }
+    model: SettingsData.getFilteredScreens("wallpaper")
 
     PanelWindow {
         id: wallpaperWindow

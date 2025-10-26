@@ -1,5 +1,4 @@
 pragma Singleton
-
 pragma ComponentBehavior: Bound
 
 import QtCore
@@ -11,22 +10,14 @@ Singleton {
     id: root
 
     readonly property int cacheConfigVersion: 1
-
-    readonly property bool isGreeterMode: Quickshell.env("shellit_RUN_GREETER") === "1" || Quickshell.env("shellit_RUN_GREETER") === "true"
-
     readonly property string _stateUrl: StandardPaths.writableLocation(StandardPaths.GenericCacheLocation)
     readonly property string _stateDir: Paths.strip(_stateUrl)
 
     property bool _loading: false
-
     property string wallpaperLastPath: ""
     property string profileLastPath: ""
 
-    Component.onCompleted: {
-        if (!isGreeterMode) {
-            loadCache()
-        }
-    }
+    Component.onCompleted: loadCache()
 
     function loadCache() {
         _loading = true
@@ -40,8 +31,8 @@ Singleton {
             if (content && content.trim()) {
                 const cache = JSON.parse(content)
 
-                wallpaperLastPath = cache.wallpaperLastPath !== undefined ? cache.wallpaperLastPath : ""
-                profileLastPath = cache.profileLastPath !== undefined ? cache.profileLastPath : ""
+                wallpaperLastPath = cache.wallpaperLastPath ?? ""
+                profileLastPath = cache.profileLastPath ?? ""
 
                 if (cache.configVersion === undefined) {
                     migrateFromUndefinedToV1(cache)
@@ -60,10 +51,10 @@ Singleton {
         if (_loading)
             return
         cacheFile.setText(JSON.stringify({
-                                             "wallpaperLastPath": wallpaperLastPath,
-                                             "profileLastPath": profileLastPath,
-                                             "configVersion": cacheConfigVersion
-                                         }, null, 2))
+            "wallpaperLastPath": wallpaperLastPath,
+            "profileLastPath": profileLastPath,
+            "configVersion": cacheConfigVersion
+        }, null, 2))
     }
 
     function migrateFromUndefinedToV1(cache) {
@@ -103,20 +94,13 @@ Singleton {
     FileView {
         id: cacheFile
 
-        path: isGreeterMode ? "" : _stateDir + "/Shellit/cache.json"
+        path: _stateDir + "/Shellit/cache.json"
         blockLoading: true
         blockWrites: true
         atomicWrites: true
-        watchChanges: !isGreeterMode
-        onLoaded: {
-            if (!isGreeterMode) {
-                parseCache(cacheFile.text())
-            }
-        }
-        onLoadFailed: error => {
-            if (!isGreeterMode) {
-                console.info("CacheData: No cache file found, starting fresh")
-            }
-        }
+        watchChanges: true
+        onLoaded: parseCache(cacheFile.text())
+        onLoadFailed: error => console.info("CacheData: No cache file found, starting fresh")
     }
 }
+

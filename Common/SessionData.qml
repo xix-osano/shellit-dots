@@ -13,7 +13,6 @@ Singleton {
 
     readonly property int sessionConfigVersion: 1
 
-    readonly property bool isGreeterMode: Quickshell.env("shellit_RUN_GREETER") === "1" || Quickshell.env("shellit_RUN_GREETER") === "true"
     property bool hasTriedDefaultSession: false
     readonly property string _stateUrl: StandardPaths.writableLocation(StandardPaths.GenericStateLocation)
     readonly property string _stateDir: Paths.strip(_stateUrl)
@@ -63,18 +62,10 @@ Singleton {
     property bool nonNvidiaGpuTempEnabled: false
     property var enabledGpuPciIds: []
 
-    Component.onCompleted: {
-        if (!isGreeterMode) {
-            loadSettings()
-        }
-    }
+    Component.onCompleted: loadSettings()
 
     function loadSettings() {
-        if (isGreeterMode) {
-            parseSettings(greeterSessionFile.text())
-        } else {
             parseSettings(settingsFile.text())
-        }
     }
 
     function parseSettings(content) {
@@ -139,19 +130,16 @@ Singleton {
                     cleanupUnusedKeys()
                 }
 
-                if (!isGreeterMode) {
-                    if (typeof Theme !== "undefined") {
-                        Theme.generateSystemThemesFromCurrentTheme()
-                    }
+                if (typeof Theme !== "undefined") {
+                    Theme.generateSystemThemesFromCurrentTheme()
                 }
             }
         } catch (e) {
-
+            console.warn("SessionData: Failed to parse settings:", e.message)
         }
     }
 
     function saveSettings() {
-        if (isGreeterMode) return
         settingsFile.setText(JSON.stringify({
                                                 "isLightMode": isLightMode,
                                                 "wallpaperPath": wallpaperPath,
@@ -662,40 +650,15 @@ Singleton {
     FileView {
         id: settingsFile
 
-        path: isGreeterMode ? "" : StandardPaths.writableLocation(StandardPaths.GenericStateLocation) + "/Shellit/session.json"
-        blockLoading: isGreeterMode
-        blockWrites: true
-        watchChanges: !isGreeterMode
-        onLoaded: {
-            if (!isGreeterMode) {
-                parseSettings(settingsFile.text())
-                hasTriedDefaultSession = false
-            }
-        }
-        onLoadFailed: error => {
-            if (!isGreeterMode && !hasTriedDefaultSession) {
-                hasTriedDefaultSession = true
-                defaultSessionCheckProcess.running = true
-            }
-        }
-    }
-
-    FileView {
-        id: greeterSessionFile
-
-        path: {
-            const greetCfgDir = Quickshell.env("shellit_GREET_CFG_DIR") || "/etc/greetd/.shellit"
-            return greetCfgDir + "/session.json"
-        }
-        preload: isGreeterMode
+        path: StandardPaths.writableLocation(StandardPaths.GenericStateLocation) + "/Shellit/session.json"
         blockLoading: false
         blockWrites: true
-        watchChanges: false
-        printErrors: true
+        watchChanges: true
         onLoaded: {
-            if (isGreeterMode) {
-                parseSettings(greeterSessionFile.text())
-            }
+            parseSettings(settingsFile.text())
+        }
+        onLoadFailed: error => {
+            console.warn("SessionData: Failed to load session.json:", error)
         }
     }
 

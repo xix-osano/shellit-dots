@@ -16,7 +16,7 @@ Singleton {
 
     readonly property string stateDir: Paths.strip(StandardPaths.writableLocation(StandardPaths.GenericCacheLocation).toString()) + "/Shellit"
 
-    readonly property bool envDisableMatugen: Quickshell.env("shellit_DISABLE_MATUGEN") === "1" || Quickshell.env("shellit_DISABLE_MATUGEN") === "true"
+    readonly property bool envDisableMatugen: Quickshell.env("SHELLIT_DISABLE_MATUGEN") === "1" || Quickshell.env("SHELLIT_DISABLE_MATUGEN") === "true"
 
     readonly property real popupDistance: {
         if (typeof SettingsData === "undefined") return 4
@@ -85,9 +85,8 @@ Singleton {
         Quickshell.execDetached(["mkdir", "-p", stateDir])
         Proc.runCommand("matugenCheck", ["which", "matugen"], (output, code) => {
             matugenAvailable = (code === 0) && !envDisableMatugen
-            const isGreeterMode = (typeof SessionData !== "undefined" && SessionData.isGreeterMode)
 
-            if (!matugenAvailable || isGreeterMode) {
+            if (!matugenAvailable) {
                 return
             }
 
@@ -143,13 +142,6 @@ Singleton {
 
         if (typeof SettingsData !== "undefined" && SettingsData.currentThemeName) {
             switchTheme(SettingsData.currentThemeName, false, false)
-        }
-    }
-
-    function applyGreeterTheme(themeName) {
-        switchTheme(themeName, false, false)
-        if (themeName === dynamic && dynamicColorsFileView.path) {
-            dynamicColorsFileView.reload()
         }
     }
 
@@ -419,13 +411,11 @@ Singleton {
                 currentThemeCategory = "generic"
             }
         }
-        const isGreeterMode = (typeof SessionData !== "undefined" && SessionData.isGreeterMode)
-        if (savePrefs && typeof SettingsData !== "undefined" && !isGreeterMode)
+
+        if (savePrefs && typeof SettingsData !== "undefined")
             SettingsData.setTheme(currentTheme)
 
-        if (!isGreeterMode) {
-            generateSystemThemesFromCurrentTheme()
-        }
+        generateSystemThemesFromCurrentTheme()
     }
 
     function setLightMode(light, savePrefs = true, enableTransition = false) {
@@ -437,16 +427,13 @@ Singleton {
             return
         }
 
-        const isGreeterMode = (typeof SessionData !== "undefined" && SessionData.isGreeterMode)
-        if (savePrefs && typeof SessionData !== "undefined" && !isGreeterMode)
+        if (savePrefs && typeof SessionData !== "undefined")
             SessionData.setLightMode(light)
-        if (!isGreeterMode) {
-            // Skip with matugen becuase, our script runner will do it.
-            if (!matugenAvailable) {
-                PortalService.setLightMode(light)
-            }
-            generateSystemThemesFromCurrentTheme()
-        }
+
+        if (!matugenAvailable)
+            PortalService.setLightMode(light)
+
+        generateSystemThemesFromCurrentTheme()
     }
 
     function toggleLightMode(savePrefs = true) {
@@ -737,8 +724,7 @@ Singleton {
     }
 
     function generateSystemThemesFromCurrentTheme() {
-        const isGreeterMode = (typeof SessionData !== "undefined" && SessionData.isGreeterMode)
-        if (!matugenAvailable || isGreeterMode)
+        if (!matugenAvailable)
             return
 
         const isLight = (typeof SessionData !== "undefined" && SessionData.isLightMode)
@@ -954,14 +940,9 @@ Singleton {
 
     FileView {
         id: dynamicColorsFileView
-        path: {
-            const greetCfgDir = Quickshell.env("shellit_GREET_CFG_DIR") || "/etc/greetd/.shellit"
-            const colorsPath = SessionData.isGreeterMode
-                ? greetCfgDir + "/colors.json"
-                : stateDir + "/shellit-colors.json"
-            return colorsPath
-        }
-        watchChanges: currentTheme === dynamic && !SessionData.isGreeterMode
+        
+        path: stateDir + "/shellit-colors.json"
+        watchChanges: currentTheme === dynamic
 
         function parseAndLoadColors() {
             try {
@@ -999,8 +980,7 @@ Singleton {
             if (currentTheme === dynamic) {
                 console.warn("Theme: Dynamic colors file load failed, marking for regeneration")
                 colorsFileLoadFailed = true
-                const isGreeterMode = (typeof SessionData !== "undefined" && SessionData.isGreeterMode)
-                if (!isGreeterMode && matugenAvailable && wallpaperPath) {
+                if (matugenAvailable && wallpaperPath) {
                     console.log("Theme: Matugen available, triggering immediate regeneration")
                     generateSystemThemesFromCurrentTheme()
                 }

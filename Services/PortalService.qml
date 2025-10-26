@@ -52,10 +52,6 @@ Singleton {
             profileImage = ""
             return
         }
-        if (Quickshell.env("shellit_RUN_GREETER") === "1" || Quickshell.env("shellit_RUN_GREETER") === "true") {
-            profileImage = ""
-            return
-        }
 
         if (!freedeskAvailable) {
             profileImage = ""
@@ -242,15 +238,6 @@ Singleton {
                                        }
                                    }
                                })
-    }
-
-    function getGreeterUserProfileImage(username) {
-        if (!username) {
-            profileImage = ""
-            return
-        }
-        userProfileCheckProcess.command = ["bash", "-c", `uid=$(id -u ${username} 2>/dev/null) && [ -n "$uid" ] && dbus-send --system --print-reply --dest=org.freedesktop.Accounts /org/freedesktop/Accounts/User$uid org.freedesktop.DBus.Properties.Get string:org.freedesktop.Accounts.User string:IconFile 2>/dev/null | grep -oP 'string "\\K[^"]+' || echo ""`]
-        userProfileCheckProcess.running = true
     }
 
     Process {

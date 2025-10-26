@@ -14,8 +14,6 @@ Singleton {
 
     readonly property int settingsConfigVersion: 1
 
-    readonly property bool isGreeterMode: Quickshell.env("shellit_RUN_GREETER") === "1" || Quickshell.env("shellit_RUN_GREETER") === "true"
-
     enum Position {
         Top,
         Bottom,
@@ -269,12 +267,10 @@ Singleton {
     signal workspaceIconsUpdated
 
     Component.onCompleted: {
-        if (!isGreeterMode) {
-            loadSettings()
-            fontCheckTimer.start()
-            initializeListModels()
-            fprintdDetectionProcess.running = true
-        }
+        loadSettings()
+        fontCheckTimer.start()
+        initializeListModels()
+        fprintdDetectionProcess.running = true
     }
 
     function loadSettings() {
@@ -1928,22 +1924,20 @@ Singleton {
     FileView {
         id: settingsFile
 
-        path: isGreeterMode ? "" : StandardPaths.writableLocation(StandardPaths.ConfigLocation) + "/Shellit/settings.json"
+        path: StandardPaths.writableLocation(StandardPaths.ConfigLocation) + "/Shellit/settings.json"
         blockLoading: true
         blockWrites: true
         atomicWrites: true
-        watchChanges: !isGreeterMode
+        watchChanges: true
         onLoaded: {
-            if (!isGreeterMode) {
-                parseSettings(settingsFile.text())
-                hasTriedDefaultSettings = false
-            }
+            parseSettings(settingsFile.text())
+            hasTriedDefaultSettings = false
         }
         onLoadFailed: error => {
-            if (!isGreeterMode && !hasTriedDefaultSettings) {
+            if (!hasTriedDefaultSettings) {
                 hasTriedDefaultSettings = true
                 defaultSettingsCheckProcess.running = true
-            } else if (!isGreeterMode) {
+            } else {
                 applyStoredTheme()
             }
         }
@@ -1952,20 +1946,16 @@ Singleton {
     FileView {
         id: pluginSettingsFile
 
-        path: isGreeterMode ? "" : pluginSettingsPath
+        path: pluginSettingsPath
         blockLoading: true
         blockWrites: true
         atomicWrites: true
-        watchChanges: !isGreeterMode
+        watchChanges: true
         onLoaded: {
-            if (!isGreeterMode) {
-                parsePluginSettings(pluginSettingsFile.text())
-            }
+            parsePluginSettings(pluginSettingsFile.text())
         }
         onLoadFailed: error => {
-            if (!isGreeterMode) {
-                pluginSettings = {}
-            }
+            pluginSettings = {}
         }
     }
 
