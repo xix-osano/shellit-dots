@@ -6,7 +6,7 @@ import qs.Services
 import qs.Widgets
 
 Item {
-    id: ShellitBarTab
+    id: shellitBarTab
 
     property var parentModal: null
 
@@ -741,7 +741,7 @@ Item {
                 border.width: 0
 
                 Column {
-                    id: ShellitBarAutoHideSection
+                    id: shellitBarAutoHideSection
 
                     anchors.fill: parent
                     anchors.margins: Theme.spacingL
@@ -912,7 +912,7 @@ Item {
                 border.width: 0
 
                 Column {
-                    id: ShellitBarSpacingSection
+                    id: shellitBarSpacingSection
 
                     anchors.fill: parent
                     anchors.margins: Theme.spacingL
@@ -1547,7 +1547,7 @@ Item {
                         }
 
                         Row {
-                            id: ShellitBarFontScaleControls
+                            id: shellitBarFontScaleControls
 
                             width: 180
                             height: 36
