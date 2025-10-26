@@ -508,7 +508,7 @@ Item {
         }
     }
 
-    shellitShellIPC {
+    ShellIPC {
         powerMenuModalLoader: powerMenuModalLoader
         processListModalLoader: processListModalLoader
         controlCenterLoader: controlCenterLoader
