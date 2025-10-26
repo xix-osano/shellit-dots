@@ -13,10 +13,10 @@ Item {
 
     anchors.left: parent.left
     anchors.top: parent.top
-    anchors.leftMargin: -(SettingsData.ShellitBarGothCornersEnabled && axis.isVertical && axis.edge === "right" ? barWindow._wingR : 0)
-    anchors.rightMargin: -(SettingsData.ShellitBarGothCornersEnabled && axis.isVertical && axis.edge === "left" ? barWindow._wingR : 0)
-    anchors.topMargin: -(SettingsData.ShellitBarGothCornersEnabled && !axis.isVertical && axis.edge === "bottom" ? barWindow._wingR : 0)
-    anchors.bottomMargin: -(SettingsData.ShellitBarGothCornersEnabled && !axis.isVertical && axis.edge === "top" ? barWindow._wingR : 0)
+    anchors.leftMargin: -(SettingsData.shellitBarGothCornersEnabled && axis.isVertical && axis.edge === "right" ? barWindow._wingR : 0)
+    anchors.rightMargin: -(SettingsData.shellitBarGothCornersEnabled && axis.isVertical && axis.edge === "left" ? barWindow._wingR : 0)
+    anchors.topMargin: -(SettingsData.shellitBarGothCornersEnabled && !axis.isVertical && axis.edge === "bottom" ? barWindow._wingR : 0)
+    anchors.bottomMargin: -(SettingsData.shellitBarGothCornersEnabled && !axis.isVertical && axis.edge === "top" ? barWindow._wingR : 0)
 
     readonly property real dpr: {
         if (CompositorService.isNiri && barWindow.screen) {
@@ -56,8 +56,8 @@ Item {
         readonly property real correctHeight: Theme.px(root.height, dpr)
         canvasSize: Qt.size(correctWidth, correctHeight)
 
-        property real wing: SettingsData.ShellitBarGothCornersEnabled ? Theme.px(barWindow._wingR, dpr) : 0
-        property real rt: SettingsData.ShellitBarSquareCorners ? 0 : Theme.px(Theme.cornerRadius, dpr)
+        property real wing: SettingsData.shellitBarGothCornersEnabled ? Theme.px(barWindow._wingR, dpr) : 0
+        property real rt: SettingsData.shellitBarSquareCorners ? 0 : Theme.px(Theme.cornerRadius, dpr)
 
         onWingChanged: root.requestRepaint()
         onRtChanged: root.requestRepaint()
@@ -89,10 +89,10 @@ Item {
             const R = wing
             const RT = rt
             const H = H_raw - (R > 0 ? R : 0)
-            const isTop = SettingsData.ShellitBarPosition === SettingsData.Position.Top
-            const isBottom = SettingsData.ShellitBarPosition === SettingsData.Position.Bottom
-            const isLeft = SettingsData.ShellitBarPosition === SettingsData.Position.Left
-            const isRight = SettingsData.ShellitBarPosition === SettingsData.Position.Right
+            const isTop = SettingsData.shellitBarPosition === SettingsData.Position.Top
+            const isBottom = SettingsData.shellitBarPosition === SettingsData.Position.Bottom
+            const isLeft = SettingsData.shellitBarPosition === SettingsData.Position.Left
+            const isRight = SettingsData.shellitBarPosition === SettingsData.Position.Right
 
             function drawTopPath() {
                 ctx.beginPath()
@@ -153,8 +153,8 @@ Item {
         readonly property real correctHeight: Theme.px(root.height, dpr)
         canvasSize: Qt.size(correctWidth, correctHeight)
 
-        property real wing: SettingsData.ShellitBarGothCornersEnabled ? Theme.px(barWindow._wingR, dpr) : 0
-        property real rt: SettingsData.ShellitBarSquareCorners ? 0 : Theme.px(Theme.cornerRadius, dpr)
+        property real wing: SettingsData.shellitBarGothCornersEnabled ? Theme.px(barWindow._wingR, dpr) : 0
+        property real rt: SettingsData.shellitBarSquareCorners ? 0 : Theme.px(Theme.cornerRadius, dpr)
         property real alphaTint: (barWindow._bgColor?.a ?? 1) < 0.99 ? (Theme.stateLayerOpacity ?? 0) : 0
 
         onWingChanged: root.requestRepaint()
@@ -188,10 +188,10 @@ Item {
             const R = wing
             const RT = rt
             const H = H_raw - (R > 0 ? R : 0)
-            const isTop = SettingsData.ShellitBarPosition === SettingsData.Position.Top
-            const isBottom = SettingsData.ShellitBarPosition === SettingsData.Position.Bottom
-            const isLeft = SettingsData.ShellitBarPosition === SettingsData.Position.Left
-            const isRight = SettingsData.ShellitBarPosition === SettingsData.Position.Right
+            const isTop = SettingsData.shellitBarPosition === SettingsData.Position.Top
+            const isBottom = SettingsData.shellitBarPosition === SettingsData.Position.Bottom
+            const isLeft = SettingsData.shellitBarPosition === SettingsData.Position.Left
+            const isRight = SettingsData.shellitBarPosition === SettingsData.Position.Right
 
             function drawTopPath() {
                 ctx.beginPath()
@@ -244,7 +244,7 @@ Item {
     Canvas {
         id: barBorder
         anchors.fill: parent
-        visible: SettingsData.ShellitBarBorderEnabled
+        visible: SettingsData.shellitBarBorderEnabled
         renderTarget: Canvas.FramebufferObject
         renderStrategy: Canvas.Cooperative
 
@@ -252,9 +252,9 @@ Item {
         readonly property real correctHeight: Theme.px(root.height, dpr)
         canvasSize: Qt.size(correctWidth, correctHeight)
 
-        property real wing: SettingsData.ShellitBarGothCornersEnabled ? Theme.px(barWindow._wingR, dpr) : 0
-        property real rt: SettingsData.ShellitBarSquareCorners ? 0 : Theme.px(Theme.cornerRadius, dpr)
-        property bool borderEnabled: SettingsData.ShellitBarBorderEnabled
+        property real wing: SettingsData.shellitBarGothCornersEnabled ? Theme.px(barWindow._wingR, dpr) : 0
+        property real rt: SettingsData.shellitBarSquareCorners ? 0 : Theme.px(Theme.cornerRadius, dpr)
+        property bool borderEnabled: SettingsData.shellitBarBorderEnabled
 
         antialiasing: rt > 0 || wing > 0
 
@@ -299,12 +299,12 @@ Item {
             const R = wing
             const RT = rt
             const H = H_raw - (R > 0 ? R : 0)
-            const isTop = SettingsData.ShellitBarPosition === SettingsData.Position.Top
-            const isBottom = SettingsData.ShellitBarPosition === SettingsData.Position.Bottom
-            const isLeft = SettingsData.ShellitBarPosition === SettingsData.Position.Left
-            const isRight = SettingsData.ShellitBarPosition === SettingsData.Position.Right
+            const isTop = SettingsData.shellitBarPosition === SettingsData.Position.Top
+            const isBottom = SettingsData.shellitBarPosition === SettingsData.Position.Bottom
+            const isLeft = SettingsData.shellitBarPosition === SettingsData.Position.Left
+            const isRight = SettingsData.shellitBarPosition === SettingsData.Position.Right
 
-            const spacing = SettingsData.ShellitBarSpacing
+            const spacing = SettingsData.shellitBarSpacing
             const hasEdgeGap = spacing > 0 || RT > 0
 
             ctx.reset()
@@ -322,14 +322,14 @@ Item {
                 ctx.rotate(Math.PI / 2)
             }
 
-            const uiThickness = Math.max(1, SettingsData.ShellitBarBorderThickness ?? 1)
+            const uiThickness = Math.max(1, SettingsData.shellitBarBorderThickness ?? 1)
             const devThickness = Math.max(1, Math.round(Theme.px(uiThickness, dpr)))
 
-            const key = SettingsData.ShellitBarBorderColor || "surfaceText"
+            const key = SettingsData.shellitBarBorderColor || "surfaceText"
             const base = (key === "surfaceText") ? Theme.surfaceText
                        : (key === "primary") ? Theme.primary
                        : Theme.secondary
-            const color = Theme.withAlpha(base, SettingsData.ShellitBarBorderOpacity ?? 1.0)
+            const color = Theme.withAlpha(base, SettingsData.shellitBarBorderOpacity ?? 1.0)
 
             ctx.globalCompositeOperation = "source-over"
             ctx.fillStyle = color
