@@ -75,7 +75,7 @@ Item {
 
     Variants {
         id: barVariants
-        model: SettingsData.getFilteredScreens("ShellitBar")
+        model: SettingsData.getFilteredScreens("shellitBar")
 
         delegate: PanelWindow {
             id: barWindow
@@ -105,28 +105,28 @@ Item {
             }
 
             function triggerWallpaperBrowser() {
-                ShellitDashPopoutLoader.active = true
-                if (!ShellitDashPopoutLoader.item) {
+                shellitDashPopoutLoader.active = true
+                if (!shellitDashPopoutLoader.item) {
                     return
                 }
 
-                if (clockButtonRef && ShellitDashPopoutLoader.item.setTriggerPosition) {
+                if (clockButtonRef && shellitDashPopoutLoader.item.setTriggerPosition) {
                     const globalPos = clockButtonRef.mapToGlobal(0, 0)
                     const pos = SettingsData.getPopupTriggerPosition(globalPos, barWindow.screen, barWindow.effectiveBarThickness, clockButtonRef.width)
                     const section = clockButtonRef.section || "center"
-                    ShellitDashPopoutLoader.item.setTriggerPosition(pos.x, pos.y, pos.width, section, barWindow.screen)
+                    shellitDashPopoutLoader.item.setTriggerPosition(pos.x, pos.y, pos.width, section, barWindow.screen)
                 } else {
-                    ShellitDashPopoutLoader.item.triggerScreen = barWindow.screen
+                    shellitDashPopoutLoader.item.triggerScreen = barWindow.screen
                 }
 
-                if (!ShellitDashPopoutLoader.item.dashVisible) {
-                    ShellitDashPopoutLoader.item.currentTabIndex = 2
+                if (!shellitDashPopoutLoader.item.dashVisible) {
+                    shellitDashPopoutLoader.item.currentTabIndex = 2
                 }
-                ShellitDashPopoutLoader.item.dashVisible = !ShellitDashPopoutLoader.item.dashVisible
+                shellitDashPopoutLoader.item.dashVisible = !shellitDashPopoutLoader.item.dashVisible
             }
 
             readonly property var dBarLayer: {
-                switch (Quickshell.env("shellit_ShellitBAR_LAYER")) {
+                switch (Quickshell.env("SHELLIT_ShellitBAR_LAYER")) {
                 case "bottom":
                     return WlrLayer.Bottom
                 case "overlay":
@@ -150,7 +150,7 @@ Item {
             AxisContext {
                 id: axis
                 edge: {
-                    switch (SettingsData.ShellitBarPosition) {
+                    switch (SettingsData.shellitBarPosition) {
                     case SettingsData.Position.Top:
                         return "top"
                     case SettingsData.Position.Bottom:
@@ -167,11 +167,11 @@ Item {
 
             readonly property bool isVertical: axis.isVertical
 
-            property bool gothCornersEnabled: SettingsData.ShellitBarGothCornersEnabled
+            property bool gothCornersEnabled: SettingsData.shellitBarGothCornersEnabled
             property real wingtipsRadius: Theme.cornerRadius
             readonly property real _wingR: Math.max(0, wingtipsRadius)
             readonly property color _surfaceContainer: Theme.surfaceContainer
-            readonly property real _backgroundAlpha: topBarCore?.backgroundTransparency ?? SettingsData.ShellitBarTransparency
+            readonly property real _backgroundAlpha: topBarCore?.backgroundTransparency ?? SettingsData.shellitBarTransparency
             readonly property color _bgColor: Theme.withAlpha(_surfaceContainer, _backgroundAlpha)
             readonly property real _dpr: {
                 if (CompositorService.isNiri && barWindow.screen) {
@@ -189,12 +189,12 @@ Item {
 
             property string screenName: modelData.name
             readonly property int notificationCount: NotificationService.notifications.length
-            readonly property real effectiveBarThickness: Math.max(barWindow.widgetThickness + SettingsData.ShellitBarInnerPadding + 4, Theme.barHeight - 4 - (8 - SettingsData.ShellitBarInnerPadding))
-            readonly property real widgetThickness: Math.max(20, 26 + SettingsData.ShellitBarInnerPadding * 0.6)
+            readonly property real effectiveBarThickness: Math.max(barWindow.widgetThickness + SettingsData.shellitBarInnerPadding + 4, Theme.barHeight - 4 - (8 - SettingsData.shellitBarInnerPadding))
+            readonly property real widgetThickness: Math.max(20, 26 + SettingsData.shellitBarInnerPadding * 0.6)
 
             screen: modelData
-            implicitHeight: !isVertical ? Theme.px(effectiveBarThickness + SettingsData.ShellitBarSpacing + (SettingsData.ShellitBarGothCornersEnabled ? _wingR : 0), _dpr) : 0
-            implicitWidth: isVertical ? Theme.px(effectiveBarThickness + SettingsData.ShellitBarSpacing + (SettingsData.ShellitBarGothCornersEnabled ? _wingR : 0), _dpr) : 0
+            implicitHeight: !isVertical ? Theme.px(effectiveBarThickness + SettingsData.shellitBarSpacing + (SettingsData.shellitBarGothCornersEnabled ? _wingR : 0), _dpr) : 0
+            implicitWidth: isVertical ? Theme.px(effectiveBarThickness + SettingsData.shellitBarSpacing + (SettingsData.shellitBarGothCornersEnabled ? _wingR : 0), _dpr) : 0
             color: "transparent"
 
             property var nativeInhibitor: null
@@ -245,7 +245,7 @@ Item {
             }
 
             function updateGpuTempConfig() {
-                const allWidgets = [...(SettingsData.ShellitBarLeftWidgets || []), ...(SettingsData.ShellitBarCenterWidgets || []), ...(SettingsData.ShellitBarRightWidgets || [])]
+                const allWidgets = [...(SettingsData.shellitBarLeftWidgets || []), ...(SettingsData.shellitBarCenterWidgets || []), ...(SettingsData.shellitBarRightWidgets || [])]
 
                 const hasGpuTempWidget = allWidgets.some(widget => {
                                                              const widgetId = typeof widget === "string" ? widget : widget.id
@@ -343,20 +343,20 @@ Item {
                 }
             }
 
-            anchors.top: !isVertical ? (SettingsData.ShellitBarPosition === SettingsData.Position.Top) : true
-            anchors.bottom: !isVertical ? (SettingsData.ShellitBarPosition === SettingsData.Position.Bottom) : true
-            anchors.left: !isVertical ? true : (SettingsData.ShellitBarPosition === SettingsData.Position.Left)
-            anchors.right: !isVertical ? true : (SettingsData.ShellitBarPosition === SettingsData.Position.Right)
+            anchors.top: !isVertical ? (SettingsData.shellitBarPosition === SettingsData.Position.Top) : true
+            anchors.bottom: !isVertical ? (SettingsData.shellitBarPosition === SettingsData.Position.Bottom) : true
+            anchors.left: !isVertical ? true : (SettingsData.shellitBarPosition === SettingsData.Position.Left)
+            anchors.right: !isVertical ? true : (SettingsData.shellitBarPosition === SettingsData.Position.Right)
 
-            exclusiveZone: (!SettingsData.ShellitBarVisible || topBarCore.autoHide) ? -1 : (barWindow.effectiveBarThickness + SettingsData.ShellitBarSpacing + SettingsData.ShellitBarBottomGap)
+            exclusiveZone: (!SettingsData.shellitBarVisible || topBarCore.autoHide) ? -1 : (barWindow.effectiveBarThickness + SettingsData.shellitBarSpacing + SettingsData.shellitBarBottomGap)
 
             Item {
                 id: inputMask
 
-                readonly property int barThickness: Theme.px(barWindow.effectiveBarThickness + SettingsData.ShellitBarSpacing, barWindow._dpr)
+                readonly property int barThickness: Theme.px(barWindow.effectiveBarThickness + SettingsData.shellitBarSpacing, barWindow._dpr)
 
-                readonly property bool inOverviewWithShow: CompositorService.isNiri && NiriService.inOverview && SettingsData.ShellitBarOpenOnOverview
-                readonly property bool effectiveVisible: SettingsData.ShellitBarVisible || inOverviewWithShow
+                readonly property bool inOverviewWithShow: CompositorService.isNiri && NiriService.inOverview && SettingsData.shellitBarOpenOnOverview
+                readonly property bool effectiveVisible: SettingsData.shellitBarVisible || inOverviewWithShow
                 readonly property bool showing: effectiveVisible && (topBarCore.reveal || inOverviewWithShow || !topBarCore.autoHide)
 
                 readonly property int maskThickness: showing ? barThickness : 1
@@ -365,7 +365,7 @@ Item {
                     if (!axis.isVertical) {
                         return 0
                     } else {
-                        switch (SettingsData.ShellitBarPosition) {
+                        switch (SettingsData.shellitBarPosition) {
                         case SettingsData.Position.Left:
                             return 0
                         case SettingsData.Position.Right:
@@ -379,7 +379,7 @@ Item {
                     if (axis.isVertical) {
                         return 0
                     } else {
-                        switch (SettingsData.ShellitBarPosition) {
+                        switch (SettingsData.shellitBarPosition) {
                         case SettingsData.Position.Top:
                             return 0
                         case SettingsData.Position.Bottom:
@@ -402,8 +402,8 @@ Item {
                 anchors.fill: parent
                 layer.enabled: true
 
-                property real backgroundTransparency: SettingsData.ShellitBarTransparency
-                property bool autoHide: SettingsData.ShellitBarAutoHide
+                property real backgroundTransparency: SettingsData.shellitBarTransparency
+                property bool autoHide: SettingsData.shellitBarAutoHide
                 property bool revealSticky: false
 
                 Timer {
@@ -415,9 +415,9 @@ Item {
 
                 property bool reveal: {
                     if (CompositorService.isNiri && NiriService.inOverview) {
-                        return SettingsData.ShellitBarOpenOnOverview || topBarMouseArea.containsMouse || hasActivePopout || revealSticky
+                        return SettingsData.shellitBarOpenOnOverview || topBarMouseArea.containsMouse || hasActivePopout || revealSticky
                     }
-                    return SettingsData.ShellitBarVisible && (!autoHide || topBarMouseArea.containsMouse || hasActivePopout || revealSticky)
+                    return SettingsData.shellitBarVisible && (!autoHide || topBarMouseArea.containsMouse || hasActivePopout || revealSticky)
                 }
 
                 readonly property bool hasActivePopout: {
@@ -425,7 +425,7 @@ Item {
                                          "loader": appDrawerLoader,
                                          "prop": "shouldBeVisible"
                                      }, {
-                                         "loader": ShellitDashPopoutLoader,
+                                         "loader": shellitDashPopoutLoader,
                                          "prop": "shouldBeVisible"
                                      }, {
                                          "loader": processListPopoutLoader,
@@ -459,7 +459,7 @@ Item {
 
                 Connections {
                     function onShellitBarTransparencyChanged() {
-                        topBarCore.backgroundTransparency = SettingsData.ShellitBarTransparency
+                        topBarCore.backgroundTransparency = SettingsData.shellitBarTransparency
                     }
 
                     target: SettingsData
@@ -488,20 +488,20 @@ Item {
 
                 MouseArea {
                     id: topBarMouseArea
-                    y: !barWindow.isVertical ? (SettingsData.ShellitBarPosition === SettingsData.Position.Bottom ? parent.height - height : 0) : 0
-                    x: barWindow.isVertical ? (SettingsData.ShellitBarPosition === SettingsData.Position.Right ? parent.width - width : 0) : 0
-                    height: !barWindow.isVertical ? Theme.px(barWindow.effectiveBarThickness + SettingsData.ShellitBarSpacing, barWindow._dpr) : undefined
-                    width: barWindow.isVertical ? Theme.px(barWindow.effectiveBarThickness + SettingsData.ShellitBarSpacing, barWindow._dpr) : undefined
+                    y: !barWindow.isVertical ? (SettingsData.shellitBarPosition === SettingsData.Position.Bottom ? parent.height - height : 0) : 0
+                    x: barWindow.isVertical ? (SettingsData.shellitBarPosition === SettingsData.Position.Right ? parent.width - width : 0) : 0
+                    height: !barWindow.isVertical ? Theme.px(barWindow.effectiveBarThickness + SettingsData.shellitBarSpacing, barWindow._dpr) : undefined
+                    width: barWindow.isVertical ? Theme.px(barWindow.effectiveBarThickness + SettingsData.shellitBarSpacing, barWindow._dpr) : undefined
                     anchors {
-                        left: !barWindow.isVertical ? parent.left : (SettingsData.ShellitBarPosition === SettingsData.Position.Left ? parent.left : undefined)
-                        right: !barWindow.isVertical ? parent.right : (SettingsData.ShellitBarPosition === SettingsData.Position.Right ? parent.right : undefined)
+                        left: !barWindow.isVertical ? parent.left : (SettingsData.shellitBarPosition === SettingsData.Position.Left ? parent.left : undefined)
+                        right: !barWindow.isVertical ? parent.right : (SettingsData.shellitBarPosition === SettingsData.Position.Right ? parent.right : undefined)
                         top: barWindow.isVertical ? parent.top : undefined
                         bottom: barWindow.isVertical ? parent.bottom : undefined
                     }
-                    readonly property bool inOverview: CompositorService.isNiri && NiriService.inOverview && SettingsData.ShellitBarOpenOnOverview
-                    hoverEnabled: SettingsData.ShellitBarAutoHide && !topBarCore.reveal && !inOverview
+                    readonly property bool inOverview: CompositorService.isNiri && NiriService.inOverview && SettingsData.shellitBarOpenOnOverview
+                    hoverEnabled: SettingsData.shellitBarAutoHide && !topBarCore.reveal && !inOverview
                     acceptedButtons: Qt.NoButton
-                    enabled: SettingsData.ShellitBarAutoHide && !topBarCore.reveal && !inOverview
+                    enabled: SettingsData.shellitBarAutoHide && !topBarCore.reveal && !inOverview
 
                     Item {
                         id: topBarContainer
@@ -509,8 +509,8 @@ Item {
 
                         transform: Translate {
                             id: topBarSlide
-                            x: barWindow.isVertical ? Theme.snap(topBarCore.reveal ? 0 : (SettingsData.ShellitBarPosition === SettingsData.Position.Right ? barWindow.implicitWidth : -barWindow.implicitWidth), barWindow._dpr) : 0
-                            y: !barWindow.isVertical ? Theme.snap(topBarCore.reveal ? 0 : (SettingsData.ShellitBarPosition === SettingsData.Position.Bottom ? barWindow.implicitHeight : -barWindow.implicitHeight), barWindow._dpr) : 0
+                            x: barWindow.isVertical ? Theme.snap(topBarCore.reveal ? 0 : (SettingsData.shellitBarPosition === SettingsData.Position.Right ? barWindow.implicitWidth : -barWindow.implicitWidth), barWindow._dpr) : 0
+                            y: !barWindow.isVertical ? Theme.snap(topBarCore.reveal ? 0 : (SettingsData.shellitBarPosition === SettingsData.Position.Bottom ? barWindow.implicitHeight : -barWindow.implicitHeight), barWindow._dpr) : 0
 
                             Behavior on x {
                                 NumberAnimation {
@@ -530,10 +530,10 @@ Item {
                         Item {
                             id: barUnitInset
                             anchors.fill: parent
-                            anchors.leftMargin: !barWindow.isVertical ? Theme.px(SettingsData.ShellitBarSpacing, barWindow._dpr) : (axis.edge === "left" ? Theme.px(SettingsData.ShellitBarSpacing, barWindow._dpr) : 0)
-                            anchors.rightMargin: !barWindow.isVertical ? Theme.px(SettingsData.ShellitBarSpacing, barWindow._dpr) : (axis.edge === "right" ? Theme.px(SettingsData.ShellitBarSpacing, barWindow._dpr) : 0)
-                            anchors.topMargin: barWindow.isVertical ? Theme.px(SettingsData.ShellitBarSpacing, barWindow._dpr) : (axis.outerVisualEdge() === "bottom" ? 0 : Theme.px(SettingsData.ShellitBarSpacing, barWindow._dpr))
-                            anchors.bottomMargin: barWindow.isVertical ? Theme.px(SettingsData.ShellitBarSpacing, barWindow._dpr) : (axis.outerVisualEdge() === "bottom" ? Theme.px(SettingsData.ShellitBarSpacing, barWindow._dpr) : 0)
+                            anchors.leftMargin: !barWindow.isVertical ? Theme.px(SettingsData.shellitBarSpacing, barWindow._dpr) : (axis.edge === "left" ? Theme.px(SettingsData.shellitBarSpacing, barWindow._dpr) : 0)
+                            anchors.rightMargin: !barWindow.isVertical ? Theme.px(SettingsData.shellitBarSpacing, barWindow._dpr) : (axis.edge === "right" ? Theme.px(SettingsData.shellitBarSpacing, barWindow._dpr) : 0)
+                            anchors.topMargin: barWindow.isVertical ? Theme.px(SettingsData.shellitBarSpacing, barWindow._dpr) : (axis.outerVisualEdge() === "bottom" ? 0 : Theme.px(SettingsData.shellitBarSpacing, barWindow._dpr))
+                            anchors.bottomMargin: barWindow.isVertical ? Theme.px(SettingsData.shellitBarSpacing, barWindow._dpr) : (axis.outerVisualEdge() === "bottom" ? Theme.px(SettingsData.shellitBarSpacing, barWindow._dpr) : 0)
 
                             BarCanvas {
                                 id: barBackground
@@ -544,10 +544,10 @@ Item {
                             Item {
                                 id: topBarContent
                                 anchors.fill: parent
-                                anchors.leftMargin: !barWindow.isVertical ? Math.max(Theme.spacingXS, SettingsData.ShellitBarInnerPadding * 0.8) : SettingsData.ShellitBarInnerPadding / 2
-                                anchors.rightMargin: !barWindow.isVertical ? Math.max(Theme.spacingXS, SettingsData.ShellitBarInnerPadding * 0.8) : SettingsData.ShellitBarInnerPadding / 2
-                                anchors.topMargin: !barWindow.isVertical ? 0 : Math.max(Theme.spacingXS, SettingsData.ShellitBarInnerPadding * 0.8)
-                                anchors.bottomMargin: !barWindow.isVertical ? 0 : Math.max(Theme.spacingXS, SettingsData.ShellitBarInnerPadding * 0.8)
+                                anchors.leftMargin: !barWindow.isVertical ? Math.max(Theme.spacingXS, SettingsData.shellitBarInnerPadding * 0.8) : SettingsData.shellitBarInnerPadding / 2
+                                anchors.rightMargin: !barWindow.isVertical ? Math.max(Theme.spacingXS, SettingsData.shellitBarInnerPadding * 0.8) : SettingsData.shellitBarInnerPadding / 2
+                                anchors.topMargin: !barWindow.isVertical ? 0 : Math.max(Theme.spacingXS, SettingsData.shellitBarInnerPadding * 0.8)
+                                anchors.bottomMargin: !barWindow.isVertical ? 0 : Math.max(Theme.spacingXS, SettingsData.shellitBarInnerPadding * 0.8)
                                 clip: false
 
                                 property int componentMapRevision: 0
@@ -703,9 +703,9 @@ Item {
                                                 verticalCenter: parent.verticalCenter
                                             }
                                             axis: axis
-                                            widgetsModel: SettingsData.ShellitBarLeftWidgetsModel
+                                            widgetsModel: SettingsData.shellitBarLeftWidgetsModel
                                             components: topBarContent.allComponents
-                                            noBackground: SettingsData.ShellitBarNoBackground
+                                            noBackground: SettingsData.shellitBarNoBackground
                                             parentScreen: barWindow.screen
                                             widgetThickness: barWindow.widgetThickness
                                             barThickness: barWindow.effectiveBarThickness
@@ -721,9 +721,9 @@ Item {
                                                 verticalCenter: parent.verticalCenter
                                             }
                                             axis: axis
-                                            widgetsModel: SettingsData.ShellitBarRightWidgetsModel
+                                            widgetsModel: SettingsData.shellitBarRightWidgetsModel
                                             components: topBarContent.allComponents
-                                            noBackground: SettingsData.ShellitBarNoBackground
+                                            noBackground: SettingsData.shellitBarNoBackground
                                             parentScreen: barWindow.screen
                                             widgetThickness: barWindow.widgetThickness
                                             barThickness: barWindow.effectiveBarThickness
@@ -739,9 +739,9 @@ Item {
                                                 horizontalCenter: parent.horizontalCenter
                                             }
                                             axis: axis
-                                            widgetsModel: SettingsData.ShellitBarCenterWidgetsModel
+                                            widgetsModel: SettingsData.shellitBarCenterWidgetsModel
                                             components: topBarContent.allComponents
-                                            noBackground: SettingsData.ShellitBarNoBackground
+                                            noBackground: SettingsData.shellitBarNoBackground
                                             parentScreen: barWindow.screen
                                             widgetThickness: barWindow.widgetThickness
                                             barThickness: barWindow.effectiveBarThickness
@@ -764,9 +764,9 @@ Item {
                                                 horizontalCenter: parent.horizontalCenter
                                             }
                                             axis: axis
-                                            widgetsModel: SettingsData.ShellitBarLeftWidgetsModel
+                                            widgetsModel: SettingsData.shellitBarLeftWidgetsModel
                                             components: topBarContent.allComponents
-                                            noBackground: SettingsData.ShellitBarNoBackground
+                                            noBackground: SettingsData.shellitBarNoBackground
                                             parentScreen: barWindow.screen
                                             widgetThickness: barWindow.widgetThickness
                                             barThickness: barWindow.effectiveBarThickness
@@ -783,9 +783,9 @@ Item {
                                                 horizontalCenter: parent.horizontalCenter
                                             }
                                             axis: axis
-                                            widgetsModel: SettingsData.ShellitBarCenterWidgetsModel
+                                            widgetsModel: SettingsData.shellitBarCenterWidgetsModel
                                             components: topBarContent.allComponents
-                                            noBackground: SettingsData.ShellitBarNoBackground
+                                            noBackground: SettingsData.shellitBarNoBackground
                                             parentScreen: barWindow.screen
                                             widgetThickness: barWindow.widgetThickness
                                             barThickness: barWindow.effectiveBarThickness
@@ -803,9 +803,9 @@ Item {
                                                 horizontalCenter: parent.horizontalCenter
                                             }
                                             axis: axis
-                                            widgetsModel: SettingsData.ShellitBarRightWidgetsModel
+                                            widgetsModel: SettingsData.shellitBarRightWidgetsModel
                                             components: topBarContent.allComponents
-                                            noBackground: SettingsData.ShellitBarNoBackground
+                                            noBackground: SettingsData.shellitBarNoBackground
                                             parentScreen: barWindow.screen
                                             widgetThickness: barWindow.widgetThickness
                                             barThickness: barWindow.effectiveBarThickness
@@ -899,8 +899,8 @@ Item {
                                         widgetThickness: barWindow.widgetThickness
                                         section: topBarContent.getWidgetSection(parent) || "center"
                                         popoutTarget: {
-                                            ShellitDashPopoutLoader.active = true
-                                            return ShellitDashPopoutLoader.item
+                                            shellitDashPopoutLoader.active = true
+                                            return shellitDashPopoutLoader.item
                                         }
                                         parentScreen: barWindow.screen
 
@@ -915,10 +915,10 @@ Item {
                                         }
 
                                         onClockClicked: {
-                                            ShellitDashPopoutLoader.active = true
-                                            if (ShellitDashPopoutLoader.item) {
-                                                ShellitDashPopoutLoader.item.dashVisible = !ShellitDashPopoutLoader.item.dashVisible
-                                                ShellitDashPopoutLoader.item.currentTabIndex = 0
+                                            shellitDashPopoutLoader.active = true
+                                            if (shellitDashPopoutLoader.item) {
+                                                shellitDashPopoutLoader.item.dashVisible = !shellitDashPopoutLoader.item.dashVisible
+                                                shellitDashPopoutLoader.item.currentTabIndex = 0
                                             }
                                         }
                                     }
@@ -934,15 +934,15 @@ Item {
                                         widgetThickness: barWindow.widgetThickness
                                         section: topBarContent.getWidgetSection(parent) || "center"
                                         popoutTarget: {
-                                            ShellitDashPopoutLoader.active = true
-                                            return ShellitDashPopoutLoader.item
+                                            shellitDashPopoutLoader.active = true
+                                            return shellitDashPopoutLoader.item
                                         }
                                         parentScreen: barWindow.screen
                                         onClicked: {
-                                            ShellitDashPopoutLoader.active = true
-                                            if (ShellitDashPopoutLoader.item) {
-                                                ShellitDashPopoutLoader.item.dashVisible = !ShellitDashPopoutLoader.item.dashVisible
-                                                ShellitDashPopoutLoader.item.currentTabIndex = 1
+                                            shellitDashPopoutLoader.active = true
+                                            if (shellitDashPopoutLoader.item) {
+                                                shellitDashPopoutLoader.item.dashVisible = !shellitDashPopoutLoader.item.dashVisible
+                                                shellitDashPopoutLoader.item.currentTabIndex = 1
                                             }
                                         }
                                     }
@@ -957,15 +957,15 @@ Item {
                                         widgetThickness: barWindow.widgetThickness
                                         section: topBarContent.getWidgetSection(parent) || "center"
                                         popoutTarget: {
-                                            ShellitDashPopoutLoader.active = true
-                                            return ShellitDashPopoutLoader.item
+                                            shellitDashPopoutLoader.active = true
+                                            return shellitDashPopoutLoader.item
                                         }
                                         parentScreen: barWindow.screen
                                         onClicked: {
-                                            ShellitDashPopoutLoader.active = true
-                                            if (ShellitDashPopoutLoader.item) {
-                                                ShellitDashPopoutLoader.item.dashVisible = !ShellitDashPopoutLoader.item.dashVisible
-                                                ShellitDashPopoutLoader.item.currentTabIndex = 3
+                                            shellitDashPopoutLoader.active = true
+                                            if (shellitDashPopoutLoader.item) {
+                                                shellitDashPopoutLoader.item.dashVisible = !shellitDashPopoutLoader.item.dashVisible
+                                                shellitDashPopoutLoader.item.currentTabIndex = 3
                                             }
                                         }
                                     }
@@ -978,7 +978,7 @@ Item {
                                         parentWindow: root
                                         parentScreen: barWindow.screen
                                         widgetThickness: barWindow.widgetThickness
-                                        isAtBottom: SettingsData.ShellitBarPosition === SettingsData.Position.Bottom
+                                        isAtBottom: SettingsData.shellitBarPosition === SettingsData.Position.Bottom
                                         visible: SettingsData.getFilteredScreens("systemTray").includes(barWindow.screen) && SystemTray.items.values.length > 0
                                     }
                                 }
