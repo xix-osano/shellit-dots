@@ -12,18 +12,6 @@ Item {
     implicitWidth: 700
     implicitHeight: 410
 
-    TodoService {
-        id: todo
-    }
-
-    // Re-render when TodoService updates
-    Connections {
-        target: todo
-        function onListChanged() {
-            taskRepeater.model = todo.list
-        }
-    }
-
     property string newTaskText: ""
 
     Column {
@@ -44,7 +32,7 @@ Item {
                 onTextChanged: root.newTaskText = text
                 Keys.onReturnPressed: {
                     if (text.trim().length > 0) {
-                        todo.addTask(text.trim())
+                        TodoService.addTask(text.trim())
                         text = ""
                     }
                 }
@@ -54,7 +42,7 @@ Item {
                 text: "Add"
                 enabled: root.newTaskText.trim().length > 0
                 onClicked: {
-                    todo.addTask(root.newTaskText.trim())
+                    TodoService.addTask(root.newTaskText.trim())
                     root.newTaskText = ""
                 }
             }
@@ -66,7 +54,7 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: todo.refresh()
+                    onClicked: TodoService.refresh()
                 }
             }
         }
@@ -84,7 +72,7 @@ Item {
             Layout.fillHeight: true
             clip: true
             spacing: Theme.spacingS
-            model: todo.list
+            model: TodoService.list
 
             delegate: Rectangle {
                 width: parent.width
@@ -131,7 +119,7 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: todo.deleteItem(model.index)
+                            onClicked: TodoService.deleteItem(model.index)
                         }
                     }
                 }
@@ -139,8 +127,8 @@ Item {
 
             footer: Item {
                 width: parent.width
-                height: todo.list.length === 0 ? 160 : 0
-                visible: todo.list.length === 0
+                height: TodoService.list.length === 0 ? 160 : 0
+                visible: TodoService.list.length === 0
 
                 Column {
                     anchors.centerIn: parent
