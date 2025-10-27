@@ -1,6 +1,5 @@
-import qs.modules.common
-import qs.modules.common.widgets
-import qs.services
+import qs.Modules.Common
+import qs.Services
 import Qt5Compat.GraphicalEffects
 import QtQuick
 import QtQuick.Controls
@@ -20,7 +19,7 @@ Item {
         id: flickable
         anchors.fill: parent
         contentHeight: columnLayout.height
-
+        contentWidth: parent.width
         clip: true
         layer.enabled: true
         layer.effect: OpacityMask {

@@ -14,7 +14,7 @@ Item {
     implicitHeight: 410
 
     // === Logic Layer ===
-    property string filePath: StandardPaths.writableLocation(StandardPaths.ConfigLocation) + "/Shellit/todo.json"
+    property string filePath: StandardPaths.writableLocation(StandardPaths.GenericStateLocation) + "/Shellit/todo.json"
     property var list: []
 
     function addTask(desc) {
@@ -60,7 +60,7 @@ Item {
         id: todoFile
         path: root.filePath
         blockLoading: true
-        blockWrites: true
+        blockWrites: false
         watchChanges: true
 
         onLoaded: {
@@ -190,7 +190,7 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: root.deleteItem(index)
+                            onClicked: root.deleteItem(model.index)
                         }
                     }
                 }
