@@ -3,17 +3,30 @@ cmake_minimum_required(VERSION 3.19)
 # ---------------------------------------------------------------------------
 # Version Management
 # ---------------------------------------------------------------------------
-set(VERSION_FILE "${CMAKE_SOURCE_DIR}/shellit/VERSION")
+set(VERSION_FILE "${CMAKE_SOURCE_DIR}/VERSION")
 
 if(EXISTS "${VERSION_FILE}")
     file(READ "${VERSION_FILE}" VERSION)
     string(STRIP "${VERSION}" VERSION)
 else()
-    set(VERSION "0.1.0")  # fallback if VERSION file not found
+    set(VERSION "0.1.0")
     message(WARNING "VERSION file not found — defaulting to ${VERSION}")
 endif()
 
-set(GIT_REVISION "static") # no git, so just a placeholder
+# Try to get the Git revision hash
+execute_process(
+    COMMAND git rev-parse --short HEAD
+    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+    OUTPUT_VARIABLE GIT_REVISION
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_QUIET
+)
+if("${GIT_REVISION}" STREQUAL "")
+    set(GIT_REVISION "nogit")
+endif()
+
+# Combine VERSION and GIT_REVISION
+set(FULL_VERSION "${VERSION}+${GIT_REVISION}")
 
 # ---------------------------------------------------------------------------
 # Project
@@ -30,7 +43,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 # Install Paths
 # ---------------------------------------------------------------------------
 set(DISTRIBUTOR "Unset" CACHE STRING "Distributor")
-set(ENABLE_MODULES "shell" CACHE STRING "Modules to build/install")
+set(ENABLE_MODULES "extras;shell" CACHE STRING "Modules to build/install")
 set(INSTALL_LIBDIR "usr/lib/shellit" CACHE STRING "Library install dir")
 set(INSTALL_QMLDIR "usr/lib/qt6/qml" CACHE STRING "QML install dir")
 set(INSTALL_QSCONFDIR "etc/xdg/quickshell/shellit" CACHE STRING "Quickshell config install dir")
@@ -43,6 +56,8 @@ add_compile_options(
     -Wall -Wextra -Wpedantic -Wshadow -Wconversion
     -Wold-style-cast -Wnull-dereference -Wdouble-promotion
     -Wformat=2 -Wfloat-equal -Wsign-conversion
+    -Wsign-conversion -Wredundant-decls -Wswitch
+    -Wunreachable-code
 )
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options(-Wunused-lambda-capture)
@@ -66,6 +81,10 @@ install(FILES "${VERSION_HEADER}" DESTINATION "${INSTALL_QSCONFDIR}/include")
 # ---------------------------------------------------------------------------
 # Installation Logic
 # ---------------------------------------------------------------------------
+if("extras" IN_LIST ENABLE_MODULES)
+    add_subdirectory(extras)
+endif()
+
 if("shell" IN_LIST ENABLE_MODULES)
     foreach(dir assets Common Modals Modules PLUGINS Services Widgets)
         if(EXISTS "${dir}")
