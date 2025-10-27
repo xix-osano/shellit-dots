@@ -1,5 +1,4 @@
 pragma Singleton
-
 pragma ComponentBehavior: Bound
 
 import QtQuick
@@ -9,8 +8,11 @@ import Quickshell.Io
 Singleton {
     id: root
 
+    // Paths
     property string stateDir: StandardPaths.writableLocation(StandardPaths.GenericStateLocation) + "/Shellit"
     property string filePath: stateDir + "/todo.json"
+
+    // Data
     property var list: []
 
     signal listChanged()
@@ -18,7 +20,9 @@ Singleton {
     function ensureStateDir() {
         const dir = stateDir
         const d = new QDir()
-        if (!d.exists(dir)) d.mkpath(dir)
+        if (!d.exists(dir)) {
+            d.mkpath(dir)
+        }
     }
 
     function save() {
@@ -76,7 +80,7 @@ Singleton {
 
     FileView {
         id: todoFile
-        path: service.filePath
+        path: root.filePath
         blockLoading: true
         blockWrites: false
         watchChanges: true
@@ -92,65 +96,13 @@ Singleton {
         }
 
         onLoadFailed: {
-            console.log("[TodoService] Creating new todo file:", error)
+            console.log("[TodoService] Creating new todo file due to:", error)
             root.list = []
             root.save()
         }
     }
+
+    Component.onCompleted: {
+        refresh()
+    }
 }
-
-
-
-// pragma Singleton
-// pragma ComponentBehavior: Bound
-
-// import QtQuick
-// import Qt.labs.platform // for StandardPaths
-// import QtQuick.LocalStorage
-// import QtCore
-
-// Singleton {
-//     id: service
-
-//     property string stateDir: StandardPaths.writableLocation(StandardPaths.GenericStateLocation) + "/Shellit"
-//     property string todoFile: stateDir + "/todo.json"
-
-//     function ensureStateDir() {
-//         const dir = service.stateDir
-//         if (!Qt.resolvedUrl(dir))
-//             return
-//         const f = new QDir()
-//         if (!f.exists(dir))
-//             f.mkpath(dir)
-//     }
-
-//     function readTodos() {
-//         ensureStateDir()
-//         try {
-//             const file = Qt.openUrlExternally("file://" + todoFile)
-//             const f = new QFile(todoFile)
-//             if (f.exists && f.open(QIODevice.ReadOnly)) {
-//                 const content = f.readAll()
-//                 f.close()
-//                 return JSON.parse(content)
-//             }
-//         } catch (e) {
-//             console.log("[TodoService] Error reading todos:", e)
-//         }
-//         return []
-//     }
-
-//     function writeTodos(todos) {
-//         ensureStateDir()
-//         try {
-//             const f = new QFile(todoFile)
-//             if (f.open(QIODevice.WriteOnly | QIODevice.Truncate)) {
-//                 f.write(JSON.stringify(todos, null, 2))
-//                 f.close()
-//                 console.log("[TodoService] Saved todos:", todoFile)
-//             }
-//         } catch (e) {
-//             console.log("[TodoService] Error writing todos:", e)
-//         }
-//     }
-// }

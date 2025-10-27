@@ -16,6 +16,14 @@ Item {
         id: todo
     }
 
+    // Re-render when TodoService updates
+    Connections {
+        target: todo
+        function onListChanged() {
+            taskRepeater.model = todo.list
+        }
+    }
+
     property string newTaskText: ""
 
     Column {
