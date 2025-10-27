@@ -4,7 +4,7 @@ import QtQuick.Effects
 import QtQuick.Controls
 import qs.Common
 import qs.Widgets
-import qs.Services.TodoService
+import qs.Services
 import Quickshell
 
 Item {
