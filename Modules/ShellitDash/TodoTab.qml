@@ -1,225 +1,280 @@
+pragma ComponentBehavior: Bound
+
+import qs.modules.common
+import qs.modules.common.widgets
+import qs.services
 import QtQuick
-import QtQuick.Layouts
-import QtQuick.Effects
 import QtQuick.Controls
-import qs.Common
-import qs.Widgets
+import QtQuick.Layouts
 import Quickshell
-import Quickshell.Io
+import Qt5Compat.GraphicalEffects
 
 Item {
     id: root
 
-    implicitWidth: 700
-    implicitHeight: 410
+    property int currentTab: 0
+    property bool showAddDialog: false
+    property string emptyPlaceholderText: "Nothing here!"
+    property string emptyPlaceholderIcon: "check_circle"
+    property int fabSize: 48
+    property int fabMargins: 14
+    property int dialogMargins: 20
 
-    // === Logic Layer ===
-    property string filePath: StandardPaths.writableLocation(StandardPaths.GenericStateLocation) + "/Shellit/todo.json"
-    property var list: []
-
-    function addTask(desc) {
-        const item = { "content": desc, "done": false }
-        list.push(item)
-        list = list.slice(0) // trigger binding updates
-        save()
-    }
-
-    function markDone(index) {
-        if (index >= 0 && index < list.length) {
-            list[index].done = true
-            list = list.slice(0)
-            save()
+    Keys.onPressed: (event) => {
+        if ((event.key === Qt.Key_PageDown || event.key === Qt.Key_PageUp) && event.modifiers === Qt.NoModifier) {
+            currentTab = event.key === Qt.Key_PageDown
+                ? Math.min(currentTab + 1, 1)
+                : Math.max(currentTab - 1, 0)
+            event.accepted = true
+        } else if (event.key === Qt.Key_N) {
+            showAddDialog = true
+            event.accepted = true
+        } else if (event.key === Qt.Key_Escape && showAddDialog) {
+            showAddDialog = false
+            event.accepted = true
         }
     }
 
-    function markUnfinished(index) {
-        if (index >= 0 && index < list.length) {
-            list[index].done = false
-            list = list.slice(0)
-            save()
-        }
-    }
-
-    function deleteItem(index) {
-        if (index >= 0 && index < list.length) {
-            list.splice(index, 1)
-            list = list.slice(0)
-            save()
-        }
-    }
-
-    function save() {
-        todoFile.setText(JSON.stringify(list, null, 2))
-    }
-
-    function refresh() {
-        todoFile.reload()
-    }
-
-    FileView {
-        id: todoFile
-        path: root.filePath
-        blockLoading: true
-        blockWrites: false
-        watchChanges: true
-
-        onLoaded: {
-            try {
-                root.list = JSON.parse(todoFile.text())
-                console.log("[TodoTab] File loaded:", root.list.length, "tasks")
-            } catch (e) {
-                root.list = []
-                console.warn("[TodoTab] Error parsing todo file:", e)
-            }
-        }
-
-        onLoadFailed: (error) => {
-            console.log("[TodoTab] Creating new todo file:", error)
-            root.list = []
-            save()
-        }
-    }
-
-    // === UI Layer ===
-
-    property string newTaskText: ""
-
-    Column {
+    ColumnLayout {
         anchors.fill: parent
-        spacing: Theme.spacingM
-        anchors.margins: Theme.spacingM
+        spacing: 0
 
-        // Header row — add and refresh
-        Row {
+        // === Tab Bar ===
+        TabBar {
+            id: tabBar
             Layout.fillWidth: true
-            spacing: Theme.spacingS
+            currentIndex: root.currentTab
+            onCurrentIndexChanged: root.currentTab = currentIndex
 
-            TextField {
-                id: newTaskInput
-                Layout.fillWidth: true
-                placeholderText: "Add a new task..."
-                text: root.newTaskText
-                onTextChanged: root.newTaskText = text
-                Keys.onReturnPressed: {
-                    if (text.trim().length > 0) {
-                        root.addTask(text.trim())
-                        text = ""
-                    }
-                }
-            }
-
-            Button {
-                text: "Add"
-                enabled: root.newTaskText.trim().length > 0
-                onClicked: {
-                    root.addTask(root.newTaskText.trim())
-                    root.newTaskText = ""
-                }
-            }
-
-            ShellitIcon {
-                name: "refresh"
-                size: Theme.iconSize - 4
-                color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.4)
-                anchors.verticalCenter: parent.verticalCenter
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: root.refresh()
+            Repeater {
+                model: [
+                    { icon: "checklist", name: "Unfinished" },
+                    { icon: "check_circle", name: "Done" }
+                ]
+                delegate: SecondaryTabButton {
+                    buttonText: modelData.name
+                    buttonIcon: modelData.icon
+                    selected: index === root.currentTab
                 }
             }
         }
 
         Rectangle {
-            width: parent.width
+            Layout.fillWidth: true
             height: 1
-            color: Qt.rgba(Theme.outline.r, Theme.outline.g, Theme.outline.b, 0.1)
+            color: Appearance.colors.colOutlineVariant
         }
 
-        // List of todos
-        ListView {
-            id: todoList
+        // === SwipeView for Tabs ===
+        SwipeView {
+            id: swipeView
             Layout.fillWidth: true
             Layout.fillHeight: true
-            clip: true
-            spacing: Theme.spacingS
-            model: root.list
+            currentIndex: root.currentTab
+            onCurrentIndexChanged: root.currentTab = currentIndex
 
-            delegate: Rectangle {
-                id: todoItem
-                width: parent.width
-                height: 55
-                radius: Theme.cornerRadius
-                color: Qt.rgba(Theme.surfaceContainerHigh.r, Theme.surfaceContainerHigh.g, Theme.surfaceContainerHigh.b, 0.5)
+            // Unfinished
+            TaskListView {
+                emptyPlaceholderIcon: "check_circle"
+                emptyPlaceholderText: "Nothing to do — impressive!"
+                taskList: Todo.list
+                    .map((item, i) => ({ ...item, originalIndex: i }))
+                    .filter(item => !item.done)
+            }
 
-                layer.enabled: true
-                layer.effect: MultiEffect {
-                    shadowEnabled: true
-                    shadowVerticalOffset: 3
-                    shadowBlur: 0.6
-                    shadowColor: Qt.rgba(0, 0, 0, 0.2)
-                }
+            // Done
+            TaskListView {
+                emptyPlaceholderIcon: "checklist"
+                emptyPlaceholderText: "Finished tasks go here."
+                taskList: Todo.list
+                    .map((item, i) => ({ ...item, originalIndex: i }))
+                    .filter(item => item.done)
+            }
+        }
+    }
 
-                Row {
-                    anchors.fill: parent
-                    anchors.margins: Theme.spacingS
-                    spacing: Theme.spacingM
+    // === Floating Action Button ===
+    StyledRectangularShadow {
+        target: fabButton
+        radius: fabButton.buttonRadius
+        blur: 0.6 * Appearance.sizes.elevationMargin
+    }
 
-                    CheckBox {
-                        checked: modelData.done
-                        onCheckedChanged: {
-                            if (checked) root.markDone(index)
-                            else root.markUnfinished(index)
-                        }
-                    }
+    FloatingActionButton {
+        id: fabButton
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.rightMargin: root.fabMargins
+        anchors.bottomMargin: root.fabMargins
+        onClicked: root.showAddDialog = true
 
-                    StyledText {
-                        text: modelData.content
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: modelData.done
-                               ? Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.4)
-                               : Theme.surfaceText
-                        font.strikeout: modelData.done
-                        Layout.fillWidth: true
-                        verticalAlignment: Text.AlignVCenter
-                    }
+        contentItem: MaterialSymbol {
+            text: "add"
+            iconSize: Appearance.font.pixelSize.huge
+            color: Appearance.m3colors.m3onPrimaryContainer
+        }
+    }
 
-                    ShellitIcon {
-                        name: "delete"
-                        size: Theme.iconSize - 2
-                        color: Qt.rgba(Theme.error.r, Theme.error.g, Theme.error.b, 0.8)
-                        anchors.verticalCenter: parent.verticalCenter
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: root.deleteItem(model.index)
-                        }
-                    }
+    // === Add Task Dialog ===
+    Item {
+        anchors.fill: parent
+        z: 1000
+        visible: opacity > 0
+        opacity: root.showAddDialog ? 1 : 0
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: Appearance.animation.elementMoveFast.duration
+                easing.type: Appearance.animation.elementMoveFast.type
+            }
+        }
+
+        Rectangle { // Scrim
+            anchors.fill: parent
+            color: Appearance.colors.colScrim
+            MouseArea {
+                anchors.fill: parent
+                onClicked: root.showAddDialog = false
+            }
+        }
+
+        Rectangle {
+            id: dialog
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.margins: root.dialogMargins
+            radius: Appearance.rounding.normal
+            color: Appearance.colors.colSurfaceContainerHigh
+
+            property alias input: todoInput
+
+            function addTask() {
+                if (todoInput.text.trim().length > 0) {
+                    Todo.addTask(todoInput.text.trim())
+                    todoInput.text = ""
+                    root.showAddDialog = false
+                    root.currentTab = 0
                 }
             }
 
-            // Empty state
-            footer: Item {
-                width: parent.width
-                height: root.list.length === 0 ? 160 : 0
-                visible: root.list.length === 0
+            ColumnLayout {
+                anchors.fill: parent
+                spacing: 16
+                padding: 16
 
-                Column {
-                    anchors.centerIn: parent
-                    spacing: Theme.spacingS
+                StyledText {
+                    text: "Add Task"
+                    font.pixelSize: Appearance.font.pixelSize.larger
+                    color: Appearance.m3colors.m3onSurface
+                }
 
-                    ShellitIcon {
-                        name: "playlist_remove"
-                        size: Theme.iconSize * 2
-                        color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.3)
+                TextField {
+                    id: todoInput
+                    Layout.fillWidth: true
+                    placeholderText: "Task description"
+                    onAccepted: dialog.addTask()
+                }
+
+                RowLayout {
+                    Layout.alignment: Qt.AlignRight
+                    spacing: 10
+                    DialogButton {
+                        buttonText: "Cancel"
+                        onClicked: root.showAddDialog = false
                     }
+                    DialogButton {
+                        buttonText: "Add"
+                        enabled: todoInput.text.trim().length > 0
+                        onClicked: dialog.addTask()
+                    }
+                }
+            }
+        }
+    }
 
-                    StyledText {
-                        text: "No tasks yet — add one above!"
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.5)
+    // === Embedded Task List ===
+    Component {
+        id: taskListDelegate
+
+        Rectangle {
+            id: taskItem
+            width: parent.width
+            height: 55
+            radius: Appearance.rounding.small
+            color: Appearance.colors.colLayer2
+            anchors.margins: 8
+            RowLayout {
+                anchors.fill: parent
+                anchors.margins: 8
+                spacing: 10
+
+                CheckBox {
+                    checked: modelData.done
+                    onCheckedChanged: {
+                        if (checked)
+                            Todo.markDone(modelData.originalIndex)
+                        else
+                            Todo.markUnfinished(modelData.originalIndex)
+                    }
+                }
+
+                StyledText {
+                    text: modelData.content
+                    Layout.fillWidth: true
+                    font.strikeout: modelData.done
+                    color: modelData.done
+                        ? Qt.rgba(0.8, 0.8, 0.8, 0.8)
+                        : Appearance.m3colors.m3onSurface
+                }
+
+                RippleButton {
+                    buttonText: "✕"
+                    tooltipText: "Delete"
+                    onClicked: Todo.deleteItem(modelData.originalIndex)
+                }
+            }
+        }
+    }
+
+    Component {
+        id: TaskListView
+        Item {
+            id: taskListContainer
+            property var taskList: []
+            property string emptyPlaceholderIcon: ""
+            property string emptyPlaceholderText: ""
+            ColumnLayout {
+                anchors.fill: parent
+                spacing: 10
+
+                ListView {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    model: taskList
+                    delegate: taskListDelegate
+                    clip: true
+                }
+
+                // Empty placeholder
+                Item {
+                    Layout.fillWidth: true
+                    visible: taskList.length === 0
+                    Column {
+                        anchors.centerIn: parent
+                        spacing: 10
+                        MaterialSymbol {
+                            text: emptyPlaceholderIcon
+                            iconSize: 48
+                            color: Appearance.m3colors.m3outline
+                        }
+                        StyledText {
+                            text: emptyPlaceholderText
+                            color: Appearance.m3colors.m3outline
+                        }
                     }
                 }
             }
         }
     }
 }
-
