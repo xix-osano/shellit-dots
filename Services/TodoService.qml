@@ -7,7 +7,7 @@ import QtCore
 import Quickshell.Io
 
 Singleton {
-    id: service
+    id: root
 
     property string stateDir: StandardPaths.writableLocation(StandardPaths.GenericStateLocation) + "/Shellit"
     property string filePath: stateDir + "/todo.json"
@@ -83,18 +83,18 @@ Singleton {
 
         onLoaded: {
             try {
-                service.list = JSON.parse(todoFile.text())
-                console.log("[TodoService] Loaded", service.list.length, "tasks")
+                root.list = JSON.parse(todoFile.text())
+                console.log("[TodoService] Loaded", root.list.length, "tasks")
             } catch (e) {
                 console.warn("[TodoService] Error parsing file:", e)
-                service.list = []
+                root.list = []
             }
         }
 
         onLoadFailed: {
             console.log("[TodoService] Creating new todo file:", error)
-            service.list = []
-            service.save()
+            root.list = []
+            root.save()
         }
     }
 }
