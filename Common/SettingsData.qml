@@ -30,7 +30,7 @@ Singleton {
     }
 
     readonly property string defaultFontFamily: "Inter Variable"
-    readonly property string defaultMonoFontFamily: "Fira Code"
+    readonly property string defaultMonoFontFamily: "JetBrains Mono"
     readonly property string _homeUrl: StandardPaths.writableLocation(StandardPaths.HomeLocation)
     readonly property string _configUrl: StandardPaths.writableLocation(StandardPaths.ConfigLocation)
     readonly property string _configDir: Paths.strip(_configUrl)
@@ -148,7 +148,7 @@ Singleton {
     property int launcherLogoSizeOffset: 0
 
     property string fontFamily: "Inter Variable"
-    property string monoFontFamily: "Fira Code"
+    property string monoFontFamily: "JetBrains Mono"
     property int fontWeight: Font.Normal
     property real fontScale: 1.0
     property real shellitBarFontScale: 1.0

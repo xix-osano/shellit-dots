@@ -236,7 +236,7 @@ ShellitPopout {
                     }
 
                     onActionTriggered: function(index) {
-                        let settingsIndex = SettingsData.weatherEnabled ? 4 : 3
+                        let settingsIndex = SettingsData.weatherEnabled ? 5 : 4
                         if (index === settingsIndex) {
                             dashVisible = false
                             settingsModal.show()

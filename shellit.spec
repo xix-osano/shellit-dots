@@ -30,7 +30,7 @@ Requires:       (quickshell-git or quickshell)
 Requires:       accountsservice
 Requires:       shellit-cli
 Requires:       dgop
-Requires:       fira-code-fonts
+Requires:       ttf-jetbrains-mono
 Requires:       material-symbols-fonts
 Requires:       rsms-inter-fonts
 
