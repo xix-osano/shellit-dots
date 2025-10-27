@@ -281,6 +281,10 @@ ShellitPopout {
                         id: mediaTab
                     }
 
+                    TodoTab {
+                        id: todoTab
+                    }
+
                     WallpaperTab {
                         id: wallpaperTab
                         active: root.currentTabIndex === 2
