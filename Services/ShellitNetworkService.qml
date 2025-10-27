@@ -96,41 +96,41 @@ Singleton {
     signal connectionChanged
     signal credentialsNeeded(string token, string ssid, string setting, var fields, var hints, string reason)
 
-    readonly property string socketPath: Quickshell.env("shellit_SOCKET")
+    readonly property string socketPath: Quickshell.env("SHELLIT_SOCKET")
 
     Component.onCompleted: {
         root.userPreference = SettingsData.networkPreference
         if (socketPath && socketPath.length > 0) {
-            checkshellitCapabilities()
+            checkSHELLITCapabilities()
         }
     }
 
     Connections {
-        target: shellitService
+        target: SHELLITService
 
         function onNetworkStateUpdate(data) {
             const networksCount = data.wifiNetworks?.length ?? "null"
-            console.log("shellitNetworkService: Subscription update received, networks:", networksCount)
+            console.log("SHELLITNetworkService: Subscription update received, networks:", networksCount)
             updateState(data)
         }
     }
 
     Connections {
-        target: shellitService
+        target: SHELLITService
 
         function onConnectionStateChanged() {
-            if (shellitService.isConnected) {
-                checkshellitCapabilities()
+            if (SHELLITService.isConnected) {
+                checkSHELLITCapabilities()
             }
         }
     }
 
     Connections {
-        target: shellitService
-        enabled: shellitService.isConnected
+        target: SHELLITService
+        enabled: SHELLITService.isConnected
 
         function onCapabilitiesChanged() {
-            checkshellitCapabilities()
+            checkSHELLITCapabilities()
         }
 
         function onCredentialsRequest(data) {
@@ -138,16 +138,16 @@ Singleton {
         }
     }
 
-    function checkshellitCapabilities() {
-        if (!shellitService.isConnected) {
+    function checkSHELLITCapabilities() {
+        if (!SHELLITService.isConnected) {
             return
         }
 
-        if (shellitService.capabilities.length === 0) {
+        if (SHELLITService.capabilities.length === 0) {
             return
         }
 
-        networkAvailable = shellitService.capabilities.includes("network")
+        networkAvailable = SHELLITService.capabilities.includes("network")
 
         if (networkAvailable && !stateInitialized) {
             stateInitialized = true
@@ -186,7 +186,7 @@ Singleton {
     function getState() {
         if (!networkAvailable) return
 
-        shellitService.sendRequest("network.getState", null, response => {
+        SHELLITService.sendRequest("network.getState", null, response => {
             if (response.result) {
                 updateState(response.result)
                 if (!initialStateFetched && response.result.wifiEnabled && (!response.result.wifiNetworks || response.result.wifiNetworks.length === 0)) {
@@ -253,7 +253,7 @@ Singleton {
         if (pendingConnectionSSID) {
             if (wifiConnected && currentWifiSSID === pendingConnectionSSID && wifiIP) {
                 const elapsed = Date.now() - pendingConnectionStartTime
-                console.info("shellitNetworkService: Successfully connected to", pendingConnectionSSID, "in", elapsed, "ms")
+                console.info("SHELLITNetworkService: Successfully connected to", pendingConnectionSSID, "in", elapsed, "ms")
                 ToastService.showInfo(`Connected to ${pendingConnectionSSID}`)
 
                 if (userPreference === "wifi" || userPreference === "auto") {
@@ -296,7 +296,7 @@ Singleton {
 
         const params = { uuid: uuid }
 
-        shellitService.sendRequest("network.ethernet.connect.config", params, response => {
+        SHELLITService.sendRequest("network.ethernet.connect.config", params, response => {
             if (response.error) {
                 connectionError = response.error
                 lastConnectionError = response.error
@@ -316,10 +316,10 @@ Singleton {
         if (!networkAvailable || isScanning || !wifiEnabled) return
 
         isScanning = true
-        shellitService.sendRequest("network.wifi.scan", null, response => {
+        SHELLITService.sendRequest("network.wifi.scan", null, response => {
             isScanning = false
             if (response.error) {
-                console.warn("shellitNetworkService: WiFi scan failed:", response.error)
+                console.warn("SHELLITNetworkService: WiFi scan failed:", response.error)
             } else {
                 Qt.callLater(() => getState())
             }
@@ -341,7 +341,7 @@ Singleton {
 
         const params = { ssid: ssid }
 
-        if (shellitService.apiVersion >= 7) {
+        if (SHELLITService.apiVersion >= 7) {
             if (password || username) {
                 params.password = password
                 if (username) params.username = username
@@ -358,7 +358,7 @@ Singleton {
             if (domainSuffixMatch) params.domainSuffixMatch = domainSuffixMatch
         }
 
-        shellitService.sendRequest("network.wifi.connect", params, response => {
+        SHELLITService.sendRequest("network.wifi.connect", params, response => {
             if (response.error) {
                 if (connectionStatus === "cancelled") {
                     return
@@ -376,7 +376,7 @@ Singleton {
     function disconnectWifi() {
         if (!networkAvailable || !wifiInterface) return
 
-        shellitService.sendRequest("network.wifi.disconnect", null, response => {
+        SHELLITService.sendRequest("network.wifi.disconnect", null, response => {
             if (response.error) {
                 ToastService.showError("Failed to disconnect WiFi")
             } else {
@@ -388,10 +388,10 @@ Singleton {
     }
 
     function submitCredentials(token, secrets, save) {
-        console.log("submitCredentials: networkAvailable=" + networkAvailable + " apiVersion=" + shellitService.apiVersion)
+        console.log("submitCredentials: networkAvailable=" + networkAvailable + " apiVersion=" + SHELLITService.apiVersion)
 
-        if (!networkAvailable || shellitService.apiVersion < 7) {
-            console.warn("submitCredentials: Aborting - networkAvailable=" + networkAvailable + " apiVersion=" + shellitService.apiVersion)
+        if (!networkAvailable || SHELLITService.apiVersion < 7) {
+            console.warn("submitCredentials: Aborting - networkAvailable=" + networkAvailable + " apiVersion=" + SHELLITService.apiVersion)
             return
         }
 
@@ -403,15 +403,15 @@ Singleton {
 
         credentialsRequested = false
 
-        shellitService.sendRequest("network.credentials.submit", params, response => {
+        SHELLITService.sendRequest("network.credentials.submit", params, response => {
             if (response.error) {
-                console.warn("shellitNetworkService: Failed to submit credentials:", response.error)
+                console.warn("SHELLITNetworkService: Failed to submit credentials:", response.error)
             }
         })
     }
 
     function cancelCredentials(token) {
-        if (!networkAvailable || shellitService.apiVersion < 7) return
+        if (!networkAvailable || SHELLITService.apiVersion < 7) return
 
         const params = {
             token: token
@@ -421,9 +421,9 @@ Singleton {
         pendingConnectionSSID = ""
         connectionStatus = "cancelled"
 
-        shellitService.sendRequest("network.credentials.cancel", params, response => {
+        SHELLITService.sendRequest("network.credentials.cancel", params, response => {
             if (response.error) {
-                console.warn("shellitNetworkService: Failed to cancel credentials:", response.error)
+                console.warn("SHELLITNetworkService: Failed to cancel credentials:", response.error)
             }
         })
     }
@@ -432,7 +432,7 @@ Singleton {
         if (!networkAvailable) return
 
         forgetSSID = ssid
-        shellitService.sendRequest("network.wifi.forget", { ssid: ssid }, response => {
+        SHELLITService.sendRequest("network.wifi.forget", { ssid: ssid }, response => {
             if (response.error) {
                 console.warn("Failed to forget network:", response.error)
             } else {
@@ -462,7 +462,7 @@ Singleton {
         if (!networkAvailable || wifiToggling) return
 
         wifiToggling = true
-        shellitService.sendRequest("network.wifi.toggle", null, response => {
+        SHELLITService.sendRequest("network.wifi.toggle", null, response => {
             wifiToggling = false
 
             if (response.error) {
@@ -477,7 +477,7 @@ Singleton {
     function enableWifiDevice() {
         if (!networkAvailable) return
 
-        shellitService.sendRequest("network.wifi.enable", null, response => {
+        SHELLITService.sendRequest("network.wifi.enable", null, response => {
             if (response.error) {
                 ToastService.showError("Failed to enable WiFi")
             } else {
@@ -494,7 +494,7 @@ Singleton {
         targetPreference = preference
         SettingsData.setNetworkPreference(preference)
 
-        shellitService.sendRequest("network.preference.set", { preference: preference }, response => {
+        SHELLITService.sendRequest("network.preference.set", { preference: preference }, response => {
             changingPreference = false
             targetPreference = ""
 
@@ -522,9 +522,9 @@ Singleton {
 
         if (type === "ethernet") {
             if (networkStatus === "ethernet") {
-                shellitService.sendRequest("network.ethernet.disconnect", null, null)
+                SHELLITService.sendRequest("network.ethernet.disconnect", null, null)
             } else {
-                shellitService.sendRequest("network.ethernet.connect", null, null)
+                SHELLITService.sendRequest("network.ethernet.connect", null, null)
             }
         }
     }
@@ -549,7 +549,7 @@ Singleton {
         networkWiredInfoLoading = true
         networkWiredInfoDetails = "Loading network information..."
 
-        shellitService.sendRequest("network.ethernet.info", { uuid: uuid }, response => {
+        SHELLITService.sendRequest("network.ethernet.info", { uuid: uuid }, response => {
             networkWiredInfoLoading = false
 
             if (response.error) {
@@ -604,7 +604,7 @@ Singleton {
         networkInfoLoading = true
         networkInfoDetails = "Loading network information..."
 
-        shellitService.sendRequest("network.info", { ssid: ssid }, response => {
+        SHELLITService.sendRequest("network.info", { ssid: ssid }, response => {
             networkInfoLoading = false
 
             if (response.error) {

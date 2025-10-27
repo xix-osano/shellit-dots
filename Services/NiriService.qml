@@ -109,7 +109,7 @@ Singleton {
         }
     }
 
-    ShellitSocket {
+    SHELLITSocket {
         id: eventStreamSocket
         path: root.socketPath
         connected: CompositorService.isNiri
@@ -133,7 +133,7 @@ Singleton {
         }
     }
 
-    ShellitSocket {
+    SHELLITSocket {
         id: requestSocket
         path: root.socketPath
         connected: CompositorService.isNiri
@@ -765,7 +765,7 @@ Singleton {
         console.log("NiriService: Generating layout config...")
 
         const cornerRadius = typeof SettingsData !== "undefined" ? SettingsData.cornerRadius : 12
-        const gaps = typeof SettingsData !== "undefined" ? Math.max(4, SettingsData.ShellitBarSpacing) : 4
+        const gaps = typeof SettingsData !== "undefined" ? Math.max(4, SettingsData.SHELLITBarSpacing) : 4
 
         const configContent = `layout {
     gaps ${gaps}
@@ -786,12 +786,12 @@ window-rule {
 }`
 
         const configDir = Paths.strip(StandardPaths.writableLocation(StandardPaths.ConfigLocation))
-        const nirishellitDir = configDir + "/niri/shellit"
-        const configPath = nirishellitDir + "/layout.kdl"
+        const niriSHELLITDir = configDir + "/niri/SHELLIT"
+        const configPath = niriSHELLITDir + "/layout.kdl"
 
         writeConfigProcess.configContent = configContent
         writeConfigProcess.configPath = configPath
-        writeConfigProcess.command = ["sh", "-c", `mkdir -p "${nirishellitDir}" && cat > "${configPath}" << 'EOF'\n${configContent}\nEOF`]
+        writeConfigProcess.command = ["sh", "-c", `mkdir -p "${niriSHELLITDir}" && cat > "${configPath}" << 'EOF'\n${configContent}\nEOF`]
         writeConfigProcess.running = true
         configGenerationPending = false
     }
@@ -800,12 +800,12 @@ window-rule {
         console.log("NiriService: Generating binds config...")
 
         const configDir = Paths.strip(StandardPaths.writableLocation(StandardPaths.ConfigLocation))
-        const nirishellitDir = configDir + "/niri/shellit"
-        const bindsPath = nirishellitDir + "/binds.kdl"
+        const niriSHELLITDir = configDir + "/niri/SHELLIT"
+        const bindsPath = niriSHELLITDir + "/binds.kdl"
         const sourceBindsPath = Paths.strip(Qt.resolvedUrl("niri-binds.kdl"))
 
         writeBindsProcess.bindsPath = bindsPath
-        writeBindsProcess.command = ["sh", "-c", `mkdir -p "${nirishellitDir}" && cp --no-preserve=mode "${sourceBindsPath}" "${bindsPath}"`]
+        writeBindsProcess.command = ["sh", "-c", `mkdir -p "${niriSHELLITDir}" && cp --no-preserve=mode "${sourceBindsPath}" "${bindsPath}"`]
         writeBindsProcess.running = true
     }
 }

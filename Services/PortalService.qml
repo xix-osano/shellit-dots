@@ -20,7 +20,7 @@ Singleton {
     property string colorSchemeCommand: ""
     property string pendingProfileImage: ""
 
-    readonly property string socketPath: Quickshell.env("shellit_SOCKET")
+    readonly property string socketPath: Quickshell.env("SHELLIT_SOCKET")
 
     function init() {}
 
@@ -32,7 +32,7 @@ Singleton {
         if (!username)
             return
 
-        shellitService.sendRequest("freedesktop.accounts.getUserIconFile", {
+        SHELLITService.sendRequest("freedesktop.accounts.getUserIconFile", {
                                    "username": username
                                }, response => {
                                    if (response.result && response.result.success) {
@@ -58,7 +58,7 @@ Singleton {
             return
         }
 
-        shellitService.sendRequest("freedesktop.accounts.getUserIconFile", {
+        SHELLITService.sendRequest("freedesktop.accounts.getUserIconFile", {
                                    "username": username
                                }, response => {
                                    if (response.result && response.result.success) {
@@ -90,7 +90,7 @@ Singleton {
         if (!freedeskAvailable)
             return
 
-        shellitService.sendRequest("freedesktop.settings.getColorScheme", null, response => {
+        SHELLITService.sendRequest("freedesktop.settings.getColorScheme", null, response => {
                                    if (response.result) {
                                        systemColorScheme = response.result.value || 0
                                    }
@@ -123,7 +123,7 @@ Singleton {
         if (!settingsPortalAvailable || !freedeskAvailable)
             return
 
-        shellitService.sendRequest("freedesktop.settings.setIconTheme", {
+        SHELLITService.sendRequest("freedesktop.settings.setIconTheme", {
                                    "iconTheme": themeName
                                }, response => {
                                    if (response.error) {
@@ -136,7 +136,7 @@ Singleton {
         if (!accountsServiceAvailable || !freedeskAvailable)
             return
 
-        shellitService.sendRequest("freedesktop.accounts.setIconFile", {
+        SHELLITService.sendRequest("freedesktop.accounts.setIconFile", {
                                    "path": imagePath || ""
                                }, response => {
                                    if (response.error) {
@@ -155,7 +155,7 @@ Singleton {
                                            userMessage = "Failed to set profile image: " + errorMsg.split(":").pop().trim()
                                        }
 
-                                       Quickshell.execDetached(["notify-send", "-u", "normal", "-a", "shellit", "-i", "error", "Profile Image Error", userMessage])
+                                       Quickshell.execDetached(["notify-send", "-u", "normal", "-a", "SHELLIT", "-i", "error", "Profile Image Error", userMessage])
 
                                        pendingProfileImage = ""
                                    } else {
@@ -168,47 +168,47 @@ Singleton {
 
     Component.onCompleted: {
         if (socketPath && socketPath.length > 0) {
-            checkshellitCapabilities()
+            checkSHELLITCapabilities()
         } else {
-            console.info("PortalService: shellit_SOCKET not set")
+            console.info("PortalService: SHELLIT_SOCKET not set")
         }
         colorSchemeDetector.running = true
     }
 
     Connections {
-        target: shellitService
+        target: SHELLITService
 
         function onConnectionStateChanged() {
-            if (shellitService.isConnected) {
-                checkshellitCapabilities()
+            if (SHELLITService.isConnected) {
+                checkSHELLITCapabilities()
             }
         }
     }
 
     Connections {
-        target: shellitService
-        enabled: shellitService.isConnected
+        target: SHELLITService
+        enabled: SHELLITService.isConnected
 
         function onCapabilitiesChanged() {
-            checkshellitCapabilities()
+            checkSHELLITCapabilities()
         }
     }
 
-    function checkshellitCapabilities() {
-        if (!shellitService.isConnected) {
+    function checkSHELLITCapabilities() {
+        if (!SHELLITService.isConnected) {
             return
         }
 
-        if (shellitService.capabilities.length === 0) {
+        if (SHELLITService.capabilities.length === 0) {
             return
         }
 
-        freedeskAvailable = shellitService.capabilities.includes("freedesktop")
+        freedeskAvailable = SHELLITService.capabilities.includes("freedesktop")
         if (freedeskAvailable) {
             checkAccountsService()
             checkSettingsPortal()
         } else {
-            console.info("PortalService: freedesktop capability not available in shellit")
+            console.info("PortalService: freedesktop capability not available in SHELLIT")
         }
     }
 
@@ -216,7 +216,7 @@ Singleton {
         if (!freedeskAvailable)
             return
 
-        shellitService.sendRequest("freedesktop.getState", null, response => {
+        SHELLITService.sendRequest("freedesktop.getState", null, response => {
                                    if (response.result && response.result.accounts) {
                                        accountsServiceAvailable = response.result.accounts.available || false
                                        if (accountsServiceAvailable) {
@@ -230,7 +230,7 @@ Singleton {
         if (!freedeskAvailable)
             return
 
-        shellitService.sendRequest("freedesktop.getState", null, response => {
+        SHELLITService.sendRequest("freedesktop.getState", null, response => {
                                    if (response.result && response.result.settings) {
                                        settingsPortalAvailable = response.result.settings.available || false
                                        if (settingsPortalAvailable && SettingsData.syncModeWithPortal) {

@@ -16,7 +16,7 @@ Singleton {
     readonly property bool enabled: (adapter && adapter.enabled) ?? false
     readonly property bool discovering: (adapter && adapter.discovering) ?? false
     readonly property var devices: adapter ? adapter.devices : null
-    readonly property bool enhancedPairingAvailable: shellitService.shellitAvailable && shellitService.apiVersion >= 9 && shellitService.capabilities.includes("bluetooth")
+    readonly property bool enhancedPairingAvailable: SHELLITService.SHELLITAvailable && SHELLITService.apiVersion >= 9 && SHELLITService.capabilities.includes("bluetooth")
     readonly property bool connected: {
         if (!adapter || !adapter.devices) {
             return false
@@ -181,10 +181,10 @@ Singleton {
             return
         }
 
-        // The shellit backend actually implements a bluez agent, so we can pair anything
+        // The SHELLIT backend actually implements a bluez agent, so we can pair anything
         if (enhancedPairingAvailable) {
             const devicePath = getDevicePath(device)
-            shellitService.bluetoothPair(devicePath, callback)
+            SHELLITService.bluetoothPair(devicePath, callback)
             return
         }
 

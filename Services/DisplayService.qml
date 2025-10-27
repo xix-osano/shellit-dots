@@ -214,14 +214,14 @@ Singleton {
     // Night Mode Functions - Simplified
     function enableNightMode() {
         if (!gammaControlAvailable) {
-            ToastService.showWarning("Night mode failed: shellit gamma control not available")
+            ToastService.showWarning("Night mode failed: SHELLIT gamma control not available")
             return
         }
 
         nightModeEnabled = true
         SessionData.setNightModeEnabled(true)
 
-        shellitService.sendRequest("wayland.gamma.setEnabled", {
+        SHELLITService.sendRequest("wayland.gamma.setEnabled", {
             "enabled": true
         }, response => {
             if (response.error) {
@@ -248,7 +248,7 @@ Singleton {
             return
         }
 
-        shellitService.sendRequest("wayland.gamma.setEnabled", {
+        SHELLITService.sendRequest("wayland.gamma.setEnabled", {
             "enabled": false
         }, response => {
             if (response.error) {
@@ -269,7 +269,7 @@ Singleton {
     function applyNightModeDirectly() {
         const temperature = SessionData.nightModeTemperature || 4000
 
-        shellitService.sendRequest("wayland.gamma.setManualTimes", {
+        SHELLITService.sendRequest("wayland.gamma.setManualTimes", {
             "sunrise": null,
             "sunset": null
         }, response => {
@@ -278,7 +278,7 @@ Singleton {
                 return
             }
 
-            shellitService.sendRequest("wayland.gamma.setUseIPLocation", {
+            SHELLITService.sendRequest("wayland.gamma.setUseIPLocation", {
                 "use": false
             }, response => {
                 if (response.error) {
@@ -286,7 +286,7 @@ Singleton {
                     return
                 }
 
-                shellitService.sendRequest("wayland.gamma.setTemperature", {
+                SHELLITService.sendRequest("wayland.gamma.setTemperature", {
                     "temp": temperature
                 }, response => {
                     if (response.error) {
@@ -325,7 +325,7 @@ Singleton {
         const sunrise = `${String(sunriseHour).padStart(2, '0')}:${String(sunriseMinute).padStart(2, '0')}`
         const sunset = `${String(sunsetHour).padStart(2, '0')}:${String(sunsetMinute).padStart(2, '0')}`
 
-        shellitService.sendRequest("wayland.gamma.setUseIPLocation", {
+        SHELLITService.sendRequest("wayland.gamma.setUseIPLocation", {
             "use": false
         }, response => {
             if (response.error) {
@@ -333,7 +333,7 @@ Singleton {
                 return
             }
 
-            shellitService.sendRequest("wayland.gamma.setTemperature", {
+            SHELLITService.sendRequest("wayland.gamma.setTemperature", {
                 "low": temperature,
                 "high": dayTemp
             }, response => {
@@ -343,7 +343,7 @@ Singleton {
                     return
                 }
 
-                shellitService.sendRequest("wayland.gamma.setManualTimes", {
+                SHELLITService.sendRequest("wayland.gamma.setManualTimes", {
                     "sunrise": sunrise,
                     "sunset": sunset
                 }, response => {
@@ -360,7 +360,7 @@ Singleton {
         const temperature = SessionData.nightModeTemperature || 4000
         const dayTemp = 6500
 
-        shellitService.sendRequest("wayland.gamma.setManualTimes", {
+        SHELLITService.sendRequest("wayland.gamma.setManualTimes", {
             "sunrise": null,
             "sunset": null
         }, response => {
@@ -369,7 +369,7 @@ Singleton {
                 return
             }
 
-            shellitService.sendRequest("wayland.gamma.setTemperature", {
+            SHELLITService.sendRequest("wayland.gamma.setTemperature", {
                 "low": temperature,
                 "high": dayTemp
             }, response => {
@@ -380,7 +380,7 @@ Singleton {
                 }
 
                 if (SessionData.nightModeUseIPLocation) {
-                    shellitService.sendRequest("wayland.gamma.setUseIPLocation", {
+                    SHELLITService.sendRequest("wayland.gamma.setUseIPLocation", {
                         "use": true
                     }, response => {
                         if (response.error) {
@@ -389,7 +389,7 @@ Singleton {
                         }
                     })
                 } else if (SessionData.latitude !== 0.0 && SessionData.longitude !== 0.0) {
-                    shellitService.sendRequest("wayland.gamma.setUseIPLocation", {
+                    SHELLITService.sendRequest("wayland.gamma.setUseIPLocation", {
                         "use": false
                     }, response => {
                         if (response.error) {
@@ -397,7 +397,7 @@ Singleton {
                             return
                         }
 
-                        shellitService.sendRequest("wayland.gamma.setLocation", {
+                        SHELLITService.sendRequest("wayland.gamma.setLocation", {
                             "latitude": SessionData.latitude,
                             "longitude": SessionData.longitude
                         }, response => {
@@ -433,23 +433,23 @@ Singleton {
     }
 
     function checkGammaControlAvailability() {
-        if (!shellitService.isConnected) {
+        if (!SHELLITService.isConnected) {
             return
         }
 
-        if (shellitService.apiVersion < 6) {
+        if (SHELLITService.apiVersion < 6) {
             gammaControlAvailable = false
             automationAvailable = false
             return
         }
 
-        if (!shellitService.capabilities.includes("gamma")) {
+        if (!SHELLITService.capabilities.includes("gamma")) {
             gammaControlAvailable = false
             automationAvailable = false
             return
         }
 
-        shellitService.sendRequest("wayland.gamma.getState", null, response => {
+        SHELLITService.sendRequest("wayland.gamma.getState", null, response => {
             if (response.error) {
                 gammaControlAvailable = false
                 automationAvailable = false
@@ -459,7 +459,7 @@ Singleton {
                 automationAvailable = true
 
                 if (nightModeEnabled) {
-                    shellitService.sendRequest("wayland.gamma.setEnabled", {
+                    SHELLITService.sendRequest("wayland.gamma.setEnabled", {
                         "enabled": true
                     }, enableResponse => {
                         if (enableResponse.error) {
@@ -767,10 +767,10 @@ Singleton {
     }
 
     Connections {
-        target: shellitService
+        target: SHELLITService
 
         function onConnectionStateChanged() {
-            if (shellitService.isConnected) {
+            if (SHELLITService.isConnected) {
                 checkGammaControlAvailability()
             } else {
                 gammaControlAvailable = false

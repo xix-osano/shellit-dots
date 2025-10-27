@@ -56,7 +56,7 @@ Item {
                     }
 
                     StyledText {
-                        text: SystemUpdateService.shellVersion ? `shellit ${SystemUpdateService.shellVersion}` : "shellit"
+                        text: SystemUpdateService.shellVersion ? `Shellit ${SystemUpdateService.shellVersion}` : "Shellit"
                         font.pixelSize: Theme.fontSizeXLarge
                         font.weight: Font.Bold
                         color: Theme.surfaceText

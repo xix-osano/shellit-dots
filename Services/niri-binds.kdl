@@ -1,59 +1,59 @@
 binds {
     Mod+Space hotkey-overlay-title="Application Launcher" { 
-        spawn "shellit" "ipc" "call" "spotlight" "toggle"; 
+        spawn "SHELLIT" "ipc" "call" "spotlight" "toggle"; 
     }
 
     Mod+V hotkey-overlay-title="Clipboard Manager" { 
-        spawn "shellit" "ipc" "call" "clipboard" "toggle"; 
+        spawn "SHELLIT" "ipc" "call" "clipboard" "toggle"; 
     }
 
     Mod+M hotkey-overlay-title="Task Manager" { 
-        spawn "shellit" "ipc" "call" "processlist" "toggle"; 
+        spawn "SHELLIT" "ipc" "call" "processlist" "toggle"; 
     }
 
     Mod+Comma hotkey-overlay-title="Settings" { 
-        spawn "shellit" "ipc" "call" "settings" "toggle"; 
+        spawn "SHELLIT" "ipc" "call" "settings" "toggle"; 
     }
 
     Mod+N hotkey-overlay-title="Notification Center" {
-        spawn "shellit" "ipc" "call" "notifications" "toggle"; 
+        spawn "SHELLIT" "ipc" "call" "notifications" "toggle"; 
     }
 
     Mod+Y hotkey-overlay-title="Browse Wallpapers" {
-        spawn "shellit" "ipc" "call" "Shellitdash" "wallpaper";
+        spawn "SHELLIT" "ipc" "call" "SHELLITdash" "wallpaper";
     }
 
     Mod+Shift+N hotkey-overlay-title="Notepad" {
-      spawn "shellit" "ipc" "call" "notepad" "toggle";  
+      spawn "SHELLIT" "ipc" "call" "notepad" "toggle";  
     }
     
     Mod+Alt+L hotkey-overlay-title="Lock Screen" { 
-        spawn "shellit" "ipc" "call" "lock" "lock"; 
+        spawn "SHELLIT" "ipc" "call" "lock" "lock"; 
     }
 
     Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" { 
-        spawn "shellit" "ipc" "call" "processlist" "toggle"; 
+        spawn "SHELLIT" "ipc" "call" "processlist" "toggle"; 
     }    
 
     // Audio
     XF86AudioRaiseVolume allow-when-locked=true {
-        spawn "shellit" "ipc" "call" "audio" "increment" "3";
+        spawn "SHELLIT" "ipc" "call" "audio" "increment" "3";
     }
     XF86AudioLowerVolume allow-when-locked=true {
-        spawn "shellit" "ipc" "call" "audio" "decrement" "3";
+        spawn "SHELLIT" "ipc" "call" "audio" "decrement" "3";
     }
     XF86AudioMute allow-when-locked=true {
-        spawn "shellit" "ipc" "call" "audio" "mute";
+        spawn "SHELLIT" "ipc" "call" "audio" "mute";
     }
     XF86AudioMicMute allow-when-locked=true {
-        spawn "shellit" "ipc" "call" "audio" "micmute";
+        spawn "SHELLIT" "ipc" "call" "audio" "micmute";
     }
     
     // BL
     XF86MonBrightnessUp allow-when-locked=true {
-       spawn "shellit" "ipc" "call" "brightness" "increment" "5" "";
+       spawn "SHELLIT" "ipc" "call" "brightness" "increment" "5" "";
     }
     XF86MonBrightnessDown allow-when-locked=true {
-       spawn "shellit" "ipc" "call" "brightness" "decrement" "5" "";
+       spawn "SHELLIT" "ipc" "call" "brightness" "decrement" "5" "";
     }  
 }

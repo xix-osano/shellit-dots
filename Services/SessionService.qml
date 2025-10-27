@@ -48,7 +48,7 @@ Singleton {
 
     property bool stateInitialized: false
 
-    readonly property string socketPath: Quickshell.env("shellit_SOCKET")
+    readonly property string socketPath: Quickshell.env("SHELLIT_SOCKET")
 
     Timer {
         id: sessionInitTimer
@@ -65,9 +65,9 @@ Singleton {
                 return
             }
             if (socketPath && socketPath.length > 0) {
-                checkshellitCapabilities()
+                checkSHELLITCapabilities()
             } else {
-                console.log("SessionService: shellit_SOCKET not set")
+                console.log("SessionService: SHELLIT_SOCKET not set")
             }
         }
     }
@@ -295,11 +295,11 @@ Singleton {
     }
 
     Connections {
-        target: shellitService
+        target: SHELLITService
 
         function onConnectionStateChanged() {
-            if (shellitService.isConnected) {
-                checkshellitCapabilities()
+            if (SHELLITService.isConnected) {
+                checkSHELLITCapabilities()
             }
         }
 
@@ -309,11 +309,11 @@ Singleton {
     }
 
     Connections {
-        target: shellitService
-        enabled: shellitService.isConnected
+        target: SHELLITService
+        enabled: SHELLITService.isConnected
 
         function onCapabilitiesChanged() {
-            checkshellitCapabilities()
+            checkSHELLITCapabilities()
         }
     }
 
@@ -344,7 +344,7 @@ Singleton {
     }
 
     Connections {
-        target: shellitService
+        target: SHELLITService
         enabled: SettingsData.loginctlLockIntegration
 
         function onLoginctlStateUpdate(data) {
@@ -356,16 +356,16 @@ Singleton {
         }
     }
 
-    function checkshellitCapabilities() {
-        if (!shellitService.isConnected) {
+    function checkSHELLITCapabilities() {
+        if (!SHELLITService.isConnected) {
             return
         }
 
-        if (shellitService.capabilities.length === 0) {
+        if (SHELLITService.capabilities.length === 0) {
             return
         }
 
-        if (shellitService.capabilities.includes("loginctl")) {
+        if (SHELLITService.capabilities.includes("loginctl")) {
             loginctlAvailable = true
             if (SettingsData.loginctlLockIntegration && !stateInitialized) {
                 stateInitialized = true
@@ -374,14 +374,14 @@ Singleton {
             }
         } else {
             loginctlAvailable = false
-            console.log("SessionService: loginctl capability not available in shellit")
+            console.log("SessionService: loginctl capability not available in SHELLIT")
         }
     }
 
     function getLoginctlState() {
         if (!loginctlAvailable) return
 
-        shellitService.sendRequest("loginctl.getState", null, response => {
+        SHELLITService.sendRequest("loginctl.getState", null, response => {
             if (response.result) {
                 updateLoginctlState(response.result)
             }
@@ -391,7 +391,7 @@ Singleton {
     function syncLockBeforeSuspend() {
         if (!loginctlAvailable) return
 
-        shellitService.sendRequest("loginctl.setLockBeforeSuspend", {
+        SHELLITService.sendRequest("loginctl.setLockBeforeSuspend", {
             enabled: SettingsData.lockBeforeSuspend
         }, response => {
             if (response.error) {
@@ -405,9 +405,9 @@ Singleton {
     function syncSleepInhibitor() {
         if (!loginctlAvailable) return
 
-        if (!shellitService.apiVersion || shellitService.apiVersion < 4) return
+        if (!SHELLITService.apiVersion || SHELLITService.apiVersion < 4) return
 
-        shellitService.sendRequest("loginctl.setSleepInhibitorEnabled", {
+        SHELLITService.sendRequest("loginctl.setSleepInhibitorEnabled", {
             enabled: SettingsData.loginctlLockIntegration && SettingsData.lockBeforeSuspend
         }, response => {
             if (response.error) {

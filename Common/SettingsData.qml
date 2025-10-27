@@ -888,7 +888,7 @@ Singleton {
     function updateGtkIconTheme(themeName) {
         var gtkThemeName = (themeName === "System Default") ? systemDefaultIconTheme : themeName
         if (gtkThemeName !== "System Default" && gtkThemeName !== "") {
-            if (shellitService.apiVersion >= 3) {
+            if (SHELLITService.apiVersion >= 3) {
                 PortalService.setSystemIconTheme(gtkThemeName)
             }
 

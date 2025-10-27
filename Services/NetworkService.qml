@@ -85,30 +85,30 @@ Singleton {
     property bool usingLegacy: false
     property var activeService: null
 
-    readonly property string socketPath: Quickshell.env("shellit_SOCKET")
+    readonly property string socketPath: Quickshell.env("SHELLIT_SOCKET")
 
     Component.onCompleted: {
         console.info("NetworkService: Initializing...")
         if (!socketPath || socketPath.length === 0) {
-            console.info("NetworkService: shellit_SOCKET not set, using LegacyNetworkService")
+            console.info("NetworkService: SHELLIT_SOCKET not set, using LegacyNetworkService")
             useLegacyService()
         } else {
-            console.log("NetworkService: shellit_SOCKET found, waiting for capabilities...")
+            console.log("NetworkService: SHELLIT_SOCKET found, waiting for capabilities...")
         }
     }
 
     Connections {
-        target: shellitNetworkService
+        target: SHELLITNetworkService
 
         function onNetworkAvailableChanged() {
-            if (!activeService && shellitNetworkService.networkAvailable) {
-                console.info("NetworkService: Network capability detected, using shellitNetworkService")
-                activeService = shellitNetworkService
+            if (!activeService && SHELLITNetworkService.networkAvailable) {
+                console.info("NetworkService: Network capability detected, using SHELLITNetworkService")
+                activeService = SHELLITNetworkService
                 usingLegacy = false
-                console.info("NetworkService: Switched to shellitNetworkService, networkAvailable:", networkAvailable)
+                console.info("NetworkService: Switched to SHELLITNetworkService, networkAvailable:", networkAvailable)
                 connectSignals()
-            } else if (!activeService && !shellitNetworkService.networkAvailable && socketPath && socketPath.length > 0) {
-                console.info("NetworkService: Network capability not available in shellit, using LegacyNetworkService")
+            } else if (!activeService && !SHELLITNetworkService.networkAvailable && socketPath && socketPath.length > 0) {
+                console.info("NetworkService: Network capability not available in SHELLIT, using LegacyNetworkService")
                 useLegacyService()
             }
         }

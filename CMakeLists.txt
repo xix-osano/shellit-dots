@@ -3,32 +3,17 @@ cmake_minimum_required(VERSION 3.19)
 # ---------------------------------------------------------------------------
 # Version Management
 # ---------------------------------------------------------------------------
-if(NOT DEFINED VERSION)
-    execute_process(
-        COMMAND git describe --tags --abbrev=0
-        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
-        OUTPUT_VARIABLE VERSION
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-    )
-    if("${VERSION}" STREQUAL "")
-        set(VERSION "0.1.0")  # fallback
-        message(WARNING "VERSION not set and no git tag found — defaulting to ${VERSION}")
-    endif()
+set(VERSION_FILE "${CMAKE_SOURCE_DIR}/shellit/VERSION")
+
+if(EXISTS "${VERSION_FILE}")
+    file(READ "${VERSION_FILE}" VERSION)
+    string(STRIP "${VERSION}" VERSION)
+else()
+    set(VERSION "0.1.0")  # fallback if VERSION file not found
+    message(WARNING "VERSION file not found — defaulting to ${VERSION}")
 endif()
 
-if(NOT DEFINED GIT_REVISION)
-    execute_process(
-        COMMAND git rev-parse --short HEAD
-        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
-        OUTPUT_VARIABLE GIT_REVISION
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-    )
-    if("${GIT_REVISION}" STREQUAL "")
-        set(GIT_REVISION "unknown")
-    endif()
-endif()
-
-string(REGEX REPLACE "^v" "" VERSION "${VERSION}")
+set(GIT_REVISION "static") # no git, so just a placeholder
 
 # ---------------------------------------------------------------------------
 # Project
@@ -45,22 +30,11 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 # Install Paths
 # ---------------------------------------------------------------------------
 set(DISTRIBUTOR "Unset" CACHE STRING "Distributor")
-set(ENABLE_MODULES "extras;shell" CACHE STRING "Modules to build/install")
+set(ENABLE_MODULES "shell" CACHE STRING "Modules to build/install")
 set(INSTALL_LIBDIR "usr/lib/shellit" CACHE STRING "Library install dir")
 set(INSTALL_QMLDIR "usr/lib/qt6/qml" CACHE STRING "QML install dir")
 set(INSTALL_QSCONFDIR "etc/xdg/quickshell/shellit" CACHE STRING "Quickshell config install dir")
-
-
-# Determine install location (default: ~/.config/quickshell/shellit)
-# if(DEFINED ENV{XDG_CONFIG_HOME})
-#     set(DEFAULT_CONFIG_DIR "$ENV{XDG_CONFIG_HOME}/quickshell/shellit")
-# else()
-#     set(DEFAULT_CONFIG_DIR "$ENV{HOME}/.config/quickshell/shellit")
-# endif()
-
-# set(INSTALL_QSCONFDIR "${DEFAULT_CONFIG_DIR}" CACHE PATH "User Quickshell config directory")
-
-# message(STATUS "Installing Shellit config to: ${INSTALL_QSCONFDIR}")
+set(INSTALL_DOCDIR "usr/share/doc/shellit" CACHE STRING "Documentation install dir")
 
 # ---------------------------------------------------------------------------
 # Compile Options
@@ -93,7 +67,7 @@ install(FILES "${VERSION_HEADER}" DESTINATION "${INSTALL_QSCONFDIR}/include")
 # Installation Logic
 # ---------------------------------------------------------------------------
 if("shell" IN_LIST ENABLE_MODULES)
-    foreach(dir assets components config extras modules services utils)
+    foreach(dir assets Common Modals Modules Services Widgets)
         if(EXISTS "${dir}")
             install(DIRECTORY ${dir} DESTINATION "${INSTALL_QSCONFDIR}")
         endif()

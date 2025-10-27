@@ -80,7 +80,7 @@ FocusScope {
                         color: Qt.rgba(Theme.warning.r, Theme.warning.g, Theme.warning.b, 0.1)
                         border.color: Theme.warning
                         border.width: 1
-                        visible: !shellitService.shellitAvailable
+                        visible: !SHELLITService.shellitAvailable
 
                         Column {
                             id: shellitWarningColumn
@@ -124,7 +124,7 @@ FocusScope {
                         ShellitButton {
                             text: "Browse"
                             iconName: "store"
-                            enabled: shellitService.shellitAvailable
+                            enabled: SHELLITService.shellitAvailable
                             onClicked: {
                                 pluginBrowserModal.show()
                             }
@@ -136,8 +136,8 @@ FocusScope {
                             onClicked: {
                                 pluginsTab.isRefreshingPlugins = true
                                 PluginService.scanPlugins()
-                                if (shellitService.shellitAvailable) {
-                                    shellitService.listInstalled()
+                                if (SHELLITService.shellitAvailable) {
+                                    SHELLITService.listInstalled()
                                 }
                                 pluginsTab.refreshPluginList()
                             }
@@ -247,7 +247,7 @@ FocusScope {
                                 property bool hasSettings: pluginData && pluginData.settings !== undefined && pluginData.settings !== ""
                                 property bool isExpanded: pluginsTab.expandedPluginId === pluginId
                                 property bool hasUpdate: {
-                                    if (shellitService.apiVersion < 8) return false
+                                    if (SHELLITService.apiVersion < 8) return false
                                     return pluginsTab.installedPluginsData[pluginId] || pluginsTab.installedPluginsData[pluginName] || false
                                 }
 
@@ -331,7 +331,7 @@ FocusScope {
                                                 height: 28
                                                 radius: 14
                                                 color: updateArea.containsMouse ? Theme.surfaceContainerHighest : "transparent"
-                                                visible: shellitService.shellitAvailable && PluginService.isPluginLoaded(pluginDelegate.pluginId) && pluginDelegate.hasUpdate
+                                                visible: SHELLITService.shellitAvailable && PluginService.isPluginLoaded(pluginDelegate.pluginId) && pluginDelegate.hasUpdate
 
                                                 ShellitIcon {
                                                     anchors.centerIn: parent
@@ -348,14 +348,14 @@ FocusScope {
                                                     onClicked: {
                                                         const currentPluginName = pluginDelegate.pluginName
                                                         const currentPluginId = pluginDelegate.pluginId
-                                                        shellitService.update(currentPluginName, response => {
+                                                        SHELLITService.update(currentPluginName, response => {
                                                             if (response.error) {
                                                                 ToastService.showError("Update failed: " + response.error)
                                                             } else {
                                                                 ToastService.showInfo("Plugin updated: " + currentPluginName)
                                                                 PluginService.forceRescanPlugin(currentPluginId)
-                                                                if (shellitService.apiVersion >= 8) {
-                                                                    shellitService.listInstalled()
+                                                                if (SHELLITService.apiVersion >= 8) {
+                                                                    SHELLITService.listInstalled()
                                                                 }
                                                             }
                                                         })
@@ -381,7 +381,7 @@ FocusScope {
                                                 height: 28
                                                 radius: 14
                                                 color: uninstallArea.containsMouse ? Theme.surfaceContainerHighest : "transparent"
-                                                visible: shellitService.shellitAvailable
+                                                visible: SHELLITService.shellitAvailable
 
                                                 ShellitIcon {
                                                     anchors.centerIn: parent
@@ -397,7 +397,7 @@ FocusScope {
                                                     cursorShape: Qt.PointingHandCursor
                                                     onClicked: {
                                                         const currentPluginName = pluginDelegate.pluginName
-                                                        shellitService.uninstall(currentPluginName, response => {
+                                                        SHELLITService.uninstall(currentPluginName, response => {
                                                             if (response.error) {
                                                                 ToastService.showError("Uninstall failed: " + response.error)
                                                             } else {
@@ -656,15 +656,15 @@ FocusScope {
             }
         }
         function onPluginListUpdated() {
-            if (shellitService.apiVersion >= 8) {
-                shellitService.listInstalled()
+            if (SHELLITService.apiVersion >= 8) {
+                SHELLITService.listInstalled()
             }
             refreshPluginList()
         }
     }
 
     Connections {
-        target: shellitService
+        target: SHELLITService
         function onPluginsListReceived(plugins) {
             pluginBrowserModal.isLoading = false
             pluginBrowserModal.allPlugins = plugins
@@ -695,8 +695,8 @@ FocusScope {
 
     Component.onCompleted: {
         pluginBrowserModal.parentModal = pluginsTab.parentModal
-        if (shellitService.shellitAvailable && shellitService.apiVersion >= 8) {
-            shellitService.listInstalled()
+        if (SHELLITService.shellitAvailable && SHELLITService.apiVersion >= 8) {
+            SHELLITService.listInstalled()
         }
     }
 
@@ -760,7 +760,7 @@ FocusScope {
 
         function installPlugin(pluginName) {
             ToastService.showInfo("Installing plugin: " + pluginName)
-            shellitService.install(pluginName, response => {
+            SHELLITService.install(pluginName, response => {
                 if (response.error) {
                     ToastService.showError("Install failed: " + response.error)
                 } else {
@@ -773,9 +773,9 @@ FocusScope {
 
         function refreshPlugins() {
             isLoading = true
-            shellitService.listPlugins()
-            if (shellitService.apiVersion >= 8) {
-                shellitService.listInstalled()
+            SHELLITService.listPlugins()
+            if (SHELLITService.apiVersion >= 8) {
+                SHELLITService.listInstalled()
             }
         }
 

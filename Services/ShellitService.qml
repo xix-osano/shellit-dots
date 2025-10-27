@@ -21,7 +21,7 @@ Singleton {
     property bool isConnecting: false
     property bool subscribeConnected: false
 
-    readonly property string socketPath: Quickshell.env("shellit_SOCKET")
+    readonly property string socketPath: Quickshell.env("SHELLIT_SOCKET")
 
     property var pendingRequests: ({})
     property int requestIdCounter: 0
@@ -69,11 +69,11 @@ Singleton {
             onStreamFinished: {
                 const helper = text.trim()
                 if (helper.includes("paru")) {
-                    checkshellitPackage.helper = "paru"
-                    checkshellitPackage.running = true
+                    checkShellitPackage.helper = "paru"
+                    checkShellitPackage.running = true
                 } else if (helper.includes("yay")) {
-                    checkshellitPackage.helper = "yay"
-                    checkshellitPackage.running = true
+                    checkShellitPackage.helper = "yay"
+                    checkShellitPackage.running = true
                 } else {
                     updateCommand = "shellit update"
                     checkingUpdateCommand = false
@@ -92,7 +92,7 @@ Singleton {
     }
 
     Process {
-        id: checkshellitPackage
+        id: checkShellitPackage
         property string helper: ""
         command: ["sh", "-c", "pacman -Qi shellit-shell-git 2>/dev/null || pacman -Qi shellit-shell-bin 2>/dev/null"]
         running: false
@@ -100,9 +100,9 @@ Singleton {
         stdout: StdioCollector {
             onStreamFinished: {
                 if (text.includes("shellit-shell-git")) {
-                    updateCommand = checkshellitPackage.helper + " -S shellit-shell-git"
+                    updateCommand = checkShellitPackage.helper + " -S shellit-shell-git"
                 } else if (text.includes("shellit-shell-bin")) {
-                    updateCommand = checkshellitPackage.helper + " -S shellit-shell-bin"
+                    updateCommand = checkShellitPackage.helper + " -S shellit-shell-bin"
                 } else {
                     updateCommand = "shellit update"
                 }
@@ -169,13 +169,13 @@ Singleton {
                     return
                 }
 
-                console.log("shellitService: Request socket <<", line)
+                console.log("SHELLITService: Request socket <<", line)
 
                 try {
                     const response = JSON.parse(line)
                     handleResponse(response)
                 } catch (e) {
-                    console.warn("shellitService: Failed to parse request response:", line, e)
+                    console.warn("SHELLITService: Failed to parse request response:", line, e)
                 }
             }
         }
@@ -199,13 +199,13 @@ Singleton {
                     return
                 }
 
-                console.log("shellitService: Subscribe socket <<", line)
+                console.log("SHELLITService: Subscribe socket <<", line)
 
                 try {
                     const response = JSON.parse(line)
                     handleSubscriptionEvent(response)
                 } catch (e) {
-                    console.warn("shellitService: Failed to parse subscription event:", line, e)
+                    console.warn("SHELLITService: Failed to parse subscription event:", line, e)
                 }
             }
         }
@@ -216,7 +216,7 @@ Singleton {
             "method": "subscribe"
         }
 
-        console.log("shellitService: Subscribing to all services")
+        console.log("SHELLITService: Subscribing to all services")
         subscribeSocket.send(request)
     }
 
@@ -224,9 +224,9 @@ Singleton {
         if (response.error) {
             if (response.error.includes("unknown method") && response.error.includes("subscribe")) {
                 if (!shownOutdatedError) {
-                    console.error("shellitService: Server does not support subscribe method")
+                    console.error("SHELLITService: Server does not support subscribe method")
                     ToastService.showError(
-                        "shellit out of date",
+                        "Shellit out of date",
                         "To update, run the following command:",
                         updateCommand
                     )
@@ -247,10 +247,10 @@ Singleton {
             apiVersion = data.apiVersion || 0
             capabilities = data.capabilities || []
 
-            console.info("shellitService: Connected (API v" + apiVersion + ") -", JSON.stringify(capabilities))
+            console.info("SHELLITService: Connected (API v" + apiVersion + ") -", JSON.stringify(capabilities))
 
             if (apiVersion < expectedApiVersion) {
-                ToastService.showError("shellit server is outdated (API v" + apiVersion + ", expected v" + expectedApiVersion + ")")
+                ToastService.showError("SHELLIT server is outdated (API v" + apiVersion + ", expected v" + expectedApiVersion + ")")
             }
 
             capabilitiesReceived()
@@ -271,10 +271,10 @@ Singleton {
 
     function sendRequest(method, params, callback) {
         if (!isConnected) {
-            console.warn("shellitService.sendRequest: Not connected, method:", method)
+            console.warn("SHELLITService.sendRequest: Not connected, method:", method)
             if (callback) {
                 callback({
-                    "error": "not connected to shellit socket"
+                    "error": "not connected to SHELLIT socket"
                 })
             }
             return
@@ -295,7 +295,7 @@ Singleton {
             pendingRequests[id] = callback
         }
 
-        console.log("shellitService.sendRequest: Sending request id=" + id + " method=" + method)
+        console.log("SHELLITService.sendRequest: Sending request id=" + id + " method=" + method)
         requestSocket.send(request)
     }
 

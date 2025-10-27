@@ -60,7 +60,7 @@ ShellitModal {
     }
 
     onBackgroundClicked: () => {
-        shellitService.bluetoothCancelPairing(token)
+        SHELLITService.bluetoothCancelPairing(token)
         close()
         pinInput = ""
         passkeyInput = ""
@@ -78,7 +78,7 @@ ShellitModal {
             implicitHeight: mainColumn.implicitHeight
 
             Keys.onEscapePressed: event => {
-                shellitService.bluetoothCancelPairing(token)
+                SHELLITService.bluetoothCancelPairing(token)
                 close()
                 pinInput = ""
                 passkeyInput = ""
@@ -259,7 +259,7 @@ ShellitModal {
                                 hoverEnabled: true
                                 cursorShape: Qt.PointingHandCursor
                                 onClicked: () => {
-                                    shellitService.bluetoothCancelPairing(token)
+                                    SHELLITService.bluetoothCancelPairing(token)
                                     close()
                                     pinInput = ""
                                     passkeyInput = ""
@@ -329,7 +329,7 @@ ShellitModal {
                 iconSize: Theme.iconSize - 4
                 iconColor: Theme.surfaceText
                 onClicked: () => {
-                    shellitService.bluetoothCancelPairing(token)
+                    SHELLITService.bluetoothCancelPairing(token)
                     close()
                     pinInput = ""
                     passkeyInput = ""
@@ -349,7 +349,7 @@ ShellitModal {
             secrets["decision"] = "yes"
         }
 
-        shellitService.bluetoothSubmitPairing(token, secrets, true, response => {
+        SHELLITService.bluetoothSubmitPairing(token, secrets, true, response => {
             if (response.error) {
                 ToastService.showError("Pairing failed", response.error)
             }

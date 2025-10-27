@@ -196,7 +196,7 @@ Column {
             width: parent.width
             height: 60
             primaryMessage: {
-                if (!shellitService.shellitAvailable) {
+                if (!SHELLITService.shellitAvailable) {
                     return "shellit_SOCKET not available"
                 }
                 return "NM not supported"

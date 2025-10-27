@@ -25,7 +25,7 @@ Singleton {
         }
         return configDirStr + "/Shellit/plugins"
     }
-    property string systemPluginDirectory: "/etc/xdg/quickshell/shellit-plugins"
+    property string systemPluginDirectory: "/etc/xdg/quickshell/Shellit-plugins"
 
     property var knownManifests: ({})
     property var pathToPluginId: ({})
@@ -428,9 +428,9 @@ Singleton {
             return id !== widgetId
         }
 
-        const leftWidgets = SettingsData.ShellitBarLeftWidgets
-        const centerWidgets = SettingsData.ShellitBarCenterWidgets
-        const rightWidgets = SettingsData.ShellitBarRightWidgets
+        const leftWidgets = SettingsData.shellitBarLeftWidgets
+        const centerWidgets = SettingsData.shellitBarCenterWidgets
+        const rightWidgets = SettingsData.shellitBarRightWidgets
 
         const newLeft = leftWidgets.filter(filterWidget)
         const newCenter = centerWidgets.filter(filterWidget)
