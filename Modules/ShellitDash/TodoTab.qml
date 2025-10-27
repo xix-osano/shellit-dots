@@ -84,13 +84,13 @@ Item {
 
     property string newTaskText: ""
 
-    ColumnLayout {
+    Column {
         anchors.fill: parent
         spacing: Theme.spacingM
-        padding: Theme.spacingM
+        anchors.margins: Theme.spacingM
 
         // Header row — add and refresh
-        RowLayout {
+        Row {
             Layout.fillWidth: true
             spacing: Theme.spacingS
 
@@ -159,7 +159,7 @@ Item {
                     shadowColor: Qt.rgba(0, 0, 0, 0.2)
                 }
 
-                RowLayout {
+                Row {
                     anchors.fill: parent
                     anchors.margins: Theme.spacingS
                     spacing: Theme.spacingM
