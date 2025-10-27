@@ -67,7 +67,7 @@ install(FILES "${VERSION_HEADER}" DESTINATION "${INSTALL_QSCONFDIR}/include")
 # Installation Logic
 # ---------------------------------------------------------------------------
 if("shell" IN_LIST ENABLE_MODULES)
-    foreach(dir assets Common Modals Modules Services Widgets)
+    foreach(dir assets Common Modals Modules PLUGINS Services Widgets)
         if(EXISTS "${dir}")
             install(DIRECTORY ${dir} DESTINATION "${INSTALL_QSCONFDIR}")
         endif()
