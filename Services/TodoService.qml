@@ -4,6 +4,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtCore
 import Quickshell.Io
+import Quickshell
 
 Singleton {
     id: root
