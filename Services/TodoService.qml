@@ -16,7 +16,7 @@ Singleton {
     // Data
     property var list: []
 
-    signal listChanged()
+    //Removed: signal listChanged()
 
     function ensureStateDir() {
         const dir = stateDir
