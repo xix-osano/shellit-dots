@@ -219,6 +219,7 @@ ShellitPopout {
                         let tabs = [
                             { icon: "dashboard", text: "Overview" },
                             { icon: "music_note", text: "Media" },
+                            { icon: "check_box", text: "Todo" },
                             { icon: "wallpaper", text: "Wallpapers" }
                         ]
 
@@ -255,8 +256,9 @@ ShellitPopout {
                     implicitHeight: {
                         if (currentIndex === 0) return overviewTab.implicitHeight
                         if (currentIndex === 1) return mediaTab.implicitHeight
-                        if (currentIndex === 2) return wallpaperTab.implicitHeight
-                        if (SettingsData.weatherEnabled && currentIndex === 3) return weatherTab.implicitHeight
+                        if (currentIndex === 2) return todoTab.implicitHeight
+                        if (currentIndex === 3) return wallpaperTab.implicitHeight
+                        if (SettingsData.weatherEnabled && currentIndex === 4) return weatherTab.implicitHeight
                         return overviewTab.implicitHeight
                     }
                     currentIndex: root.currentTabIndex
@@ -266,8 +268,8 @@ ShellitPopout {
 
                         onSwitchToWeatherTab: {
                             if (SettingsData.weatherEnabled) {
-                                tabBar.currentIndex = 3
-                                tabBar.tabClicked(3)
+                                tabBar.currentIndex = 4
+                                tabBar.tabClicked(4)
                             }
                         }
 
@@ -287,14 +289,14 @@ ShellitPopout {
 
                     WallpaperTab {
                         id: wallpaperTab
-                        active: root.currentTabIndex === 2
+                        active: root.currentTabIndex === 3
                         tabBarItem: tabBar
                         keyForwardTarget: mainContainer
                     }
 
                     WeatherTab {
                         id: weatherTab
-                        visible: SettingsData.weatherEnabled && root.currentTabIndex === 3
+                        visible: SettingsData.weatherEnabled && root.currentTabIndex === 4
                     }
                 }
             }
