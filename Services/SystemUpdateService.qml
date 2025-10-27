@@ -123,12 +123,21 @@ Singleton {
             versionDetection.running = true
         }
     }
-
+    
     Process {
         id: versionDetection
         command: [
             "sh", "-c",
-            `cd "${Quickshell.shellDir}" && if [ -d .git ]; then echo "(git) $(git rev-parse --short HEAD)"; elif [ -f VERSION ]; then cat VERSION; fi`
+            `cd "${Quickshell.shellDir}" && \
+            VERSION_FILE="VERSION"; \
+            VERSION="0.1.0"; \
+            [ -f "$VERSION_FILE" ] && VERSION=$(cat $VERSION_FILE); \
+            if [ -d .git ]; then \
+                GIT_REV=$(git rev-parse --short HEAD); \
+                echo "$VERSION ($GIT_REV)"; \
+            else \
+                echo "$VERSION"; \
+            fi`
         ]
 
         stdout: StdioCollector {
@@ -137,6 +146,20 @@ Singleton {
             }
         }
     }
+
+    // Process {
+    //     id: versionDetection
+    //     command: [
+    //         "sh", "-c",
+    //         `cd "${Quickshell.shellDir}" && if [ -d .git ]; then echo "(git) $(git rev-parse --short HEAD)"; elif [ -f VERSION ]; then cat VERSION; fi`
+    //     ]
+
+    //     stdout: StdioCollector {
+    //         onStreamFinished: {
+    //             shellVersion = text.trim()
+    //         }
+    //     }
+    // }
 
     Process {
         id: updateFinderDetection
