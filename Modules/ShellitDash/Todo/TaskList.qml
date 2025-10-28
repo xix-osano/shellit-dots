@@ -9,6 +9,8 @@ import Quickshell
 
 Item {
     id: root
+    anchors.fill: parent
+
     required property var taskList;
     property string emptyPlaceholderIcon
     property string emptyPlaceholderText

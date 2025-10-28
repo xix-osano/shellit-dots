@@ -144,86 +144,40 @@ Item {
             height: 1
             color: ShellitAppearance.colors.colOutlineVariant
         }
-        
-        // --- Scrollable Task List ---
-        ScrollView {
+
+        SwipeView {
+            id: swipeView
+            Layout.topMargin: 30
             Layout.fillWidth: true
             Layout.fillHeight: true
+            anchors.margins: 10
+            spacing: Theme.spacingM
             clip: true
-
-            ListView {
-                id: taskView
-                width: parent.width
-                spacing: 8
-                clip: true
-                model: root.currentTab === 0
-                    ? TodoService.list.filter(t => !t.done)
-                    : TodoService.list.filter(t => t.done)
-
-                delegate: Rectangle {
-                    width: parent.width - 20
-                    height: 50
-                    radius: 10
-                    color: Appearance.colors.colSurfaceContainerHigh
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.margins: 10
-
-                    RowLayout {
-                        anchors.fill: parent
-                        anchors.margins: 10
-                        spacing: 10
-
-                        Text {
-                            text: modelData.text
-                            font.pixelSize: 14
-                            Layout.fillWidth: true
-                            wrapMode: Text.Wrap
-                        }
-
-                        Text {
-                            text: modelData.date ?? "-"
-                            font.pixelSize: 13
-                            color: Appearance.m3colors.m3onSurfaceVariant
-                            horizontalAlignment: Text.AlignRight
-                        }
-                    }
-                }
+            currentIndex: currentTab
+            onCurrentIndexChanged: {
+                tabIndicator.enableIndicatorAnimation = true
+                currentTab = currentIndex
             }
+
+            // To Do tab
+            TaskList {
+                listBottomPadding: root.fabSize + root.fabMargins * 2
+                emptyPlaceholderIcon: "check_circle"
+                emptyPlaceholderText: "Nothing here!"
+                taskList: Todo.list
+                    .map(function(item, i) { return Object.assign({}, item, {originalIndex: i}); })
+                    .filter(function(item) { return !item.done; })
+            }
+            TaskList {
+                listBottomPadding: root.fabSize + root.fabMargins * 2
+                emptyPlaceholderIcon: "checklist"
+                emptyPlaceholderText: "Finished tasks will go here"
+                taskList: Todo.list
+                    .map(function(item, i) { return Object.assign({}, item, {originalIndex: i}); })
+                    .filter(function(item) { return item.done; })
+            }
+
         }
-
-        // SwipeView {
-        //     id: swipeView
-        //     Layout.topMargin: 30
-        //     Layout.fillWidth: true
-        //     Layout.fillHeight: true
-        //     anchors.margins: 10
-        //     spacing: Theme.spacingM
-        //     clip: true
-        //     currentIndex: currentTab
-        //     onCurrentIndexChanged: {
-        //         tabIndicator.enableIndicatorAnimation = true
-        //         currentTab = currentIndex
-        //     }
-
-        //     // To Do tab
-        //     TaskList {
-        //         listBottomPadding: root.fabSize + root.fabMargins * 2
-        //         emptyPlaceholderIcon: "check_circle"
-        //         emptyPlaceholderText: "Nothing here!"
-        //         taskList: Todo.list
-        //             .map(function(item, i) { return Object.assign({}, item, {originalIndex: i}); })
-        //             .filter(function(item) { return !item.done; })
-        //     }
-        //     TaskList {
-        //         listBottomPadding: root.fabSize + root.fabMargins * 2
-        //         emptyPlaceholderIcon: "checklist"
-        //         emptyPlaceholderText: "Finished tasks will go here"
-        //         taskList: Todo.list
-        //             .map(function(item, i) { return Object.assign({}, item, {originalIndex: i}); })
-        //             .filter(function(item) { return item.done; })
-        //     }
-
-        // }
     }
 
     // + FAB
