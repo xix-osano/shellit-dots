@@ -16,8 +16,6 @@ Singleton {
     // Data
     property var list: []
 
-    //Removed: signal listChanged()
-
     function ensureStateDir() {
         const dir = stateDir
         const d = new QDir()
@@ -25,11 +23,16 @@ Singleton {
             d.mkpath(dir)
         }
     }
-
+    
     function save() {
         ensureStateDir()
+        if (!todoFile.ready) {
+            console.warn("[TodoService] File not ready — delaying save")
+            return
+        }
         try {
             todoFile.setText(JSON.stringify(list, null, 2))
+            console.log("[TodoService] Saved", list.length, "tasks")
         } catch (e) {
             console.warn("[TodoService] Failed to save:", e)
         }
@@ -49,7 +52,6 @@ Singleton {
         })
         list = list.slice(0)
         save()
-        listChanged()
     }
 
     function markDone(index) {
@@ -57,7 +59,6 @@ Singleton {
             list[index].done = true
             list = list.slice(0)
             save()
-            listChanged()
         }
     }
 
@@ -66,7 +67,6 @@ Singleton {
             list[index].done = false
             list = list.slice(0)
             save()
-            listChanged()
         }
     }
 
@@ -75,7 +75,6 @@ Singleton {
             list.splice(index, 1)
             list = list.slice(0)
             save()
-            listChanged()
         }
     }
 
