@@ -82,7 +82,7 @@ Singleton {
     FileView {
         id: todoFile
         path: root.filePath
-        blockLoading: true
+        blockLoading: false
         blockWrites: false
         watchChanges: true
 
