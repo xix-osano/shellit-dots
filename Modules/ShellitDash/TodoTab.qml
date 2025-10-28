@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import qs.Services.TodoService
+import qs.Services
 
 Item {
     id: todoTab
