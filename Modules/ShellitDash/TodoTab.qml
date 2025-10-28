@@ -3,6 +3,7 @@ import qs.Common
 import qs.Widgets
 import qs.Modules.ShellitDash.Todo
 import QtQuick
+import QtQuick.Effects
 import QtQuick.Controls
 import QtQuick.Layouts
 
