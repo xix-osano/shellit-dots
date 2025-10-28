@@ -43,10 +43,12 @@ Item {
     Column {
         anchors.fill: parent
         spacing: Theme.spacingM
+        height: parent.height
 
         TabBar {
             id: tabBar
             Layout.fillWidth: true
+            height: 40
             currentIndex: currentTab
             onCurrentIndexChanged: currentTab = currentIndex
 
@@ -75,7 +77,7 @@ Item {
         Item { // Tab indicator
             id: tabIndicator
             Layout.fillWidth: true
-            height: 40
+            height: 3
             property bool enableIndicatorAnimation: false
             Connections {
                 target: root
