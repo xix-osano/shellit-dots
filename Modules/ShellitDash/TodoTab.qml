@@ -52,17 +52,17 @@ Item {
             currentIndex: currentTab
             onCurrentIndexChanged: currentTab = currentIndex
 
-            background: Item {
-                WheelHandler {
-                    onWheel: (event) => {
-                        if (event.angleDelta.y < 0)
-                            tabBar.currentIndex = Math.min(tabBar.currentIndex + 1, root.tabButtonList.length - 1)
-                        else if (event.angleDelta.y > 0)
-                            tabBar.currentIndex = Math.max(tabBar.currentIndex - 1, 0)
-                    }
-                    acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-                }
-            }
+            // background: Item {
+            //     WheelHandler {
+            //         onWheel: (event) => {
+            //             if (event.angleDelta.y < 0)
+            //                 tabBar.currentIndex = Math.min(tabBar.currentIndex + 1, root.tabButtonList.length - 1)
+            //             else if (event.angleDelta.y > 0)
+            //                 tabBar.currentIndex = Math.max(tabBar.currentIndex - 1, 0)
+            //         }
+            //         acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+            //     }
+            // }
 
             Repeater {
                 model: root.tabButtonList
@@ -124,10 +124,11 @@ Item {
 
         SwipeView {
             id: swipeView
-            Layout.topMargin: 10
+            Layout.topMargin: 30
             Layout.fillWidth: true
             Layout.fillHeight: true
-            spacing: 10
+            anchors.margins: 10
+            spacing: Theme.spacingM
             clip: true
             currentIndex: currentTab
             onCurrentIndexChanged: {
