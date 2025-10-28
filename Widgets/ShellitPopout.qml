@@ -131,7 +131,7 @@ PanelWindow {
         active: root.visible
         asynchronous: false
         transformOrigin: Item.Center
-        layer.enabled: Quickshell.env("shellit_DISABLE_LAYER") !== "true"
+        layer.enabled: Quickshell.env("SHELLIT_DISABLE_LAYER") !== "true"
         layer.smooth: true
         opacity: shouldBeVisible ? 1 : 0
         transform: [scaleTransform, motionTransform]

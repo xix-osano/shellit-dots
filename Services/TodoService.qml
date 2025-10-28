@@ -12,8 +12,8 @@ Singleton {
     signal tasksUpdated()
 
     // Paths
-    property string stateDir: StandardPaths.writableLocation(StandardPaths.GenericStateLocation) + "/Shellit"
-    property string filePath: stateDir + "/todo.json"
+    readonly property string stateDir: Paths.strip(StandardPaths.writableLocation(StandardPaths.GenericStateLocation) + "/Shellit")
+    readonly property string filePath: stateDir + "/todo.json"
 
     // Data
     property var list: []
