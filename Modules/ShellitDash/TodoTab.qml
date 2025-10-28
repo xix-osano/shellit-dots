@@ -138,6 +138,8 @@ Item {
 
             // To Do tab
             TaskList {
+                implicitHeight: parent.height
+                implicitWidth: parent.width
                 listBottomPadding: root.fabSize + root.fabMargins * 2
                 emptyPlaceholderIcon: "check_circle"
                 emptyPlaceholderText: "Nothing here!"
@@ -146,6 +148,8 @@ Item {
                     .filter(function(item) { return !item.done; })
             }
             TaskList {
+                implicitHeight: parent.height
+                implicitWidth: parent.width
                 listBottomPadding: root.fabSize + root.fabMargins * 2
                 emptyPlaceholderIcon: "checklist"
                 emptyPlaceholderText: "Finished tasks will go here"
