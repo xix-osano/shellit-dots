@@ -1,12 +1,12 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import QtQuick.Controls
-import Quickshell
+import Qt5Compat.GraphicalEffects
 import qs.Common
 import qs.Widgets
 import qs.Services
-import "../Services" // for TodoService
-import "."
+import Quickshell
 
 Item {
     id: root
