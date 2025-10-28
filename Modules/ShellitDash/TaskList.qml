@@ -23,7 +23,7 @@ Item {
 
         clip: true
         layer.enabled: true
-        layer.effect: OpacityMask {
+        layer.effect: MultiEffect {
             maskSource: Rectangle {
                 width: flickable.width
                 height: flickable.height
