@@ -40,80 +40,103 @@ Item {
         }
     }
 
-    Column {
+    ColumnLayout {
         anchors.fill: parent
         spacing: Theme.spacingM
         height: parent.height
 
-        TabBar {
+        RowLayout {
             id: tabBar
             Layout.fillWidth: true
-            height: 30
-            currentIndex: currentTab
-            onCurrentIndexChanged: currentTab = currentIndex
+            Layout.margins: 10
+            spacing: 8
+            anchors.horizontalCenter: parent.horizontalCenter
 
-            // background: Item {
-            //     WheelHandler {
-            //         onWheel: (event) => {
-            //             if (event.angleDelta.y < 0)
-            //                 tabBar.currentIndex = Math.min(tabBar.currentIndex + 1, root.tabButtonList.length - 1)
-            //             else if (event.angleDelta.y > 0)
-            //                 tabBar.currentIndex = Math.max(tabBar.currentIndex - 1, 0)
-            //         }
-            //         acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-            //     }
-            // }
-
-            Repeater {
-                model: root.tabButtonList
-                delegate: SecondaryTabButton {
-                    selected: (index == currentTab)
-                    buttonText: modelData.name
-                    buttonIcon: modelData.icon
-                }
+            Button {
+                text: "Unfinished"
+                checkable: true
+                checked: root.currentTab === 0
+                onClicked: root.currentTab = 0
+                Layout.fillWidth: true
+            }
+            Button {
+                text: "Done"
+                checkable: true
+                checked: root.currentTab === 1
+                onClicked: root.currentTab = 1
+                Layout.fillWidth: true
             }
         }
 
-        Item { // Tab indicator
-            id: tabIndicator
-            Layout.fillWidth: true
-            height: 3
-            property bool enableIndicatorAnimation: false
-            Connections {
-                target: root
-                function onCurrentTabChanged() {
-                    tabIndicator.enableIndicatorAnimation = true
-                }
-            }
+        // TabBar {
+        //     id: tabBar
+        //     Layout.fillWidth: true
+        //     height: 30
+        //     currentIndex: currentTab
+        //     onCurrentIndexChanged: currentTab = currentIndex
 
-            Rectangle {
-                id: indicator
-                property int tabCount: root.tabButtonList.length
-                property real fullTabSize: root.width / tabCount;
-                property real targetWidth: tabBar?.contentItem?.children[0]?.children[tabBar.currentIndex]?.tabContentWidth ?? 0
+        //     background: Item {
+        //         WheelHandler {
+        //             onWheel: (event) => {
+        //                 if (event.angleDelta.y < 0)
+        //                     tabBar.currentIndex = Math.min(tabBar.currentIndex + 1, root.tabButtonList.length - 1)
+        //                 else if (event.angleDelta.y > 0)
+        //                     tabBar.currentIndex = Math.max(tabBar.currentIndex - 1, 0)
+        //             }
+        //             acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+        //         }
+        //     }
 
-                implicitWidth: targetWidth
-                anchors {
-                    top: parent.top
-                    bottom: parent.bottom
-                }
+        //     Repeater {
+        //         model: root.tabButtonList
+        //         delegate: SecondaryTabButton {
+        //             selected: (index == currentTab)
+        //             buttonText: modelData.name
+        //             buttonIcon: modelData.icon
+        //         }
+        //     }
+        // }
 
-                x: tabBar.currentIndex * fullTabSize + (fullTabSize - targetWidth) / 2
+        // Item { // Tab indicator
+        //     id: tabIndicator
+        //     Layout.fillWidth: true
+        //     height: 3
+        //     property bool enableIndicatorAnimation: false
+        //     Connections {
+        //         target: root
+        //         function onCurrentTabChanged() {
+        //             tabIndicator.enableIndicatorAnimation = true
+        //         }
+        //     }
 
-                color: ShellitAppearance.colors.colPrimary
-                radius: ShellitAppearance.rounding.full
+        //     Rectangle {
+        //         id: indicator
+        //         property int tabCount: root.tabButtonList.length
+        //         property real fullTabSize: root.width / tabCount;
+        //         property real targetWidth: tabBar?.contentItem?.children[0]?.children[tabBar.currentIndex]?.tabContentWidth ?? 0
 
-                Behavior on x {
-                    enabled: tabIndicator.enableIndicatorAnimation
-                    animation: ShellitAppearance.animation.elementMove.numberAnimation.createObject(this)
-                }
+        //         implicitWidth: targetWidth
+        //         anchors {
+        //             top: parent.top
+        //             bottom: parent.bottom
+        //         }
 
-                Behavior on implicitWidth {
-                    enabled: tabIndicator.enableIndicatorAnimation
-                    animation: ShellitAppearance.animation.elementMove.numberAnimation.createObject(this)
-                }
-            }
-        }
+        //         x: tabBar.currentIndex * fullTabSize + (fullTabSize - targetWidth) / 2
+
+        //         color: ShellitAppearance.colors.colPrimary
+        //         radius: ShellitAppearance.rounding.full
+
+        //         Behavior on x {
+        //             enabled: tabIndicator.enableIndicatorAnimation
+        //             animation: ShellitAppearance.animation.elementMove.numberAnimation.createObject(this)
+        //         }
+
+        //         Behavior on implicitWidth {
+        //             enabled: tabIndicator.enableIndicatorAnimation
+        //             animation: ShellitAppearance.animation.elementMove.numberAnimation.createObject(this)
+        //         }
+        //     }
+        // }
 
         Rectangle { // Tabbar bottom border
             id: tabBarBottomBorder
@@ -121,44 +144,86 @@ Item {
             height: 1
             color: ShellitAppearance.colors.colOutlineVariant
         }
-
-        SwipeView {
-            id: swipeView
-            Layout.topMargin: 30
+        
+        // --- Scrollable Task List ---
+        ScrollView {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            anchors.margins: 10
-            spacing: Theme.spacingM
             clip: true
-            currentIndex: currentTab
-            onCurrentIndexChanged: {
-                tabIndicator.enableIndicatorAnimation = true
-                currentTab = currentIndex
-            }
 
-            // To Do tab
-            TaskList {
-                implicitHeight: parent.height
-                implicitWidth: parent.width
-                listBottomPadding: root.fabSize + root.fabMargins * 2
-                emptyPlaceholderIcon: "check_circle"
-                emptyPlaceholderText: "Nothing here!"
-                taskList: Todo.list
-                    .map(function(item, i) { return Object.assign({}, item, {originalIndex: i}); })
-                    .filter(function(item) { return !item.done; })
-            }
-            TaskList {
-                implicitHeight: parent.height
-                implicitWidth: parent.width
-                listBottomPadding: root.fabSize + root.fabMargins * 2
-                emptyPlaceholderIcon: "checklist"
-                emptyPlaceholderText: "Finished tasks will go here"
-                taskList: Todo.list
-                    .map(function(item, i) { return Object.assign({}, item, {originalIndex: i}); })
-                    .filter(function(item) { return item.done; })
-            }
+            ListView {
+                id: taskView
+                width: parent.width
+                spacing: 8
+                clip: true
+                model: root.currentTab === 0
+                    ? TodoService.list.filter(t => !t.done)
+                    : TodoService.list.filter(t => t.done)
 
+                delegate: Rectangle {
+                    width: parent.width - 20
+                    height: 50
+                    radius: 10
+                    color: Appearance.colors.colSurfaceContainerHigh
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.margins: 10
+
+                    RowLayout {
+                        anchors.fill: parent
+                        anchors.margins: 10
+                        spacing: 10
+
+                        Text {
+                            text: modelData.text
+                            font.pixelSize: 14
+                            Layout.fillWidth: true
+                            wrapMode: Text.Wrap
+                        }
+
+                        Text {
+                            text: modelData.date ?? "-"
+                            font.pixelSize: 13
+                            color: Appearance.m3colors.m3onSurfaceVariant
+                            horizontalAlignment: Text.AlignRight
+                        }
+                    }
+                }
+            }
         }
+
+        // SwipeView {
+        //     id: swipeView
+        //     Layout.topMargin: 30
+        //     Layout.fillWidth: true
+        //     Layout.fillHeight: true
+        //     anchors.margins: 10
+        //     spacing: Theme.spacingM
+        //     clip: true
+        //     currentIndex: currentTab
+        //     onCurrentIndexChanged: {
+        //         tabIndicator.enableIndicatorAnimation = true
+        //         currentTab = currentIndex
+        //     }
+
+        //     // To Do tab
+        //     TaskList {
+        //         listBottomPadding: root.fabSize + root.fabMargins * 2
+        //         emptyPlaceholderIcon: "check_circle"
+        //         emptyPlaceholderText: "Nothing here!"
+        //         taskList: Todo.list
+        //             .map(function(item, i) { return Object.assign({}, item, {originalIndex: i}); })
+        //             .filter(function(item) { return !item.done; })
+        //     }
+        //     TaskList {
+        //         listBottomPadding: root.fabSize + root.fabMargins * 2
+        //         emptyPlaceholderIcon: "checklist"
+        //         emptyPlaceholderText: "Finished tasks will go here"
+        //         taskList: Todo.list
+        //             .map(function(item, i) { return Object.assign({}, item, {originalIndex: i}); })
+        //             .filter(function(item) { return item.done; })
+        //     }
+
+        // }
     }
 
     // + FAB
