@@ -157,28 +157,38 @@ Item {
         }
     }
 
-    // + FAB
-    StyledRectangularShadow {
-        target: fabButton
-        radius: fabButton.buttonRadius
-        blur: 0.6 * Appearance.sizes.elevationMargin
-    }
+    // === Floating Action Button ===
     FloatingActionButton {
         id: fabButton
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.rightMargin: root.fabMargins
-        anchors.bottomMargin: root.fabMargins
-
+        anchors.margins: root.fabMargins
+        icon.name: "add"
         onClicked: root.showAddDialog = true
-
-        contentItem: MaterialSymbol {
-            text: "add"
-            horizontalAlignment: Text.AlignHCenter
-            iconSize: Appearance.font.fontSize.huge
-            color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.7)
-        }
     }
+
+    // // + FAB
+    // StyledRectangularShadow {
+    //     target: fabButton
+    //     radius: fabButton.buttonRadius
+    //     blur: 0.6 * Appearance.sizes.elevationMargin
+    // }
+    // FloatingActionButton {
+    //     id: fabButton
+    //     anchors.right: parent.right
+    //     anchors.bottom: parent.bottom
+    //     anchors.rightMargin: root.fabMargins
+    //     anchors.bottomMargin: root.fabMargins
+
+    //     onClicked: root.showAddDialog = true
+
+    //     contentItem: MaterialSymbol {
+    //         text: "add"
+    //         horizontalAlignment: Text.AlignHCenter
+    //         iconSize: Appearance.font.fontSize.huge
+    //         color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.7)
+    //     }
+    // }
 
     Item {
         anchors.fill: parent
