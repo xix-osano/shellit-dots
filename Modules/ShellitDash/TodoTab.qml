@@ -92,13 +92,30 @@ Item {
     }
 
     // === Floating Action Button ===
-    FloatingActionButton {
-        id: fabButton
+    Rectangle {
+        id: addButton
+        width: 56; height: 56
+        radius: 28
+        color: "#6200EE"
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins: root.fabMargins
-        icon.name: "add"
-        onClicked: root.showAddDialog = true
+        anchors.margins: 16
+
+        Text {
+            anchors.centerIn: parent
+            text: "+"
+            color: "white"
+            font.pixelSize: 28
+            font.bold: true
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                // trigger task creation
+                TodoService.addTask("New Task")
+            }
+        }
     }
 
     // === Add Task Dialog ===
