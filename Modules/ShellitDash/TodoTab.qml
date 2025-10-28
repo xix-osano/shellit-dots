@@ -42,7 +42,6 @@ Item {
 
             Button {
                 text: "Add"
-                color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.4)
                 enabled: root.newTaskText.trim().length > 0
                 onClicked: {
                     TodoService.addTask(root.newTaskText.trim())
