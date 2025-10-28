@@ -139,7 +139,7 @@ Item {
             anchors.centerIn: parent
             color: Appearance.colors.colSurfaceContainerHigh
             radius: 10
-            padding: 16
+            anchors.margins: 16
 
             ColumnLayout {
                 anchors.fill: parent
