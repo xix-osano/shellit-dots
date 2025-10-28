@@ -48,7 +48,7 @@ Item {
         TabBar {
             id: tabBar
             Layout.fillWidth: true
-            height: 40
+            height: 30
             currentIndex: currentTab
             onCurrentIndexChanged: currentTab = currentIndex
 

@@ -9,9 +9,6 @@ import Quickshell
 
 Item {
     id: root
-    implicitWidth: 700
-    implicitHeight: 370
-
     required property var taskList;
     property string emptyPlaceholderIcon
     property string emptyPlaceholderText
