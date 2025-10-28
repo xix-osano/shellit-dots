@@ -16,7 +16,7 @@ Item {
     property int todoListItemPadding: 8
     property int listBottomPadding: 80
 
-    StyledFlickable {
+    ShellitFlickable {
         id: flickable
         anchors.fill: parent
         contentHeight: columnLayout.height
