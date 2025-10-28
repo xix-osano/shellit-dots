@@ -86,7 +86,7 @@ if("extras" IN_LIST ENABLE_MODULES)
 endif()
 
 if("shell" IN_LIST ENABLE_MODULES)
-    foreach(dir assets Common Modals Modules PLUGINS Services Widgets)
+    foreach(dir assets Common Modals Modules PLUGINS scripts Services Shaders Widgets)
         if(EXISTS "${dir}")
             install(DIRECTORY ${dir} DESTINATION "${INSTALL_QSCONFDIR}")
         endif()

@@ -17,12 +17,17 @@ Singleton {
 
     // Data
     property var list: []
-
+    
     function ensureStateDir() {
         const dir = stateDir
-        const d = new QDir()
-        if (!d.exists(dir)) {
-            d.mkpath(dir)
+        try {
+            const fileInfo = File.info(dir)
+            if (!fileInfo.exists) {
+                File.makePath(dir)
+                console.log("[TodoService] Created state directory:", dir)
+            }
+        } catch (e) {
+            console.warn("[TodoService] Failed to ensure state dir:", e)
         }
     }
     
@@ -106,7 +111,7 @@ Singleton {
             root.tasksUpdated()
         }
 
-        onLoadFailed: {
+        onLoadFailed: (error) => {
             console.log("[TodoService] Creating new todo file due to:", error)
             root.list = []
             root.save()
