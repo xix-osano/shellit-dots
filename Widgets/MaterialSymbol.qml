@@ -3,13 +3,13 @@ import QtQuick
 
 StyledText {
     id: root
-    property real iconSize: Appearance?.font.fontSize.small ?? 16
+    property real iconSize: ShellitAppearance?.font.pixelSize.small ?? 16
     property real fill: 0
     property real truncatedFill: fill.toFixed(1) // Reduce memory consumption spikes from constant font remapping
     renderType: fill !== 0 ? Text.CurveRendering : Text.NativeRendering
     font {
         hintingPreference: Font.PreferFullHinting
-        family: "JetBrains Mono"
+        family: ShellitAppearance?.font.family.iconMaterial ?? "Material Symbols Rounded"
         pixelSize: iconSize
         weight: Font.Normal + (Font.DemiBold - Font.Normal) * truncatedFill
         variableAxes: { 
@@ -22,9 +22,9 @@ StyledText {
 
     Behavior on fill { // Leaky leaky, no good
         NumberAnimation {
-            duration: Appearance?.animation.elementMoveFast.duration ?? 200
-            easing.type: Appearance?.animation.elementMoveFast.type ?? Easing.BezierSpline
-            easing.bezierCurve: Appearance?.animation.elementMoveFast.bezierCurve ?? [0.34, 0.80, 0.34, 1.00, 1, 1]
+            duration: ShellitAppearance?.animation.elementMoveFast.duration ?? 200
+            easing.type: ShellitAppearance?.animation.elementMoveFast.type ?? Easing.BezierSpline
+            easing.bezierCurve: ShellitAppearance?.animation.elementMoveFast.bezierCurve ?? [0.34, 0.80, 0.34, 1.00, 1, 1]
         }
     }
 }
