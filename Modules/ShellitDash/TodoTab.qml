@@ -151,10 +151,16 @@ Item {
     }
 
     // + FAB
-    StyledRectangularShadow {
+    RectangularShadow {
+        required property var target
         target: fabButton
-        radius: fabButton.buttonRadius
+        anchors.fill: target
+        radius: target.buttonRadius
         blur: 0.6 * ShellitAppearance.sizes.elevationMargin
+        offset: Qt.vector2d(0.0, 1.0)
+        spread: 1
+        color: ShellitAppearance.colors.colShadow
+        cached: true
     }
     FloatingActionButton {
         id: fabButton
