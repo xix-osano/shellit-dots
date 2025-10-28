@@ -4,7 +4,7 @@ import qs.Services
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import QtGraphicalEffects
+import QtQuick.Effects
 import Quickshell
 
 Item {
