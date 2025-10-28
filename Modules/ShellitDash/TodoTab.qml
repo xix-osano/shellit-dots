@@ -295,11 +295,11 @@ Item {
                     Layout.alignment: Qt.AlignRight
                     spacing: 5
 
-                    DialogButton {
+                    Button {
                         buttonText: "Cancel"
                         onClicked: root.showAddDialog = false
                     }
-                    DialogButton {
+                    Button {
                         buttonText: "Add"
                         enabled: todoInput.text.length > 0
                         onClicked: dialog.addTask()
