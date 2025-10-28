@@ -108,7 +108,7 @@ Item {
                                 Item {
                                     Layout.fillWidth: true
                                 }
-                                TodoItemActionButton {
+                                Button {
                                     Layout.fillWidth: false
                                     onClicked: {
                                         todoItem.pendingDoneToggle = true
@@ -122,7 +122,7 @@ Item {
                                         color: Theme.surfaceContainerHigh
                                     }
                                 }
-                                TodoItemActionButton {
+                                Button {
                                     Layout.fillWidth: false
                                     onClicked: {
                                         todoItem.pendingDelete = true
