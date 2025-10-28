@@ -189,6 +189,13 @@ Item {
                     }
                 }
             }
-        }       
+        }
+
+        Connections {
+            target: TodoService
+            function onTasksUpdated() {
+                taskList.model = TodoService.list
+            }
+        }
     }
 }

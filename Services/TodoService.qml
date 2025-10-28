@@ -9,6 +9,8 @@ import Quickshell
 Singleton {
     id: root
 
+    signal tasksUpdated()
+
     // Paths
     property string stateDir: StandardPaths.writableLocation(StandardPaths.GenericStateLocation) + "/Shellit"
     property string filePath: stateDir + "/todo.json"
@@ -52,6 +54,7 @@ Singleton {
         })
         list = list.slice(0)
         save()
+        tasksUpdated()
     }
 
     function markDone(index) {
@@ -59,6 +62,7 @@ Singleton {
             list[index].done = true
             list = list.slice(0)
             save()
+            tasksUpdated()
         }
     }
 
@@ -67,6 +71,7 @@ Singleton {
             list[index].done = false
             list = list.slice(0)
             save()
+            tasksUpdated()
         }
     }
 
@@ -75,7 +80,12 @@ Singleton {
             list.splice(index, 1)
             list = list.slice(0)
             save()
+            tasksUpdated()
         }
+    }
+    
+    Component.onCompleted: {
+        refresh()
     }
 
     FileView {
@@ -93,16 +103,14 @@ Singleton {
                 console.warn("[TodoService] Error parsing file:", e)
                 root.list = []
             }
+            root.tasksUpdated()
         }
 
         onLoadFailed: {
             console.log("[TodoService] Creating new todo file due to:", error)
             root.list = []
             root.save()
+            root.tasksUpdated()
         }
-    }
-
-    Component.onCompleted: {
-        refresh()
     }
 }
