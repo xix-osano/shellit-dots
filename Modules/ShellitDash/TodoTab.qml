@@ -9,6 +9,9 @@ import QtQuick.Layouts
 
 Item {
     id: root
+    implicitWidth: 700
+    implicitHeight: 410
+
     property int currentTab: 0
     property var tabButtonList: [{"icon": "checklist", "name": "Unfinished"}, {"name": "Done", "icon": "check_circle"}]
     property bool showAddDialog: false
@@ -37,9 +40,9 @@ Item {
         }
     }
 
-    ColumnLayout {
+    Column {
         anchors.fill: parent
-        spacing: 0
+        spacing: Theme.spacingM
 
         TabBar {
             id: tabBar
@@ -72,7 +75,7 @@ Item {
         Item { // Tab indicator
             id: tabIndicator
             Layout.fillWidth: true
-            height: 3
+            height: 40
             property bool enableIndicatorAnimation: false
             Connections {
                 target: root
