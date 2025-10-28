@@ -19,7 +19,11 @@ TabButton {
     property color colBackgroundHover: ShellitAppearance.colors.colLayer1Hover
     property color colRipple: ShellitAppearance.colors.colLayer1Active
 
-    PointingHandInteraction {}
+    MouseArea {
+        anchors.fill: parent
+        onPressed: (mouse) => mouse.accepted = false
+        cursorShape: Qt.PointingHandCursor
+    }
 
     component RippleAnim: NumberAnimation {
         duration: rippleDuration
