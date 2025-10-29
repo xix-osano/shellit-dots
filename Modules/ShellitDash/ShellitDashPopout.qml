@@ -293,7 +293,6 @@ ShellitPopout {
                     TodoTab {
                         id: todoTab
                         active: root.currentTabIndex === 3
-                        tabBarItem: tabBar
                     }
 
                     WeatherTab {
