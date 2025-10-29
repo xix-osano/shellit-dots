@@ -102,7 +102,7 @@ Rectangle {
             RowLayout {
                 anchors.fill: parent
                 spacing: 0
-                padding: 10
+                anchors.margins: 10
 
                 Text {
                     Layout.fillWidth: true
@@ -133,7 +133,7 @@ Rectangle {
                 id: column
                 width: parent.width
                 spacing: 5
-                padding: 5
+                anchors.margins: 5
 
                 // Filtered List Model: This creates a filtered list based on currentFilter
                 Repeater {
