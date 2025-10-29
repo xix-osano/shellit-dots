@@ -38,7 +38,6 @@ Item {
             Text {
                 id: taskDescriptionText
                 Layout.fillWidth: true
-                text: task.content
                 font.pixelSize: 16
                 verticalAlignment: Text.AlignVCenter
                 elide: Text.ElideRight
