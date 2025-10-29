@@ -257,7 +257,7 @@ ShellitPopout {
                         if (currentIndex === 0) return overviewTab.implicitHeight
                         if (currentIndex === 1) return mediaTab.implicitHeight
                         if (currentIndex === 2) return wallpaperTab.implicitHeight
-                        f (currentIndex === 3) return todoTab.implicitHeight
+                        if (currentIndex === 3) return todoTab.implicitHeight
                         if (SettingsData.weatherEnabled && currentIndex === 4) return weatherTab.implicitHeight
                         return overviewTab.implicitHeight
                     }
