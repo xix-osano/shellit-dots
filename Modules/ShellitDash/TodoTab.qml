@@ -14,9 +14,10 @@ Item {
         id: headerText
         text: "To-Do List. Coming Soon!"
         font.pixelSize: 24
+        color: Theme.primary
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 10
+        anchors.verticalCenter: parent.verticalCenter
     }
 
 }
