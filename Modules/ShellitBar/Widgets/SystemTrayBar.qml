@@ -19,7 +19,7 @@ Item {
     property bool isAtBottom: false
     readonly property real horizontalPadding: SettingsData.ShellitBarNoBackground ? 2 : Theme.spacingS
     readonly property var hiddenTrayIds: {
-        const envValue = Quickshell.env("shellit_HIDE_TRAYIDS") || ""
+        const envValue = Quickshell.env("SHELLIT_HIDE_TRAYIDS") || ""
         return envValue ? envValue.split(",").map(id => id.trim().toLowerCase()) : []
     }
     readonly property var visibleTrayItems: {
