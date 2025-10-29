@@ -219,8 +219,8 @@ ShellitPopout {
                         let tabs = [
                             { icon: "dashboard", text: "Overview" },
                             { icon: "music_note", text: "Media" },
-                            { icon: "checklist", text: "Todo" },
-                            { icon: "wallpaper", text: "Wallpapers" }
+                            { icon: "wallpaper", text: "Wallpapers" },
+                            { icon: "checklist", text: "Todo" }
                         ]
 
                         if (SettingsData.weatherEnabled) {
@@ -256,8 +256,8 @@ ShellitPopout {
                     implicitHeight: {
                         if (currentIndex === 0) return overviewTab.implicitHeight
                         if (currentIndex === 1) return mediaTab.implicitHeight
-                        if (currentIndex === 2) return todoTab.implicitHeight
-                        if (currentIndex === 3) return wallpaperTab.implicitHeight
+                        if (currentIndex === 2) return wallpaperTab.implicitHeight
+                        f (currentIndex === 3) return todoTab.implicitHeight
                         if (SettingsData.weatherEnabled && currentIndex === 4) return weatherTab.implicitHeight
                         return overviewTab.implicitHeight
                     }
@@ -283,15 +283,17 @@ ShellitPopout {
                         id: mediaTab
                     }
 
-                    TodoTab {
-                        id: todoTab
-                    }
-
                     WallpaperTab {
                         id: wallpaperTab
-                        active: root.currentTabIndex === 3
+                        active: root.currentTabIndex === 2
                         tabBarItem: tabBar
                         keyForwardTarget: mainContainer
+                    }
+
+                    TodoTab {
+                        id: todoTab
+                        active: root.currentTabIndex === 3
+                        tabBarItem: tabBar
                     }
 
                     WeatherTab {
