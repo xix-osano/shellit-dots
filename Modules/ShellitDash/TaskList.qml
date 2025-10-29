@@ -24,7 +24,7 @@ Item {
         RowLayout {
             anchors.fill: parent
             spacing: 10
-            padding: 10
+            anchors.margins: 10
 
             // 1. CheckBox for Status
             CheckBox {
