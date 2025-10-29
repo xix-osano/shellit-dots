@@ -37,7 +37,7 @@ Rectangle {
             Layout.fillWidth: true
             height: 50
             spacing: 10
-            padding: 10
+            anchors.margins: 10
             
             // --- Unfinished Button ---
             Button {
