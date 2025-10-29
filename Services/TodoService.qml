@@ -1,6 +1,7 @@
 pragma Singleton
 pragma ComponentBehavior: Bound
 
+import qs.Common
 import QtQuick
 import QtCore
 import Quickshell.Io
@@ -12,34 +13,34 @@ Singleton {
     signal tasksUpdated()
 
     // Paths
-    readonly property string stateDir: Paths.strip(StandardPaths.writableLocation(StandardPaths.GenericStateLocation) + "/Shellit")
-    readonly property string filePath: stateDir + "/todo.json"
+    readonly property string baseDir: Paths.strip(StandardPaths.writableLocation(StandardPaths.GenericStateLocation) + "/Shellit")
+    readonly property string filePath: baseDir + "/todo.json"
 
     // Data
     property var list: []
     
-    function ensureStateDir() {
-        const dir = stateDir
+    function ensureBaseDir() {
+        const dir = baseDir
         try {
             const fileInfo = File.info(dir)
             if (!fileInfo.exists) {
                 File.makePath(dir)
-                console.log("[TodoService] Created state directory:", dir)
+                console.log("[TodoService] Created base directory:", dir)
             }
         } catch (e) {
-            console.warn("[TodoService] Failed to ensure state dir:", e)
+            console.warn("[TodoService] Failed to ensure base dir:", e)
         }
     }
     
     function save() {
-        ensureStateDir()
+        ensureBaseDir()
         if (!todoFile.ready) {
             console.warn("[TodoService] File not ready — delaying save")
             return
         }
         try {
-            todoFile.setText(JSON.stringify(list, null, 2))
-            console.log("[TodoService] Saved", list.length, "tasks")
+            todoFile.setText(JSON.stringify(root.list, null, 2))
+            console.log("[TodoService] Saved", root.list.length, "tasks")
         } catch (e) {
             console.warn("[TodoService] Failed to save:", e)
         }
@@ -65,7 +66,7 @@ Singleton {
     function markDone(index) {
         if (index >= 0 && index < list.length) {
             list[index].done = true
-            list = list.slice(0)
+            root.list = list.slice(0)
             save()
             tasksUpdated()
         }
@@ -74,7 +75,7 @@ Singleton {
     function markUnfinished(index) {
         if (index >= 0 && index < list.length) {
             list[index].done = false
-            list = list.slice(0)
+            root.list = list.slice(0)
             save()
             tasksUpdated()
         }
@@ -83,7 +84,7 @@ Singleton {
     function deleteItem(index) {
         if (index >= 0 && index < list.length) {
             list.splice(index, 1)
-            list = list.slice(0)
+            root.list = list.slice(0)
             save()
             tasksUpdated()
         }
@@ -95,9 +96,10 @@ Singleton {
 
     FileView {
         id: todoFile
-        path: root.filePath
+        path: root.filePath : ""
         blockLoading: false
-        blockWrites: false
+        blockWrites: true
+        atomicWrites: true
         watchChanges: true
 
         onLoaded: {
