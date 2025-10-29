@@ -96,7 +96,7 @@ Singleton {
 
     FileView {
         id: todoFile
-        path: root.filePath : ""
+        path: root.filePath
         blockLoading: false
         blockWrites: true
         atomicWrites: true
