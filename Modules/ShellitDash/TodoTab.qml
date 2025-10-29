@@ -144,7 +144,7 @@ Rectangle {
                         return (root.currentFilter === 0 && !isDone) || (root.currentFilter === 1 && isDone)
                     })
 
-                    delegate: TaskListItem {
+                    delegate: TaskList {
                         width: parent.width
                         task: model.modelData // The filtered task object
                         onStatusChanged: (isDone) => {
