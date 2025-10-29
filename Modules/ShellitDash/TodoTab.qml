@@ -1,43 +1,33 @@
-import qs.Services
-import QtQuick
-import QtQuick.Controls 
-import QtQuick.Layouts 
 import Quickshell
+import QtQuick
+import QtQuick.Effects
+import QtQuick.Layouts
+import qs.Common
+import qs.Services
+import qs.Widgets
 
-Rectangle {
+Item {
     id: root
-    width: 700
-    height: 410
-    radius: 20
-    border.color: "black"
-    border.width: 2
-    color: "white"
+     
+    implicitWidth: 700
+    implicitHeight: 410
 
     property int currentFilter: 0 // 0: Unfinished, 1: Done
+    //property var tabButtonList: [{"icon": "checklist", "name": "Unfinished"}, {"name": "Done", "icon": "check_circle"}]
+    //property bool showAddDialog: false
 
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
 
-        // 1. Header (TodoTab title)
-        Rectangle {
-            Layout.fillWidth: true
-            height: 50
-            color: "transparent"
-            Text {
-                anchors.centerIn: parent
-                text: "TodoTab"
-                font.pixelSize: 24
-                font.bold: true
-            }
-        }
-
-        // 2. Tabs for Unfinished and Done
+        // Tabs for Unfinished and Done
         RowLayout {
+            id: tabBar
             Layout.fillWidth: true
             height: 50
             spacing: 10
             anchors.margins: 10
+            anchors.horizontalCenter: parent.horizontalCenter
             
             // --- Unfinished Button ---
             Button {
@@ -95,9 +85,6 @@ Rectangle {
             Layout.fillWidth: true
             height: 40
             color: "#D3D3D3" // Light Gray Header
-            border.top: 1
-            border.bottom: 1
-            border.color: "black"
 
             RowLayout {
                 anchors.fill: parent

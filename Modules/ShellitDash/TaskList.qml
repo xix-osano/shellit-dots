@@ -17,8 +17,6 @@ Item {
     Rectangle {
         anchors.fill: parent
         radius: 8
-        border.color: "#A0A0A0" // Medium Gray
-        border.width: 1
         color: "white"
 
         RowLayout {
