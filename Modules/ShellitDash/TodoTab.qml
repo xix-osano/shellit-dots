@@ -1,7 +1,12 @@
-import Quickshell
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Effects
+import QtQuick.Shapes
 import QtQuick.Layouts
+import Quickshell.Io
+import Quickshell
+import qs.Common
+import qs.Widgets
 
 Item {
     id: root
@@ -9,15 +14,22 @@ Item {
     implicitWidth: 700
     implicitHeight: 410
      
+    Column {
+        anchors.centerIn: parent
+        spacing: Theme.spacingM
 
-    Text {
-        id: headerText
-        text: "To-Do List. Coming Soon!"
-        font.pixelSize: 24
-        color: Theme.primary
-        anchors.top: parent.top
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
+        ShellitIcon {
+            name: "checklist"
+            size: Theme.iconSize * 3
+            color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.5)
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        StyledText {
+            text: "To-Do List. Coming Soon!"
+            font.pixelSize: Theme.fontSizeLarge
+            color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.7)
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
     }
-
 }

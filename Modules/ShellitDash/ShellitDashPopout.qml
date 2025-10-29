@@ -219,7 +219,7 @@ ShellitPopout {
                         let tabs = [
                             { icon: "dashboard", text: "Overview" },
                             { icon: "music_note", text: "Media" },
-                            { icon: "check_box", text: "Todo" },
+                            { icon: "checklist", text: "Todo" },
                             { icon: "wallpaper", text: "Wallpapers" }
                         ]
 
