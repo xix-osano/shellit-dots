@@ -8,7 +8,7 @@
 
 
 import qs.modules.common
-import qs.modules.background
+//import qs.modules.background
 import qs.modules.bar
 import qs.modules.cheatsheet
 import qs.modules.crosshair
@@ -36,7 +36,7 @@ ShellRoot {
     // Enable/disable modules here. False = not loaded at all, so rest assured
     // no unnecessary stuff will take up memory if you decide to only use, say, the overview.
     property bool enableBar: true
-    property bool enableBackground: true
+    //property bool enableBackground: true
     property bool enableCheatsheet: true
     property bool enableCrosshair: true
     property bool enableDock: true
@@ -66,7 +66,7 @@ ShellRoot {
     }
 
     LazyLoader { active: enableBar && Config.ready && !Config.options.bar.vertical; component: Bar {} }
-    LazyLoader { active: enableBackground; component: Background {} }
+    //LazyLoader { active: enableBackground; component: Background {} }
     LazyLoader { active: enableCheatsheet; component: Cheatsheet {} }
     LazyLoader { active: enableCrosshair; component: Crosshair {} }
     LazyLoader { active: enableDock && Config.options.dock.enable; component: Dock {} }
