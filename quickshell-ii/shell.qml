@@ -36,11 +36,11 @@ ShellRoot {
     // Enable/disable modules here. False = not loaded at all, so rest assured
     // no unnecessary stuff will take up memory if you decide to only use, say, the overview.
     property bool enableBar: true
-    //property bool enableBackground: true
+    property bool enableBackground: true
     property bool enableCheatsheet: true
     property bool enableCrosshair: true
     property bool enableDock: true
-    //property bool enableLock: true
+    property bool enableLock: true
     property bool enableMediaControls: true
     property bool enableNotificationPopup: true
     property bool enableOnScreenDisplay: true
@@ -50,10 +50,10 @@ ShellRoot {
     property bool enableReloadPopup: true
     property bool enableScreenCorners: true
     property bool enableSessionScreen: true
-    //property bool enableSidebarLeft: true
+    property bool enableSidebarLeft: true
     property bool enableSidebarRight: true
     property bool enableVerticalBar: true
-    //property bool enableWallpaperSelector: true
+    property bool enableWallpaperSelector: true
 
     // Force initialization of some singletons
     Component.onCompleted: {
