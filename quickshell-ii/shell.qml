@@ -13,7 +13,7 @@ import qs.modules.bar
 import qs.modules.cheatsheet
 import qs.modules.crosshair
 import qs.modules.dock
-import qs.modules.lock
+//import qs.modules.lock
 import qs.modules.mediaControls
 import qs.modules.notificationPopup
 import qs.modules.onScreenDisplay
@@ -40,7 +40,7 @@ ShellRoot {
     property bool enableCheatsheet: true
     property bool enableCrosshair: true
     property bool enableDock: true
-    property bool enableLock: true
+    //property bool enableLock: true
     property bool enableMediaControls: true
     property bool enableNotificationPopup: true
     property bool enableOnScreenDisplay: true
@@ -70,7 +70,7 @@ ShellRoot {
     LazyLoader { active: enableCheatsheet; component: Cheatsheet {} }
     LazyLoader { active: enableCrosshair; component: Crosshair {} }
     LazyLoader { active: enableDock && Config.options.dock.enable; component: Dock {} }
-    LazyLoader { active: enableLock; component: Lock {} }
+    //LazyLoader { active: enableLock; component: Lock {} }
     LazyLoader { active: enableMediaControls; component: MediaControls {} }
     LazyLoader { active: enableNotificationPopup; component: NotificationPopup {} }
     LazyLoader { active: enableOnScreenDisplay; component: OnScreenDisplay {} }
