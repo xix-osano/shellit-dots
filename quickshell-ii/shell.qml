@@ -15,7 +15,7 @@ import qs.modules.crosshair
 import qs.modules.dock
 //import qs.modules.lock
 import qs.modules.mediaControls
-import qs.modules.notificationPopup
+//import qs.modules.notificationPopup
 import qs.modules.onScreenDisplay
 import qs.modules.onScreenKeyboard
 import qs.modules.overview
@@ -42,7 +42,7 @@ ShellRoot {
     property bool enableDock: true
     //property bool enableLock: true
     property bool enableMediaControls: true
-    property bool enableNotificationPopup: true
+    //property bool enableNotificationPopup: true
     property bool enableOnScreenDisplay: true
     property bool enableOnScreenKeyboard: true
     property bool enableOverview: true
@@ -72,7 +72,7 @@ ShellRoot {
     LazyLoader { active: enableDock && Config.options.dock.enable; component: Dock {} }
     //LazyLoader { active: enableLock; component: Lock {} }
     LazyLoader { active: enableMediaControls; component: MediaControls {} }
-    LazyLoader { active: enableNotificationPopup; component: NotificationPopup {} }
+    //LazyLoader { active: enableNotificationPopup; component: NotificationPopup {} }
     LazyLoader { active: enableOnScreenDisplay; component: OnScreenDisplay {} }
     LazyLoader { active: enableOnScreenKeyboard; component: OnScreenKeyboard {} }
     LazyLoader { active: enableOverview; component: Overview {} }
