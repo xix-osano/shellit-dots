@@ -100,7 +100,9 @@ Rectangle {
             id: tagsFlickable
             visible: root.responseData.tags.length > 0
             Layout.alignment: Qt.AlignLeft
-            Layout.fillWidth: true
+            Layout.fillWidth: {
+                return true
+            }
             implicitHeight: tagRowLayout.implicitHeight
             contentWidth: tagRowLayout.implicitWidth
 

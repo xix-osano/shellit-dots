@@ -91,7 +91,7 @@ TabButton {
 
     background: Rectangle {
         id: buttonBackground
-        radius: Appearance?.rounding.normal
+        radius: Appearance?.rounding.small ?? 7
         implicitHeight: 37
         color: (root.hovered ? root.colBackgroundHover : root.colBackground)
         layer.enabled: true

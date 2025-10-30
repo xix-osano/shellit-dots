@@ -16,6 +16,8 @@ import QtQuick
  */
 Singleton {
     id: root
+    property real minimumBrightnessAllowed: 0.00001 // Setting to 0 would kind of turn off the screen. We don't want that.
+
     signal brightnessChanged()
 
     property var ddcMonitors: []
@@ -135,14 +137,14 @@ Singleton {
         }
 
         function syncBrightness() {
-            const brightnessValue = Math.max(monitor.multipliedBrightness, 0)
-            const rawValueRounded = Math.max(Math.floor(brightnessValue * monitor.rawMaxBrightness), 1);
-            setProc.command = isDdc ? ["ddcutil", "-b", busNum, "setvcp", "10", rawValueRounded] : ["brightnessctl", "--class", "backlight", "s", rawValueRounded, "--quiet"];
+            const brightnessValue = Math.max(monitor.multipliedBrightness, root.minimumBrightnessAllowed)
+            const rounded = Math.round(brightnessValue * monitor.rawMaxBrightness);
+            setProc.command = isDdc ? ["ddcutil", "-b", busNum, "setvcp", "10", rounded] : ["brightnessctl", "--class", "backlight", "s", rounded, "--quiet"];
             setProc.startDetached();
         }
 
         function setBrightness(value: real): void {
-            value = Math.max(0, Math.min(1, value));
+            value = Math.max(root.minimumBrightnessAllowed, Math.min(1, value));
             monitor.brightness = value;
         }
 
@@ -166,8 +168,8 @@ Singleton {
     }
 
     // Anti-flashbang
-    property int workspaceAnimationDelay: 500
-    property int contentSwitchDelay: 30
+    property int workspaceAnimationDelay: 700
+    property int contentSwitchDelay: 20
     property string screenshotDir: "/tmp/quickshell/brightness/antiflashbang"
     function brightnessMultiplierForLightness(x: real): real {
         // I hand picked some values and fitted an exponential curve for this
@@ -186,6 +188,7 @@ Singleton {
                 enabled: Config.options.light.antiFlashbang.enable && Appearance.m3colors.darkmode
                 target: Hyprland
                 function onRawEvent(event) {
+                    print(event.name)
                     if (["activewindowv2", "windowtitlev2"].includes(event.name)) {
                         screenshotTimer.interval = root.contentSwitchDelay;
                         screenshotTimer.restart();

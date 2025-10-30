@@ -5,12 +5,11 @@ import QtQuick.Layouts
 
 GroupButton {
     id: button
-    property string buttonIcon: ""
     property string buttonText: ""
+    property string buttonIcon: ""
 
-    baseHeight: 36
-    baseWidth: content.implicitWidth + 46
-    clickedWidth: baseWidth + 6
+    baseWidth: content.implicitWidth + 10 * 2
+    baseHeight: 30
 
     buttonRadius: baseHeight / 2
     buttonRadiusPressed: Appearance.rounding.small
@@ -29,13 +28,11 @@ GroupButton {
             anchors.centerIn: parent
             spacing: 5
             MaterialSymbol {
-                visible: buttonIcon !== ""
                 text: buttonIcon
-                iconSize: Appearance.font.pixelSize.huge
+                iconSize: Appearance.font.pixelSize.large
                 color: button.colText
             }
             StyledText {
-                visible: buttonText !== ""
                 text: buttonText
                 font.pixelSize: Appearance.font.pixelSize.small
                 color: button.colText

@@ -6,7 +6,7 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.Notifications
 
-MaterialShape { // App icon
+MaterialCookie { // App icon
     id: root
     property var appIcon: ""
     property var summary: ""
@@ -21,11 +21,8 @@ MaterialShape { // App icon
     property real smallAppIconSize: implicitSize * smallAppIconScale
 
     implicitSize: 38 * scale
-    property list<var> urgentShapes: [
-        MaterialShape.Shape.VerySunny,
-        MaterialShape.Shape.SoftBurst,
-    ]
-    shape: isUrgent ? urgentShapes[Math.floor(Math.random() * urgentShapes.length)] : MaterialShape.Shape.Circle
+    sides: isUrgent ? 10 : 0
+    amplitude: implicitSize / 24
 
     color: isUrgent ? Appearance.colors.colPrimary : Appearance.colors.colSecondaryContainer
     Loader {

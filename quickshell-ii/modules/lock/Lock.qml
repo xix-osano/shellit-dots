@@ -1,6 +1,4 @@
-pragma ComponentBehavior: Bound
 import qs
-import qs.services
 import qs.modules.common
 import qs.modules.common.functions
 import qs.modules.lock
@@ -11,9 +9,9 @@ import Quickshell.Wayland
 import Quickshell.Hyprland
 
 Scope {
-    id: root
+	id: root
 
-    function unlockKeyring() {
+	function unlockKeyring() {
         Quickshell.execDetached({
             environment: ({
                 UNLOCK_PASSWORD: root.currentText
@@ -22,141 +20,117 @@ Scope {
         })
     }
 
-    property var windowData: []
-    function saveWindowPositionAndTile() {
-		Hyprland.dispatch(`keyword dwindle:pseudotile true`)
-        root.windowData = HyprlandData.windowList.filter(w => (w.floating && w.workspace.id === HyprlandData.activeWorkspace.id))
-        root.windowData.forEach(w => {
-			Hyprland.dispatch(`pseudo address:${w.address}`)
-            Hyprland.dispatch(`settiled address:${w.address}`)
-			Hyprland.dispatch(`movetoworkspacesilent ${w.workspace.id},address:${w.address}`)
-        })
-    }
-    function restoreWindowPositionAndTile() {
-        root.windowData.forEach(w => {
-            Hyprland.dispatch(`setfloating address:${w.address}`)
-            Hyprland.dispatch(`movewindowpixel exact ${w.at[0]} ${w.at[1]}, address:${w.address}`)
-			Hyprland.dispatch(`pseudo address:${w.address}`)
-        })
-		Hyprland.dispatch(`keyword dwindle:pseudotile false`)
-    }
+	// This stores all the information shared between the lock surfaces on each screen.
+	// https://github.com/quickshell-mirror/quickshell-examples/tree/master/lockscreen
+	LockContext {
+		id: lockContext
 
-    // This stores all the information shared between the lock surfaces on each screen.
-    // https://github.com/quickshell-mirror/quickshell-examples/tree/master/lockscreen
-    LockContext {
-        id: lockContext
+		Connections {
+			target: GlobalStates
+			function onScreenLockedChanged() {
+				if (GlobalStates.screenLocked) lockContext.reset();
+			}
+		}
 
-        Connections {
-            target: GlobalStates
-            function onScreenLockedChanged() {
-                if (GlobalStates.screenLocked) {
-                    lockContext.reset();
-                    lockContext.tryFingerUnlock();
-                }
-            }
-        }
+		onUnlocked: (targetAction) => {
+			// Perform the target action if it's not just unlocking
+			if (targetAction == LockContext.ActionEnum.Poweroff) {
+				Session.poweroff();
+				return;
+			} else if (targetAction == LockContext.ActionEnum.Reboot) {
+				Session.reboot();
+				return;
+			}
 
-        onUnlocked: (targetAction) => {
-            // Perform the target action if it's not just unlocking
-            if (targetAction == LockContext.ActionEnum.Poweroff) {
-                Session.poweroff();
-                return;
-            } else if (targetAction == LockContext.ActionEnum.Reboot) {
-                Session.reboot();
-                return;
-            }
+			// Unlock the keyring if configured to do so
+			if (Config.options.lock.security.unlockKeyring) root.unlockKeyring();
 
-            // Unlock the keyring if configured to do so
-            if (Config.options.lock.security.unlockKeyring) root.unlockKeyring();
-
-            // Unlock the screen before exiting, or the compositor will display a
-            // fallback lock you can't interact with.
-            GlobalStates.screenLocked = false;
-            
-            // Refocus last focused window on unlock (hack)
-            Quickshell.execDetached(["bash", "-c", `sleep 0.2; hyprctl --batch "dispatch togglespecialworkspace; dispatch togglespecialworkspace"`])
+			// Unlock the screen before exiting, or the compositor will display a
+			// fallback lock you can't interact with.
+			GlobalStates.screenLocked = false;
+			
+			// Refocus last focused window on unlock (hack)
+			Quickshell.execDetached(["bash", "-c", `sleep 0.2; hyprctl --batch "dispatch togglespecialworkspace; dispatch togglespecialworkspace"`])
 
             // Reset
             lockContext.reset();
-        }
-    }
+		}
+	}
 
-    WlSessionLock {
-        id: lock
-        locked: GlobalStates.screenLocked
+	WlSessionLock {
+		id: lock
+		locked: GlobalStates.screenLocked
 
-        WlSessionLockSurface {
-            color: "transparent"
-            Loader {
-                active: GlobalStates.screenLocked
-                anchors.fill: parent
-                opacity: active ? 1 : 0
-                Behavior on opacity {
-                    animation: Appearance.animation.elementMoveFast.colorAnimation.createObject(this)
-                }
-                sourceComponent: LockSurface {
-                    context: lockContext
-                }
-            }
-        }
-    }
+		WlSessionLockSurface {
+			color: "transparent"
+			Loader {
+				active: GlobalStates.screenLocked
+				anchors.fill: parent
+				opacity: active ? 1 : 0
+				Behavior on opacity {
+					animation: Appearance.animation.elementMoveFast.colorAnimation.createObject(this)
+				}
+				sourceComponent: LockSurface {
+					context: lockContext
+				}
+			}
+		}
+	}
 
-    // Blur layer hack
-    Variants {
+	// Blur layer hack
+	Variants {
         model: Quickshell.screens
-        delegate: Scope {
-            required property ShellScreen modelData
-            property bool shouldPush: GlobalStates.screenLocked
-            property string targetMonitorName: modelData.name
-            property int verticalMovementDistance: modelData.height
-            property int horizontalSqueeze: modelData.width * 0.2
-            onShouldPushChanged: {
-                if (shouldPush) {
-                    root.saveWindowPositionAndTile();
-                    Quickshell.execDetached(["bash", "-c", `hyprctl keyword monitor ${targetMonitorName}, addreserved, ${verticalMovementDistance}, ${-verticalMovementDistance}, ${horizontalSqueeze}, ${horizontalSqueeze}`])
-                } else {
-                    Quickshell.execDetached(["bash", "-c", `hyprctl keyword monitor ${targetMonitorName}, addreserved, 0, 0, 0, 0`])
-                    root.restoreWindowPositionAndTile();
-                }
-            }
-        }
-    }
+		delegate: Scope {
+			required property ShellScreen modelData
+			property bool shouldPush: GlobalStates.screenLocked
+			property string targetMonitorName: modelData.name
+			property int verticalMovementDistance: modelData.height
+			property int horizontalSqueeze: modelData.width * 0.2
+			onShouldPushChanged: {
+				if (shouldPush) {
+					Quickshell.execDetached(["bash", "-c", `hyprctl keyword monitor ${targetMonitorName}, addreserved, ${verticalMovementDistance}, ${-verticalMovementDistance}, ${horizontalSqueeze}, ${horizontalSqueeze}`])
+				} else {
+					Quickshell.execDetached(["bash", "-c", `hyprctl keyword monitor ${targetMonitorName}, addreserved, 0, 0, 0, 0`])
+				}
+			}
+		}
+	}
 
-    IpcHandler {
+	IpcHandler {
         target: "lock"
 
         function activate(): void {
             GlobalStates.screenLocked = true;
         }
-        function focus(): void {
-            lockContext.shouldReFocus();
-        }
+		function focus(): void {
+			lockContext.shouldReFocus();
+		}
     }
 
-    GlobalShortcut {
+	GlobalShortcut {
         name: "lock"
         description: "Locks the screen"
 
         onPressed: {
-            if (Config.options.lock.useHyprlock) {
-                Quickshell.execDetached(["bash", "-c", "pidof hyprlock || hyprlock"]);
-                return;
-            }
+			if (Config.options.lock.useHyprlock) {
+				Quickshell.execDetached(["hyprlock"])
+				return;
+			}
             GlobalStates.screenLocked = true;
         }
     }
 
-    GlobalShortcut {
+	GlobalShortcut {
         name: "lockFocus"
         description: "Re-focuses the lock screen. This is because Hyprland after waking up for whatever reason"
-            + "decides to keyboard-unfocus the lock screen"
+			+ "decides to keyboard-unfocus the lock screen"
 
         onPressed: {
             lockContext.shouldReFocus();
         }
     }
 
-    Connections {
+	Connections {
         target: Config
         function onReadyChanged() {
             if (Config.options.lock.launchOnStartup && Config.ready && Persistent.ready && Persistent.isNewHyprlandInstance) {

@@ -227,8 +227,7 @@ Rectangle {
         id: calendarWidget
 
         CalendarWidget {
-            anchors.fill: parent
-            anchors.margins: 5
+            anchors.centerIn: parent
         }
     }
 

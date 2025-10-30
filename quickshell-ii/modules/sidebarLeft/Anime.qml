@@ -23,20 +23,20 @@ Item {
     property var suggestionQuery: ""
     property var suggestionList: []
 
-    property bool pullLoading: false
-    property int pullLoadingGap: 80
-    property real normalizedPullDistance: Math.max(0, (1 - Math.exp(-booruResponseListView.verticalOvershoot / 50)) * booruResponseListView.dragging)
+    Connections {
+        target: Config
+        function onReadyChanged() {
+            if (Config.options.policies.weeb !== 0) {
+                Quickshell.execDetached(["bash", "-c", `mkdir -p '${root.downloadPath}' && mkdir -p '${root.nsfwPath}'`])
+            }
+        }
+    }
 
     Connections {
         target: Booru
         function onTagSuggestion(query, suggestions) {
             root.suggestionQuery = query;
             root.suggestionList = suggestions;
-        }
-        function onRunningRequestsChanged() {
-            if (Booru.runningRequests === 0) {
-                root.pullLoading = false;
-            }
         }
     }
 
@@ -62,8 +62,6 @@ Item {
                 if (root.responses.length > 0) {
                     const lastResponse = root.responses[root.responses.length - 1];
                     root.handleInput(`${lastResponse.tags.join(" ")} ${parseInt(lastResponse.page) + 1}`);
-                } else {
-                    root.handleInput("");
                 }
             }
         },
@@ -96,7 +94,10 @@ Item {
             }
         }
         else if (inputText.trim() == "+") {
-            root.handleInput(`${root.commandPrefix}next`);
+            if (root.responses.length > 0) {
+                const lastResponse = root.responses[root.responses.length - 1]
+                root.handleInput(lastResponse.tags.join(" ") + ` ${parseInt(lastResponse.page) + 1}`);
+            }
         }
         else {
             // Create tag list
@@ -119,22 +120,16 @@ Item {
         }
     }
 
-    property real pageKeyScrollAmount: booruResponseListView.height / 2
     Keys.onPressed: (event) => {
         tagInputField.forceActiveFocus()
         if (event.modifiers === Qt.NoModifier) {
             if (event.key === Qt.Key_PageUp) {
-                if (booruResponseListView.atYBeginning) return;
-                booruResponseListView.contentY = Math.max(0, booruResponseListView.contentY - root.pageKeyScrollAmount)
+                booruResponseListView.contentY = Math.max(0, booruResponseListView.contentY - booruResponseListView.height / 2)
                 event.accepted = true
             } else if (event.key === Qt.Key_PageDown) {
-                if (booruResponseListView.atYEnd) return;
-                booruResponseListView.contentY = Math.min(booruResponseListView.contentHeight, booruResponseListView.contentY + root.pageKeyScrollAmount)
+                booruResponseListView.contentY = Math.min(booruResponseListView.contentHeight - booruResponseListView.height / 2, booruResponseListView.contentY + booruResponseListView.height / 2)
                 event.accepted = true
             }
-        }
-        if ((event.modifiers & Qt.ControlModifier) && (event.modifiers & Qt.ShiftModifier) && event.key === Qt.Key_O) {
-            Booru.clearResponses()
         }
     }
 
@@ -172,19 +167,16 @@ Item {
                 mouseScrollFactor: Config.options.interactions.scrolling.mouseScrollFactor * 1.4
 
                 property int lastResponseLength: 0
-                Connections {
-                    target: root
-                    function onResponsesChanged() {
-                        if (root.responses.length > booruResponseListView.lastResponseLength) {
+
+                model: ScriptModel {
+                    values: {
+                        if(root.responses.length > booruResponseListView.lastResponseLength) {
                             if (booruResponseListView.lastResponseLength > 0 && root.responses[booruResponseListView.lastResponseLength].provider != "system")
                                 booruResponseListView.contentY = booruResponseListView.contentY + root.scrollOnNewResponse
                             booruResponseListView.lastResponseLength = root.responses.length
                         }
+                        return root.responses
                     }
-                }
-
-                model: ScriptModel {
-                    values: root.responses
                 }
                 delegate: BooruResponse {
                     responseData: modelData
@@ -192,14 +184,6 @@ Item {
                     previewDownloadPath: root.previewDownloadPath
                     downloadPath: root.downloadPath
                     nsfwPath: root.nsfwPath
-                }
-
-                onDragEnded: { // Pull to load more
-                    const gap = booruResponseListView.verticalOvershoot
-                    if (gap > root.pullLoadingGap) {
-                        root.pullLoading = true
-                        root.handleInput(`${root.commandPrefix}next`)
-                    }
                 }
             }
 
@@ -210,7 +194,6 @@ Item {
                 icon: "bookmark_heart"
                 title: Translation.tr("Anime boorus")
                 description: ""
-                shape: MaterialShape.Shape.Bun
             }
 
             ScrollToBottomButton {
@@ -218,24 +201,42 @@ Item {
                 target: booruResponseListView
             }
 
-            MaterialLoadingIndicator {
-                id: loadingIndicator
+            Item { // Queries awaiting response
                 z: 4
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    bottom: parent.bottom
-                    bottomMargin: 20 + (root.pullLoading ? 0 : Math.max(0, (root.normalizedPullDistance - 0.5) * 50))
-                    Behavior on bottomMargin {
-                        NumberAnimation {
-                            duration: 200
-                            easing.type: Easing.BezierSpline
-                            easing.bezierCurve: Appearance.animationCurves.expressiveFastSpatial
-                        }
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.margins: 10
+                implicitHeight: pendingBackground.implicitHeight
+                opacity: Booru.runningRequests > 0 ? 1 : 0
+                visible: opacity > 0
+
+                Behavior on opacity {
+                    animation: Appearance.animation.elementMoveEnter.numberAnimation.createObject(this)
+                }
+
+                Rectangle {
+                    id: pendingBackground
+                    color: Appearance.m3colors.m3inverseSurface
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    implicitHeight: pendingText.implicitHeight + 12 * 2
+                    radius: Appearance.rounding.verysmall
+
+                    StyledText {
+                        id: pendingText
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.leftMargin: 12
+                        anchors.rightMargin: 12
+                        anchors.verticalCenter: parent.verticalCenter
+                        font.pixelSize: Appearance.font.pixelSize.smaller
+                        color: Appearance.m3colors.m3inverseOnSurface
+                        wrapMode: Text.Wrap
+                        text: Translation.tr("%1 queries pending").arg(Booru.runningRequests)
                     }
                 }
-                loading: root.pullLoading || Booru.runningRequests > 0
-                pullProgress: Math.min(1, booruResponseListView.verticalOvershoot / root.pullLoadingGap * booruResponseListView.dragging)
-                scale: root.pullLoading ? 1 : Math.min(1, root.normalizedPullDistance * 2)
             }
         }
 
