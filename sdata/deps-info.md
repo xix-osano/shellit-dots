@@ -1,0 +1,82 @@
+## Information
+Meta-packages (from sdata/packages/install-deps.sh)
+- shellit-basic
+  - Purpose: Core shell tooling used by scripts (general CLI utilities, build helpers, JSON processing, etc.).
+- shellit-audio
+  - Purpose: Audio stack (e.g., PipeWire/WirePlumber, mixers, control UIs) used by widgets and desktop integrations.
+- shellit-backlight
+  - Purpose: Screen brightness control utilities (e.g., brightnessctl).
+- shellit-fonts-themes
+  - Purpose: Fonts and themes used across the shell/widgets (Noto, emoji fonts, icon themes, GTK/Qt themes).
+- shellit-kde
+  - Purpose: KDE integration bits (dialogs, theming helpers, optional browser integration).
+- shellit-portal
+  - Purpose: Desktop portals (e.g., xdg-desktop-portal and Wayland compositor-specific portals).
+- shellit-python
+  - Purpose: Python 3 and libs for repo Python scripts and virtualenv activation.
+- shellit-screencapture
+  - Purpose: Screenshot/recording tools on Wayland (e.g., grim, slurp, wf-recorder or similar).
+- shellit-toolkit
+  - Purpose: General utilities used by scripts (jq, imagemagick, bc, etc.).
+- shellit-widgets
+  - Purpose: Runtime deps for Quickshell widgets and supporting tools used in the UI modules.
+- shellit-hyprland
+  - Purpose: Hyprland compositor and related tools (hyprland, hyprctl, hypridle, hyprlock, hyprcursor, portals).
+- shellit-microtex-git
+  - Purpose: MicroTeX-related setup used by this config (custom packaging).
+- shellit-bibata-modern-classic-bin (optional)
+  - Purpose: Bibata Modern Classic mouse cursor theme (installed only if not present).
+
+Concrete dependencies inferred from repository scripts
+- hyprland (provides hyprctl)
+  - Purpose: Compositor
+- jq
+  - Used by: switchwall.sh (JSON parsing), multiple scripts reading config.json, hyprctl -j output.
+  - Purpose: JSON parsing and transformation.
+- matugen (AUR)
+  - Used by: switchwall.sh to generate Material You colors from image or color input.
+  - Purpose: Color extraction and scheme generation.
+- python (python3) + virtualenv (python-virtualenv)
+  - Used by: switchwall.sh activates $SHELLIT_VIRTUAL_ENV and runs generate_colors_material.py.
+  - Purpose: Color processing
+- imagemagick (identify)
+  - Used by: switchwall.sh to probe image width/height to suggest upscaling.
+  - Purpose: Image metadata inspection.
+- bc
+  - Used by: switchwall.sh for simple arithmetic on cursor coordinates.
+  - Purpose: Shell-friendly math.
+- xdg-user-dirs (xdg-user-dir)
+  - Used by: switchwall.sh to locate Pictures folder.
+  - Purpose: XDG directories resolution.
+- libnotify (notify-send)
+  - Used by: switchwall.sh to interactively prompt actions (install/open apps) via notifications.
+  - Purpose: Desktop notifications with actions.
+- hyprpicker (AUR)
+  - Used by: switchwall.sh for picking colors from screen when --color is passed without hex.
+  - Purpose: On-screen color picker (Wayland).
+- mpvpaper (AUR)
+  - Used by: switchwall.sh to set video wallpapers per monitor.
+  - Purpose: Video wallpaper playback under Wayland.
+- ffmpeg
+  - Used by: switchwall.sh to extract a frame from videos to derive colors and thumbnails.
+  - Purpose: Video frame extraction and media handling.
+- kitty
+  - Used by: switchwall.sh to run interactive installs or external tools in a terminal (kitty -1 ...).
+  - Purpose: Terminal emulator integration.
+- kdialog (KDE)
+  - Used by: switchwall.sh to open a file picker for choosing wallpapers.
+  - Purpose: GUI file selection dialog.
+- glib2 (gsettings) + dconf
+  - Used by: switchwall.sh to set GNOME interface color-scheme and GTK theme.
+  - Purpose: System settings manipulation.
+- yay (or yay-bin from AUR)
+  - Used by: sdata/dist-arch/install-deps.sh to build/install local PKGBUILDs and dependencies.
+  - Purpose: AUR helper used by installer.
+- base-devel, git, makepkg (core Arch tooling)
+  - Used by: sdata/dist-arch/install-deps.sh and update.sh for building AUR/PKGBUILD packages and repository management.
+  - Purpose: Build toolchain and VCS for packaging.
+
+
+Notes
+- Some Hyprland-adjacent packages appear in a legacy removal list as -git variants (e.g., hypridle, hyprlock, xdg-desktop-portal-hyprland). This suggests the meta-packages likely standardized on stable repo versions now.
+- Exact package lists per meta-package should be verified against the PKGBUILD files in sdata/dist-arch/*; the above is aligned with how the code uses these tools.
