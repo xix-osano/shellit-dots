@@ -10,6 +10,29 @@ Item {
     property bool showDate: Config.options.bar.verbose
     implicitWidth: rowLayout.implicitWidth
     implicitHeight: Appearance.sizes.barHeight
+    colBackgroundToggled: Appearance.colors.colSecondaryContainer
+    colBackgroundToggledHover: Appearance.colors.colSecondaryContainerHover
+    colRippleToggled: Appearance.colors.colSecondaryContainerActive
+    toggled: GlobalStates.sidebarLeftOpen
+    
+    onPressed: {
+        GlobalStates.dashOpen = !GlobalStates.dashOpen;
+    }
+
+    Connections {
+        target: Dash
+        function onResponseFinished() {
+            if (GlobalStates.dashOpen) return;
+            root.showPing = true;
+        }
+    }
+
+    Connections {
+        target: GlobalStates
+        function onDashOpenChanged() {
+            root.showPing = false;
+        }
+    }
 
     RowLayout {
         id: rowLayout

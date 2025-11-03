@@ -361,6 +361,8 @@ Singleton {
         property real searchWidth: 450
         property real sidebarWidth: 460
         property real sidebarWidthExtended: 750
+        property real dashWidth: 700
+        property real dashHeight: 410
         property real baseVerticalBarWidth: 46
         property real verticalBarWidth: Config.options.bar.cornerStyle === 1 ? 
             (baseVerticalBarWidth + root.sizes.hyprlandGapsOut * 2) : baseVerticalBarWidth

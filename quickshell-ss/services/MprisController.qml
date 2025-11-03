@@ -17,6 +17,10 @@ Singleton {
 	id: root;
 	property MprisPlayer trackedPlayer: null;
 	property MprisPlayer activePlayer: trackedPlayer ?? Mpris.players.values[0] ?? null;
+	//dash mediaplayer controller
+	readonly property list<MprisPlayer> availablePlayers: Mpris.players.values
+    property MprisPlayer proactivePlayer: availablePlayers.find(p => p.isPlaying) ?? availablePlayers.find(p => p.canControl && p.canPlay) ?? null
+
 	signal trackChanged(reverse: bool);
 
 	property bool __reverse: false;
