@@ -13,11 +13,7 @@ Item {
     colBackgroundToggled: Appearance.colors.colSecondaryContainer
     colBackgroundToggledHover: Appearance.colors.colSecondaryContainerHover
     colRippleToggled: Appearance.colors.colSecondaryContainerActive
-    toggled: GlobalStates.sidebarLeftOpen
-    
-    onPressed: {
-        GlobalStates.dashOpen = !GlobalStates.dashOpen;
-    }
+    toggled: GlobalStates.dashOpen
 
     Connections {
         target: Dash
@@ -32,6 +28,22 @@ Item {
         function onDashOpenChanged() {
             root.showPing = false;
         }
+    }
+
+    Rectangle {
+        id: bgHover
+        anchors.fill: parent
+        color: Appearance.colors.colLayer1Hover
+        opacity: mouseArea.containsMouse ? 0.12 : 0
+        Behavior on opacity { NumberAnimation { duration: 120 } }
+    }
+
+    Rectangle {
+        id: bgPressed
+        anchors.fill: parent
+        color: Appearance.colors.colLayer1Active
+        opacity: mouseArea.pressed ? 0.18 : 0
+        Behavior on opacity { NumberAnimation { duration: 80 } }
     }
 
     RowLayout {
@@ -64,7 +76,8 @@ Item {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
-        acceptedButtons: Qt.NoButton
+        acceptedButtons: Qt.LeftButton
+        onClicked: GlobalStates.dashOpen = !GlobalStates.dashOpen 
 
         ClockWidgetTooltip {
             hoverTarget: mouseArea
