@@ -10,6 +10,7 @@ Item {
     property bool borderless: Config.options.bar.borderless
     property bool showDate: Config.options.bar.verbose
     property bool toggled: GlobalStates.dashOpen
+    property bool showPing: false
     property color colBackgroundToggled: Appearance.colors.colSecondaryContainer
     property color colBackgroundToggledHover: Appearance.colors.colSecondaryContainerHover
     property color colRippleToggled: Appearance.colors.colSecondaryContainerActive
