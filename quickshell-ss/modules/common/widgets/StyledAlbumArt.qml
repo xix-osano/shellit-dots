@@ -25,8 +25,8 @@ Item {
     Loader {
         active: activePlayer?.playbackState === MprisPlaybackState.Playing && showAnimation
         sourceComponent: Component {
-            Ref {
-                service: CavaService
+            QtObject {
+                property var service: CavaService
             }
         }
     }
