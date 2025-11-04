@@ -8,12 +8,13 @@ Item {
     id: root
     property bool borderless: Config.options.bar.borderless
     property bool showDate: Config.options.bar.verbose
+    property bool toggled: GlobalStates.dashOpen
+    property color colBackgroundToggled: Appearance.colors.colSecondaryContainer
+    property color colBackgroundToggledHover: Appearance.colors.colSecondaryContainerHover
+    property color colRippleToggled: Appearance.colors.colSecondaryContainerActive
     implicitWidth: rowLayout.implicitWidth
     implicitHeight: Appearance.sizes.barHeight
-    colBackgroundToggled: Appearance.colors.colSecondaryContainer
-    colBackgroundToggledHover: Appearance.colors.colSecondaryContainerHover
-    colRippleToggled: Appearance.colors.colSecondaryContainerActive
-    toggled: GlobalStates.dashOpen
+
 
     Connections {
         target: Dash
