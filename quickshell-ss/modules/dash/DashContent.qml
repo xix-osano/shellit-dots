@@ -64,6 +64,9 @@ Item {
             id: tabBar
             visible: root.tabButtonList.length > 1
             tabButtonList: root.tabButtonList
+            Synchronizer on currentIndex {
+                property alias source: root.selectedTab
+            }
 
             onActionTriggered: {
                 let settingsIndex = weatherEnabled ? 5 : 4
@@ -71,10 +74,6 @@ Item {
                     GlobalStates.dashOpen = false
                     Quickshell.execDetached(["qs", "-p", root.settingsQmlPath])
                 }
-            }
-
-            Synchronizer on currentIndex {
-                property alias source: root.selectedTab
             }
         }
 
