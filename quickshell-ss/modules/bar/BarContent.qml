@@ -153,7 +153,7 @@ Item { // Bar content region
         }
 
         MouseArea {
-            id: DashclockwidgetArea
+            id: dashclockwidgetArea
             anchors.verticalCenter: parent.verticalCenter
             implicitWidth: root.centerSideModuleWidth
             implicitHeight: dashClockWidget.implicitHeight
@@ -161,7 +161,7 @@ Item { // Bar content region
             onPressed: {
                 GlobalStates.dashOpen = !GlobalStates.dashOpen;
             }
-            
+
             BarGroup {
                 id: dashClockWidget
                 anchors.fill: parent
