@@ -50,7 +50,7 @@ Card {
                 spacing: 8
                 
                 IconImage { //SystemLogo
-                    property string colorOverride: ""
+                    property string colorOverride: Appearance.colors.colLayer1
                     property real brightnessOverride: 0.5
                     property real contrastOverride: 1
 
@@ -59,7 +59,6 @@ Card {
                     width: 16
                     height: 16
                     anchors.verticalCenter: parent.verticalCenter
-                    colorOverride: Appearance.colors.colLayer1
                     smooth: true
                     asynchronous: true
                     layer.enabled: hasColorOverride
