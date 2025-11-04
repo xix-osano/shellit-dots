@@ -16,19 +16,19 @@ Item {
      
     Column {
         anchors.centerIn: parent
-        spacing: Theme.spacingM
+        spacing: 12
 
-        ShellitIcon {
+        StyledIcon {
             name: "music_note"
-            size: Theme.iconSize * 3
-            color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.5)
+            size: 24 * 3
+            color: Appearance.colors.colSubtext
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
         StyledText {
             text: "MediaPlayerTab. Coming Soon!"
-            font.pixelSize: Theme.fontSizeLarge
-            color: Qt.rgba(Theme.surfaceText.r, Theme.surfaceText.g, Theme.surfaceText.b, 0.7)
+            font.pixelSize: 16
+            color: Appearance.colors.colSubtext
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }
