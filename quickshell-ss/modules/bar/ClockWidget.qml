@@ -1,6 +1,7 @@
 import qs
 import qs.modules.common
 import qs.modules.common.widgets
+import qs.modules.dash
 import qs.services
 import QtQuick
 import QtQuick.Layouts
@@ -16,7 +17,6 @@ Item {
     property color colRippleToggled: Appearance.colors.colSecondaryContainerActive
     implicitWidth: rowLayout.implicitWidth
     implicitHeight: Appearance.sizes.barHeight
-
 
     Connections {
         target: Dash
