@@ -153,6 +153,32 @@ Item { // Bar content region
         }
 
         MouseArea {
+            id: DashclockwidgetArea
+            anchors.verticalCenter: parent.verticalCenter
+            implicitWidth: root.centerSideModuleWidth
+            implicitHeight: dashClockWidget.implicitHeight
+
+            onPressed: {
+                GlobalStates.dashOpen = !GlobalStates.dashOpen;
+            }
+            
+            BarGroup {
+                id: dashClockWidget
+                anchors.fill: parent
+
+                ClockWidget {
+                    showDate: (Config.options.bar.verbose && root.useShortenedForm < 2)
+                    Layout.alignment: Qt.AlignVCenter
+                    Layout.fillWidth: true
+                }
+            }
+        }   
+
+        VerticalBarSeparator {
+            visible: Config.options?.bar.borderless
+        }
+
+        MouseArea {
             id: rightCenterGroup
             anchors.verticalCenter: parent.verticalCenter
             implicitWidth: root.centerSideModuleWidth
@@ -166,11 +192,11 @@ Item { // Bar content region
                 id: rightCenterGroupContent
                 anchors.fill: parent
 
-                ClockWidget {
-                    showDate: (Config.options.bar.verbose && root.useShortenedForm < 2)
-                    Layout.alignment: Qt.AlignVCenter
-                    Layout.fillWidth: true
-                }
+                // ClockWidget {
+                //     showDate: (Config.options.bar.verbose && root.useShortenedForm < 2)
+                //     Layout.alignment: Qt.AlignVCenter
+                //     Layout.fillWidth: true
+                // }
 
                 UtilButtons {
                     visible: (Config.options.bar.verbose && root.useShortenedForm === 0)

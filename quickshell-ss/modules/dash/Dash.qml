@@ -18,7 +18,7 @@ Scope { // Scope
         root.dashContent = contentComponent.createObject(null, {
             "scopeRoot": root,
         });
-        sidebarLoader.item.contentParent.children = [root.sidebarContent];
+        dashLoader.item.contentParent.children = [root.dashContent];
     }
 
     onDetachChanged: {
@@ -46,7 +46,7 @@ Scope { // Scope
             property bool extend: false
             property real dashWidth: Appearance.sizes.dashWidth
             property real dahsHeight: Appearance.sizes.dashHeight
-            property var contentParent: sidebarLeftBackground
+            property var contentParent: dashBackground
 
             function hide() {
                 GlobalStates.dashLeftOpen = false

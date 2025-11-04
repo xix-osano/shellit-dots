@@ -23,6 +23,7 @@ import qs.modules.polkit
 import qs.modules.regionSelector
 import qs.modules.screenCorners
 import qs.modules.sessionScreen
+import qs.modules.dash
 import qs.modules.sidebarLeft
 import qs.modules.sidebarRight
 import qs.modules.verticalBar
@@ -52,6 +53,7 @@ ShellRoot {
     property bool enableReloadPopup: true
     property bool enableScreenCorners: true
     property bool enableSessionScreen: true
+    property bool enableDash: true
     property bool enableSidebarLeft: true
     property bool enableSidebarRight: true
     property bool enableVerticalBar: true
@@ -83,6 +85,7 @@ ShellRoot {
     LazyLoader { active: enableReloadPopup; component: ReloadPopup {} }
     LazyLoader { active: enableScreenCorners; component: ScreenCorners {} }
     LazyLoader { active: enableSessionScreen; component: SessionScreen {} }
+    LazyLoader { active: enableDash; component: Dash {} }
     LazyLoader { active: enableSidebarLeft; component: SidebarLeft {} }
     LazyLoader { active: enableSidebarRight; component: SidebarRight {} }
     LazyLoader { active: enableVerticalBar && Config.ready && Config.options.bar.vertical; component: VerticalBar {} }
