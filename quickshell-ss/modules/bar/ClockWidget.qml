@@ -82,8 +82,8 @@ Item {
         acceptedButtons: Qt.LeftButton
         onClicked: GlobalStates.dashOpen = !GlobalStates.dashOpen 
 
-        ClockWidgetTooltip {
-            hoverTarget: mouseArea
-        }
+        // ClockWidgetTooltip {
+        //     hoverTarget: mouseArea
+        // }
     }
 }
