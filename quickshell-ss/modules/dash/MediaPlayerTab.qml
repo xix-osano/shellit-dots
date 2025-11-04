@@ -7,9 +7,9 @@ import Quickshell.Services.Mpris
 import Quickshell.Services.Pipewire
 import Quickshell.Io
 import Quickshell
-import qs.Common
-import qs.Services
-import qs.Widgets
+import qs.modules.common
+import qs.services
+import qs.modules.common.widgets
 
 Item {
     id: root

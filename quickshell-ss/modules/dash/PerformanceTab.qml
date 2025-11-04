@@ -5,8 +5,8 @@ import QtQuick.Shapes
 import QtQuick.Layouts
 import Quickshell.Io
 import Quickshell
-import qs.Common
-import qs.Widgets
+import qs.modules.common
+import qs.modules.common.widgets
 
 Item {
     id: root
