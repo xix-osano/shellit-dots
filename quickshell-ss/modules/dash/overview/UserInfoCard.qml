@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Effects
 import Quickshell.Widgets
 import Quickshell
-import qs.Common
+import qs.modules.common
 import qs.services
 import qs.modules.common.widgets
 
