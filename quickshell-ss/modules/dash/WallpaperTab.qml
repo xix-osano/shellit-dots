@@ -1,9 +1,12 @@
+import Qt.labs.folderlistmodel
+import QtCore
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Layouts
 import QtQuick.Effects
-import Qt.labs.folderlistmodel          // ONLY external dependency kept
+import QtQuick.Layouts
+import Quickshell
 import qs.modules.common
+import qs.services
 import qs.modules.common.widgets
 
 Item {
@@ -12,124 +15,284 @@ Item {
     implicitWidth: 700
     implicitHeight: 410
 
-    /*  --------------  PUBLIC API  --------------  */
-    property url    folderUrl: ""               // folder to scan (file://...)  OR  ""
-    property string currentWallpaper: ""        // full path to active wallpaper (file://...)
-    property int    itemsPerPage: 16
-    property bool   active: false               // enables keyboard + focus
-    property alias  keyForwardTarget: root      // kept for compat, not used internally
-
-    /*  --------------  READ-ONLY  --------------  */
-    readonly property int totalPages: Math.max(1, Math.ceil(wallpaperModel.count / itemsPerPage))
-    readonly property string selectedFileName: {
-        if (!modelIndexValid()) return ""
-        const path = wallpaperModel.get(mapToModel(gridIndex), "filePath").toString()
-        return path.substring(path.lastIndexOf("/") + 1)
-    }
-
-    /*  --------------  INTERNAL  --------------  */
+    property string wallpaperPath: ""
+    property string wallpaperDir: ""
     property int currentPage: 0
+    property int itemsPerPage: 16
+    property int totalPages: Math.max(1, Math.ceil(wallpaperFolderModel.count / itemsPerPage))
+    property bool active: false
+    property Item focusTarget: wallpaperGrid
+    property Item tabBarItem: null
     property int gridIndex: 0
-    property bool enableAnimation: false
+    property Item keyForwardTarget: null
     property int lastPage: 0
+    property bool enableAnimation: false
+    property string homeDir: StandardPaths.writableLocation(StandardPaths.HomeLocation)
+    property string selectedFileName: ""
 
-    /*  --------------  SIGNALS  --------------  */
-    signal wallpaperChosen(string filePath)     // emitted when user presses Enter or clicks
-    signal browseRequested()                    // emitted when folder icon clicked
+    signal requestTabChange(int newIndex)
 
-    /*  ================================================================  */
-    /*  Helpers                                                            */
-    /*  ================================================================  */
-    function mapToModel(gridIdx) { return currentPage * itemsPerPage + gridIdx }
-    function modelIndexValid() {
-        const idx = mapToModel(gridIndex)
-        return idx >= 0 && idx < wallpaperModel.count
+    onCurrentPageChanged: {
+        if (currentPage !== lastPage) {
+            enableAnimation = false
+            lastPage = currentPage
+        }
+        updateSelectedFileName()
     }
 
-    /*  keep highlight in sync  */
-    onGridIndexChanged => wallpaperGrid.currentIndex = gridIndex
-    onCurrentPageChanged => {
-        if (currentPage !== lastPage) enableAnimation = false
-        lastPage = currentPage
+    onGridIndexChanged: {
+        updateSelectedFileName()
     }
 
-    /*  ================================================================  */
-    /*  Keyboard handling (unchanged logic)                                */
-    /*  ================================================================  */
-    Keys.onPressed: (event) => root.handleKey(event) && (event.accepted = true)
+    onVisibleChanged: {
+        if (visible && active) {
+            setInitialSelection()
+        }
+    }
 
-    function handleKey(event) {
-        const cols = 4
-        const pageItemCount = Math.min(itemsPerPage, wallpaperModel.count - currentPage * itemsPerPage)
+    Component.onCompleted: {
+        loadWallpaperDirectory()
+    }
 
-        /*  accept wallpaper  */
+    onActiveChanged: {
+        if (active && visible) {
+            setInitialSelection()
+        }
+    }
+
+    function handleKeyEvent(event) {
+        const columns = 4
+        const currentCol = gridIndex % columns
+        const visibleCount = Math.min(itemsPerPage, wallpaperFolderModel.count - currentPage * itemsPerPage)
+
         if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-            if (modelIndexValid()) {
-                const path = wallpaperModel.get(mapToModel(gridIndex), "filePath").toString()
-                root.wallpaperChosen(path.replace(/^file:\/\//, ""))
+            if (gridIndex >= 0 && gridIndex < visibleCount) {
+                const absoluteIndex = currentPage * itemsPerPage + gridIndex
+                if (absoluteIndex < wallpaperFolderModel.count) {
+                    const filePath = wallpaperFolderModel.get(absoluteIndex, "filePath")
+                    if (filePath) {
+                        root.setWallpaper(filePath.toString().replace(/^file:\/\//, ''))
+                    }
+                }
             }
             return true
         }
 
-        /*  arrows + paging  */
         if (event.key === Qt.Key_Right) {
-            if (gridIndex + 1 < pageItemCount) gridIndex++
-            else if (currentPage < totalPages - 1) { gridIndex = 0; currentPage++ }
+            if (gridIndex + 1 < visibleCount) {
+                gridIndex++
+            } else if (currentPage < totalPages - 1) {
+                gridIndex = 0
+                currentPage++
+            }
             return true
         }
+
         if (event.key === Qt.Key_Left) {
-            if (gridIndex > 0) gridIndex--
-            else if (currentPage > 0) {
+            if (gridIndex > 0) {
+                gridIndex--
+            } else if (currentPage > 0) {
                 currentPage--
-                gridIndex = Math.min(itemsPerPage, wallpaperModel.count - currentPage * itemsPerPage) - 1
+                const prevPageCount = Math.min(itemsPerPage, wallpaperFolderModel.count - currentPage * itemsPerPage)
+                gridIndex = prevPageCount - 1
             }
             return true
         }
+
         if (event.key === Qt.Key_Down) {
-            if (gridIndex + cols < pageItemCount) gridIndex += cols
-            else if (currentPage < totalPages - 1) { gridIndex = gridIndex % cols; currentPage++ }
-            return true
-        }
-        if (event.key === Qt.Key_Up) {
-            if (gridIndex >= cols) gridIndex -= cols
-            else if (currentPage > 0) {
-                currentPage--
-                const prevCount = Math.min(itemsPerPage, wallpaperModel.count - currentPage * itemsPerPage)
-                gridIndex = Math.min(Math.floor((prevCount - 1) / cols) * cols + (gridIndex % cols),
-                                     prevCount - 1)
+            if (gridIndex + columns < visibleCount) {
+                gridIndex += columns
+            } else if (currentPage < totalPages - 1) {
+                gridIndex = currentCol
+                currentPage++
             }
             return true
         }
-        if (event.key === Qt.Key_PageUp   && currentPage > 0)       { gridIndex = 0; currentPage--; return true }
-        if (event.key === Qt.Key_PageDown && currentPage < totalPages - 1) { gridIndex = 0; currentPage++; return true }
-        if (event.key === Qt.Key_Home && event.modifiers & Qt.ControlModifier) { currentPage = 0; gridIndex = 0; return true }
-        if (event.key === Qt.Key_End  && event.modifiers & Qt.ControlModifier) {
-            currentPage = totalPages - 1
-            gridIndex = Math.max(0, Math.min(itemsPerPage, wallpaperModel.count - currentPage * itemsPerPage) - 1)
+
+        if (event.key === Qt.Key_Up) {
+            if (gridIndex >= columns) {
+                gridIndex -= columns
+            } else if (currentPage > 0) {
+                currentPage--
+                const prevPageCount = Math.min(itemsPerPage, wallpaperFolderModel.count - currentPage * itemsPerPage)
+                const prevPageRows = Math.ceil(prevPageCount / columns)
+                gridIndex = (prevPageRows - 1) * columns + currentCol
+                gridIndex = Math.min(gridIndex, prevPageCount - 1)
+            }
             return true
         }
+
+        if (event.key === Qt.Key_PageUp && currentPage > 0) {
+            gridIndex = 0
+            currentPage--
+            return true
+        }
+
+        if (event.key === Qt.Key_PageDown && currentPage < totalPages - 1) {
+            gridIndex = 0
+            currentPage++
+            return true
+        }
+
+        if (event.key === Qt.Key_Home && event.modifiers & Qt.ControlModifier) {
+            gridIndex = 0
+            currentPage = 0
+            return true
+        }
+
+        if (event.key === Qt.Key_End && event.modifiers & Qt.ControlModifier) {
+            currentPage = totalPages - 1
+            const lastPageCount = Math.min(itemsPerPage, wallpaperFolderModel.count - currentPage * itemsPerPage)
+            gridIndex = Math.max(0, lastPageCount - 1)
+            return true
+        }
+
         return false
     }
 
-    /*  ================================================================  */
-    /*  Folder model  */
-    /*  ================================================================  */
-    FolderListModel {
-        id: wallpaperModel
-        folder: root.folderUrl
-        nameFilters: ["*.jpg", "*.jpeg", "*.png", "*.bmp", "*.gif", "*.webp"]
-        showDirs: false; showFiles: true; showHidden: false
-        sortField: FolderListModel.Name
+    function setInitialSelection() {
+        if (!Config.options.background.wallpaperPath || wallpaperFolderModel.count === 0) {
+            gridIndex = 0
+            updateSelectedFileName()
+            Qt.callLater(() => { enableAnimation = true })
+            return
+        }
+
+        for (let i = 0; i < wallpaperFolderModel.count; i++) {
+            const filePath = wallpaperFolderModel.get(i, "filePath")
+            if (filePath && filePath.toString().replace(/^file:\/\//, '') === Config.options.background.wallpaperPath) {
+                const targetPage = Math.floor(i / itemsPerPage)
+                const targetIndex = i % itemsPerPage
+                currentPage = targetPage
+                gridIndex = targetIndex
+                updateSelectedFileName()
+                Qt.callLater(() => { enableAnimation = true })
+                return
+            }
+        }
+        gridIndex = 0
+        updateSelectedFileName()
+        Qt.callLater(() => { enableAnimation = true })
     }
 
-    /*  ================================================================  */
-    /*  UI  */
-    /*  ================================================================  */
+    function loadWallpaperDirectory() {
+        const currentWallpaper = Config.options.background.wallpaperPath
+
+        wallpaperDir = currentWallpaper.substring(0, currentWallpaper.lastIndexOf('/'))
+    }
+
+    function updateSelectedFileName() {
+        if (wallpaperFolderModel.count === 0) {
+            selectedFileName = ""
+            return
+        }
+
+        const absoluteIndex = currentPage * itemsPerPage + gridIndex
+        if (absoluteIndex < wallpaperFolderModel.count) {
+            const filePath = wallpaperFolderModel.get(absoluteIndex, "filePath")
+            if (filePath) {
+                const pathStr = filePath.toString().replace(/^file:\/\//, '')
+                selectedFileName = pathStr.substring(pathStr.lastIndexOf('/') + 1)
+                return
+            }
+        }
+        selectedFileName = ""
+    }
+
+    function setWallpaperPath(path) {
+        wallpaperPath = path
+    }
+
+    function setWallpaper(imagePath) {
+        wallpaperPath = imagePath
+    }
+
+    function clearWallpaper() {
+        wallpaperPath = ""
+    }
+
+    Connections {
+        target: wallpaperPath
+        function onWallpaperPathChanged() {
+            loadWallpaperDirectory()
+            if (visible && active) {
+                setInitialSelection()
+            }
+        }
+    }
+
+    Connections {
+        target: wallpaperFolderModel
+        function onCountChanged() {
+            if (wallpaperFolderModel.status === FolderListModel.Ready) {
+                if (visible && active) {
+                    setInitialSelection()
+                }
+                updateSelectedFileName()
+            }
+        }
+        function onStatusChanged() {
+            if (wallpaperFolderModel.status === FolderListModel.Ready && wallpaperFolderModel.count > 0) {
+                if (visible && active) {
+                    setInitialSelection()
+                }
+                updateSelectedFileName()
+            }
+        }
+    }
+
+    FolderListModel {
+        id: wallpaperFolderModel
+
+        showDirsFirst: false
+        showDotAndDotDot: false
+        showHidden: false
+        nameFilters: ["*.jpg", "*.jpeg", "*.png", "*.bmp", "*.gif", "*.webp"]
+        showFiles: true
+        showDirs: false
+        sortField: FolderListModel.Name
+        folder: wallpaperDir ? "file://" + wallpaperDir : ""
+    }
+
+    // Loader {
+    //     id: wallpaperBrowserLoader
+    //     active: false
+    //     asynchronous: true
+
+    //     sourceComponent: FileBrowserModal {
+    //         Component.onCompleted: {
+    //             open()
+    //         }
+    //         browserTitle: "Select Wallpaper Directory"
+    //         browserIcon: "folder_open"
+    //         browserType: "wallpaper"
+    //         showHiddenFiles: false
+    //         fileExtensions: ["*.jpg", "*.jpeg", "*.png", "*.bmp", "*.gif", "*.webp"]
+    //         allowStacking: true
+
+    //         onFileSelected: (path) => {
+    //             const cleanPath = path.replace(/^file:\/\//, '')
+    //             root.setWallpaper(cleanPath)
+
+    //             const dirPath = cleanPath.substring(0, cleanPath.lastIndexOf('/'))
+    //             if (dirPath) {
+    //                 wallpaperDir = dirPath
+    //                 CacheData.wallpaperLastPath = dirPath
+    //                 CacheData.saveCache()
+    //             }
+    //             close()
+    //         }
+
+    //         onDialogClosed: {
+    //             Qt.callLater(() => wallpaperBrowserLoader.active = false)
+    //         }
+    //     }
+    // }
+
     Column {
         anchors.fill: parent
         spacing: 0
 
-        /*  ---------------  Grid  ---------------  */
         Item {
             width: parent.width
             height: parent.height - 50
@@ -142,41 +305,77 @@ Item {
                 cellWidth: width / 4
                 cellHeight: height / 4
                 clip: true
-                interactive: active
+                enabled: root.active
+                interactive: root.active
                 boundsBehavior: Flickable.StopAtBounds
                 keyNavigationEnabled: false
+                activeFocusOnTab: false
                 highlightFollowsCurrentItem: true
                 highlightMoveDuration: enableAnimation ? 400 : 0
+                focus: false
+
+                highlight: Item {
+                    z: 1000
+                    Rectangle {
+                        anchors.fill: parent
+                        anchors.margins: 4
+                        color: "transparent"
+                        border.width: 3
+                        border.color: Appearance.m3colors.m3primary
+                        radius: Appearance.rounding.small
+                    }
+                }
 
                 model: {
-                    const start = currentPage * itemsPerPage
-                    const end   = Math.min(start + itemsPerPage, wallpaperModel.count)
-                    const arr   = []
-                    for (let i = start; i < end; ++i) {
-                        arr.push(wallpaperModel.get(i, "filePath").toString())
+                    const startIndex = currentPage * itemsPerPage
+                    const endIndex = Math.min(startIndex + itemsPerPage, wallpaperFolderModel.count)
+                    const items = []
+                    for (let i = startIndex; i < endIndex; i++) {
+                        const filePath = wallpaperFolderModel.get(i, "filePath")
+                        if (filePath) {
+                            items.push(filePath.toString().replace(/^file:\/\//, ''))
+                        }
                     }
-                    return arr
+                    return items
                 }
-                onCountChanged => currentIndex = Math.min(gridIndex, count - 1)
 
-                highlight: Rectangle {
-                    z: 1000
-                    anchors.fill: parent
-                    anchors.margins: 4
-                    color: "transparent"
-                    border.width: 3
-                    border.color: Appearance.m3colors.m3primary
-                    radius: Appearance.rounding.small
+                onModelChanged: {
+                    const clampedIndex = model.length > 0 ? Math.min(Math.max(0, gridIndex), model.length - 1) : 0
+                    if (gridIndex !== clampedIndex) {
+                        gridIndex = clampedIndex
+                    }
+                }
+
+                onCountChanged: {
+                    if (count > 0) {
+                        const clampedIndex = Math.min(gridIndex, count - 1)
+                        currentIndex = clampedIndex
+                        positionViewAtIndex(clampedIndex, GridView.Contain)
+                    }
+                    enableAnimation = true
+                }
+
+                Connections {
+                    target: root
+                    function onGridIndexChanged() {
+                        if (wallpaperGrid.count > 0) {
+                            wallpaperGrid.currentIndex = gridIndex
+                            if (!enableAnimation) {
+                                wallpaperGrid.positionViewAtIndex(gridIndex, GridView.Contain)
+                            }
+                        }
+                    }
                 }
 
                 delegate: Item {
                     width: wallpaperGrid.cellWidth
                     height: wallpaperGrid.cellHeight
 
-                    property string imgPath: modelData
-                    property bool isSelected: root.currentWallpaper === imgPath
+                    property string wallpaperPath: modelData || ""
+                    property bool isSelected: root.wallpaperPath === modelData
 
                     Rectangle {
+                        id: wallpaperCard
                         anchors.fill: parent
                         anchors.margins: 4
                         color: Appearance.colors.colSurfaceContainerHighest
@@ -187,16 +386,24 @@ Item {
                             anchors.fill: parent
                             color: isSelected ? Appearance.colors.colPrimary : "transparent"
                             radius: parent.radius
-                            Behavior on color { ColorAnimation { duration: 400; easing.type: Easing.OutCubic } }
+
+                            Behavior on color {
+                                ColorAnimation {
+                                    duration: 400
+                                    easing.type: Easing.OutCubic
+                                }
+                            }
                         }
 
                         Image {
-                            id: thumb
+                            id: thumbnailImage
                             anchors.fill: parent
-                            source: imgPath
+                            source: modelData ? `file://${modelData}` : ""
                             fillMode: Image.PreserveAspectCrop
                             asynchronous: true
+                            cache: true
                             smooth: true
+
                             layer.enabled: true
                             layer.effect: MultiEffect {
                                 maskEnabled: true
@@ -204,8 +411,8 @@ Item {
                                 maskSpreadAtMin: 1.0
                                 maskSource: ShaderEffectSource {
                                     sourceItem: Rectangle {
-                                        width: thumb.width
-                                        height: thumb.height
+                                        width: thumbnailImage.width
+                                        height: thumbnailImage.height
                                         radius: Appearance.rounding.small
                                     }
                                 }
@@ -214,7 +421,7 @@ Item {
 
                         BusyIndicator {
                             anchors.centerIn: parent
-                            running: thumb.status === Image.Loading
+                            running: thumbnailImage.status === Image.Loading
                             visible: running
                         }
 
@@ -225,12 +432,16 @@ Item {
                         }
 
                         MouseArea {
+                            id: wallpaperMouseArea
                             anchors.fill: parent
                             hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
+
                             onClicked: {
                                 gridIndex = index
-                                root.wallpaperChosen(imgPath.replace(/^file:\/\//, ""))
+                                if (modelData) {
+                                    root.setWallpaper(modelData)
+                                }
                             }
                         }
                     }
@@ -239,24 +450,27 @@ Item {
 
             StyledText {
                 anchors.centerIn: parent
-                visible: wallpaperModel.count === 0
+                visible: wallpaperFolderModel.count === 0
                 text: "No wallpapers found\n\nClick the folder icon below to browse"
-                horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: 14
                 color: Appearance.colors.colOutlineVariant
+                horizontalAlignment: Text.AlignHCenter
             }
         }
 
-        /*  ---------------  footer  ---------------  */
         Column {
             width: parent.width
             height: 50
+
             Row {
                 width: parent.width
                 height: 32
                 spacing: 8
 
-                Item { width: (parent.width - controlsRow.width - browseBtn.width - 8) / 2; height: parent.height }
+                Item {
+                    width: (parent.width - controlsRow.width - browseButton.width - 8) / 2
+                    height: parent.height
+                }
 
                 Row {
                     id: controlsRow
@@ -264,42 +478,61 @@ Item {
                     spacing: 8
 
                     StyledActionButton {
-                        iconName: "skip_previous"; iconSize: 20; buttonSize: 32
-                        enabled: currentPage > 0; opacity: enabled ? 1.0 : 0.3
-                        onClicked: --currentPage
+                        anchors.verticalCenter: parent.verticalCenter
+                        iconName: "skip_previous"
+                        iconSize: 20
+                        buttonSize: 32
+                        enabled: currentPage > 0
+                        opacity: enabled ? 1.0 : 0.3
+                        onClicked: {
+                            if (currentPage > 0) {
+                                currentPage--
+                            }
+                        }
                     }
+
                     StyledText {
                         anchors.verticalCenter: parent.verticalCenter
-                        text: wallpaperModel.count
-                              ? `${wallpaperModel.count} wallpapers  •  ${currentPage + 1} / ${totalPages}`
-                              : "No wallpapers"
+                        text: wallpaperFolderModel.count > 0 ? `${wallpaperFolderModel.count} wallpapers  •  ${currentPage + 1} / ${totalPages}` : "No wallpapers"
                         font.pixelSize: 14
                         color: Appearance.colors.colSubtext
                         opacity: 0.7
                     }
+
                     StyledActionButton {
-                        iconName: "skip_next"; iconSize: 20; buttonSize: 32
-                        enabled: currentPage < totalPages - 1; opacity: enabled ? 1.0 : 0.3
-                        onClicked: ++currentPage
+                        anchors.verticalCenter: parent.verticalCenter
+                        iconName: "skip_next"
+                        iconSize: 20
+                        buttonSize: 32
+                        enabled: currentPage < totalPages - 1
+                        opacity: enabled ? 1.0 : 0.3
+                        onClicked: {
+                            if (currentPage < totalPages - 1) {
+                                currentPage++
+                            }
+                        }
                     }
                 }
 
-                StyledActionButton {
-                    id: browseBtn
-                    iconName: "folder_open"; iconSize: 20; buttonSize: 32
-                    opacity: 0.7
-                    onClicked: root.browseRequested()
-                }
+                // StyledActionButton {
+                //     id: browseButton
+                //     anchors.verticalCenter: parent.verticalCenter
+                //     iconName: "folder_open"
+                //     iconSize: 20
+                //     buttonSize: 32
+                //     opacity: 0.7
+                //     onClicked: wallpaperBrowserLoader.active = true
+                // }
             }
 
             StyledText {
                 width: parent.width
                 height: 18
                 text: selectedFileName
-                visible: selectedFileName !== ""
                 font.pixelSize: 12
                 color: Appearance.colors.colSubtext
                 opacity: 0.5
+                visible: selectedFileName !== ""
                 elide: Text.ElideMiddle
                 horizontalAlignment: Text.AlignHCenter
             }
