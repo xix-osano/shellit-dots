@@ -65,10 +65,9 @@ Item {
             visible: root.tabButtonList.length > 1
             tabButtonList: root.tabButtonList
 
-            onActionTriggered: function(index) {
+            onActionTriggered: {
                 let settingsIndex = weatherEnabled ? 5 : 4
                 if (index === settingsIndex) {
-                    //dashVisible = false
                     GlobalStates.dashOpen = false
                     Quickshell.execDetached(["qs", "-p", root.settingsQmlPath])
                 }
