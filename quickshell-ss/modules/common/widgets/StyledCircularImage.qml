@@ -59,7 +59,7 @@ Rectangle {
         }
     }
 
-    DankIcon {
+    StyledIcon {
         anchors.centerIn: parent
         name: root.fallbackIcon
         size: parent.width * 0.5

@@ -96,7 +96,7 @@ Card {
             Row {
                 spacing: 8
 
-                DankIcon {
+                StyledIcon {
                     name: "schedule"
                     size: 16
                     color: Appearance.colors.colLayer1

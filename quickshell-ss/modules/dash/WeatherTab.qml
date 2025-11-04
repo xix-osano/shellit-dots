@@ -244,7 +244,7 @@ Item {
                         color: Appearance.colors.colLayer1
                         anchors.horizontalCenter: parent.horizontalCenter
 
-                        DankIcon {
+                        StyledIcon {
                             anchors.centerIn: parent
                             name: "device_thermostat"
                             size: 24 - 4
@@ -291,7 +291,7 @@ Item {
                         color: Appearance.colors.colLayer1
                         anchors.horizontalCenter: parent.horizontalCenter
 
-                        DankIcon {
+                        StyledIcon {
                             anchors.centerIn: parent
                             name: "humidity_low"
                             size: 24 - 4
