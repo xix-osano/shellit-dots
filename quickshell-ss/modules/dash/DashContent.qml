@@ -68,13 +68,13 @@ Item {
                 property alias source: root.selectedTab
             }
 
-            onActionTriggered: {
-                let settingsIndex = weatherEnabled ? 5 : 4
-                if (index === settingsIndex) {
-                    GlobalStates.dashOpen = false
-                    Quickshell.execDetached(["qs", "-p", root.settingsQmlPath])
-                }
-            }
+            // onActionTriggered: {
+            //     let settingsIndex = weatherEnabled ? 5 : 4
+            //     if (index === settingsIndex) {
+            //         GlobalStates.dashOpen = false
+            //         Quickshell.execDetached(["qs", "-p", root.settingsQmlPath])
+            //     }
+            // }
         }
 
         SwipeView { // Content pages
